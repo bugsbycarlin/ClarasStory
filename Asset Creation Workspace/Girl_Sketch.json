@@ -1,0 +1,236 @@
+{"frames": [
+
+{
+	"filename": "Girl-00001.png",
+	"frame": {"x":0,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00002.png",
+	"frame": {"x":720,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00003.png",
+	"frame": {"x":1440,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00004.png",
+	"frame": {"x":2160,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00005.png",
+	"frame": {"x":2880,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00006.png",
+	"frame": {"x":3600,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00007.png",
+	"frame": {"x":4320,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00008.png",
+	"frame": {"x":5040,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00009.png",
+	"frame": {"x":5760,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00010.png",
+	"frame": {"x":6480,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00012.png",
+	"frame": {"x":0,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00013.png",
+	"frame": {"x":720,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00014.png",
+	"frame": {"x":1440,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00015.png",
+	"frame": {"x":2160,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00016.png",
+	"frame": {"x":2880,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00017.png",
+	"frame": {"x":3600,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00018.png",
+	"frame": {"x":4320,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00019.png",
+	"frame": {"x":5040,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00020.png",
+	"frame": {"x":5760,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00021.png",
+	"frame": {"x":6480,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00022.png",
+	"frame": {"x":0,"y":1440,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00023.png",
+	"frame": {"x":720,"y":1440,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00024.png",
+	"frame": {"x":1440,"y":1440,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00025.png",
+	"frame": {"x":2160,"y":1440,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00026.png",
+	"frame": {"x":2880,"y":1440,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00027.png",
+	"frame": {"x":3600,"y":1440,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00028.png",
+	"frame": {"x":4320,"y":1440,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Girl-00029.png",
+	"frame": {"x":5040,"y":1440,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "Girl_Sketch.png",
+	"format": "RGBA8888",
+	"size": {"w":7200,"h":7200},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:771ffc268d1cc611a1600313984ab3e8:d25d0d29fc62c9beb6570900cbf626e4:1b7bee260cb20fe34fdeba1bcabc6c27$"
+}
+}

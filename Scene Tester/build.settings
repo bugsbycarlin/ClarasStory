@@ -42,7 +42,10 @@ settings =
 	--
 	plugins =
 	{
-
+		["plugin.animation"] =
+	      {
+	          publisherId = "com.coronalabs"
+	      },
 	},
 
 	--
