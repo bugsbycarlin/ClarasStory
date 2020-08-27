@@ -28,6 +28,8 @@ local total_performance_time = 0
 local update_timer = nil
 local time_text = nil
 
+local load_start_time = 0
+
 local selected_element_id = nil
 
 local save_file = system.pathForFile("Scenes/chapter_1_scene_1.json", system.ResourceDirectory)
@@ -406,7 +408,10 @@ function scene:show(event)
       loadingText.text = "Loading " .. percent .. "%"
     end
 
-    timer.performWithDelay(40, function() self:partialLoad() end)
+    timer.performWithDelay(40, function() 
+      load_start_time = system.getTimer()
+      self:partialLoad() 
+    end)
 
     Runtime:addEventListener("enterFrame", updateLoadDisplay)
 
@@ -423,7 +428,7 @@ end
 
 function scene:partialLoad()
   picture_name = self.partialLoadObjects[self.partialLoadNumber]
-  if string.len(picture_name) > 2 then
+  if string.len(picture_name) >= 1 then
     file_name = picture_info[picture_name]["file_name"]
     sheet = picture_info[picture_name]["sheet"]
     sprite[picture_name] = graphics.newImageSheet("Art/" .. file_name, sheet)
@@ -437,6 +442,8 @@ function scene:partialLoad()
   else
     loadingText.text = "Loading 100%"
     Runtime:removeEventListener("enterFrame", updateLoadDisplay)
+    local load_time_total = system.getTimer() - load_start_time
+    print("Load time was " .. load_time_total)
     self:startEditor()
   end
 end
@@ -451,7 +458,7 @@ function scene:startEditor()
   pictureHeaderText:setTextColor(0.3,0.3,1.0)
   pictureHeaderText.anchorX = 0
   for picture_name, info in pairs(picture_info) do
-    if string.len(picture_name) > 2 then
+    if string.len(picture_name) >= 1 then
       local displayText = display.newText(picture_name, 30, 30 * (image_count + 2), "Fonts/MouseMemoirs.ttf", 32)
       displayText.anchorX = 0
       displayText:setTextColor(0,0,0)
