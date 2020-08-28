@@ -2,18 +2,18 @@
 local picture_info = {}
 
 -- letters
--- picture_info["A"] = {
---   file_name = "Letter_A_Sketch.png",
---   row_length = 5,
---   sprite_size = 200,
---   sprite_count = 17,
--- }
--- picture_info["B"] = {
---   file_name = "Letter_B_Sketch.png",
---   row_length = 5,
---   sprite_size = 200,
---   sprite_count = 17,
--- }
+picture_info["A"] = {
+  file_name = "Letter_A_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 15,
+}
+picture_info["B"] = {
+  file_name = "Letter_B_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 17,
+}
 picture_info["C"] = {
   file_name = "Letter_C_Sketch.png",
   row_length = 5,
@@ -32,48 +32,132 @@ picture_info["E"] = {
   sprite_size = 200,
   sprite_count = 21,
 }
--- picture_info["F"] = {
---   file_name = "Letter_F_Sketch.png",
---   row_length = 5,
---   sprite_size = 200,
---   sprite_count = 16,
--- }
--- picture_info["L"] = {
---   file_name = "Letter_L_Sketch.png",
---   row_length = 5,
---   sprite_size = 200,
---   sprite_count = 14,
--- }
--- picture_info["O"] = {
---   file_name = "Letter_O_Sketch.png",
---   row_length = 5,
---   sprite_size = 200,
---   sprite_count = 32,
--- }
--- picture_info["R"] = {
---   file_name = "Letter_R_Sketch.png",
---   row_length = 5,
---   sprite_size = 200,
---   sprite_count = 22,
--- }
--- picture_info["S"] = {
---   file_name = "Letter_S_Sketch.png",
---   row_length = 5,
---   sprite_size = 200,
---   sprite_count = 32,
--- }
--- picture_info["T"] = {
---   file_name = "Letter_T_Sketch.png",
---   row_length = 5,
---   sprite_size = 200,
---   sprite_count = 12,
--- }
--- picture_info["Y"] = {
---   file_name = "Letter_Y_Sketch.png",
---   row_length = 5,
---   sprite_size = 200,
---   sprite_count = 25,
--- }
+picture_info["F"] = {
+  file_name = "Letter_F_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 15,
+}
+picture_info["G"] = {
+  file_name = "Letter_G_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 13,
+}
+picture_info["H"] = {
+  file_name = "Letter_H_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 13,
+}
+picture_info["I"] = {
+  file_name = "Letter_I_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 12,
+}
+picture_info["J"] = {
+  file_name = "Letter_J_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 10,
+}
+picture_info["K"] = {
+  file_name = "Letter_K_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 15,
+}
+picture_info["L"] = {
+  file_name = "Letter_L_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 14,
+}
+picture_info["M"] = {
+  file_name = "Letter_M_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 11,
+}
+picture_info["N"] = {
+  file_name = "Letter_N_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 8,
+}
+picture_info["O"] = {
+  file_name = "Letter_O_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count =8,
+}
+picture_info["P"] = {
+  file_name = "Letter_P_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 8,
+}
+picture_info["Q"] = {
+  file_name = "Letter_Q_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 18,
+}
+picture_info["R"] = {
+  file_name = "Letter_R_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 22,
+}
+picture_info["S"] = {
+  file_name = "Letter_S_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 13,
+}
+picture_info["T"] = {
+  file_name = "Letter_T_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 12,
+}
+picture_info["U"] = {
+  file_name = "Letter_U_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 13,
+}
+picture_info["V"] = {
+  file_name = "Letter_V_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 7,
+}
+picture_info["W"] = {
+  file_name = "Letter_W_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 13,
+}
+picture_info["X"] = {
+  file_name = "Letter_X_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 8,
+}
+picture_info["Y"] = {
+  file_name = "Letter_Y_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 20,
+}
+picture_info["Z"] = {
+  file_name = "Letter_Z_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 11,
+}
 
 
 
@@ -196,10 +280,7 @@ for picture, info in pairs(picture_info) do
     sheetContentHeight = math.ceil(sprite_count / row_length) * sprite_size,
     frames = {}
   }
-  print(file_name)
-  print("Sheet info")
-  print(info.sheet.sheetContentHeight)
-  print(info.sheet.sheetContentWidth)
+
   -- dang
   for i = 1, sprite_count do
     info["sheet"].frames[i] = {
@@ -208,11 +289,6 @@ for picture, info in pairs(picture_info) do
       width = sprite_size,
       height = sprite_size,
     }
-    print("Frame " .. i)
-    print(info["sheet"].frames[i].x)
-    print(info["sheet"].frames[i].y)
-    print(info["sheet"].frames[i].width)
-    print(info["sheet"].frames[i].height)
     table.insert(info.frames, i)
   end
 end

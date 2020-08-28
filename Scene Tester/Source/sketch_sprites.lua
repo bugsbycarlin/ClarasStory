@@ -15,10 +15,11 @@ function sketch_sprites:create()
   object.sprite_list = {}
 
   function object:add(sprite)
+    sprite.squish_start = system.getTimer()
     table.insert(self.sprite_list, sprite)
   end
 
-  function object:update(mode)
+  function object:update(mode, total_performance_time)
     for i = 1, #self.sprite_list do
 
       sprite = self.sprite_list[i]
@@ -27,39 +28,53 @@ function sketch_sprites:create()
           sprite:setFrame(sprite.frame + 1)
         else
           sprite.state = "static"
-          sprite.squish_start = system.getTimer()
+        end
+      end
+
+      sprite = self.sprite_list[i]
+      if sprite.state == "disappearing_rewind" then
+        if sprite.frame > 1 then
+          sprite:setFrame(sprite.frame - 1)
+        else
+          sprite.state = "disappearing_pop"
+          sprite.isVisible = false
         end
       end
 
       local current_time = system.getTimer()
 
-      if sprite.state == "static" then
+      if sprite.state == "static" or sprite.state == "sketching" then
         local squish_time = current_time - sprite.squish_start
         -- sprite.xScale = sprite.x_scale * (1 + (sprite.squish_scale - 1) * math.sin(squish_time * 2 * math.pi / sprite.squish_period))
         sprite.yScale = sprite.y_scale * (1 + (sprite.squish_scale - 1) * math.cos(squish_time * 2 * math.pi / sprite.squish_period))
+        sprite.xScale = sprite.x_scale
         sprite.y = sprite.fixed_y - sprite.height * (sprite.squish_scale - 1) * math.cos(squish_time * 2 * math.pi / sprite.squish_period)
         sprite.x = sprite.fixed_x - sprite.squish_tilt * math.sin(0.5 * squish_time * 2 * math.pi / sprite.squish_period)
         -- sprite.rotation = sprite.squish_tilt * math.sin(squish_time * 2 * math.pi / sprite.squish_period)
         
-      elseif sprite.state == "sketching" then
-        sprite.xScale = sprite.x_scale
-        sprite.yScale = sprite.y_scale
+      -- elseif sprite.state == "sketching" then
+      --   sprite.xScale = sprite.x_scale
+      --   sprite.yScale = sprite.y_scale
       end
 
       if (mode == "performing") then
         if sprite.state ~= "disappearing_expand" and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
-          if current_time - sprite.start_time > sprite.disappear_time then
+          if total_performance_time > sprite.disappear_time then
             if sprite.disappear_method == "expand" then
               sprite.state = "disappearing_expand"
               current_x_scale = sprite.xScale
               current_y_scale = sprite.yScale
-              animation.to(sprite, {xScale=current_x_scale * 10, yScale=current_y_scale * 10, alpha = 0}, {time=sprite.squish_period * 0.75, easing=easing.inExpo})
+              if sprite.info["sprite_size"] > 200 then
+                animation.to(sprite, {xScale=current_x_scale * 10, yScale=current_y_scale * 10, alpha = 0}, {time=sprite.squish_period * 0.75, easing=easing.inExpo})
+              else
+                animation.to(sprite, {xScale=current_x_scale * 30, yScale=current_y_scale * 30, alpha = 0}, {time=sprite.squish_period * 0.75, easing=easing.inExpo})
+              end
             end
           end
         end
 
         if sprite.state ~= "disappearing_pop" and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
-          if current_time - sprite.start_time > sprite.disappear_time then
+          if total_performance_time > sprite.disappear_time then
             if sprite.disappear_method == "pop" then
               sprite.state = "disappearing_pop"
               sprite.isVisible = false
@@ -69,7 +84,17 @@ function sketch_sprites:create()
             end
           end
         end
+
+        if sprite.state ~= "disappearing_rewind" and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
+          if total_performance_time > sprite.disappear_time then
+            if sprite.disappear_method == "rewind" then
+              sprite.state = "disappearing_rewind"
+            end
+          end
+        end
       end
+
+
 
     end
   end

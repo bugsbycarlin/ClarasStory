@@ -367,14 +367,17 @@ function scene:show(event)
   self.performanceAssetGroup = display.newGroup()
   self.sceneGroup:insert(self.performanceAssetGroup)
 
+  self.editingGroup = display.newGroup()
+  self.sceneGroup:insert(self.editingGroup)
+
   self.scriptAssetGroup = display.newGroup()
-  self.sceneGroup:insert(self.scriptAssetGroup)
+  self.editingGroup:insert(self.scriptAssetGroup)
 
   self.pictureEditingGroup = display.newGroup()
-  self.sceneGroup:insert(self.pictureEditingGroup)
+  self.editingGroup:insert(self.pictureEditingGroup)
 
   self.soundEditingGroup = display.newGroup()
-  self.sceneGroup:insert(self.soundEditingGroup)
+  self.editingGroup:insert(self.soundEditingGroup)
 
   sketch_sprites = sketch_sprites_class:create()
 
@@ -418,7 +421,7 @@ function scene:show(event)
     updateLoadDisplay()
 
     timer.performWithDelay(35, function() 
-      sketch_sprites:update(mode)
+      sketch_sprites:update(mode, total_performance_time)
     end, 0)
 
     Runtime:addEventListener("key", function(event) self:handleKeyboard(event) end)
@@ -454,12 +457,12 @@ function scene:startEditor()
 
   -- add pictures menu
   local image_count = 0
-  local pictureHeaderText = display.newText("Pictures", 30, 30, "Fonts/MouseMemoirs.ttf", 32)
+  local pictureHeaderText = display.newText(self.editingGroup, "Pictures", 30, 14, "Fonts/MouseMemoirs.ttf", 16)
   pictureHeaderText:setTextColor(0.3,0.3,1.0)
   pictureHeaderText.anchorX = 0
   for picture_name, info in pairs(picture_info) do
     if string.len(picture_name) >= 1 then
-      local displayText = display.newText(picture_name, 30, 30 * (image_count + 2), "Fonts/MouseMemoirs.ttf", 32)
+      local displayText = display.newText(self.editingGroup, picture_name, 30, 14 * (image_count + 2), "Fonts/MouseMemoirs.ttf", 16)
       displayText.anchorX = 0
       displayText:setTextColor(0,0,0)
       image_count = image_count + 1
@@ -505,12 +508,12 @@ function scene:startEditor()
   for name, info in pairs(sound_info) do
     table.insert(sound_names, name)
   end
-  local soundHeaderText = display.newText("Sounds", 30, display.contentHeight - 30 * (#sound_names + 2), "Fonts/MouseMemoirs.ttf", 32)
+  local soundHeaderText = display.newText(self.editingGroup, "Sounds", 30, display.contentHeight - 30 * (#sound_names + 2), "Fonts/MouseMemoirs.ttf", 32)
   soundHeaderText:setTextColor(0.3,0.3,1.0)
   soundHeaderText.anchorX = 0
   for sound_name, info in pairs(sound_info) do
     if string.len(sound_name) > 2 then
-      local displayText = display.newText(sound_name, 30, display.contentHeight - 30 * (#sound_names + 1), "Fonts/MouseMemoirs.ttf", 32)
+      local displayText = display.newText(self.editingGroup, sound_name, 30, display.contentHeight - 30 * (#sound_names + 1), "Fonts/MouseMemoirs.ttf", 32)
       displayText.anchorX = 0
       displayText:setTextColor(0,0,0)
       sound_count = sound_count + 1
@@ -572,6 +575,10 @@ function scene:handleKeyboard(event)
   if event.keyName == "space" and event.phase == "down" then
     if mode == "editing" then
       mode = "performing"
+      self.editingGroup.isVisible = false
+      for i = 1,self.pictureEditingGroup.numChildren do
+        self.pictureEditingGroup[i].isVisible = false
+      end
       audio.resume()
       start_performance_time = system.getTimer()
       current_time = system.getTimer()
@@ -580,6 +587,10 @@ function scene:handleKeyboard(event)
       end, 0)
     elseif mode == "performing" then
       mode = "editing"
+      self.editingGroup.isVisible = true
+      for i = 1,self.pictureEditingGroup.numChildren do
+        self.pictureEditingGroup[i].isVisible = true
+      end
       audio.pause()
       current_time = system.getTimer()
       stored_performance_time = stored_performance_time + current_time - start_performance_time
@@ -591,6 +602,10 @@ function scene:handleKeyboard(event)
 
   if event.isCtrlDown and event.keyName == "r" and event.phase == "down" then
     mode = "editing"
+    self.editingGroup.isVisible = true
+    for i = 1,self.pictureEditingGroup.numChildren do
+      self.pictureEditingGroup[i].isVisible = true
+    end
 
     if update_timer ~= nil then
       timer.cancel(update_timer)
