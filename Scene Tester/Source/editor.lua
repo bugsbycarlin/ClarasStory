@@ -26,7 +26,7 @@ local stored_performance_time = 0
 local total_performance_time = 0
 
 local update_timer = nil
-local time_text = nil
+local basic_info_text = nil
 
 local load_start_time = 0
 
@@ -65,6 +65,15 @@ function scene:loadInfo()
   if script_assets == nil or #script_assets == 0 then
     script_assets = {}
   end
+
+  -- supplement assets which might be missing later properties
+  for key, asset in pairs(script_assets) do
+    if asset["sketch"] == nil then
+      asset.sketch = true
+    end
+    -- script_asset_count = script_asset_count + 1
+  end
+
 
   have_loaded = true
 
@@ -136,7 +145,7 @@ function scene:updateScriptAssetDisplay()
       self.soundEditingGroup.isVisible = false
 
       if self.pictureEditingGroup.numChildren == 0 then
-        labels = {"Start Time", "x", "y", "x scale", "y scale", "Disappear Time", "Disappear Method", "Squish Scale", "Squish Tilt", "Squish Period"}
+        labels = {"Start Time", "x", "y", "x scale", "y scale", "Sketch", "Disappear Time", "Disappear Method", "Squish Scale", "Squish Tilt", "Squish Period"}
         edit_fields = {}
         for i = 1, #labels do
 
@@ -212,6 +221,20 @@ function scene:updateScriptAssetDisplay()
         edit_fields[6]:addEventListener("userInput", function(event)
           if event.phase == "editing" then
             asset = getSelectedAsset()
+            if event.text == "true" then
+              asset.sketch = true
+            else
+              asset.sketch = false
+            end
+            if asset.performance ~= nil then
+              asset.performance.sketch = asset.sketch
+            end
+          end
+        end)
+
+        edit_fields[7]:addEventListener("userInput", function(event)
+          if event.phase == "editing" then
+            asset = getSelectedAsset()
             if tonumber(event.text) ~= nil then
               asset.disappear_time = tonumber(event.text)
             end
@@ -221,7 +244,7 @@ function scene:updateScriptAssetDisplay()
           end
         end)
 
-        edit_fields[7]:addEventListener("userInput", function(event)
+        edit_fields[8]:addEventListener("userInput", function(event)
           if event.phase == "editing" then
             asset = getSelectedAsset()
             asset.disappear_method = event.text
@@ -231,7 +254,7 @@ function scene:updateScriptAssetDisplay()
           end
         end)
 
-        edit_fields[8]:addEventListener("userInput", function(event)
+        edit_fields[9]:addEventListener("userInput", function(event)
           if event.phase == "editing" then
             asset = getSelectedAsset()
             if tonumber(event.text) ~= nil then
@@ -243,7 +266,7 @@ function scene:updateScriptAssetDisplay()
           end
         end)
 
-        edit_fields[9]:addEventListener("userInput", function(event)
+        edit_fields[10]:addEventListener("userInput", function(event)
           if event.phase == "editing" then
             asset = getSelectedAsset()
             if tonumber(event.text) ~= nil then
@@ -255,7 +278,7 @@ function scene:updateScriptAssetDisplay()
           end
         end)
 
-        edit_fields[10]:addEventListener("userInput", function(event)
+        edit_fields[11]:addEventListener("userInput", function(event)
           if event.phase == "editing" then
             asset = getSelectedAsset()
             if tonumber(event.text) ~= nil then
@@ -275,11 +298,12 @@ function scene:updateScriptAssetDisplay()
       edit_fields[3].text = asset.y
       edit_fields[4].text = asset.x_scale
       edit_fields[5].text = asset.y_scale
-      edit_fields[6].text = asset.disappear_time
-      edit_fields[7].text = asset.disappear_method
-      edit_fields[8].text = asset.squish_scale
-      edit_fields[9].text = asset.squish_tilt
-      edit_fields[10].text = asset.squish_period
+      edit_fields[6].text = tostring(asset.sketch)
+      edit_fields[7].text = asset.disappear_time
+      edit_fields[8].text = asset.disappear_method
+      edit_fields[9].text = asset.squish_scale
+      edit_fields[10].text = asset.squish_tilt
+      edit_fields[11].text = asset.squish_period
     elseif asset.type == "sound" then
       for i = 1,self.pictureEditingGroup.numChildren do
         self.pictureEditingGroup[i].isVisible = false
@@ -292,22 +316,32 @@ end
 
 function scene:perform(asset)
   if asset.type == "sound" then
-    asset.performance = audio.loadSound("Sound/" .. sound_info[asset.name].file_name)
+    asset.performance = audio.loadStream("Sound/" .. sound_info[asset.name].file_name)
     audio.play(asset.performance, 0)
   elseif asset.type == "picture" then
     local picture = asset.name
 
     asset.performance = display.newSprite(self.performanceAssetGroup, sprite[picture], {frames=picture_info[picture].frames})
+    asset.performance.id = asset.id
     asset.performance.x = asset.x
     asset.performance.y = asset.y
     asset.performance.fixed_y = asset.y
     asset.performance.fixed_x = asset.x
     asset.performance.info = picture_info[picture]
-    asset.performance:setFrame(0)
-    asset.performance.state = "sketching"
+    if asset.sketch == true then
+      asset.performance.sketch = true
+      asset.performance:setFrame(0)
+      asset.performance.state = "sketching"
+    else
+      asset.performance.sketch = false
+      asset.performance:setFrame(picture_info[picture]["sprite_count"])
+      asset.performance.state = "static"
+    end
     asset.performance.start_time = system.getTimer()
     asset.performance.x_scale = asset.x_scale
     asset.performance.y_scale = asset.y_scale
+    asset.performance.xScale = asset.performance.x_scale
+    asset.performance.yScale = asset.performance.y_scale
     asset.performance.disappear_time = asset.disappear_time
     asset.performance.disappear_method = asset.disappear_method
     asset.performance.squish_scale = asset.squish_scale
@@ -332,13 +366,14 @@ function scene:clearPerformance()
 end
 
 function scene:updateEverything()
+  local last_update_time = total_performance_time
   updateTime()
-  time_text.text = math.floor(total_performance_time) / 1000.0
+  basic_info_text.text = "Time: " .. math.floor(total_performance_time) / 1000.0 .. ", Objects: " .. self.performanceAssetGroup.numChildren
 
   if mode == "performing" then
     for i = 1, #script_assets do
       asset = script_assets[i]
-      if asset.performance == nil and total_performance_time >= asset.start_time then
+      if asset.performance == nil and last_update_time <= asset.start_time and total_performance_time >= asset.start_time then
         self:perform(asset)
       end
     end
@@ -394,8 +429,8 @@ function scene:show(event)
 
     display.setDefault("background", 1, 1, 1)
 
-    time_text = display.newText(self.sceneGroup, "0", display.contentCenterX, 30, "Fonts/MouseMemoirs.ttf", 30)
-    time_text:setTextColor(0.0, 0.0, 0.0)
+    basic_info_text = display.newText(self.sceneGroup, "Time:0, Objects: 0", display.contentCenterX, 30, "Fonts/MouseMemoirs.ttf", 30)
+    basic_info_text:setTextColor(0.0, 0.0, 0.0)
 
     self.partialLoadNumber = 1
     self.partialLoadObjects = {}
@@ -478,6 +513,7 @@ function scene:startEditor()
             y=display.contentCenterY,
             x_scale=1,
             y_scale=1,
+            sketch=true,
             disappear_time=-1,
             disappear_method="",
             squish_scale=1,
@@ -616,12 +652,47 @@ function scene:handleKeyboard(event)
     stored_performance_time = 0
     total_performance_time = 0
     
-    self:updateEverything()
-    
     audio.stop()
 
     self:clearPerformance()
+
+    self:updateEverything()
   end
+
+  if event.isShiftDown and event.keyName == "left" and event.phase == "up" then  
+    if mode == "editing" then
+      
+      stored_performance_time = stored_performance_time - 1000
+      total_performance_time = stored_performance_time
+      
+      if stored_performance_time < 0 then
+        current_time = system.getTimer()
+        start_performance_time = 0
+        stored_performance_time = 0
+        total_performance_time = 0
+        
+        self:clearPerformance()
+        audio.stop()
+      else
+        for i = 1, #script_assets do
+          asset = script_assets[i]
+          if asset.type == "picture" then
+            if asset.start_time > stored_performance_time then
+              sketch_sprites:remove(asset.id)
+              asset.performance = nil
+            end
+          elseif asset.type == "sound" then
+            print("Seeking time " .. stored_performance_time .. " in sound file " .. tostring(asset.performance))
+            audio.seek(stored_performance_time + 50, asset.performance)
+          end
+        end
+      end
+
+      self:updateEverything()
+
+    end
+  end
+
 
   if event.isCtrlDown and event.keyName == "d" and event.phase == "up" then
     if mode == "editing" then

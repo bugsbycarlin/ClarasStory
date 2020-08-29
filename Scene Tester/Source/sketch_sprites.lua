@@ -19,12 +19,44 @@ function sketch_sprites:create()
     table.insert(self.sprite_list, sprite)
   end
 
+  function object:remove(id)
+    for i = 1, #self.sprite_list do
+      sprite = self.sprite_list[i]
+      if sprite.id == id then
+        sprite.state = "remove"
+        print("Removing " .. sprite.id)
+      end
+    end
+  end
+
   function object:update(mode, total_performance_time)
+    -- print("Updating; time " .. system.getTimer())
+    copy_sprite_list = {}
+    for i = 1, #self.sprite_list do
+      sprite = self.sprite_list[i]
+      if sprite.state ~= "remove" and sprite.isVisible == true and sprite.alpha > 0 then
+        table.insert(copy_sprite_list, sprite)
+      else
+        print("Fully deleting " .. sprite.id)
+        animation.cancel(sprite)
+        display.remove(sprite)
+      end
+    end
+    self.sprite_list = copy_sprite_list
+
     for i = 1, #self.sprite_list do
 
       sprite = self.sprite_list[i]
       if sprite.state == "sketching" then
         if sprite.frame < sprite.info.sprite_count then
+          sprite:setFrame(sprite.frame + 1)
+        else
+          sprite.state = "static"
+        end
+      end
+
+      if sprite.state == "outline_sketching" then
+        if sprite.frame < sprite.info.outline_frame then
           sprite:setFrame(sprite.frame + 1)
         else
           sprite.state = "static"
@@ -50,42 +82,78 @@ function sketch_sprites:create()
         sprite.xScale = sprite.x_scale
         sprite.y = sprite.fixed_y - sprite.height * (sprite.squish_scale - 1) * math.cos(squish_time * 2 * math.pi / sprite.squish_period)
         sprite.x = sprite.fixed_x - sprite.squish_tilt * math.sin(0.5 * squish_time * 2 * math.pi / sprite.squish_period)
-        -- sprite.rotation = sprite.squish_tilt * math.sin(squish_time * 2 * math.pi / sprite.squish_period)
-        
-      -- elseif sprite.state == "sketching" then
-      --   sprite.xScale = sprite.x_scale
-      --   sprite.yScale = sprite.y_scale
       end
 
       if (mode == "performing") then
-        if sprite.state ~= "disappearing_expand" and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
+        if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
           if total_performance_time > sprite.disappear_time then
             if sprite.disappear_method == "expand" then
               sprite.state = "disappearing_expand"
               current_x_scale = sprite.xScale
               current_y_scale = sprite.yScale
               if sprite.info["sprite_size"] > 200 then
-                animation.to(sprite, {xScale=current_x_scale * 10, yScale=current_y_scale * 10, alpha = 0}, {time=sprite.squish_period * 0.75, easing=easing.inExpo})
+                animation.to(sprite, {xScale=current_x_scale * 10, yScale=current_y_scale * 10, alpha = 0}, {time=sprite.squish_period * 0.75, easing=easing.inSine})
               else
-                animation.to(sprite, {xScale=current_x_scale * 30, yScale=current_y_scale * 30, alpha = 0}, {time=sprite.squish_period * 0.75, easing=easing.inExpo})
+                animation.to(sprite, {xScale=current_x_scale * 30, yScale=current_y_scale * 30, alpha = 0}, {time=sprite.squish_period * 0.75, easing=easing.inSine})
               end
             end
           end
         end
 
-        if sprite.state ~= "disappearing_pop" and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
+        if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
           if total_performance_time > sprite.disappear_time then
-            if sprite.disappear_method == "pop" then
-              sprite.state = "disappearing_pop"
-              sprite.isVisible = false
-              -- current_x_scale = sprite.xScale
-              -- current_y_scale = sprite.yScale
-              -- animation.to(sprite, {xScale=current_x_scale * 10, yScale=current_y_scale * 10, alpha = 0}, {time=sprite.squish_period * 0.75, easing=easing.inExpo})
+            if sprite.disappear_method == "leap_left" then
+              sprite.state = "disappearing_leap_left"
+              local current_x = sprite.x
+              local current_y = sprite.y
+              animation.to(sprite, {x=current_x - sprite.info["sprite_size"], y=current_y - sprite.info["sprite_size"] / 4, alpha = 0}, {time=sprite.squish_period / 2, easing=easing.outCubic})
             end
           end
         end
 
-        if sprite.state ~= "disappearing_rewind" and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
+        if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
+          if total_performance_time > sprite.disappear_time then
+            if sprite.disappear_method == "leap_right" then
+              sprite.state = "disappearing_leap_right"
+              local current_x = sprite.x
+              local current_y = sprite.y
+              animation.to(sprite, {x=current_x + sprite.info["sprite_size"], y=current_y - sprite.info["sprite_size"] / 4, alpha = 0}, {time=sprite.squish_period / 2, easing=easing.outCubic})
+            end
+          end
+        end
+
+        if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
+          if total_performance_time > sprite.disappear_time then
+            if sprite.disappear_method == "bounce_left" then
+              sprite.state = "disappearing_bounce_left"
+              local current_x = sprite.x
+              local current_y = sprite.y
+              animation.to(sprite, {x=current_x - sprite.info["sprite_size"], y=current_y - sprite.info["sprite_size"] / 4, alpha = 0}, {time=sprite.squish_period / 2, easing=easing.inOutBack})
+            end
+          end
+        end
+
+        if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
+          if total_performance_time > sprite.disappear_time then
+            if sprite.disappear_method == "bounce_right" then
+              sprite.state = "disappearing_bounce_right"
+              local current_x = sprite.x
+              local current_y = sprite.y
+              animation.to(sprite, {x=current_x + sprite.info["sprite_size"], y=current_y - sprite.info["sprite_size"] / 4, alpha = 0}, {time=sprite.squish_period / 2, easing=easing.inOutBack})
+            end
+          end
+        end
+
+        if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
+          if total_performance_time > sprite.disappear_time then
+            if sprite.disappear_method == "pop" then
+              sprite.state = "disappearing_pop"
+              sprite.isVisible = false
+            end
+          end
+        end
+
+        if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
           if total_performance_time > sprite.disappear_time then
             if sprite.disappear_method == "rewind" then
               sprite.state = "disappearing_rewind"
@@ -93,9 +161,6 @@ function sketch_sprites:create()
           end
         end
       end
-
-
-
     end
   end
 

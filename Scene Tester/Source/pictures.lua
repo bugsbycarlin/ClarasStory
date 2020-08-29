@@ -160,8 +160,17 @@ picture_info["Z"] = {
 }
 
 
+-- UI
+picture_info["Letter_Box"] = {
+  file_name = "Letter_Box.png",
+  row_length = 2,
+  sprite_size = 200,
+  sprite_count = 2,
+}
 
--- objects
+
+
+-- things to see and spell
 picture_info["Apple"] = {
   file_name = "Apple_Sketch.png",
   row_length = 5,
@@ -181,6 +190,7 @@ picture_info["Bird"] = {
   row_length = 5,
   sprite_size = 400,
   sprite_count = 25,
+  outline_frame = 11,
 }
 
 picture_info["Sweater"] = {
@@ -216,6 +226,7 @@ picture_info["Girl"] = {
   row_length = 5,
   sprite_size = 400,
   sprite_count = 25,
+  outline_frame = 10,
 }
 
 picture_info["Green_Star"] = {
@@ -292,6 +303,7 @@ for picture, info in pairs(picture_info) do
     table.insert(info.frames, i)
   end
 end
+
 
 -- function picture_info:getFrame(name, number)
 
