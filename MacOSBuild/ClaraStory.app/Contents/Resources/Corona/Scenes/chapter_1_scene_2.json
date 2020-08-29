@@ -1,0 +1,1061 @@
+[
+  {
+    "y": 384,
+    "type": "sound",
+    "name": "Chapter_1_Scene_1",
+    "performance": "<type 'userdata' is not supported by JSON.>",
+    "id": "Chapter_1_Scene_1_1",
+    "sketch": true,
+    "start_time": 0,
+    "x": 512
+  },
+  {
+    "squish_scale": 1.02,
+    "performance": {
+      "squish_scale": 1.02,
+      "squish_start": 7671.657,
+      "_class": {
+        "removeEventListener": "<type 'function' is not supported by JSON.>",
+        "addEventListener": "<type 'function' is not supported by JSON.>",
+        "__index": "<reference cycle>"
+      },
+      "sketch": true,
+      "squish_period": 545,
+      "id": "Earth_2",
+      "fixed_y": 384,
+      "disappear_time": 8300,
+      "y_scale": 1,
+      "state": "static",
+      "_proxy": "<type 'userdata' is not supported by JSON.>",
+      "info": {
+        "row_length": 10,
+        "sheet": {
+          "sheetContentWidth": 4000,
+          "sheetContentHeight": 2400,
+          "frames": [
+            {
+              "y": 0,
+              "x": 0,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 0,
+              "x": 400,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 0,
+              "x": 800,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 0,
+              "x": 1200,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 0,
+              "x": 1600,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 0,
+              "x": 2000,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 0,
+              "x": 2400,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 0,
+              "x": 2800,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 0,
+              "x": 3200,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 0,
+              "x": 3600,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 400,
+              "x": 0,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 400,
+              "x": 400,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 400,
+              "x": 800,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 400,
+              "x": 1200,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 400,
+              "x": 1600,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 400,
+              "x": 2000,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 400,
+              "x": 2400,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 400,
+              "x": 2800,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 400,
+              "x": 3200,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 400,
+              "x": 3600,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 800,
+              "x": 0,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 800,
+              "x": 400,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 800,
+              "x": 800,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 800,
+              "x": 1200,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 800,
+              "x": 1600,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 800,
+              "x": 2000,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 800,
+              "x": 2400,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 800,
+              "x": 2800,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 800,
+              "x": 3200,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 800,
+              "x": 3600,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1200,
+              "x": 0,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1200,
+              "x": 400,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1200,
+              "x": 800,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1200,
+              "x": 1200,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1200,
+              "x": 1600,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1200,
+              "x": 2000,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1200,
+              "x": 2400,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1200,
+              "x": 2800,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1200,
+              "x": 3200,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1200,
+              "x": 3600,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1600,
+              "x": 0,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1600,
+              "x": 400,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1600,
+              "x": 800,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1600,
+              "x": 1200,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1600,
+              "x": 1600,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1600,
+              "x": 2000,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1600,
+              "x": 2400,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1600,
+              "x": 2800,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1600,
+              "x": 3200,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1600,
+              "x": 3600,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 2000,
+              "x": 0,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 2000,
+              "x": 400,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 2000,
+              "x": 800,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 2000,
+              "x": 1200,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 2000,
+              "x": 1600,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 2000,
+              "x": 2000,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 2000,
+              "x": 2400,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 2000,
+              "x": 2800,
+              "height": 400,
+              "width": 400
+            }
+          ]
+        },
+        "sprite_count": 58,
+        "sprite_size": 400,
+        "frames": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58
+        ],
+        "file_name": "Earth_Sketch.png"
+      },
+      "x_scale": 1,
+      "disappear_method": "expand",
+      "start_time": 7671.634,
+      "fixed_x": 512,
+      "squish_tilt": 8
+    },
+    "type": "picture",
+    "x_scale": 1,
+    "squish_period": 545,
+    "id": "Earth_2",
+    "sketch": true,
+    "fixed_y": 384,
+    "x": 512,
+    "y": 384,
+    "y_scale": 1,
+    "name": "Earth",
+    "disappear_time": 8300,
+    "disappear_method": "expand",
+    "start_time": 1635,
+    "fixed_x": 512,
+    "squish_tilt": 8
+  },
+  {
+    "squish_scale": 1,
+    "type": "picture",
+    "fixed_x": 350,
+    "squish_period": 545,
+    "id": "Seaside_3",
+    "fixed_y": 551.25,
+    "sketch": true,
+    "x": 350,
+    "disappear_time": 25630,
+    "y_scale": 1,
+    "name": "Seaside",
+    "y": 551.25,
+    "disappear_method": "rewind",
+    "start_time": 8990,
+    "x_scale": 2,
+    "squish_tilt": 0
+  },
+  {
+    "squish_scale": 1,
+    "type": "picture",
+    "fixed_x": 299,
+    "squish_period": 545,
+    "id": "Tower_5",
+    "fixed_y": 509.25,
+    "sketch": true,
+    "x": 299,
+    "disappear_time": 13075,
+    "y_scale": 1,
+    "name": "Tower",
+    "y": 509.25,
+    "disappear_method": "rewind",
+    "start_time": 10545,
+    "x_scale": 1,
+    "squish_tilt": 0
+  },
+  {
+    "squish_scale": 1.02,
+    "type": "picture",
+    "x_scale": -1,
+    "squish_period": 545,
+    "id": "Girl_6",
+    "fixed_y": 556.5,
+    "sketch": true,
+    "y_scale": 1,
+    "y": 556.5,
+    "x": 740.75,
+    "name": "Girl",
+    "disappear_time": 25630,
+    "disappear_method": "rewind",
+    "start_time": 13075,
+    "fixed_x": 740.75,
+    "squish_tilt": 8
+  },
+  {
+    "squish_scale": 1,
+    "type": "picture",
+    "x_scale": 0.5,
+    "squish_period": 1718,
+    "id": "Red_Star_7",
+    "fixed_y": 408,
+    "sketch": true,
+    "y_scale": 0.5,
+    "disappear_time": 15800,
+    "x": 611,
+    "name": "Red_Star",
+    "y": 408,
+    "disappear_method": "bounce_left",
+    "start_time": 14720,
+    "fixed_x": 611,
+    "squish_tilt": 0
+  },
+  {
+    "squish_scale": 1,
+    "type": "picture",
+    "x_scale": 0.5,
+    "squish_period": 1718,
+    "id": "Orange_Star_8",
+    "fixed_y": 351.75,
+    "sketch": true,
+    "y_scale": 0.5,
+    "disappear_time": 16340,
+    "x": 542,
+    "name": "Orange_Star",
+    "y": 351.75,
+    "disappear_method": "bounce_right",
+    "start_time": 15260,
+    "fixed_x": 542,
+    "squish_tilt": 0
+  },
+  {
+    "squish_scale": 1,
+    "type": "picture",
+    "x_scale": 0.5,
+    "squish_period": 1718,
+    "id": "Green_Star_9",
+    "fixed_y": 282,
+    "sketch": true,
+    "y_scale": 0.5,
+    "disappear_time": 16880,
+    "x": 475.25,
+    "name": "Green_Star",
+    "y": 282,
+    "disappear_method": "bounce_left",
+    "start_time": 15800,
+    "fixed_x": 475.25,
+    "squish_tilt": 0
+  },
+  {
+    "squish_scale": 1,
+    "type": "picture",
+    "x_scale": 0.5,
+    "squish_period": 1718,
+    "id": "Yellow_Star_10",
+    "fixed_y": 191.25,
+    "sketch": true,
+    "y_scale": 0.5,
+    "y": 191.25,
+    "x": 413,
+    "name": "Yellow_Star",
+    "disappear_time": 17420,
+    "disappear_method": "bounce_right",
+    "start_time": 16340,
+    "fixed_x": 413,
+    "squish_tilt": 0
+  },
+  {
+    "squish_scale": 1.02,
+    "performance": {
+      "squish_scale": 1.02,
+      "squish_start": 7110.668,
+      "_class": {
+        "removeEventListener": "<type 'function' is not supported by JSON.>",
+        "addEventListener": "<type 'function' is not supported by JSON.>",
+        "__index": "<reference cycle>"
+      },
+      "sketch": true,
+      "squish_period": 545,
+      "id": "Girl_11",
+      "fixed_y": 510.75,
+      "disappear_time": 8300,
+      "y_scale": 1,
+      "state": "static",
+      "_proxy": "<type 'userdata' is not supported by JSON.>",
+      "info": {
+        "row_length": 5,
+        "sheet": {
+          "sheetContentWidth": 2000,
+          "sheetContentHeight": 2000,
+          "frames": [
+            {
+              "y": 0,
+              "x": 0,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 0,
+              "x": 400,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 0,
+              "x": 800,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 0,
+              "x": 1200,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 0,
+              "x": 1600,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 400,
+              "x": 0,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 400,
+              "x": 400,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 400,
+              "x": 800,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 400,
+              "x": 1200,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 400,
+              "x": 1600,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 800,
+              "x": 0,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 800,
+              "x": 400,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 800,
+              "x": 800,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 800,
+              "x": 1200,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 800,
+              "x": 1600,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1200,
+              "x": 0,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1200,
+              "x": 400,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1200,
+              "x": 800,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1200,
+              "x": 1200,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1200,
+              "x": 1600,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1600,
+              "x": 0,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1600,
+              "x": 400,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1600,
+              "x": 800,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1600,
+              "x": 1200,
+              "height": 400,
+              "width": 400
+            },
+            {
+              "y": 1600,
+              "x": 1600,
+              "height": 400,
+              "width": 400
+            }
+          ]
+        },
+        "sprite_count": 25,
+        "sprite_size": 400,
+        "frames": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "file_name": "Girl_Sketch.png"
+      },
+      "x_scale": 1,
+      "disappear_method": "leap_left",
+      "start_time": 7110.645,
+      "fixed_x": 242.75,
+      "squish_tilt": 8
+    },
+    "type": "picture",
+    "fixed_x": 242.75,
+    "squish_period": 545,
+    "id": "Girl_11",
+    "sketch": true,
+    "fixed_y": 510.75,
+    "y_scale": 1,
+    "disappear_time": 8300,
+    "x": 242.75,
+    "name": "Girl",
+    "y": 510.75,
+    "disappear_method": "leap_left",
+    "start_time": 1090,
+    "x_scale": 1,
+    "squish_tilt": 8
+  },
+  {
+    "squish_scale": 1.02,
+    "type": "picture",
+    "fixed_x": 559.25,
+    "squish_period": 545,
+    "id": "Sweater_12",
+    "fixed_y": 400.5,
+    "sketch": true,
+    "x": 559.25,
+    "disappear_time": 25630,
+    "y_scale": 1,
+    "name": "Sweater",
+    "y": 400.5,
+    "disappear_method": "rewind",
+    "start_time": 19630,
+    "x_scale": 1,
+    "squish_tilt": 8
+  },
+  {
+    "squish_scale": 1.02,
+    "type": "picture",
+    "fixed_x": 320.75,
+    "squish_period": 545,
+    "id": "Bird_13",
+    "fixed_y": 148.5,
+    "sketch": true,
+    "x": 320.75,
+    "disappear_time": 25630,
+    "y_scale": 1,
+    "name": "Bird",
+    "y": 148.5,
+    "disappear_method": "rewind",
+    "start_time": 20180,
+    "x_scale": 1,
+    "squish_tilt": 8
+  },
+  {
+    "squish_scale": 1,
+    "type": "picture",
+    "x_scale": 0.6,
+    "squish_period": 1718,
+    "id": "B_14",
+    "fixed_y": 107.25,
+    "sketch": true,
+    "y_scale": 0.6,
+    "y": 107.25,
+    "x": 535.25,
+    "name": "B",
+    "disappear_time": 24540,
+    "disappear_method": "rewind",
+    "start_time": 21810,
+    "fixed_x": 535.25,
+    "squish_tilt": 0
+  },
+  {
+    "squish_scale": 1,
+    "type": "picture",
+    "x_scale": 0.5,
+    "squish_period": 1718,
+    "id": "S_15",
+    "fixed_y": 276.75,
+    "sketch": true,
+    "y_scale": 0.5,
+    "y": 276.75,
+    "x": 651.5,
+    "name": "S",
+    "disappear_time": 25360,
+    "disappear_method": "expand",
+    "start_time": 21810,
+    "fixed_x": 651.5,
+    "squish_tilt": 0
+  },
+  {
+    "squish_scale": 1,
+    "type": "picture",
+    "x_scale": 0.6,
+    "squish_period": 1718,
+    "id": "I_16",
+    "fixed_y": 111.75,
+    "sketch": true,
+    "y_scale": 0.6,
+    "y": 111.75,
+    "x": 594.5,
+    "name": "I",
+    "disappear_time": 24540,
+    "disappear_method": "rewind",
+    "start_time": 22090,
+    "fixed_x": 594.5,
+    "squish_tilt": 0
+  },
+  {
+    "squish_scale": 1,
+    "type": "picture",
+    "x_scale": 0.5,
+    "squish_period": 1718,
+    "id": "W_17",
+    "fixed_y": 279,
+    "sketch": true,
+    "y_scale": 0.5,
+    "y": 279,
+    "x": 703.25,
+    "name": "W",
+    "disappear_time": 25360,
+    "disappear_method": "expand",
+    "start_time": 22090,
+    "fixed_x": 703.25,
+    "squish_tilt": 0
+  },
+  {
+    "squish_scale": 1,
+    "type": "picture",
+    "x_scale": 0.6,
+    "squish_period": 1718,
+    "id": "R_18",
+    "fixed_y": 114,
+    "sketch": true,
+    "y_scale": 0.6,
+    "y": 114,
+    "x": 657.5,
+    "name": "R",
+    "disappear_time": 24540,
+    "disappear_method": "rewind",
+    "start_time": 22360,
+    "fixed_x": 657.5,
+    "squish_tilt": 0
+  },
+  {
+    "squish_scale": 1,
+    "type": "picture",
+    "x_scale": 0.4,
+    "squish_period": 1718,
+    "id": "E_19",
+    "fixed_y": 276.75,
+    "sketch": true,
+    "y_scale": 0.4,
+    "y": 276.75,
+    "x": 761.75,
+    "name": "E",
+    "disappear_time": 25360,
+    "disappear_method": "expand",
+    "start_time": 22360,
+    "fixed_x": 761.75,
+    "squish_tilt": 0
+  },
+  {
+    "squish_scale": 1,
+    "type": "picture",
+    "x_scale": 0.6,
+    "squish_period": 1718,
+    "id": "D_20",
+    "fixed_y": 105.75,
+    "sketch": true,
+    "y_scale": 0.6,
+    "y": 105.75,
+    "x": 707.75,
+    "name": "D",
+    "disappear_time": 24540,
+    "disappear_method": "rewind",
+    "start_time": 22630,
+    "fixed_x": 707.75,
+    "squish_tilt": 0
+  },
+  {
+    "squish_scale": 1,
+    "type": "picture",
+    "x_scale": 0.4,
+    "squish_period": 1718,
+    "id": "A_21",
+    "fixed_y": 276,
+    "sketch": true,
+    "y_scale": 0.4,
+    "y": 276,
+    "x": 805.25,
+    "name": "A",
+    "disappear_time": 25360,
+    "disappear_method": "expand",
+    "start_time": 22630,
+    "fixed_x": 805.25,
+    "squish_tilt": 0
+  },
+  {
+    "squish_scale": 1,
+    "type": "picture",
+    "x_scale": 0.5,
+    "squish_period": 1718,
+    "id": "T_22",
+    "fixed_y": 278.25,
+    "sketch": true,
+    "y_scale": 0.5,
+    "y": 278.25,
+    "x": 854,
+    "name": "T",
+    "disappear_time": 25360,
+    "disappear_method": "expand",
+    "start_time": 22900,
+    "fixed_x": 854,
+    "squish_tilt": 0
+  },
+  {
+    "squish_scale": 1,
+    "type": "picture",
+    "x_scale": 0.4,
+    "squish_period": 1718,
+    "id": "E_23",
+    "fixed_y": 274.5,
+    "sketch": true,
+    "y_scale": 0.4,
+    "y": 274.5,
+    "x": 896,
+    "name": "E",
+    "disappear_time": 25360,
+    "disappear_method": "expand",
+    "start_time": 23180,
+    "fixed_x": 896,
+    "squish_tilt": 0
+  },
+  {
+    "squish_scale": 1,
+    "type": "picture",
+    "x_scale": 0.5,
+    "squish_period": 1718,
+    "id": "R_24",
+    "fixed_y": 276.75,
+    "sketch": true,
+    "y_scale": 0.5,
+    "y": 276.75,
+    "x": 941,
+    "name": "R",
+    "disappear_time": 25360,
+    "disappear_method": "expand",
+    "start_time": 23450,
+    "fixed_x": 941,
+    "squish_tilt": 0
+  }
+]

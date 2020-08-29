@@ -337,10 +337,12 @@ function scene:startScene()
       sketch_sprites:add(button_letter)
       table.insert(self.button_letters, button_letter)
 
+      local this_letter = i
+
       button_backing:addEventListener("tap", function(event)
         if mode == "interactive" then
           print("Touching " .. self.current_letter_number)
-          if self.current_letter_number >= 1 and self.current_letter_number <= string.len(info.word) then
+          if self.current_letter_number >= 1 and self.current_letter_number <= string.len(info.word) and this_letter == self.current_letter_number then
             local sound = audio.loadSound("Sound/Touch_Letter.wav")
             audio.play(sound)
 
