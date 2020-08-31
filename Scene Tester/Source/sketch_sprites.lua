@@ -19,6 +19,15 @@ function sketch_sprites:create()
     table.insert(self.sprite_list, sprite)
   end
 
+  function object:immediatelyRemoveAll()
+    for i = 1, #self.sprite_list do
+      sprite = self.sprite_list[i]
+      animation.cancel(sprite)
+      display.remove(sprite)
+    end
+    self.sprite_list = {}
+  end
+
   function object:remove(id)
     for i = 1, #self.sprite_list do
       sprite = self.sprite_list[i]

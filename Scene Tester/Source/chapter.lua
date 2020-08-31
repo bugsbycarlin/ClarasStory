@@ -177,7 +177,7 @@ function scene:setupSceneStructure()
   }
   flow["Chapter_1_Interactive_Girl"] = {
     name="Chapter_1_Interactive_Girl",
-    next=nil,
+    next="Chapter_1_Interactive_Bird",
     type="interactive_spelling",
     word="Girl",
     show_clara=false,
@@ -187,7 +187,20 @@ function scene:setupSceneStructure()
     bpm=110,
     mpb=545,
     time_sig=4,
-
+    -- here it might be fun to use a stage spotlight
+  }
+  flow["Chapter_1_Interactive_Bird"] = {
+    name="Chapter_1_Interactive_Bird",
+    next=nil,
+    type="interactive_spelling",
+    word="Bird",
+    show_clara=false,
+    interactive_start=12 * 545.454,
+    random_order=false,
+    random_letters=false,
+    bpm=110,
+    mpb=545,
+    time_sig=4,
     -- here it might be fun to use a stage spotlight
   }
 
@@ -216,6 +229,7 @@ function scene:gotoScene(new_scene_name, fade_options)
     print("COMPOSER has set next as " .. tostring(composer.getVariable("next_scene")))
     if new_scene.type == "interactive_spelling" then
       composer.setVariable("interactive_settings", new_scene)
+      
       composer.gotoScene("Source.interactive_spelling_player", fade_options)
     elseif new_scene.type == "scripted" then
       composer.setVariable("script_assets", new_scene.script)

@@ -185,12 +185,44 @@ picture_info["Earth"] = {
   sprite_count = 58,
 }
 
+picture_info["Sun"] = {
+  file_name = "Sun_Sketch.png",
+  row_length = 5,
+  sprite_size = 400,
+  sprite_count = 25,
+  outline_frame = 10,
+}
+
 picture_info["Bird"] = {
   file_name = "Bird_Sketch.png",
   row_length = 5,
   sprite_size = 400,
   sprite_count = 25,
   outline_frame = 11,
+}
+
+picture_info["Little_Boat"] = {
+  file_name = "Little_Boat_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 25,
+  outline_frame = 7,
+}
+
+picture_info["Little_Wave"] = {
+  file_name = "Little_Wave_Sketch.png",
+  row_length = 1,
+  sprite_size = 200,
+  sprite_count = 1,
+  outline_frame = 1,
+}
+
+picture_info["Blue_Sky"] = {
+  file_name = "Blue_Sky_Sketch.png",
+  row_length = 1,
+  sprite_size = 200,
+  sprite_count = 1,
+  outline_frame = 1,
 }
 
 picture_info["Sweater"] = {
@@ -214,11 +246,19 @@ picture_info["City"] = {
   sprite_count = 24,
 }
 
-picture_info["Seaside"] = {
-  file_name = "Seaside_Sketch.png",
-  row_length = 4,
-  sprite_size = 720,
-  sprite_count = 11,
+picture_info["Seagull"] = {
+  file_name = "Seagull.png",
+  row_length = 1,
+  sprite_size = 200,
+  sprite_count = 1,
+}
+
+picture_info["Beach"] = {
+  file_name = "Beach_Sketch.png",
+  row_length = 5,
+  sprite_size = 400,
+  sprite_count = 10,
+  outline_frame = 1,
 }
 
 picture_info["Girl"] = {

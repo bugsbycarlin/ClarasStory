@@ -28,6 +28,8 @@ local update_timer = nil
 
 local load_start_time = 0
 
+local interactive_ui_timer = nil
+
 local music_loop = nil
 
 -- local save_file = system.pathForFile("Scenes/chapter_1_interactive_1.json", system.ResourceDirectory)
@@ -199,9 +201,16 @@ function scene:show(event)
     self.chapter = composer.getVariable("chapter")
     self.next_scene = composer.getVariable("next_scene")
 
+    print("Making scene for " .. self.info.word)
+
+    current_time = 0
+    start_performance_time = 0
+    stored_performance_time = 0
+    total_performance_time = 0
+
     self:startScene()
 
-    timer.performWithDelay(35, function() 
+    self.sketch_sprite_timer = timer.performWithDelay(35, function() 
       sketch_sprites:update(mode, total_performance_time)
     end, 0)
 
@@ -213,7 +222,7 @@ end
 function scene:startScene()
   mode = "performing"
 
-  Runtime:addEventListener("touch", function(event) self:handleMouse(event) end)
+  -- Runtime:addEventListener("touch", function(event) self:handleMouse(event) end)
 
   -- local picture = "Apple"
 
@@ -277,7 +286,11 @@ function scene:startScene()
     self.interactive_rounds = 0
     self.letter_stagger = 0
     print("adding a timer for interactive start")
-    self.interactive_ui_timer = timer.performWithDelay(info.mpb, function() self:updateInteractiveUI() end, -1)
+    print(interactive_ui_timer)
+    interactive_ui_timer = timer.performWithDelay(info.mpb, function()
+      self:updateInteractiveUI() 
+    end, 0)
+    print(interactive_ui_timer)
   end, 1)
 
   self.button_backings = {}
@@ -339,7 +352,7 @@ function scene:startScene()
 
       local this_letter = i
 
-      button_backing:addEventListener("tap", function(event)
+      local button_event = function(event)
         if mode == "interactive" then
           print("Touching " .. self.current_letter_number)
           if self.current_letter_number >= 1 and self.current_letter_number <= string.len(info.word) and this_letter == self.current_letter_number then
@@ -374,7 +387,9 @@ function scene:startScene()
             end
           end
         end
-      end)
+      end
+      button_backing:addEventListener("tap", button_event)
+      button.event = button_event
 
       table.insert(self.buttons, button)
     end, 1)
@@ -395,7 +410,7 @@ function scene:updateInteractiveUI()
     if self.current_letter_number >= 1 and self.current_letter_number <= string.len(word) then
       current_letter = word:sub(self.current_letter_number, self.current_letter_number)
       if self.interactive_rounds % 8 == 0 then
-        randomizer = math.random(2)
+        randomizer = math.random(4)
         local sound = audio.loadSound("Sound/Interactive_Letters/" .. info.bpm .. "_" .. current_letter .. "_" .. randomizer .. ".wav")
         audio.play(sound)
       end
@@ -492,9 +507,20 @@ function scene:updateInteractiveUI()
             self.button_letters[i].squish_period = 545
           end
         elseif self.end_phrase == 8 then
-          mode = "finished"
-          timer.cancel(self.interactive_ui_timer)
-          
+          -- this is a reset that removes everything
+          print("Trying to cancel this damned function")
+          print(interactive_ui_timer)
+          timer.cancel(interactive_ui_timer)
+          print(interactive_ui_timer)
+          timer.cancel(self.sketch_sprite_timer)
+          audio.stop()
+          sketch_sprites:immediatelyRemoveAll()
+          for i = 1, string.len(info.word) do
+            self.buttons[i]:removeEventListener("tap", self.buttons[i].event)
+            display.remove(self.buttons[i])
+          end
+          self.buttons = {}
+          mode = nil
           self.chapter:gotoScene(self.next_scene, nil)
         end
 
@@ -506,31 +532,31 @@ function scene:updateInteractiveUI()
   end
 end
 
-asset_start_x = 0
-asset_start_y = 0
-function scene:handleMouse(event)
-  -- if mode == "editing" then
-  --   local asset = getSelectedAsset()
+-- asset_start_x = 0
+-- asset_start_y = 0
+-- function scene:handleMouse(event)
+--   -- if mode == "editing" then
+--   --   local asset = getSelectedAsset()
 
-  --   if asset ~= nil and asset.type == "picture" and asset.performance ~= nil then
-  --     if event.phase == "began" then
-  --       asset_start_x = asset.performance.fixed_x
-  --       asset_start_y = asset.performance.fixed_y
-  --       if asset_start_x == nil then
-  --         asset_start_x = 0
-  --         asset_start_y = 0
-  --       end
-  --     elseif event.phase == "moved" or event.phase == "ended" or event.phase == "cancelled" then
-  --       asset.performance.fixed_x = asset_start_x + event.x - event.xStart
-  --       asset.performance.fixed_y = asset_start_y + event.y - event.yStart
-  --       asset.fixed_x = asset.performance.fixed_x
-  --       asset.fixed_y = asset.performance.fixed_y
-  --       asset.x = asset.fixed_x
-  --       asset.y = asset.fixed_y
-  --     end
-  --   end
-  -- end
-end
+--   --   if asset ~= nil and asset.type == "picture" and asset.performance ~= nil then
+--   --     if event.phase == "began" then
+--   --       asset_start_x = asset.performance.fixed_x
+--   --       asset_start_y = asset.performance.fixed_y
+--   --       if asset_start_x == nil then
+--   --         asset_start_x = 0
+--   --         asset_start_y = 0
+--   --       end
+--   --     elseif event.phase == "moved" or event.phase == "ended" or event.phase == "cancelled" then
+--   --       asset.performance.fixed_x = asset_start_x + event.x - event.xStart
+--   --       asset.performance.fixed_y = asset_start_y + event.y - event.yStart
+--   --       asset.fixed_x = asset.performance.fixed_x
+--   --       asset.fixed_y = asset.performance.fixed_y
+--   --       asset.x = asset.fixed_x
+--   --       asset.y = asset.fixed_y
+--   --     end
+--   --   end
+--   -- end
+-- end
 
 -- hide()
 function scene:hide(event)

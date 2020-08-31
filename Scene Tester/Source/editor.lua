@@ -25,6 +25,10 @@ local start_performance_time = 0
 local stored_performance_time = 0
 local total_performance_time = 0
 
+local picture_asset_start = 1
+
+local script_asset_start = 1
+
 local update_timer = nil
 local basic_info_text = nil
 
@@ -82,7 +86,7 @@ function scene:loadInfo()
   stored_performance_time = 0
   total_performance_time = 0
 
-  self:updateScriptAssetDisplay()
+  self:updateAssetDisplayList(script_asset_start, script_asset_start + 19)
   self:updateEverything()
     
   audio.stop()
@@ -110,7 +114,7 @@ function getSelectedAsset()
   return nil
 end
 
-function scene:updateScriptAssetDisplay()
+function scene:updateAssetDisplayList(script_asset_start, script_asset_end)
   while self.scriptAssetGroup.numChildren > 0 do
     local child = self.scriptAssetGroup[1]
     if child then child:removeSelf() end
@@ -119,20 +123,24 @@ function scene:updateScriptAssetDisplay()
   local scriptHeaderText = display.newText(self.scriptAssetGroup, "Script", display.contentWidth - 30, 18, "Fonts/MouseMemoirs.ttf", 20)
   scriptHeaderText:setTextColor(0.3,0.3,1.0)
   scriptHeaderText.anchorX = 1
+  asset_display_count = 1
   for i = 1, #script_assets do
-    local asset = script_assets[i]
+    if i >= script_asset_start and i <= script_asset_end then
+      local asset = script_assets[i]
 
-    local displayText = display.newText(self.scriptAssetGroup, asset.id, display.contentWidth - 30, 18 * (i + 1), "Fonts/MouseMemoirs.ttf", 20)
-    displayText.anchorX = 1
-    displayText:setTextColor(0,0,0)
-    if selected_element_id ~= nil and selected_element_id == asset.id then
-      displayText:setTextColor(0.5,0.8,0.5)
+      local displayText = display.newText(self.scriptAssetGroup, asset.id, display.contentWidth - 30, 18 * (asset_display_count + 1), "Fonts/MouseMemoirs.ttf", 20)
+      displayText.anchorX = 1
+      displayText:setTextColor(0,0,0)
+      if selected_element_id ~= nil and selected_element_id == asset.id then
+        displayText:setTextColor(0.5,0.8,0.5)
+      end
+      local id = asset.id
+      displayText:addEventListener("tap", function()
+        selected_element_id = id
+        self:updateAssetDisplayList(script_asset_start, script_asset_start + 19)
+      end)
+      asset_display_count = asset_display_count + 1
     end
-    local id = asset.id
-    displayText:addEventListener("tap", function()
-      selected_element_id = id
-      self:updateScriptAssetDisplay()
-    end)
   end
 
   local asset = getSelectedAsset()
@@ -490,66 +498,147 @@ function scene:startEditor()
   -- remove loading text
   loadingText:removeSelf()
 
-  -- add pictures menu
-  local image_count = 0
-  local pictureHeaderText = display.newText(self.editingGroup, "Pictures", 30, 14, "Fonts/MouseMemoirs.ttf", 16)
-  pictureHeaderText:setTextColor(0.3,0.3,1.0)
-  pictureHeaderText.anchorX = 0
-  for picture_name, info in pairs(picture_info) do
-    if string.len(picture_name) >= 1 then
-      local displayText = display.newText(self.editingGroup, picture_name, 30, 14 * (image_count + 2), "Fonts/MouseMemoirs.ttf", 16)
-      displayText.anchorX = 0
-      displayText:setTextColor(0,0,0)
-      image_count = image_count + 1
-      displayText:addEventListener("tap", function()
-        if mode == "editing" then
-          script_asset_count = script_asset_count + 1
-          new_asset = {
-            name=picture_name,
-            id=picture_name .. "_" .. script_asset_count,
-            type="picture",
-            start_time=stored_performance_time,
-            x=display.contentCenterX,
-            y=display.contentCenterY,
-            x_scale=1,
-            y_scale=1,
-            sketch=true,
-            disappear_time=-1,
-            disappear_method="",
-            squish_scale=1,
-            squish_tilt=0,
-            squish_period=1718,
-            performance=nil,
-            timer=nil,
-          }
-          table.insert(script_assets, new_asset)
+  self:updatePictureAssetMenu(picture_asset_start, picture_asset_start + 19)
+  
 
-          selected_element_id = new_asset.id
-
-          self:updateScriptAssetDisplay()
-
-          self:perform(new_asset)
-        end
-      end)
+  left_picture_page = display.newImageRect(self.editingGroup, "Art/small_arrow.png", 32, 32)
+  left_picture_page.x = 100
+  left_picture_page.y = 18
+  left_picture_page.xScale = -1
+  left_picture_page:addEventListener("tap", function()
+    picture_asset_start = picture_asset_start - 20
+    if picture_asset_start < 1 then
+      picture_asset_start = 1
     end
 
-    stored_performance_time = 0
-    total_performance_time = 0
-    mode = "editing"
-  end
+    self:updatePictureAssetMenu(picture_asset_start, picture_asset_start + 19)
+  end)
 
+  right_picture_page = display.newImageRect(self.editingGroup, "Art/small_arrow.png", 32, 32)
+  right_picture_page.x = 124
+  right_picture_page.y = 18
+  right_picture_page:addEventListener("tap", function()
+      picture_asset_start = picture_asset_start + 20
+
+      self:updatePictureAssetMenu(picture_asset_start, picture_asset_start + 19)
+    -- end
+  end)
+
+
+  left_script_asset_page = display.newImageRect(self.editingGroup, "Art/small_arrow.png", 32, 32)
+  left_script_asset_page.x = display.contentWidth - 124
+  left_script_asset_page.y = 18
+  left_script_asset_page.xScale = -1
+  left_script_asset_page:addEventListener("tap", function()
+    script_asset_start = script_asset_start - 20
+    if script_asset_start < 1 then
+      script_asset_start = 1
+    end
+
+    self:updateAssetDisplayList(script_asset_start, script_asset_start + 19)
+  end)
+
+  right_script_asset_page = display.newImageRect(self.editingGroup, "Art/small_arrow.png", 32, 32)
+  right_script_asset_page.x = display.contentWidth - 100
+  right_script_asset_page.y = 18
+  right_script_asset_page:addEventListener("tap", function()
+      script_asset_start = script_asset_start + 20
+
+      self:updateAssetDisplayList(script_asset_start, script_asset_start + 19)
+    -- end
+  end)
+
+
+
+
+  self:updateSoundAssetMenu()
+
+  stored_performance_time = 0
+  total_performance_time = 0
+  mode = "editing"
+
+  Runtime:addEventListener("touch", function(event) self:handleMouse(event) end)
+
+  self:updateAssetDisplayList(script_asset_start, script_asset_start + 19)
+end
+
+function scene:updatePictureAssetMenu(start_number, end_number)
+  -- add pictures menu
+  local image_count = 0
+  pictureHeaderText = display.newText(self.editingGroup, "Pictures", 30, 18, "Fonts/MouseMemoirs.ttf", 20)
+  pictureHeaderText:setTextColor(0.3,0.3,1.0)
+  pictureHeaderText.anchorX = 0
+  print("pick butt")
+  if self.picture_buttons ~= nil then
+    print(#self.picture_buttons)
+    for i = 1, #self.picture_buttons do
+      print(i)
+      display.remove(self.picture_buttons[i])
+      -- should remove event listener but meh
+    end
+  end
+  self.picture_buttons = {}
+  local alphabetical_pairs = {}
+  for picture_name, info in pairs(picture_info) do table.insert(alphabetical_pairs, picture_name) end
+  table.sort(alphabetical_pairs)
+  for i, picture_name in ipairs(alphabetical_pairs) do
+    if i >= start_number and i <= end_number then
+      if string.len(picture_name) >= 1 then
+        local displayText = display.newText(self.editingGroup, picture_name, 30, 18 * (image_count + 2), "Fonts/MouseMemoirs.ttf", 20)
+        displayText.anchorX = 0
+        displayText:setTextColor(0,0,0)
+        image_count = image_count + 1
+        displayText:addEventListener("tap", function()
+          if mode == "editing" then
+            script_asset_count = script_asset_count + 1
+            new_asset = {
+              name=picture_name,
+              id=picture_name .. "_" .. script_asset_count,
+              type="picture",
+              start_time=stored_performance_time,
+              x=display.contentCenterX,
+              y=display.contentCenterY,
+              x_scale=1,
+              y_scale=1,
+              sketch=true,
+              disappear_time=-1,
+              disappear_method="",
+              squish_scale=1,
+              squish_tilt=0,
+              squish_period=1718,
+              performance=nil,
+              timer=nil,
+            }
+            table.insert(script_assets, new_asset)
+
+            selected_element_id = new_asset.id
+
+            self:updateAssetDisplayList(script_asset_start, script_asset_start + 19)
+
+            self:perform(new_asset)
+          end
+        end)
+        table.insert(self.picture_buttons, displayText)
+      end
+    end
+  end
+end
+
+function scene:updateSoundAssetMenu()
   -- add sounds menu
   local sound_count = 0
   sound_names = {}
   for name, info in pairs(sound_info) do
     table.insert(sound_names, name)
   end
-  local soundHeaderText = display.newText(self.editingGroup, "Sounds", 30, display.contentHeight - 30 * (#sound_names + 2), "Fonts/MouseMemoirs.ttf", 32)
+  print(#sound_names)
+  print("hey man")
+  local soundHeaderText = display.newText(self.editingGroup, "Sounds", 30, display.contentHeight - 18 * (#sound_names + 2), "Fonts/MouseMemoirs.ttf", 20)
   soundHeaderText:setTextColor(0.3,0.3,1.0)
   soundHeaderText.anchorX = 0
   for sound_name, info in pairs(sound_info) do
     if string.len(sound_name) > 2 then
-      local displayText = display.newText(self.editingGroup, sound_name, 30, display.contentHeight - 30 * (#sound_names + 1), "Fonts/MouseMemoirs.ttf", 32)
+      local displayText = display.newText(self.editingGroup, sound_name, 30, display.contentHeight - 18 * (#sound_names + 1 - sound_count), "Fonts/MouseMemoirs.ttf", 20)
       displayText.anchorX = 0
       displayText:setTextColor(0,0,0)
       sound_count = sound_count + 1
@@ -570,15 +659,11 @@ function scene:startEditor()
 
           selected_element_id = new_asset.id
 
-          self:updateScriptAssetDisplay()
+          self:updateAssetDisplayList(script_asset_start, script_asset_start + 19)
         end
       end)
     end
   end
-
-  Runtime:addEventListener("touch", function(event) self:handleMouse(event) end)
-
-  self:updateScriptAssetDisplay()
 end
 
 asset_start_x = 0
@@ -709,7 +794,7 @@ function scene:handleKeyboard(event)
       script_assets = new_script_assets
       selected_element_id = nil
 
-      self:updateScriptAssetDisplay()
+      self:updateAssetDisplayList(script_asset_start, script_asset_start + 19)
     end
   end
 
