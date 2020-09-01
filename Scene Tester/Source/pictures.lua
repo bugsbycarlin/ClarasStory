@@ -176,6 +176,7 @@ picture_info["Apple"] = {
   row_length = 5,
   sprite_size = 400,
   sprite_count = 25,
+  outline_frame = 11,
 }
 
 picture_info["Earth"] = {
@@ -183,6 +184,7 @@ picture_info["Earth"] = {
   row_length = 10,
   sprite_size = 400,
   sprite_count = 58,
+  outline_frame = 14,
 }
 
 picture_info["Sun"] = {
@@ -230,6 +232,8 @@ picture_info["Sweater"] = {
   row_length = 5,
   sprite_size = 400,
   sprite_count = 25,
+  outline_frame = 11,
+
 }
 
 picture_info["Tower"] = {
@@ -237,13 +241,31 @@ picture_info["Tower"] = {
   row_length = 5,
   sprite_size = 400,
   sprite_count = 25,
+  outline_frame = 11,
 }
 
-picture_info["City"] = {
-  file_name = "City_Sketch.png",
+picture_info["Girl_Shadow"] = {
+  file_name = "Girl_Shadow_Sketch.png",
   row_length = 5,
-  sprite_size = 720,
+  sprite_size = 400,
+  sprite_count = 19,
+  outline_frame = 8,
+}
+
+picture_info["Black_and_White_Town"] = {
+  file_name = "Black_and_White_Town_Sketch.png",
+  row_length = 5,
+  sprite_size = 400,
   sprite_count = 24,
+  outline_frame = 3,
+}
+
+picture_info["Seaside_Road"] = {
+  file_name = "Seaside_Road.png",
+  row_length = 1,
+  sprite_size = 1024,
+  sprite_count = 1,
+  outline_frame = 1,
 }
 
 picture_info["Seagull"] = {
@@ -260,6 +282,85 @@ picture_info["Beach"] = {
   sprite_count = 10,
   outline_frame = 1,
 }
+
+picture_info["Window"] = {
+  file_name = "Window_Sketch.png",
+  row_length = 5,
+  sprite_size = 400,
+  sprite_height = 600,
+  sprite_count = 12,
+  outline_frame = 12,
+}
+
+picture_info["Brown_Square"] = {
+  file_name = "Brown_Square.png",
+  row_length = 1,
+  sprite_size = 128,
+  sprite_count = 1,
+}
+
+picture_info["White_Square"] = {
+  file_name = "White_Square.png",
+  row_length = 1,
+  sprite_size = 128,
+  sprite_count = 1,
+}
+
+picture_info["Couch"] = {
+  file_name = "Couch.png",
+  row_length = 1,
+  sprite_size = 800,
+  sprite_count = 1,
+}
+
+picture_info["Hill"] = {
+  file_name = "Hill.png",
+  row_length = 1,
+  sprite_size = 1024,
+  sprite_count = 1,
+}
+
+picture_info["Mountain"] = {
+  file_name = "Mountain.png",
+  row_length = 1,
+  sprite_size = 1024,
+  sprite_count = 1,
+}
+
+
+picture_info["Mom"] = {
+  file_name = "Mom_Sketch.png",
+  row_length = 5,
+  sprite_size = 400,
+  sprite_count = 25,
+  outline_frame = 12,
+}
+
+picture_info["Home"] = {
+  file_name = "Home_Sketch.png",
+  row_length = 5,
+  sprite_size = 400,
+  sprite_count = 25,
+  outline_frame = 12,
+}
+
+picture_info["Phone"] = {
+  file_name = "Phone_Sketch.png",
+  row_length = 5,
+  sprite_size = 400,
+  sprite_count = 22,
+  outline_frame = 6,
+}
+
+
+picture_info["Dad"] = {
+  file_name = "Dad_Sketch.png",
+  row_length = 5,
+  sprite_size = 400,
+  sprite_count = 25,
+  outline_frame = 12,
+}
+
 
 picture_info["Girl"] = {
   file_name = "Girl_Sketch.png",
@@ -319,26 +420,34 @@ picture_info["Pink_Star"] = {
 }
 
 for picture, info in pairs(picture_info) do
-  file_name = info["file_name"]
-  sprite_size = info["sprite_size"]
-  row_length = info["row_length"]
-  sprite_count = info["sprite_count"]
+  local file_name = info["file_name"]
+  local sprite_size = info["sprite_size"]
+  local row_length = info["row_length"]
+  local sprite_count = info["sprite_count"]
 
   info.frames = {}
 
+  local sprite_height = sprite_size
+    -- optional height modification
+  if info["sprite_height"] ~= nil then
+    sprite_height = info["sprite_height"]
+  end
+
   info.sheet = {
     sheetContentWidth = row_length * sprite_size,
-    sheetContentHeight = math.ceil(sprite_count / row_length) * sprite_size,
+    sheetContentHeight = math.ceil(sprite_count / row_length) * sprite_height,
     frames = {}
   }
+
+
 
   -- dang
   for i = 1, sprite_count do
     info["sheet"].frames[i] = {
       x = sprite_size * ((i - 1) % row_length),
-      y = sprite_size * (math.floor((i-1) / row_length)),
+      y = sprite_height * (math.floor((i-1) / row_length)),
       width = sprite_size,
-      height = sprite_size,
+      height = sprite_height,
     }
     table.insert(info.frames, i)
   end

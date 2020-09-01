@@ -27,21 +27,7 @@ local load_start_time = 0
 
 local selected_element_id = nil
 
-local save_file = system.pathForFile("Scenes/chapter_1_scene_1.json", system.ResourceDirectory)
-print(save_file)
-
-function scene:saveInfo(event)
-  local file = io.open(save_file, "w")
- 
-  if file then
-    file:write(json.encode(script_assets))
-    io.close(file)
-  end
-
-  print(save_file)
-
-  return true
-end
+local mode = nil
 
 function updateTime()
   current_time = system.getTimer()
@@ -52,6 +38,9 @@ function updateTime()
 end
 
 function scene:nextScene()
+  timer.cancel(self.sketch_sprite_timer)
+  sketch_sprites:immediatelyRemoveAll()
+  mode = nil
   self.chapter:gotoScene(self.next_scene, nil)
   -- composer.gotoScene("Source.interactive_spelling_player", nil)
 end
@@ -64,7 +53,7 @@ function scene:perform(asset)
   elseif asset.type == "picture" then
     local picture = asset.name
 
-    asset.performance = display.newSprite(self.performanceAssetGroup, sprite[picture], {frames=picture_info[picture].frames})
+    asset.performance = display.newSprite(self.performanceAssetGroup[asset.depth + 5], sprite[picture], {frames=picture_info[picture].frames})
     asset.performance.id = asset.id
     asset.performance.x = asset.x
     asset.performance.y = asset.y
@@ -102,9 +91,11 @@ function scene:clearPerformance()
     asset.performance = nil
   end
 
-  while self.performanceAssetGroup.numChildren > 0 do
-    local child = self.performanceAssetGroup[1]
-    if child then child:removeSelf() end
+  for i = 1, 9 do
+    while self.performanceAssetGroup[i].numChildren > 0 do
+      local child = self.performanceAssetGroup[i][1]
+      if child then child:removeSelf() end
+    end
   end
 end
 
@@ -122,6 +113,10 @@ function scene:updateEverything()
     end
   end
 end
+
+-- function scene:fullReset()
+
+-- end
 
 
 -- -----------------------------------------------------------------------------------
@@ -142,22 +137,25 @@ function scene:show(event)
   self.sceneGroup = self.view
   local phase = event.phase
 
-  self.performanceAssetGroup = display.newGroup()
-  self.sceneGroup:insert(self.performanceAssetGroup)
-
-  sketch_sprites = sketch_sprites_class:create()
-
   if (phase == "will") then
     -- Code here runs when the scene is still off screen (but is about to come on screen)
     
   elseif (phase == "did") then
     -- Code here runs when the scene is entirely on screen
 
-    local base_path = system.pathForFile(nil, system.ResourceDirectory)
+    self.performanceAssetGroup = display.newGroup()
+    self.sceneGroup:insert(self.performanceAssetGroup)
+
+    for i = -4, 4 do
+      local layer = display.newGroup()
+      self.performanceAssetGroup:insert(layer)
+    end
+
+    sketch_sprites = sketch_sprites_class:create()
 
     display.setDefault("background", 1, 1, 1)
 
-    timer.performWithDelay(35, function() 
+    self.sketch_sprite_timer = timer.performWithDelay(35, function() 
       sketch_sprites:update(mode, total_performance_time)
     end, 0)
 

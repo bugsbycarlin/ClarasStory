@@ -182,16 +182,17 @@ function scene:show(event)
   self.sceneGroup = self.view
   local phase = event.phase
 
-  self.performanceAssetGroup = display.newGroup()
-  self.sceneGroup:insert(self.performanceAssetGroup)
-
-  sketch_sprites = sketch_sprites_class:create()
-
   if (phase == "will") then
     -- Code here runs when the scene is still off screen (but is about to come on screen)
     
   elseif (phase == "did") then
     -- Code here runs when the scene is entirely on screen
+
+    self.performanceAssetGroup = display.newGroup()
+    self.sceneGroup:insert(self.performanceAssetGroup)
+
+    sketch_sprites = sketch_sprites_class:create()
+
 
     display.setDefault("background", 1, 1, 1)
 

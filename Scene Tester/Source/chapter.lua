@@ -32,11 +32,11 @@ local flow = nil
 
 local current_scene = nil
 
-local save_file = system.pathForFile("Scenes/chapter_1_scene_1.json", system.ResourceDirectory)
-print(save_file)
+local chapter_1_scene_1_file = system.pathForFile("Scenes/chapter_1_scene_1.json", system.ResourceDirectory)
+local chapter_1_scene_2_file = system.pathForFile("Scenes/chapter_1_scene_2.json", system.ResourceDirectory)
 
-function scene:loadInfo()
-  local file = io.open(save_file, "r")
+function scene:loadInfo(scene_file)
+  local file = io.open(scene_file, "r")
   local script_assets = {}
  
   if file then
@@ -191,7 +191,7 @@ function scene:setupSceneStructure()
   }
   flow["Chapter_1_Interactive_Bird"] = {
     name="Chapter_1_Interactive_Bird",
-    next=nil,
+    next="Chapter_1_Scene_2",
     type="interactive_spelling",
     word="Bird",
     show_clara=false,
@@ -203,8 +203,45 @@ function scene:setupSceneStructure()
     time_sig=4,
     -- here it might be fun to use a stage spotlight
   }
+  flow["Chapter_1_Scene_2"] = {
+    name="Chapter_1_Scene_2",
+    next="Chapter_1_Interactive_Mom",
+    type="scripted",
+    script_file="Chapter_1_Scene_2.json",
+    script=nil,
+    duration=0,
+  }
+  flow["Chapter_1_Interactive_Mom"] = {
+    name="Chapter_1_Interactive_Mom",
+    next="Chapter_1_Interactive_Dad",
+    type="interactive_spelling",
+    word="Mom",
+    show_clara=false,
+    interactive_start=12 * 545.454,
+    random_order=false,
+    random_letters=false,
+    bpm=110,
+    mpb=545,
+    time_sig=4,
+    -- here it might be fun to use a stage spotlight
+  }
+  flow["Chapter_1_Interactive_Dad"] = {
+    name="Chapter_1_Interactive_Dad",
+    next=nil,
+    type="interactive_spelling",
+    word="Dad",
+    show_clara=false,
+    interactive_start=12 * 545.454,
+    random_order=false,
+    random_letters=false,
+    bpm=110,
+    mpb=545,
+    time_sig=4,
+    -- here it might be fun to use a stage spotlight
+  }
 
-  flow.Chapter_1_Scene_1.script = self:loadInfo(save_file)
+  flow.Chapter_1_Scene_1.script = self:loadInfo(chapter_1_scene_1_file)
+  flow.Chapter_1_Scene_2.script = self:loadInfo(chapter_1_scene_2_file)
 end
 
 function scene:startGame()

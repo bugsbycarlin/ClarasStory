@@ -36,7 +36,7 @@ local load_start_time = 0
 
 local selected_element_id = nil
 
-local save_file = system.pathForFile("Scenes/chapter_1_scene_1.json", system.ResourceDirectory)
+local save_file = system.pathForFile("Scenes/chapter_1_scene_3.json", system.ResourceDirectory)
 print(save_file)
 
 function scene:saveInfo(event)
@@ -75,7 +75,11 @@ function scene:loadInfo()
     if asset["sketch"] == nil then
       asset.sketch = true
     end
-    -- script_asset_count = script_asset_count + 1
+
+
+    if asset["depth"] == nil then
+      asset.depth = 0
+    end    
   end
 
 
@@ -153,7 +157,20 @@ function scene:updateAssetDisplayList(script_asset_start, script_asset_end)
       self.soundEditingGroup.isVisible = false
 
       if self.pictureEditingGroup.numChildren == 0 then
-        labels = {"Start Time", "x", "y", "x scale", "y scale", "Sketch", "Disappear Time", "Disappear Method", "Squish Scale", "Squish Tilt", "Squish Period"}
+        labels = {
+          "Start Time",
+          "x",
+          "y",
+          "x scale",
+          "y scale",
+          "Sketch",
+          "Disappear Time",
+          "Disappear Method",
+          "Squish Scale",
+          "Squish Tilt",
+          "Squish Period",
+          "Depth"
+        }
         edit_fields = {}
         for i = 1, #labels do
 
@@ -298,6 +315,19 @@ function scene:updateAssetDisplayList(script_asset_start, script_asset_end)
           end
         end)
 
+        edit_fields[12]:addEventListener("userInput", function(event)
+          if event.phase == "editing" then
+            asset = getSelectedAsset()
+            if tonumber(event.text) ~= nil then
+              asset.depth = tonumber(event.text)
+            end
+            -- move it from one layer to another
+            -- if asset.performance ~= nil then
+            --   asset.performance.depth = asset.depth
+            -- end
+          end
+        end)
+
 
       end
 
@@ -312,6 +342,7 @@ function scene:updateAssetDisplayList(script_asset_start, script_asset_end)
       edit_fields[9].text = asset.squish_scale
       edit_fields[10].text = asset.squish_tilt
       edit_fields[11].text = asset.squish_period
+      edit_fields[12].text = asset.depth
     elseif asset.type == "sound" then
       for i = 1,self.pictureEditingGroup.numChildren do
         self.pictureEditingGroup[i].isVisible = false
@@ -329,7 +360,9 @@ function scene:perform(asset)
   elseif asset.type == "picture" then
     local picture = asset.name
 
-    asset.performance = display.newSprite(self.performanceAssetGroup, sprite[picture], {frames=picture_info[picture].frames})
+    -- add depth here
+    print("Adding asset " .. picture .. " with depth " .. asset.depth)
+    asset.performance = display.newSprite(self.performanceAssetGroup[asset.depth + 5], sprite[picture], {frames=picture_info[picture].frames})
     asset.performance.id = asset.id
     asset.performance.x = asset.x
     asset.performance.y = asset.y
@@ -367,16 +400,23 @@ function scene:clearPerformance()
     asset.performance = nil
   end
 
-  while self.performanceAssetGroup.numChildren > 0 do
-    local child = self.performanceAssetGroup[1]
-    if child then child:removeSelf() end
+  for i = 1, 9 do
+    while self.performanceAssetGroup[i].numChildren > 0 do
+      local child = self.performanceAssetGroup[i][1]
+      if child then child:removeSelf() end
+    end
   end
 end
 
 function scene:updateEverything()
   local last_update_time = total_performance_time
   updateTime()
-  basic_info_text.text = "Time: " .. math.floor(total_performance_time) / 1000.0 .. ", Objects: " .. self.performanceAssetGroup.numChildren
+  local objects_in_performance = 0
+  for i = 1, 9 do
+    print(i)
+    objects_in_performance = objects_in_performance + self.performanceAssetGroup[i].numChildren
+  end 
+  basic_info_text.text = "Time: " .. math.floor(total_performance_time) / 1000.0 .. ", Objects: " .. objects_in_performance
 
   if mode == "performing" then
     for i = 1, #script_assets do
@@ -407,23 +447,6 @@ function scene:show(event)
   self.sceneGroup = self.view
   local phase = event.phase
 
-  self.performanceAssetGroup = display.newGroup()
-  self.sceneGroup:insert(self.performanceAssetGroup)
-
-  self.editingGroup = display.newGroup()
-  self.sceneGroup:insert(self.editingGroup)
-
-  self.scriptAssetGroup = display.newGroup()
-  self.editingGroup:insert(self.scriptAssetGroup)
-
-  self.pictureEditingGroup = display.newGroup()
-  self.editingGroup:insert(self.pictureEditingGroup)
-
-  self.soundEditingGroup = display.newGroup()
-  self.editingGroup:insert(self.soundEditingGroup)
-
-  sketch_sprites = sketch_sprites_class:create()
-
   if (phase == "will") then
     -- Code here runs when the scene is still off screen (but is about to come on screen)
     
@@ -434,6 +457,29 @@ function scene:show(event)
     -- print(base_path)
     -- local path = system.pathForFile("Pages", system.ResourceDirectory)
     -- print(path)
+
+    self.performanceAssetGroup = display.newGroup()
+    self.sceneGroup:insert(self.performanceAssetGroup)
+
+    for i = -4, 4 do
+      local layer = display.newGroup()
+      self.performanceAssetGroup:insert(layer)
+    end
+
+    self.editingGroup = display.newGroup()
+    self.sceneGroup:insert(self.editingGroup)
+
+    self.scriptAssetGroup = display.newGroup()
+    self.editingGroup:insert(self.scriptAssetGroup)
+
+    self.pictureEditingGroup = display.newGroup()
+    self.editingGroup:insert(self.pictureEditingGroup)
+
+    self.soundEditingGroup = display.newGroup()
+    self.editingGroup:insert(self.soundEditingGroup)
+
+
+    sketch_sprites = sketch_sprites_class:create()
 
     display.setDefault("background", 1, 1, 1)
 
@@ -606,6 +652,7 @@ function scene:updatePictureAssetMenu(start_number, end_number)
               squish_scale=1,
               squish_tilt=0,
               squish_period=1718,
+              depth=0,
               performance=nil,
               timer=nil,
             }
