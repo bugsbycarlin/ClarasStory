@@ -250,8 +250,8 @@ function scene:startGame()
 
   composer.setVariable("sprite", sprite)
 
-  self:gotoScene("Chapter_1_Scene_1", {effect = "fade", time = 500})
-  -- self:gotoScene("Chapter_1_Interactive_Girl", {effect = "fade", time = 500})
+  -- self:gotoScene("Chapter_1_Scene_1", {effect = "fade", time = 500})
+  self:gotoScene("Chapter_1_Interactive_Girl", {effect = "fade", time = 500})
 end
 
 function scene:gotoScene(new_scene_name, fade_options)

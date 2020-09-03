@@ -396,8 +396,18 @@ function scene:startScene()
     end, 1)
   end
 
+  local function finishedLoop(event)
+    print("finished loop")
+    self:listenerTest()
+  end
+
+  print("I AM STARTING THE MUSIC LOOP")
   music_loop = audio.loadStream("Sound/Chapter_1_Interactive_Loop.wav")
-  audio.play(music_loop, {loops=-1})
+  audio.play(music_loop, {loops=0, onComplete = finishedLoop})
+end
+
+function scene:listenerTest()
+  print("I am in listener test")
 end
 
 function scene:updateInteractiveUI()

@@ -56,11 +56,35 @@ function sketch_sprites:create()
     for i = 1, #self.sprite_list do
 
       sprite = self.sprite_list[i]
+
+      if sprite.state == "animating" then
+        sprite.animation_count = sprite.animation_count + 1
+        if sprite.animation_count % sprite.info.animation_on == 0 then
+          if sprite.frame < sprite.info.animation_start or sprite.frame > sprite.info.animation_end then
+            sprite:setFrame(sprite.info.animation_start)
+          else
+            if sprite.frame >= sprite.info.animation_end then
+              sprite:setFrame(sprite.info.animation_start)
+            else
+              sprite:setFrame(sprite.frame + 1)
+            end
+          end
+        end
+      end
+
       if sprite.state == "sketching" then
         if sprite.frame < sprite.info.sprite_count then
           sprite:setFrame(sprite.frame + 1)
         else
-          sprite.state = "static"
+          if sprite.info["animation_end"] ~= nil then
+            print("setting " .. sprite.info.file_name .. " to animation")
+            --sprite_count = info["animation_end"]
+            sprite.state = "animating"
+            sprite.animation_count = 0
+          else
+            print("setting " .. sprite.info.file_name .. " to static")
+            sprite.state = "static"
+          end
         end
       end
 
@@ -68,7 +92,15 @@ function sketch_sprites:create()
         if sprite.frame < sprite.info.outline_frame then
           sprite:setFrame(sprite.frame + 1)
         else
-          sprite.state = "static"
+          if sprite.info["animation_end"] ~= nil then
+            print("setting " .. sprite.info.file_name .. " to animation")
+            --sprite_count = info["animation_end"]
+            sprite.state = "animating"
+            sprite.animation_count = 0
+          else
+            print("setting " .. sprite.info.file_name .. " to static")
+            sprite.state = "static"
+          end
         end
       end
 
@@ -84,7 +116,7 @@ function sketch_sprites:create()
 
       local current_time = system.getTimer()
 
-      if sprite.state == "static" or sprite.state == "sketching" then
+      if sprite.state == "static" or sprite.state == "sketching"  or sprite.state == "animating" then
         local squish_time = current_time - sprite.squish_start
         -- sprite.xScale = sprite.x_scale * (1 + (sprite.squish_scale - 1) * math.sin(squish_time * 2 * math.pi / sprite.squish_period))
         sprite.yScale = sprite.y_scale * (1 + (sprite.squish_scale - 1) * math.cos(squish_time * 2 * math.pi / sprite.squish_period))

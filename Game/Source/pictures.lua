@@ -457,6 +457,19 @@ picture_info["Tent"] = {
   outline_frame = 1,
 }
 
+picture_info["Farmer"] = {
+  file_name = "Farmer_Sketch.png",
+  row_length = 8,
+  sprite_size = 256,
+  sprite_height = 400,
+  sprite_count = 12,
+  outline_frame = 5,
+  animation_start = 17,
+  animation_end = 32,
+  animation_on = 2,
+}
+
+
 picture_info["Backpack"] = {
   file_name = "Backpack_Sketch.png",
   row_length = 5,
@@ -546,13 +559,16 @@ for picture, info in pairs(picture_info) do
     sprite_height = info["sprite_height"]
   end
 
+  -- optional animation modification
+  if info["animation_end"] ~= nil then
+    sprite_count = info["animation_end"]
+  end
+
   info.sheet = {
     sheetContentWidth = row_length * sprite_size,
     sheetContentHeight = math.ceil(sprite_count / row_length) * sprite_height,
     frames = {}
   }
-
-
 
   -- dang
   for i = 1, sprite_count do
