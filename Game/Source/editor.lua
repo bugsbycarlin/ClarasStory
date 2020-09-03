@@ -8,6 +8,8 @@ local sound_info = require("Source.sounds")
 
 local sketch_sprites_class = require("Source.sketch_sprites")
 
+local sketch_sprites_timer = nil
+
 local scene = composer.newScene()
 
 local sketch_sprites
@@ -509,7 +511,7 @@ function scene:show(event)
 
     updateLoadDisplay()
 
-    timer.performWithDelay(35, function() 
+    sketch_sprites_timer = timer.performWithDelay(35, function() 
       sketch_sprites:update(mode, total_performance_time)
     end, 0)
 
@@ -851,6 +853,12 @@ function scene:handleKeyboard(event)
       if asset ~= nil and asset.type == "picture" and asset.performance == nil then
         self:perform(asset)
       end
+    end
+  end
+
+  if event.isCtrlDown and event.keyName == "e" and event.phase == "up" then
+    if mode == "editing" then
+      sketch_sprites_timer._delay = 500
     end
   end
 

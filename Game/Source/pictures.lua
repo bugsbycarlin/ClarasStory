@@ -352,6 +352,119 @@ picture_info["Phone"] = {
   outline_frame = 6,
 }
 
+picture_info["Wand"] = {
+  file_name = "Wand_Sketch.png",
+  row_length = 5,
+  sprite_size = 400,
+  sprite_count = 25,
+  outline_frame = 5,
+}
+
+picture_info["Teddy"] = {
+  file_name = "Teddy_Sketch.png",
+  row_length = 5,
+  sprite_size = 400,
+  sprite_count = 25,
+  outline_frame = 11,
+}
+
+picture_info["Snack"] = {
+  file_name = "Snack_Sketch.png",
+  row_length = 5,
+  sprite_size = 400,
+  sprite_count = 25,
+  outline_frame = 8,
+}
+
+picture_info["Orange"] = {
+  file_name = "Orange_Sketch.png",
+  row_length = 5,
+  sprite_size = 400,
+  sprite_count = 21,
+  outline_frame = 5,
+}
+
+picture_info["Banana"] = {
+  file_name = "Banana_Sketch.png",
+  row_length = 5,
+  sprite_size = 400,
+  sprite_count = 20,
+  outline_frame = 7,
+}
+
+picture_info["Plum"] = {
+  file_name = "Plum_Sketch.png",
+  row_length = 5,
+  sprite_size = 400,
+  sprite_count = 24,
+  outline_frame = 6,
+}
+
+picture_info["Farm"] = {
+  file_name = "Farm_Sketch.png",
+  row_length = 4,
+  sprite_size = 1024,
+  sprite_height = 768,
+  sprite_count = 16,
+  outline_frame = 9,
+}
+
+picture_info["Pig"] = {
+  file_name = "Pig_Sketch.png",
+  row_length = 5,
+  sprite_size = 400,
+  sprite_count = 23,
+  outline_frame = 10,
+}
+
+picture_info["Cow"] = {
+  file_name = "Cow_Sketch.png",
+  row_length = 5,
+  sprite_size = 400,
+  sprite_count = 25,
+  outline_frame = 18,
+}
+
+picture_info["Coin"] = {
+  file_name = "Coin_Sketch.png",
+  row_length = 4,
+  sprite_size = 256,
+  sprite_count = 16,
+  outline_frame = 9,
+}
+
+picture_info["Pear"] = {
+  file_name = "Pear_Sketch.png",
+  row_length = 4,
+  sprite_size = 256,
+  sprite_count = 14,
+  outline_frame = 3,
+}
+
+picture_info["Lime"] = {
+  file_name = "Lime_Sketch.png",
+  row_length = 4,
+  sprite_size = 256,
+  sprite_count = 15,
+  outline_frame = 5,
+}
+
+picture_info["Tent"] = {
+  file_name = "Tent_Sketch.png",
+  row_length = 2,
+  sprite_size = 512,
+  sprite_count = 4,
+  outline_frame = 1,
+}
+
+picture_info["Backpack"] = {
+  file_name = "Backpack_Sketch.png",
+  row_length = 5,
+  sprite_size = 400,
+  sprite_count = 25,
+  outline_frame = 9,
+}
+
 
 picture_info["Dad"] = {
   file_name = "Dad_Sketch.png",
