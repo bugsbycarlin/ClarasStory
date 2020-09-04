@@ -1,15 +1,5 @@
 [
   {
-    "type": "sound",
-    "id": "Plum_Beast_Intro_1",
-    "sketch": true,
-    "y": 384,
-    "x": 512,
-    "name": "Plum_Beast_Intro",
-    "start_time": 0,
-    "depth": 0
-  },
-  {
     "squish_scale": 1.02,
     "x": 254.75,
     "type": "picture",

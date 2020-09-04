@@ -34,22 +34,23 @@ local flow = nil
 
 local current_scene = nil
 
-local chapter_1_scene_1_file = system.pathForFile("Scenes/chapter_1_scene_1.json", system.ResourceDirectory)
-local chapter_1_scene_2_file = system.pathForFile("Scenes/chapter_1_scene_2.json", system.ResourceDirectory)
-local chapter_1_scene_3_file = system.pathForFile("Scenes/chapter_1_scene_3.json", system.ResourceDirectory)
-local chapter_1_scene_4_file = system.pathForFile("Scenes/chapter_1_scene_4.json", system.ResourceDirectory)
-local chapter_1_scene_5_file = system.pathForFile("Scenes/chapter_1_scene_5.json", system.ResourceDirectory)
-local chapter_1_scene_6_file = system.pathForFile("Scenes/chapter_1_scene_6.json", system.ResourceDirectory)
-local chapter_1_scene_7_file = system.pathForFile("Scenes/chapter_1_scene_6.json", system.ResourceDirectory)
+-- local chapter_1_scene_1_file = system.pathForFile("Scenes/chapter_1_scene_1.json", system.ResourceDirectory)
+-- local chapter_1_scene_2_file = system.pathForFile("Scenes/chapter_1_scene_2.json", system.ResourceDirectory)
+-- local chapter_1_scene_3_file = system.pathForFile("Scenes/chapter_1_scene_3.json", system.ResourceDirectory)
+-- local chapter_1_scene_4_file = system.pathForFile("Scenes/chapter_1_scene_4.json", system.ResourceDirectory)
+-- local chapter_1_scene_5_file = system.pathForFile("Scenes/chapter_1_scene_5.json", system.ResourceDirectory)
+-- local chapter_1_scene_6_file = system.pathForFile("Scenes/chapter_1_scene_6.json", system.ResourceDirectory)
+-- local chapter_1_scene_7_file = system.pathForFile("Scenes/chapter_1_scene_6.json", system.ResourceDirectory)
 
-local chapter_1_beast_apple_file = system.pathForFile("Scenes/chapter_1_beast_apple.json", system.ResourceDirectory)
-local chapter_1_beast_banana_file = system.pathForFile("Scenes/chapter_1_beast_banana.json", system.ResourceDirectory)
-local chapter_1_beast_lime_file = system.pathForFile("Scenes/chapter_1_beast_lime.json", system.ResourceDirectory)
-local chapter_1_beast_orange_file = system.pathForFile("Scenes/chapter_1_beast_orange.json", system.ResourceDirectory)
-local chapter_1_beast_pear_file = system.pathForFile("Scenes/chapter_1_beast_pear.json", system.ResourceDirectory)
-local chapter_1_beast_plum_file = system.pathForFile("Scenes/chapter_1_beast_plum.json", system.ResourceDirectory)
+-- local chapter_1_beast_apple_file = system.pathForFile("Scenes/chapter_1_beast_apple.json", system.ResourceDirectory)
+-- local chapter_1_beast_banana_file = system.pathForFile("Scenes/chapter_1_beast_banana.json", system.ResourceDirectory)
+-- local chapter_1_beast_lime_file = system.pathForFile("Scenes/chapter_1_beast_lime.json", system.ResourceDirectory)
+-- local chapter_1_beast_orange_file = system.pathForFile("Scenes/chapter_1_beast_orange.json", system.ResourceDirectory)
+-- local chapter_1_beast_pear_file = system.pathForFile("Scenes/chapter_1_beast_pear.json", system.ResourceDirectory)
+-- local chapter_1_beast_plum_file = system.pathForFile("Scenes/chapter_1_beast_plum.json", system.ResourceDirectory)
 
-function scene:loadInfo(scene_file)
+function scene:loadSceneScript(scene_name)
+  local scene_file = system.pathForFile("Scenes/" .. scene_name .. ".json", system.ResourceDirectory)
   local file = io.open(scene_file, "r")
   local script_assets = {}
  
@@ -190,7 +191,7 @@ function scene:setupSceneStructure()
     next="Chapter_1_Interactive_Girl",
     type="scripted",
     script_file="Chapter_1_Scene_1.json",
-    script=nil,
+    script=self:loadSceneScript("chapter_1_scene_1"),
     duration=28363.636,
   }
   flow["Chapter_1_Interactive_Girl"] = {
@@ -228,7 +229,7 @@ function scene:setupSceneStructure()
     next="Chapter_1_Interactive_Mom",
     type="scripted",
     script_file="Chapter_1_Scene_2.json",
-    script=nil,
+    script=self:loadSceneScript("chapter_1_scene_2"),
     duration=0,
   }
   flow["Chapter_1_Interactive_Mom"] = {
@@ -268,7 +269,7 @@ function scene:setupSceneStructure()
     next="Chapter_1_Interactive_Wand",
     type="scripted",
     script_file="Chapter_1_Scene_3.json",
-    script=nil,
+    script=self:loadSceneScript("chapter_1_scene_3"),
     duration=0,
   }
   flow["Chapter_1_Interactive_Wand"] = {
@@ -292,7 +293,7 @@ function scene:setupSceneStructure()
     next="Chapter_1_Interactive_Pig",
     type="scripted",
     script_file="Chapter_1_Scene_4.json",
-    script=nil,
+    script=self:loadSceneScript("chapter_1_scene_4"),
     duration=0,
   }
   flow["Chapter_1_Interactive_Pig"] = {
@@ -332,7 +333,7 @@ function scene:setupSceneStructure()
     next="Chapter_1_Interactive_Coin",
     type="scripted",
     script_file="Chapter_1_Scene_5.json",
-    script=nil,
+    script=self:loadSceneScript("chapter_1_scene_5"),
     duration=0,
   }
   flow["Chapter_1_Interactive_Coin"] = {
@@ -356,7 +357,7 @@ function scene:setupSceneStructure()
     next=nil,
     type="scripted",
     script_file="Chapter_1_Scene_6.json",
-    script=nil,
+    script=self:loadSceneScript("chapter_1_scene_6"),
     duration=0,
     -- cleanup=false,
   }
@@ -366,8 +367,7 @@ function scene:setupSceneStructure()
     name="Chapter_1_Beast_Apple",
     next="Chapter_1_Interactive_Apple",
     type="scripted",
-    -- script_file="Chapter_1_Beast_Apple.json",
-    script=nil,
+    script=self:loadSceneScript("chapter_1_beast_apple"),
     duration=0,
   }
   flow["Chapter_1_Interactive_Apple"] = {
@@ -384,14 +384,13 @@ function scene:setupSceneStructure()
     outro_sound_beats = {16, 18, 20, 22, 24},
     outro_word_beat = 26,
     time_sig=4,
-    -- here it might be fun to use a stage spotlight
+    script=self:loadSceneScript("chapter_1_fruit_interactive"),
   }
   flow["Chapter_1_Beast_Banana"] = {
     name="Chapter_1_Beast_Banana",
     next="Chapter_1_Interactive_Banana",
     type="scripted",
-    -- script_file="Chapter_1_Beast_Apple.json",
-    script=nil,
+    script=self:loadSceneScript("chapter_1_beast_banana"),
     duration=0,
   }
   flow["Chapter_1_Interactive_Banana"] = {
@@ -408,14 +407,13 @@ function scene:setupSceneStructure()
     outro_sound_beats = {16, 18, 20, 22, 24, 26},
     outro_word_beat = 28,
     time_sig=4,
-    -- here it might be fun to use a stage spotlight
+    script=self:loadSceneScript("chapter_1_fruit_interactive"),
   }
   flow["Chapter_1_Beast_Lime"] = {
     name="Chapter_1_Beast_Lime",
     next="Chapter_1_Interactive_Lime",
     type="scripted",
-    -- script_file="Chapter_1_Beast_Apple.json",
-    script=nil,
+    script=self:loadSceneScript("chapter_1_beast_lime"),
     duration=0,
   }
   flow["Chapter_1_Interactive_Lime"] = {
@@ -432,14 +430,13 @@ function scene:setupSceneStructure()
     outro_sound_beats = {12, 14, 16, 18},
     outro_word_beat = 20,
     time_sig=4,
-    -- here it might be fun to use a stage spotlight
+    script=self:loadSceneScript("chapter_1_fruit_interactive"),
   }
   flow["Chapter_1_Beast_Orange"] = {
     name="Chapter_1_Beast_Orange",
     next="Chapter_1_Interactive_Orange",
     type="scripted",
-    -- script_file="Chapter_1_Beast_Apple.json",
-    script=nil,
+    script=self:loadSceneScript("chapter_1_beast_orange"),
     duration=0,
   }
   flow["Chapter_1_Interactive_Orange"] = {
@@ -456,14 +453,13 @@ function scene:setupSceneStructure()
     outro_sound_beats = {20, 22, 24, 26, 28, 30},
     outro_word_beat = 34,
     time_sig=4,
-    -- here it might be fun to use a stage spotlight
+    script=self:loadSceneScript("chapter_1_fruit_interactive"),
   }
   flow["Chapter_1_Beast_Pear"] = {
     name="Chapter_1_Beast_Pear",
     next="Chapter_1_Interactive_Pear",
     type="scripted",
-    -- script_file="Chapter_1_Beast_Apple.json",
-    script=nil,
+    script=self:loadSceneScript("chapter_1_beast_pear"),
     duration=0,
   }
   flow["Chapter_1_Interactive_Pear"] = {
@@ -480,14 +476,13 @@ function scene:setupSceneStructure()
     outro_sound_beats = {12, 14, 16, 18},
     outro_word_beat = 20,
     time_sig=4,
-    -- here it might be fun to use a stage spotlight
+    script=self:loadSceneScript("chapter_1_fruit_interactive"),
   }
   flow["Chapter_1_Beast_Plum"] = {
     name="Chapter_1_Beast_Plum",
     next="Chapter_1_Interactive_Plum",
     type="scripted",
-    -- script_file="Chapter_1_Beast_Apple.json",
-    script=nil,
+    script=self:loadSceneScript("chapter_1_beast_plum"),
     duration=0,
   }
   flow["Chapter_1_Interactive_Plum"] = {
@@ -504,7 +499,7 @@ function scene:setupSceneStructure()
     outro_sound_beats = {12, 14, 16, 18},
     outro_word_beat = 20,
     time_sig=4,
-    -- here it might be fun to use a stage spotlight
+    script=self:loadSceneScript("chapter_1_fruit_interactive"),
   }
 
   -- make a random chain of fruits for the fruit beast before moving to Scene 7
@@ -516,10 +511,10 @@ function scene:setupSceneStructure()
     "Pear",
     "Plum",
   }
-  -- for i = #fruits, 2, -1 do
-  --   local j = math.random(i)
-  --   fruits[i], fruits[j] = fruits[j], fruits[i]
-  -- end
+  for i = #fruits, 2, -1 do
+    local j = math.random(i)
+    fruits[i], fruits[j] = fruits[j], fruits[i]
+  end
 
 
   flow["Chapter_1_Scene_6"].next = "Chapter_1_Beast_" .. fruits[1]
@@ -528,22 +523,20 @@ function scene:setupSceneStructure()
   flow["Chapter_1_Interactive_" .. fruits[3]].next = "Chapter_1_Scene_7"
 
 
-
-
   -- scripts
-  flow.Chapter_1_Scene_1.script = self:loadInfo(chapter_1_scene_1_file)
-  flow.Chapter_1_Scene_2.script = self:loadInfo(chapter_1_scene_2_file)
-  flow.Chapter_1_Scene_3.script = self:loadInfo(chapter_1_scene_3_file)
-  flow.Chapter_1_Scene_4.script = self:loadInfo(chapter_1_scene_4_file)
-  flow.Chapter_1_Scene_5.script = self:loadInfo(chapter_1_scene_5_file)
-  flow.Chapter_1_Scene_6.script = self:loadInfo(chapter_1_scene_6_file)
+  -- flow.Chapter_1_Scene_1.script = self:loadInfo(chapter_1_scene_1_file)
+  -- flow.Chapter_1_Scene_2.script = self:loadInfo(chapter_1_scene_2_file)
+  -- flow.Chapter_1_Scene_3.script = self:loadInfo(chapter_1_scene_3_file)
+  -- flow.Chapter_1_Scene_4.script = self:loadInfo(chapter_1_scene_4_file)
+  -- flow.Chapter_1_Scene_5.script = self:loadInfo(chapter_1_scene_5_file)
+  -- flow.Chapter_1_Scene_6.script = self:loadInfo(chapter_1_scene_6_file)
 
-  flow.Chapter_1_Beast_Apple.script = self:loadInfo(chapter_1_beast_apple_file)
-  flow.Chapter_1_Beast_Banana.script = self:loadInfo(chapter_1_beast_banana_file)
-  flow.Chapter_1_Beast_Orange.script = self:loadInfo(chapter_1_beast_orange_file)
-  flow.Chapter_1_Beast_Lime.script = self:loadInfo(chapter_1_beast_lime_file)
-  flow.Chapter_1_Beast_Pear.script = self:loadInfo(chapter_1_beast_pear_file)
-  flow.Chapter_1_Beast_Plum.script = self:loadInfo(chapter_1_beast_plum_file)
+  -- flow.Chapter_1_Beast_Apple.script = self:loadInfo(chapter_1_beast_apple_file)
+  -- flow.Chapter_1_Beast_Banana.script = self:loadInfo(chapter_1_beast_banana_file)
+  -- flow.Chapter_1_Beast_Orange.script = self:loadInfo(chapter_1_beast_orange_file)
+  -- flow.Chapter_1_Beast_Lime.script = self:loadInfo(chapter_1_beast_lime_file)
+  -- flow.Chapter_1_Beast_Pear.script = self:loadInfo(chapter_1_beast_pear_file)
+  -- flow.Chapter_1_Beast_Plum.script = self:loadInfo(chapter_1_beast_plum_file)
 
   self.first_scene = "Chapter_1_Scene_6"
 
@@ -564,19 +557,21 @@ function scene:gotoScene(new_scene_name, fade_options)
   if new_scene_name ~= "end" and flow[new_scene_name] ~= nil then
     print("New scene: " .. new_scene_name)
     new_scene = flow[new_scene_name]
-    composer.setVariable("settings", new_scene)
     if new_scene.next ~= nil then
       composer.setVariable("next_scene", new_scene.next)
+      composer.setVariable("settings", new_scene)
+      if new_scene.script ~= nil then
+        composer.setVariable("script_assets", new_scene.script)
+      else
+        composer.setVariable("script_assets", "")
+      end
     else
       composer.setVariable("next_scene", "end")
     end
     print("COMPOSER has set next as " .. tostring(composer.getVariable("next_scene")))
     if new_scene.type == "interactive_spelling" then
-      
-      
       composer.gotoScene("Source.interactive_spelling_player", fade_options)
     elseif new_scene.type == "scripted" then
-      composer.setVariable("script_assets", new_scene.script)
       composer.gotoScene("Source.scripted_player", fade_options)
     end
   else

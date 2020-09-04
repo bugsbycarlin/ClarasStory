@@ -446,6 +446,13 @@ picture_info["Bridge"] = {
   outline_frame = 4,
 }
 
+picture_info["Speech_Bubble"] = {
+  file_name = "Speech_Bubble.png",
+  row_length = 1,
+  sprite_size = 400,
+  sprite_count = 1,
+  outline_frame = 1,
+}
 
 picture_info["Pig"] = {
   file_name = "Pig_Sketch.png",

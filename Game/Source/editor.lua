@@ -93,7 +93,7 @@ function scene:loadInfo()
   total_performance_time = 0
 
   self:updateAssetDisplayList(script_asset_start, script_asset_start + 19)
-  self:updateEverything()
+  self:updatePerformance()
     
   audio.stop()
 
@@ -410,7 +410,7 @@ function scene:clearPerformance()
   end
 end
 
-function scene:updateEverything()
+function scene:updatePerformance()
   local last_update_time = total_performance_time
   updateTime()
   local objects_in_performance = 0
@@ -753,7 +753,7 @@ function scene:handleKeyboard(event)
       start_performance_time = system.getTimer()
       current_time = system.getTimer()
       update_timer = timer.performWithDelay(35, function() 
-        self:updateEverything()
+        self:updatePerformance()
       end, 0)
     elseif mode == "performing" then
       mode = "editing"
@@ -765,7 +765,7 @@ function scene:handleKeyboard(event)
       current_time = system.getTimer()
       stored_performance_time = stored_performance_time + current_time - start_performance_time
       total_performance_time = stored_performance_time
-      self:updateEverything()
+      self:updatePerformance()
       timer.cancel(update_timer)
     end
   end
@@ -790,7 +790,7 @@ function scene:handleKeyboard(event)
 
     self:clearPerformance()
 
-    self:updateEverything()
+    self:updatePerformance()
   end
 
   if event.isShiftDown and event.keyName == "left" and event.phase == "up" then  
@@ -822,7 +822,7 @@ function scene:handleKeyboard(event)
         end
       end
 
-      self:updateEverything()
+      self:updatePerformance()
 
     end
   end

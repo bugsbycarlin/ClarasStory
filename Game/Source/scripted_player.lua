@@ -65,7 +65,12 @@ function scene:perform(asset)
     else
       asset.performance.sketch = false
       asset.performance:setFrame(picture_info[picture]["sprite_count"])
-      asset.performance.state = "static"
+      if asset.performance.info["animation_end"] ~= nil then
+        asset.performance.state = "animating"
+        asset.performance.animation_count = 0
+      else
+        asset.performance.state = "static"
+      end
     end
     asset.performance.start_time = system.getTimer()
     asset.performance.x_scale = asset.x_scale
@@ -97,7 +102,7 @@ function scene:clearPerformance()
   end
 end
 
-function scene:updateEverything()
+function scene:updatePerformance()
   local last_update_time = total_performance_time
   updateTime()
 
@@ -184,10 +189,10 @@ function scene:startPerformance()
   start_performance_time = system.getTimer()
   current_time = system.getTimer()
 
-  self:updateEverything()
+  self:updatePerformance()
 
   update_timer = timer.performWithDelay(35, function() 
-    self:updateEverything()
+    self:updatePerformance()
   end, 0)
 end
 
