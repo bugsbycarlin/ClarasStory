@@ -109,6 +109,37 @@ function updateTime()
   total_performance_time = stored_performance_time + (current_time - start_performance_time)
 end
 
+function scene:poopStars(center_x, center_y, num_stars)
+  local info = self.info
+  colors = {"Green", "Yellow", "Blue", "Red", "Orange", "Purple", "Pink"}
+  for i = 1, num_stars do
+    local star_color = colors[math.random(#colors)]
+    local picture = star_color .. "_Star"
+    local star_sprite = display.newSprite(self.performanceAssetGroup, sprite[picture], {frames=picture_info[picture].frames})
+    star_sprite.id = picture .. "_" .. 0
+    star_sprite.x = center_x
+    star_sprite.y = center_y
+    star_sprite.fixed_y = star_sprite.y
+    star_sprite.fixed_x = star_sprite.x
+    star_sprite.info = picture_info[picture]
+    star_sprite.sketch = false
+    star_sprite:setFrame(picture_info[picture]["sprite_count"])
+    star_sprite.state = "disappearing_gravity"
+    star_sprite.start_time = system.getTimer()
+    star_sprite.x_scale = 0.5
+    star_sprite.y_scale = 0.5
+    star_sprite.xScale = star_sprite.x_scale
+    star_sprite.yScale = star_sprite.y_scale
+    star_sprite.disappear_time = -1
+    star_sprite.squish_scale = 1.04
+    star_sprite.squish_tilt = 0
+    star_sprite.squish_period = info.mpb
+    star_sprite.x_vel = -20 + math.random(40)
+    star_sprite.y_vel = -1 * (4 + math.random(6))
+    self.sketch_sprites:add(star_sprite)
+  end
+end
+
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
@@ -221,10 +252,19 @@ function scene:startScene()
 
   local picture = info.word
 
+  local spelling_object_x = display.contentCenterX
+  local spelling_object_y = display.contentCenterY - 100
+  if info["object_x"] ~= nil then
+    spelling_object_x = info["object_x"]
+  end
+  if info["object_y"] ~= nil then
+    spelling_object_y = info["object_y"]
+  end
+
   self.spelling_object = display.newSprite(self.performanceAssetGroup, sprite[picture], {frames=picture_info[picture].frames})
   self.spelling_object.id = picture .. "_" .. 0
-  self.spelling_object.x = display.contentCenterX
-  self.spelling_object.y = display.contentCenterY - 100
+  self.spelling_object.x = spelling_object_x
+  self.spelling_object.y = spelling_object_y
   self.spelling_object.fixed_y = self.spelling_object.y
   self.spelling_object.fixed_x = self.spelling_object.x
   self.spelling_object.info = picture_info[picture]
@@ -305,12 +345,18 @@ function scene:startScene()
 
       local this_letter = i
 
+      function poopStars(x, y, val)
+        self:poopStars(x, y, val)
+      end
+
       local button_event = function(event)
         if mode == "interactive" then
           print("Touching " .. self.current_letter_number)
           if self.current_letter_number >= 1 and self.current_letter_number <= string.len(info.word) and this_letter == self.current_letter_number then
             local sound = audio.loadSound("Sound/Touch_Letter.wav")
             audio.play(sound)
+
+            poopStars(button_backing.x, button_backing.y, 3 + math.random(3))
 
             self.current_letter_number = self.current_letter_number + 1
             local c = self.current_letter_number

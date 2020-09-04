@@ -241,11 +241,14 @@ function scene:setupSceneStructure()
     random_letters=false,
     bpm=110,
     mpb=545.4545454545,
+    object_x = display.contentCenterX - 50,
+    object_y = display.contentCenterY - 100,
     intro_letter_beats = {8, 10, 12},
     outro_letter_beats = {4, 6, 8},
     outro_sound_beats = {12, 14, 16},
     outro_word_beat = 18,
     time_sig=4,
+    script=self:loadSceneScript("chapter_1_mom_interactive"),
     -- here it might be fun to use a stage spotlight
   }
   flow["Chapter_1_Interactive_Dad"] = {
@@ -257,11 +260,14 @@ function scene:setupSceneStructure()
     random_letters=false,
     bpm=110,
     mpb=545.4545454545,
+    object_x = display.contentCenterX + 90,
+    object_y = display.contentCenterY - 100,
     intro_letter_beats = {8, 10, 12},
     outro_letter_beats = {4, 6, 8},
     outro_sound_beats = {12, 14, 16},
     outro_word_beat = 18,
     time_sig=4,
+    script=self:loadSceneScript("chapter_1_dad_interactive"),
     -- here it might be fun to use a stage spotlight
   }
   flow["Chapter_1_Scene_3"] = {
@@ -523,22 +529,17 @@ function scene:setupSceneStructure()
   flow["Chapter_1_Interactive_" .. fruits[3]].next = "Chapter_1_Scene_7"
 
 
-  -- scripts
-  -- flow.Chapter_1_Scene_1.script = self:loadInfo(chapter_1_scene_1_file)
-  -- flow.Chapter_1_Scene_2.script = self:loadInfo(chapter_1_scene_2_file)
-  -- flow.Chapter_1_Scene_3.script = self:loadInfo(chapter_1_scene_3_file)
-  -- flow.Chapter_1_Scene_4.script = self:loadInfo(chapter_1_scene_4_file)
-  -- flow.Chapter_1_Scene_5.script = self:loadInfo(chapter_1_scene_5_file)
-  -- flow.Chapter_1_Scene_6.script = self:loadInfo(chapter_1_scene_6_file)
+  flow["Chapter_1_Scene_7"] = {
+    name="Chapter_1_Scene_7",
+    next=nil,
+    type="scripted",
+    script_file="Chapter_1_Scene_7.json",
+    script=self:loadSceneScript("chapter_1_scene_7"),
+    duration=0,
+  }
 
-  -- flow.Chapter_1_Beast_Apple.script = self:loadInfo(chapter_1_beast_apple_file)
-  -- flow.Chapter_1_Beast_Banana.script = self:loadInfo(chapter_1_beast_banana_file)
-  -- flow.Chapter_1_Beast_Orange.script = self:loadInfo(chapter_1_beast_orange_file)
-  -- flow.Chapter_1_Beast_Lime.script = self:loadInfo(chapter_1_beast_lime_file)
-  -- flow.Chapter_1_Beast_Pear.script = self:loadInfo(chapter_1_beast_pear_file)
-  -- flow.Chapter_1_Beast_Plum.script = self:loadInfo(chapter_1_beast_plum_file)
 
-  self.first_scene = "Chapter_1_Scene_6"
+  self.first_scene = "Chapter_1_Interactive_Mom"
 
 end
 

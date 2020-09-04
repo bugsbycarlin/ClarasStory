@@ -7,6 +7,8 @@ sketch_sprites.__index = sketch_sprites
 max_squish_scale = 1.25
 max_squish_rotation = 30
 
+gravity_constant = 2
+
 function sketch_sprites:create()
 
   local object = {}
@@ -125,6 +127,18 @@ function sketch_sprites:create()
         sprite.x = sprite.fixed_x - sprite.squish_tilt * math.sin(0.5 * squish_time * 2 * math.pi / sprite.squish_period)
       end
 
+      if sprite.state == "disappearing_gravity" then
+        sprite.fixed_x = sprite.fixed_x + sprite.x_vel
+        sprite.fixed_y = sprite.fixed_y + sprite.y_vel
+        sprite.x = sprite.fixed_x
+        sprite.y = sprite.fixed_y
+        sprite.y_vel = sprite.y_vel + gravity_constant
+        if sprite.fixed_y > display.contentHeight + 400 then
+          sprite.state = "disappearing_pop"
+          sprite.isVisible = false
+        end
+      end
+
       if (mode == "performing") then
         if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
           if total_performance_time > sprite.disappear_time then
@@ -207,6 +221,14 @@ function sketch_sprites:create()
           if total_performance_time > sprite.disappear_time then
             if sprite.disappear_method == "rewind" then
               sprite.state = "disappearing_rewind"
+            end
+          end
+        end
+
+        if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
+          if total_performance_time > sprite.disappear_time then
+            if sprite.disappear_method == "gravity" then
+              sprite.state = "disappearing_gravity"
             end
           end
         end
