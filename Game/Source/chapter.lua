@@ -227,10 +227,11 @@ function scene:setupSceneStructure()
     outro_sound_beats = {12, 14, 16},
     outro_word_beat = 18,
     time_sig=4,
+    -- here it might be fun to use a stage spotlight
   }
   flow["Chapter_1_Interactive_Dad"] = {
     name="Chapter_1_Interactive_Dad",
-    next=nil,
+    next="Chapter_1_Scene_3",
     type="interactive_spelling",
     word="Dad",
     random_order=false,
@@ -244,6 +245,32 @@ function scene:setupSceneStructure()
     time_sig=4,
     -- here it might be fun to use a stage spotlight
   }
+  flow["Chapter_1_Scene_3"] = {
+    name="Chapter_1_Scene_3",
+    next="Chapter_1_Interactive_Wand",
+    type="scripted",
+    script_file="Chapter_1_Scene_3.json",
+    script=nil,
+    duration=0,
+  }
+  flow["Chapter_1_Interactive_Wand"] = {
+    name="Chapter_1_Interactive_Wand",
+    next="Chapter_1_Interactive_4",
+    type="interactive_spelling",
+    word="Wand",
+    random_order=false,
+    random_letters=false,
+    bpm=110,
+    mpb=545.4545454545,
+    intro_letter_beats = {4, 6, 8, 10},
+    outro_letter_beats = {4, 6, 8, 10},
+    outro_sound_beats = {12, 14, 16, 18},
+    outro_word_beat = 20,
+    time_sig=4,
+    -- here it might be fun to use a stage spotlight
+  }
+
+
 
   flow.Chapter_1_Scene_1.script = self:loadInfo(chapter_1_scene_1_file)
   flow.Chapter_1_Scene_2.script = self:loadInfo(chapter_1_scene_2_file)
@@ -256,7 +283,7 @@ function scene:startGame()
   composer.setVariable("sprite", sprite)
 
   -- self:gotoScene("Chapter_1_Scene_1", {effect = "fade", time = 500})
-  self:gotoScene("Chapter_1_Interactive_Girl", {effect = "fade", time = 500})
+  self:gotoScene("Chapter_1_Interactive_Dad", {effect = "fade", time = 500})
 end
 
 function scene:gotoScene(new_scene_name, fade_options)
