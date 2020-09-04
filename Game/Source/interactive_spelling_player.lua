@@ -264,28 +264,8 @@ function scene:beatActions()
   local info = self.info
   local word = string.lower(self.info.word)
 
-  -- on interactives, on the 3rd out of every 8 beats, tell the player to press a button.
-  -- the sound is delayed by one beat (to capture the pre-beat sound), so this will actually
-  -- land right on the measure mark.
-  if mode == "interactive" and self.interactive_beats % 8 == 3 then
-    if self.current_letter_number >= 1 and self.current_letter_number <= string.len(word) then
-      print("I should be playing this sound")
-      current_letter = word:sub(self.current_letter_number, self.current_letter_number)
-      randomizer = math.random(4)
-      local sound = audio.loadSound("Sound/Interactive_Letters_".. info.bpm .. "/" .. current_letter .. "_" .. randomizer .. ".wav")
-      audio.play(sound)
-    end
-  end
-end
-
-function scene:measureActions()
-  print("on measure")
-
-  local info = self.info
-  local word = string.lower(self.info.word)
-
-  -- on every measure during interactives, update the color coding to fit the letter
-  if mode == "interactive" then
+    -- on every other beat during interactives, update the color coding to fit the letter
+  if mode == "interactive" and self.interactive_beats % 2 == 0 then
     for i = 1, string.len(word) do
       if i ~= nil and self.button_backings ~= nil and self.button_backings[i] ~= nil and self.button_backings[i]["squish_scale"] ~= nil then
         if i ~= self.current_letter_number then
@@ -312,6 +292,26 @@ function scene:measureActions()
       end
     end
   end
+
+  -- on interactives, on the 3rd out of every 8 beats, tell the player to press a button.
+  -- the sound is delayed by one beat (to capture the pre-beat sound), so this will actually
+  -- land right on the measure mark.
+  if mode == "interactive" and self.interactive_beats % 8 == 3 then
+    if self.current_letter_number >= 1 and self.current_letter_number <= string.len(word) then
+      print("I should be playing this sound")
+      current_letter = word:sub(self.current_letter_number, self.current_letter_number)
+      randomizer = math.random(4)
+      local sound = audio.loadSound("Sound/Interactive_Letters_".. info.bpm .. "/" .. current_letter .. "_" .. randomizer .. ".wav")
+      audio.play(sound)
+    end
+  end
+end
+
+function scene:measureActions()
+  print("on measure")
+
+  local info = self.info
+  local word = string.lower(self.info.word)
 
   if mode == "pre_outro" then
     mode = "outro"

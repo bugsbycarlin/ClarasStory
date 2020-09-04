@@ -34,6 +34,10 @@ local current_scene = nil
 
 local chapter_1_scene_1_file = system.pathForFile("Scenes/chapter_1_scene_1.json", system.ResourceDirectory)
 local chapter_1_scene_2_file = system.pathForFile("Scenes/chapter_1_scene_2.json", system.ResourceDirectory)
+local chapter_1_scene_3_file = system.pathForFile("Scenes/chapter_1_scene_3.json", system.ResourceDirectory)
+local chapter_1_scene_4_file = system.pathForFile("Scenes/chapter_1_scene_4.json", system.ResourceDirectory)
+local chapter_1_scene_5_file = system.pathForFile("Scenes/chapter_1_scene_5.json", system.ResourceDirectory)
+local chapter_1_scene_6_file = system.pathForFile("Scenes/chapter_1_scene_6.json", system.ResourceDirectory)
 
 function scene:loadInfo(scene_file)
   local file = io.open(scene_file, "r")
@@ -255,7 +259,7 @@ function scene:setupSceneStructure()
   }
   flow["Chapter_1_Interactive_Wand"] = {
     name="Chapter_1_Interactive_Wand",
-    next="Chapter_1_Interactive_4",
+    next="Chapter_1_Scene_4",
     type="interactive_spelling",
     word="Wand",
     random_order=false,
@@ -269,11 +273,73 @@ function scene:setupSceneStructure()
     time_sig=4,
     -- here it might be fun to use a stage spotlight
   }
+  flow["Chapter_1_Scene_4"] = {
+    name="Chapter_1_Scene_4",
+    next="Chapter_1_Interactive_Pig",
+    type="scripted",
+    script_file="Chapter_1_Scene_4.json",
+    script=nil,
+    duration=0,
+  }
+  flow["Chapter_1_Interactive_Pig"] = {
+    name="Chapter_1_Interactive_Pig",
+    next="Chapter_1_Interactive_Cow",
+    type="interactive_spelling",
+    word="Pig",
+    random_order=false,
+    random_letters=false,
+    bpm=110,
+    mpb=545.4545454545,
+    intro_letter_beats = {4, 6, 8},
+    outro_letter_beats = {4, 6, 8},
+    outro_sound_beats = {12, 14, 16},
+    outro_word_beat = 20,
+    time_sig=4,
+    -- here it might be fun to use a stage spotlight
+  }
+  flow["Chapter_1_Interactive_Cow"] = {
+    name="Chapter_1_Interactive_Cow",
+    next=nil,
+    type="interactive_spelling",
+    word="Cow",
+    random_order=false,
+    random_letters=false,
+    bpm=110,
+    mpb=545.4545454545,
+    intro_letter_beats = {4, 6, 8},
+    outro_letter_beats = {4, 6, 8},
+    outro_sound_beats = {12, 14, 16},
+    outro_word_beat = 20,
+    time_sig=4,
+    -- here it might be fun to use a stage spotlight
+  }
 
+
+  flow["Chapter_1_Scene_5"] = {
+    name="Chapter_1_Scene_5",
+    next="Chapter_1_Interactive_Cow",
+    type="scripted",
+    script_file="Chapter_1_Scene_5.json",
+    script=nil,
+    duration=0,
+  }
+  flow["Chapter_1_Scene_6"] = {
+    name="Chapter_1_Scene_6",
+    next="Chapter_1_Interactive_Cow",
+    type="scripted",
+    script_file="Chapter_1_Scene_6.json",
+    script=nil,
+    duration=0,
+  }
 
 
   flow.Chapter_1_Scene_1.script = self:loadInfo(chapter_1_scene_1_file)
   flow.Chapter_1_Scene_2.script = self:loadInfo(chapter_1_scene_2_file)
+  flow.Chapter_1_Scene_3.script = self:loadInfo(chapter_1_scene_3_file)
+  flow.Chapter_1_Scene_4.script = self:loadInfo(chapter_1_scene_4_file)
+  flow.Chapter_1_Scene_5.script = self:loadInfo(chapter_1_scene_5_file)
+  flow.Chapter_1_Scene_6.script = self:loadInfo(chapter_1_scene_6_file)
+
 end
 
 function scene:startGame()
