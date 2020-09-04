@@ -143,6 +143,15 @@ function sketch_sprites:create()
 
         if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
           if total_performance_time > sprite.disappear_time then
+            if sprite.disappear_method == "fade" then
+              sprite.state = "disappearing_fade"
+              animation.to(sprite, {alpha = 0}, {time=sprite.squish_period * 0.75, easing=easing.outSine})
+            end
+          end
+        end
+
+        if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
+          if total_performance_time > sprite.disappear_time then
             if sprite.disappear_method == "leap_left" then
               sprite.state = "disappearing_leap_left"
               local current_x = sprite.x

@@ -38,7 +38,7 @@ local load_start_time = 0
 
 local selected_element_id = nil
 
-local save_file = system.pathForFile("Scenes/Chapter_1_Beast_Apple.json", system.ResourceDirectory)
+local save_file = system.pathForFile("Scenes/chapter_1_scene_6.json", system.ResourceDirectory)
 print(save_file)
 
 function scene:saveInfo(event)

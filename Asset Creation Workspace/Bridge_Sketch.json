@@ -1,0 +1,108 @@
+{"frames": [
+
+{
+	"filename": "Bridge0000.png",
+	"frame": {"x":0,"y":0,"w":512,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":400},
+	"sourceSize": {"w":512,"h":400}
+},
+{
+	"filename": "Bridge0001.png",
+	"frame": {"x":512,"y":0,"w":512,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":400},
+	"sourceSize": {"w":512,"h":400}
+},
+{
+	"filename": "Bridge0002.png",
+	"frame": {"x":1024,"y":0,"w":512,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":400},
+	"sourceSize": {"w":512,"h":400}
+},
+{
+	"filename": "Bridge0003.png",
+	"frame": {"x":1536,"y":0,"w":512,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":400},
+	"sourceSize": {"w":512,"h":400}
+},
+{
+	"filename": "Bridge0004.png",
+	"frame": {"x":0,"y":400,"w":512,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":400},
+	"sourceSize": {"w":512,"h":400}
+},
+{
+	"filename": "Bridge0005.png",
+	"frame": {"x":512,"y":400,"w":512,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":400},
+	"sourceSize": {"w":512,"h":400}
+},
+{
+	"filename": "Bridge0006.png",
+	"frame": {"x":1024,"y":400,"w":512,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":400},
+	"sourceSize": {"w":512,"h":400}
+},
+{
+	"filename": "Bridge0007.png",
+	"frame": {"x":1536,"y":400,"w":512,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":400},
+	"sourceSize": {"w":512,"h":400}
+},
+{
+	"filename": "Bridge0008.png",
+	"frame": {"x":0,"y":800,"w":512,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":400},
+	"sourceSize": {"w":512,"h":400}
+},
+{
+	"filename": "Bridge0009.png",
+	"frame": {"x":512,"y":800,"w":512,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":400},
+	"sourceSize": {"w":512,"h":400}
+},
+{
+	"filename": "Bridge0010.png",
+	"frame": {"x":1024,"y":800,"w":512,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":400},
+	"sourceSize": {"w":512,"h":400}
+},
+{
+	"filename": "Bridge0011.png",
+	"frame": {"x":1536,"y":800,"w":512,"h":400},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":400},
+	"sourceSize": {"w":512,"h":400}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "Bridge_Sketch.png",
+	"format": "RGBA8888",
+	"size": {"w":2048,"h":1200},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:50eb6181caae86de0e7896632c56e3a6:7ade8c6252fd0d24684521aaa0c47c11:a7bdf9b63dc11def3c68686100ca6663$"
+}
+}

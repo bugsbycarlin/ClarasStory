@@ -6,11 +6,7 @@ local lfs = require("lfs")
 local picture_info = require("Source.pictures")
 local sound_info = require("Source.sounds")
 
-local sketch_sprites_class = require("Source.sketch_sprites")
-
 local scene = composer.newScene()
-
-local sketch_sprites
 
 local sprite = {}
 
@@ -39,7 +35,9 @@ end
 
 function scene:nextScene()
   timer.cancel(self.sketch_sprite_timer)
-  sketch_sprites:immediatelyRemoveAll()
+  if self.info["cleanup"] == nil or self.info["cleanup"] ~= false then
+    self.sketch_sprites:immediatelyRemoveAll()
+  end
   mode = nil
   self.chapter:gotoScene(self.next_scene, nil)
   -- composer.gotoScene("Source.interactive_spelling_player", nil)
@@ -79,12 +77,12 @@ function scene:perform(asset)
     asset.performance.squish_scale = asset.squish_scale
     asset.performance.squish_tilt = asset.squish_tilt
     asset.performance.squish_period = asset.squish_period
-    sketch_sprites:add(asset.performance)
+    self.sketch_sprites:add(asset.performance)
   end
 end
 
 function scene:clearPerformance()
-  sketch_sprites.sprite_list = {}
+  self.sketch_sprites.sprite_list = {}
 
   for i = 1, #script_assets do
     asset = script_assets[i]
@@ -151,14 +149,15 @@ function scene:show(event)
       self.performanceAssetGroup:insert(layer)
     end
 
-    sketch_sprites = sketch_sprites_class:create()
+    self.sketch_sprites = composer.getVariable("sketch_sprites")
 
     display.setDefault("background", 1, 1, 1)
 
     self.sketch_sprite_timer = timer.performWithDelay(35, function() 
-      sketch_sprites:update(mode, total_performance_time)
+      self.sketch_sprites:update(mode, total_performance_time)
     end, 0)
 
+    self.info = composer.getVariable("settings")
     self.chapter = composer.getVariable("chapter")
     self.next_scene = composer.getVariable("next_scene")
 

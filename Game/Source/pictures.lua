@@ -220,7 +220,15 @@ picture_info["Little_Wave"] = {
 }
 
 picture_info["Blue_Sky"] = {
-  file_name = "Blue_Sky_Sketch.png",
+  file_name = "Blue_Sky.png",
+  row_length = 1,
+  sprite_size = 200,
+  sprite_count = 1,
+  outline_frame = 1,
+}
+
+picture_info["Orange_Sky"] = {
+  file_name = "Orange_Sky.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
@@ -408,6 +416,36 @@ picture_info["Farm"] = {
   sprite_count = 16,
   outline_frame = 9,
 }
+
+picture_info["River"] = {
+  file_name = "River_Sketch.png",
+  row_length = 4,
+  sprite_size = 1024,
+  sprite_height = 768,
+  sprite_count = 13,
+  outline_frame = 6,
+}
+
+picture_info["Fruit_Beast"] = {
+  file_name = "Fruit_Beast_Sketch.png",
+  row_length = 9,
+  sprite_size = 400,
+  sprite_count = 16,
+  outline_frame = 8,
+  animation_start = 17,
+  animation_end = 34,
+  animation_on = 2,
+}
+
+picture_info["Bridge"] = {
+  file_name = "Bridge_Sketch.png",
+  row_length = 4,
+  sprite_size = 512,
+  sprite_height = 400,
+  sprite_count = 12,
+  outline_frame = 4,
+}
+
 
 picture_info["Pig"] = {
   file_name = "Pig_Sketch.png",
