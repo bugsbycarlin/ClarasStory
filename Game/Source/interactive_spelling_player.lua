@@ -28,141 +28,7 @@ local update_timer = nil
 
 local load_start_time = 0
 
-local interactive_ui_timer = nil
-
 local music_loop = nil
-
--- local save_file = system.pathForFile("Scenes/chapter_1_interactive_1.json", system.ResourceDirectory)
--- print(save_file)
-
--- function scene:loadInfo()
---   local file = io.open(save_file, "r")
---   print(save_file)
- 
---   if file then
---       local contents = file:read("*a")
---       io.close(file)
---       script_assets = json.decode(contents)
---       script_asset_count = 0
---       for k,v in pairs(script_assets) do
---         script_asset_count = script_asset_count + 1
---       end
---   end
-
---   if script_assets == nil or #script_assets == 0 then
---     script_assets = {}
---   end
-
---   -- supplement assets which might be missing later properties
---   for key, asset in pairs(script_assets) do
---     if asset["sketch"] == nil then
---       asset.sketch = true
---     end
---     -- script_asset_count = script_asset_count + 1
---   end
-
-
---   have_loaded = true
-
---   current_time = system.getTimer()
---   start_performance_time = 0
---   stored_performance_time = 0
---   total_performance_time = 0
-
---   self:updateScriptAssetDisplay()
---   self:updateEverything()
-    
---   audio.stop()
-
---   self:clearPerformance()
--- end
-
--- function updateTime()
---   current_time = system.getTimer()
-
---   if mode == "performing" then
---     total_performance_time = stored_performance_time + (current_time - start_performance_time)
---   end
--- end
-
--- function getSelectedAsset()
---   if selected_element_id ~= nil then
---     for i = 1, #script_assets do
---       if script_assets[i].id == selected_element_id then
---         return script_assets[i]
---       end
---     end
---   end
-
---   return nil
--- end
-
--- function scene:perform(asset)
---   if asset.type == "sound" then
---     asset.performance = audio.loadStream("Sound/" .. sound_info[asset.name].file_name)
---     audio.play(asset.performance, 0)
---   elseif asset.type == "picture" then
---     local picture = asset.name
-
---     asset.performance = display.newSprite(self.performanceAssetGroup, sprite[picture], {frames=picture_info[picture].frames})
---     asset.performance.id = asset.id
---     asset.performance.x = asset.x
---     asset.performance.y = asset.y
---     asset.performance.fixed_y = asset.y
---     asset.performance.fixed_x = asset.x
---     asset.performance.info = picture_info[picture]
---     if asset.sketch == true then
---       asset.performance.sketch = true
---       asset.performance:setFrame(0)
---       asset.performance.state = "sketching"
---     else
---       asset.performance.sketch = false
---       asset.performance:setFrame(picture_info[picture]["sprite_count"])
---       asset.performance.state = "static"
---     end
---     asset.performance.start_time = system.getTimer()
---     asset.performance.x_scale = asset.x_scale
---     asset.performance.y_scale = asset.y_scale
---     asset.performance.disappear_time = asset.disappear_time
---     asset.performance.disappear_method = asset.disappear_method
---     asset.performance.squish_scale = asset.squish_scale
---     asset.performance.squish_tilt = asset.squish_tilt
---     asset.performance.squish_period = asset.squish_period
---     sketch_sprites:add(asset.performance)
---   end
--- end
-
-
-
--- function scene:clearPerformance()
---   sketch_sprites.sprite_list = {}
-
---   for i = 1, #script_assets do
---     asset = script_assets[i]
---     asset.performance = nil
---   end
-
---   while self.performanceAssetGroup.numChildren > 0 do
---     local child = self.performanceAssetGroup[1]
---     if child then child:removeSelf() end
---   end
--- end
-
--- function scene:updateEverything()
---   local last_update_time = total_performance_time
---   updateTime()
---   basic_info_text.text = "Time: " .. math.floor(total_performance_time) / 1000.0 .. ", Objects: " .. self.performanceAssetGroup.numChildren
-
---   if mode == "performing" then
---     for i = 1, #script_assets do
---       asset = script_assets[i]
---       if asset.performance == nil and last_update_time <= asset.start_time and total_performance_time >= asset.start_time then
---         self:perform(asset)
---       end
---     end
---   end
--- end
-
 
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
@@ -221,87 +87,62 @@ function scene:show(event)
 end
 
 function scene:startScene()
-  mode = "performing"
-
-  -- Runtime:addEventListener("touch", function(event) self:handleMouse(event) end)
-
-  -- local picture = "Apple"
-
-  -- local test_performance = display.newSprite(self.performanceAssetGroup, sprite[picture], {frames=picture_info[picture].frames})
-  -- test_performance.id = "Apple_5"
-  -- test_performance.x = display.contentCenterX
-  -- test_performance.y = display.contentCenterY
-  -- test_performance.fixed_y = test_performance.y
-  -- test_performance.fixed_x = test_performance.x
-  -- test_performance.info = picture_info[picture]
-  -- test_performance.sketch = true
-  -- test_performance:setFrame(0)
-  -- test_performance.state = "sketching"
-  -- test_performance.start_time = system.getTimer()
-  -- test_performance.x_scale = 1.0
-  -- test_performance.y_scale = 1.0
-  -- test_performance.disappear_time = -1
-  -- test_performance.squish_scale = 1.02
-  -- test_performance.squish_tilt = 8
-  -- test_performance.squish_period = 545
-  -- sketch_sprites:add(test_performance)
+  mode = "intro"
 
   local info = self.info
 
   self.current_letter_number = 1
 
-  timer.performWithDelay((info.time_sig - 1) * info.mpb, function()
-    local sound = audio.loadSound("Sound/Interactive_" .. info.word .. "/" .. info.bpm .. "_intro.wav")
-    audio.play(sound)
+  music_loop = audio.loadStream("Sound/Chapter_1_Interactive_Loop.wav")
+  audio.play(music_loop, {loops=-1})
 
-    local picture = info.word
+  self.start_performance_time = system.getTimer()
+  self.measures = 1
+  self.interactive_measures = 0
+  self.beats = 1
+  self.interactive_beats = 0
 
-    self.spelling_object = display.newSprite(self.performanceAssetGroup, sprite[picture], {frames=picture_info[picture].frames})
-    self.spelling_object.id = picture .. "_" .. 0
-    self.spelling_object.x = display.contentCenterX
-    self.spelling_object.y = display.contentCenterY - 100
-    self.spelling_object.fixed_y = self.spelling_object.y
-    self.spelling_object.fixed_x = self.spelling_object.x
-    self.spelling_object.info = picture_info[picture]
-    self.spelling_object.sketch = true
-    self.spelling_object:setFrame(0)
-    self.spelling_object.state = "outline_sketching"
-    self.spelling_object.start_time = system.getTimer()
-    self.spelling_object.x_scale = 1
-    self.spelling_object.y_scale = 1
-    self.spelling_object.xScale = self.spelling_object.x_scale
-    self.spelling_object.yScale = self.spelling_object.y_scale
-    self.spelling_object.disappear_time = -1
-    self.spelling_object.squish_scale = 1.02
-    self.spelling_object.squish_tilt = 8
-    self.spelling_object.squish_period = 545
-    sketch_sprites:add(self.spelling_object)
-  end, 1)
+  self.beat_timer = timer.performWithDelay(1, function() 
+    self:beatTimerCheck()
+  end, 0)
 
-  timer.performWithDelay(info.interactive_start - info.mpb, function()
-    local sound = audio.loadSound("Sound/Interactive_" .. info.word .. "/" .. info.bpm .. "_quick_spelling.wav")
-    audio.play(sound)
-  end, 1)
+  local sound = audio.loadSound("Sound/Chapter_1/" .. info.word .. "_Intro.wav")
+  audio.play(sound, {onComplete = function()
+    mode = "interactive"
+    self.interactive_measures = 1
+    self.interactive_beats = 1
+  end})
 
-  timer.performWithDelay(info.interactive_start + 6 * info.mpb, function()
-    self.interactive_rounds = 0
-    self.letter_stagger = 0
-    print("adding a timer for interactive start")
-    print(interactive_ui_timer)
-    interactive_ui_timer = timer.performWithDelay(info.mpb, function()
-      self:updateInteractiveUI() 
-    end, 0)
-    print(interactive_ui_timer)
-  end, 1)
+  local picture = info.word
+
+  self.spelling_object = display.newSprite(self.performanceAssetGroup, sprite[picture], {frames=picture_info[picture].frames})
+  self.spelling_object.id = picture .. "_" .. 0
+  self.spelling_object.x = display.contentCenterX
+  self.spelling_object.y = display.contentCenterY - 100
+  self.spelling_object.fixed_y = self.spelling_object.y
+  self.spelling_object.fixed_x = self.spelling_object.x
+  self.spelling_object.info = picture_info[picture]
+  self.spelling_object.sketch = true
+  self.spelling_object:setFrame(0)
+  self.spelling_object.state = "outline_sketching"
+  self.spelling_object.start_time = system.getTimer()
+  self.spelling_object.x_scale = 1
+  self.spelling_object.y_scale = 1
+  self.spelling_object.xScale = self.spelling_object.x_scale
+  self.spelling_object.yScale = self.spelling_object.y_scale
+  self.spelling_object.disappear_time = -1
+  self.spelling_object.squish_scale = 1.02
+  self.spelling_object.squish_tilt = 8
+  self.spelling_object.squish_period = info.mpb
+  sketch_sprites:add(self.spelling_object)
 
   self.button_backings = {}
   self.button_letters = {}
   self.buttons = {}
 
   for i = 1, string.len(info.word) do
-    timer.performWithDelay(info.interactive_start + (i-1) * info.mpb, function()
-      -- local sound = audio.loadSound("Sound/Interactive_" .. info.word .. "/" .. info.bpm .. "_intro.wav")
-      -- audio.play(sound)
+    timer.performWithDelay(info.intro_letter_beats[i] * info.mpb, function()
+
       local picture = string.upper(info.word):sub(i,i)
 
       local button = display.newGroup()
@@ -325,7 +166,7 @@ function scene:startScene()
       button_backing.disappear_time = -1
       button_backing.squish_scale = 1
       button_backing.squish_tilt = 0
-      button_backing.squish_period = 545
+      button_backing.squish_period = info.mpb
       sketch_sprites:add(button_backing)
       table.insert(self.button_backings, button_backing)
 
@@ -347,7 +188,7 @@ function scene:startScene()
       button_letter.disappear_time = -1
       button_letter.squish_scale = 1
       button_letter.squish_tilt = 0
-      button_letter.squish_period = 545
+      button_letter.squish_period = info.mpb
       sketch_sprites:add(button_letter)
       table.insert(self.button_letters, button_letter)
 
@@ -366,24 +207,23 @@ function scene:startScene()
             self.button_backings[c - 1]:setFrame(1)
             self.button_backings[c - 1].squish_scale = 1
             self.button_backings[c - 1].squish_tilt = 0
-            self.button_backings[c - 1].squish_period = 545
+            self.button_backings[c - 1].squish_period = info.mpb
             self.button_letters[c - 1].squish_scale = 1
             self.button_letters[c - 1].squish_tilt = 0
-            self.button_letters[c - 1].squish_period = 545
+            self.button_letters[c - 1].squish_period = info.mpb
 
             if c <= string.len(info.word) then
               self.button_backings[c].squish_scale = 1.02
               self.button_backings[c].squish_tilt = 8
-              self.button_backings[c].squish_period = 545
+              self.button_backings[c].squish_period = info.mpb
               self.button_letters[c].squish_scale = 1.02
               self.button_letters[c].squish_tilt = 8
-              self.button_letters[c].squish_period = 545
+              self.button_letters[c].squish_period = info.mpb
             end
 
             if c > string.len(info.word) then
               -- we're done!
-              -- mode = "wrapping_up"
-              self.end_phrase = 1
+              mode = "pre_outro"
               self.spelling_object.state = "sketching"
             end
           end
@@ -395,153 +235,320 @@ function scene:startScene()
       table.insert(self.buttons, button)
     end, 1)
   end
-
-  local function finishedLoop(event)
-    print("finished loop")
-    self:listenerTest()
-  end
-
-  print("I AM STARTING THE MUSIC LOOP")
-  music_loop = audio.loadStream("Sound/Chapter_1_Interactive_Loop.wav")
-  audio.play(music_loop, {loops=0, onComplete = finishedLoop})
 end
 
-function scene:listenerTest()
-  print("I am in listener test")
+
+
+function scene:beatTimerCheck()
+  current_time = system.getTimer()
+  if current_time - self.start_performance_time > (self.info.mpb * self.info.time_sig) * self.measures then
+    self:measureActions()
+    self.measures = self.measures + 1
+    if mode == "interactive" then
+      self.interactive_measures = self.interactive_measures + 1
+    end
+  end
+
+  if current_time - self.start_performance_time > self.info.mpb * self.beats then
+    self:beatActions()
+    self.beats = self.beats + 1
+    if mode == "interactive" then
+      self.interactive_beats = self.interactive_beats + 1
+    end
+  end
 end
 
-function scene:updateInteractiveUI()
-  print("updating interactive UI")
-  if mode == "performing" then
-    mode = "interactive"
-  end
-  if mode ~= "finished" then
-    local info = self.info
-    local word = string.lower(self.info.word)
+function scene:beatActions()
+  print("on interactive beat " .. self.interactive_beats)
+
+  local info = self.info
+  local word = string.lower(self.info.word)
+
+  -- on interactives, on the 3rd out of every 8 beats, tell the player to press a button.
+  -- the sound is delayed by one beat (to capture the pre-beat sound), so this will actually
+  -- land right on the measure mark.
+  if mode == "interactive" and self.interactive_beats % 8 == 3 then
     if self.current_letter_number >= 1 and self.current_letter_number <= string.len(word) then
+      print("I should be playing this sound")
       current_letter = word:sub(self.current_letter_number, self.current_letter_number)
-      if self.interactive_rounds % 8 == 0 then
-        randomizer = math.random(4)
-        local sound = audio.loadSound("Sound/Interactive_Letters/" .. info.bpm .. "_" .. current_letter .. "_" .. randomizer .. ".wav")
-        audio.play(sound)
-      end
+      randomizer = math.random(4)
+      local sound = audio.loadSound("Sound/Interactive_Letters_".. info.bpm .. "/" .. current_letter .. "_" .. randomizer .. ".wav")
+      audio.play(sound)
+    end
+  end
+end
 
-      for i = 1, string.len(info.word) do
-        if i ~= nil and self.button_backings ~= nil and self.button_backings[i] ~= nil and self.button_backings[i]["squish_scale"] ~= nil then
-          if i ~= self.current_letter_number then
-            self.button_backings[i]:setFrame(1)
-            self.button_backings[i].squish_scale = 1
-            self.button_backings[i].squish_tilt = 0
-            self.button_backings[i].squish_period = 545
-            self.button_letters[i].squish_scale = 1
-            self.button_letters[i].squish_tilt = 0
-            self.button_letters[i].squish_period = 545
+function scene:measureActions()
+  print("on measure")
+
+  local info = self.info
+  local word = string.lower(self.info.word)
+
+  -- on every measure during interactives, update the color coding to fit the letter
+  if mode == "interactive" then
+    for i = 1, string.len(word) do
+      if i ~= nil and self.button_backings ~= nil and self.button_backings[i] ~= nil and self.button_backings[i]["squish_scale"] ~= nil then
+        if i ~= self.current_letter_number then
+          self.button_backings[i]:setFrame(1)
+          self.button_backings[i].squish_scale = 1
+          self.button_backings[i].squish_tilt = 0
+          self.button_backings[i].squish_period = info.mpb
+          self.button_letters[i].squish_scale = 1
+          self.button_letters[i].squish_tilt = 0
+          self.button_letters[i].squish_period = info.mpb
+        else
+          self.button_backings[i].squish_scale = 1.02
+          self.button_backings[i].squish_tilt = 8
+          self.button_backings[i].squish_period = info.mpb
+          self.button_letters[i].squish_scale = 1.02
+          self.button_letters[i].squish_tilt = 8
+          self.button_letters[i].squish_period = info.mpb
+          if self.button_backings[i].frame == 1 then
+            self.button_backings[i]:setFrame(2)
           else
-            self.button_backings[i].squish_scale = 1.02
-            self.button_backings[i].squish_tilt = 8
-            self.button_backings[i].squish_period = 545
-            self.button_letters[i].squish_scale = 1.02
-            self.button_letters[i].squish_tilt = 8
-            self.button_letters[i].squish_period = 545
-            if self.button_backings[i].frame == 1 then
-              self.button_backings[i]:setFrame(2)
-            else
-              self.button_backings[i]:setFrame(1)
-            end
-          end
-        end
-      end
-    else
-      if self.end_phrase > 1 and self.end_phrase <= 5 then
-        self.letter_stagger = self.letter_stagger + 1
-        
-        for i = 1, string.len(info.word) do
-          if i ~= self.letter_stagger / 2 then
             self.button_backings[i]:setFrame(1)
-            self.button_backings[i].squish_scale = 1
-            self.button_backings[i].squish_tilt = 0
-            self.button_backings[i].squish_period = 545
-            self.button_letters[i].squish_scale = 1
-            self.button_letters[i].squish_tilt = 0
-            self.button_letters[i].squish_period = 545
-          else
-            self.button_backings[i].squish_scale = 1.02
-            self.button_backings[i].squish_tilt = 8
-            self.button_backings[i].squish_period = 545
-            self.button_letters[i].squish_scale = 1.02
-            self.button_letters[i].squish_tilt = 8
-            self.button_letters[i].squish_period = 545
-            if self.button_backings[i].frame == 1 then
-              self.button_backings[i]:setFrame(2)
-            else
-              self.button_backings[i]:setFrame(1)
-            end
           end
         end
-      end
-      if self.interactive_rounds % 4 == 0 then
-        if self.end_phrase == 1 then
-          local sound = audio.loadSound("Sound/Interactive_" .. info.word .. "/" .. info.bpm .. "_spelling.wav")
-          audio.play(sound)
-          self.letter_stagger = 1
-        elseif self.end_phrase == 3 then
-          local sound = audio.loadSound("Sound/Interactive_" .. info.word .. "/" .. info.bpm .. "_pronunciation.wav")
-          audio.play(sound)
-          self.letter_stagger = 1
-        elseif self.end_phrase == 5 then
-          local sound = audio.loadSound("Sound/Interactive_" .. info.word .. "/" .. info.bpm .. "_success_word.wav")
-          audio.play(sound)
-          for i = 1, string.len(info.word) do
-            self.button_backings[i].squish_scale = 1.02
-            self.button_backings[i].squish_tilt = 8
-            self.button_backings[i].squish_period = 545
-            self.button_letters[i].squish_scale = 1.02
-            self.button_letters[i].squish_tilt = 8
-            self.button_letters[i].squish_period = 545
-            if self.button_backings[i].frame == 1 then
-              self.button_backings[i]:setFrame(2)
-            else
-              self.button_backings[i]:setFrame(1)
-            end
-          end
-        elseif self.end_phrase == 6 then
-          local sound = audio.loadSound("Sound/Interactive_" .. info.word .. "/" .. info.bpm .. "_success_praise.wav")
-          audio.play(sound)
-
-          for i = 1, string.len(info.word) do
-            self.button_backings[i]:setFrame(1)
-            self.button_backings[i].squish_scale = 1
-            self.button_backings[i].squish_tilt = 0
-            self.button_backings[i].squish_period = 545
-            self.button_letters[i].squish_scale = 1
-            self.button_letters[i].squish_tilt = 0
-            self.button_letters[i].squish_period = 545
-          end
-        elseif self.end_phrase == 8 then
-          -- this is a reset that removes everything
-          print("Trying to cancel this damned function")
-          print(interactive_ui_timer)
-          timer.cancel(interactive_ui_timer)
-          print(interactive_ui_timer)
-          timer.cancel(self.sketch_sprite_timer)
-          audio.stop()
-          sketch_sprites:immediatelyRemoveAll()
-          for i = 1, string.len(info.word) do
-            self.buttons[i]:removeEventListener("tap", self.buttons[i].event)
-            display.remove(self.buttons[i])
-          end
-          self.buttons = {}
-          mode = nil
-          self.chapter:gotoScene(self.next_scene, nil)
-        end
-
-        self.end_phrase = self.end_phrase + 1
       end
     end
+  end
 
-    self.interactive_rounds = self.interactive_rounds + 1
+  if mode == "pre_outro" then
+    mode = "outro"
+
+    -- play the outro sound
+    local sound = audio.loadSound("Sound/Chapter_1/" .. info.word .. "_Outro.wav")
+    audio.play(sound, {onComplete = function()
+      mode = "post_outro"
+    end})
+
+    -- load up some letter timing for show
+    for letter_num = 1, string.len(info.word) do
+      timer.performWithDelay(info.outro_letter_beats[letter_num] * info.mpb, function()
+        for i = 1, string.len(info.word) do
+          if i ~= letter_num then
+            self.button_backings[i]:setFrame(1)
+            self.button_backings[i].squish_scale = 1
+            self.button_backings[i].squish_tilt = 0
+            self.button_backings[i].squish_period = info.mpb
+            self.button_letters[i].squish_scale = 1
+            self.button_letters[i].squish_tilt = 0
+            self.button_letters[i].squish_period = info.mpb
+          else
+            self.button_backings[i].squish_scale = 1.02
+            self.button_backings[i].squish_tilt = 8
+            self.button_backings[i].squish_period = info.mpb
+            self.button_letters[i].squish_scale = 1.02
+            self.button_letters[i].squish_tilt = 8
+            self.button_letters[i].squish_period = info.mpb
+            if self.button_backings[i].frame == 1 then
+              self.button_backings[i]:setFrame(2)
+            else
+              self.button_backings[i]:setFrame(1)
+            end
+          end
+        end
+      end)
+    end
+    for letter_num = 1, string.len(info.word) do
+      timer.performWithDelay(info.outro_sound_beats[letter_num] * info.mpb, function()
+        for i = 1, string.len(info.word) do
+          if i ~= letter_num then
+            self.button_backings[i]:setFrame(1)
+            self.button_backings[i].squish_scale = 1
+            self.button_backings[i].squish_tilt = 0
+            self.button_backings[i].squish_period = info.mpb
+            self.button_letters[i].squish_scale = 1
+            self.button_letters[i].squish_tilt = 0
+            self.button_letters[i].squish_period = info.mpb
+          else
+            self.button_backings[i].squish_scale = 1.02
+            self.button_backings[i].squish_tilt = 8
+            self.button_backings[i].squish_period = info.mpb
+            self.button_letters[i].squish_scale = 1.02
+            self.button_letters[i].squish_tilt = 8
+            self.button_letters[i].squish_period = info.mpb
+            if self.button_backings[i].frame == 1 then
+              self.button_backings[i]:setFrame(2)
+            else
+              self.button_backings[i]:setFrame(1)
+            end
+          end
+        end
+      end)
+    end
+    timer.performWithDelay(info.outro_word_beat * info.mpb, function()
+      for i = 1, string.len(info.word) do
+        self.button_backings[i].squish_scale = 1.02
+        self.button_backings[i].squish_tilt = 8
+        self.button_backings[i].squish_period = info.mpb
+        self.button_letters[i].squish_scale = 1.02
+        self.button_letters[i].squish_tilt = 8
+        self.button_letters[i].squish_period = info.mpb
+        self.button_backings[i]:setFrame(2)
+      end
+    end)
+    timer.performWithDelay((info.outro_word_beat + 1) * info.mpb, function()
+      for i = 1, string.len(info.word) do
+        self.button_backings[i]:setFrame(1)
+        self.button_backings[i].squish_scale = 1
+        self.button_backings[i].squish_tilt = 0
+        self.button_backings[i].squish_period = info.mpb
+        self.button_letters[i].squish_scale = 1
+        self.button_letters[i].squish_tilt = 0
+        self.button_letters[i].squish_period = info.mpb
+        self.button_backings[i]:setFrame(1)
+      end
+    end)
+  end
+
+  if mode == "post_outro" then
+    mode = "finished"
+    -- timer.cancel(interactive_ui_timer)
+    timer.cancel(self.sketch_sprite_timer)
+    audio.stop()
+    sketch_sprites:immediatelyRemoveAll()
+    for i = 1, string.len(info.word) do
+      self.buttons[i]:removeEventListener("tap", self.buttons[i].event)
+      display.remove(self.buttons[i])
+    end
+    self.buttons = {}
+    self.chapter:gotoScene(self.next_scene, nil)
   end
 end
+
+-- function scene:updateInteractiveUI()
+--   print("updating interactive UI")
+--   if mode == "intro" then
+--     mode = "interactive"
+--   end
+--   if mode ~= "finished" then
+--     local info = self.info
+--     local word = string.lower(self.info.word)
+--     if self.current_letter_number >= 1 and self.current_letter_number <= string.len(word) then
+--       current_letter = word:sub(self.current_letter_number, self.current_letter_number)
+--       if self.interactive_rounds % 8 == 0 then
+--         randomizer = math.random(4)
+--         local sound = audio.loadSound("Sound/Interactive_Letters/" .. info.bpm .. "_" .. current_letter .. "_" .. randomizer .. ".wav")
+--         audio.play(sound)
+--       end
+
+--       for i = 1, string.len(info.word) do
+--         if i ~= nil and self.button_backings ~= nil and self.button_backings[i] ~= nil and self.button_backings[i]["squish_scale"] ~= nil then
+--           if i ~= self.current_letter_number then
+--             self.button_backings[i]:setFrame(1)
+--             self.button_backings[i].squish_scale = 1
+--             self.button_backings[i].squish_tilt = 0
+--             self.button_backings[i].squish_period = 545
+--             self.button_letters[i].squish_scale = 1
+--             self.button_letters[i].squish_tilt = 0
+--             self.button_letters[i].squish_period = 545
+--           else
+--             self.button_backings[i].squish_scale = 1.02
+--             self.button_backings[i].squish_tilt = 8
+--             self.button_backings[i].squish_period = 545
+--             self.button_letters[i].squish_scale = 1.02
+--             self.button_letters[i].squish_tilt = 8
+--             self.button_letters[i].squish_period = 545
+--             if self.button_backings[i].frame == 1 then
+--               self.button_backings[i]:setFrame(2)
+--             else
+--               self.button_backings[i]:setFrame(1)
+--             end
+--           end
+--         end
+--       end
+--     else
+--       if self.end_phrase > 1 and self.end_phrase <= 5 then
+--         self.letter_stagger = self.letter_stagger + 1
+        
+--         for i = 1, string.len(info.word) do
+--           if i ~= self.letter_stagger / 2 then
+--             self.button_backings[i]:setFrame(1)
+--             self.button_backings[i].squish_scale = 1
+--             self.button_backings[i].squish_tilt = 0
+--             self.button_backings[i].squish_period = 545
+--             self.button_letters[i].squish_scale = 1
+--             self.button_letters[i].squish_tilt = 0
+--             self.button_letters[i].squish_period = 545
+--           else
+--             self.button_backings[i].squish_scale = 1.02
+--             self.button_backings[i].squish_tilt = 8
+--             self.button_backings[i].squish_period = 545
+--             self.button_letters[i].squish_scale = 1.02
+--             self.button_letters[i].squish_tilt = 8
+--             self.button_letters[i].squish_period = 545
+--             if self.button_backings[i].frame == 1 then
+--               self.button_backings[i]:setFrame(2)
+--             else
+--               self.button_backings[i]:setFrame(1)
+--             end
+--           end
+--         end
+--       end
+--       if self.interactive_rounds % 4 == 0 then
+--         if self.end_phrase == 1 then
+--           local sound = audio.loadSound("Sound/Interactive_" .. info.word .. "/" .. info.bpm .. "_spelling.wav")
+--           audio.play(sound)
+--           self.letter_stagger = 1
+--         elseif self.end_phrase == 3 then
+--           local sound = audio.loadSound("Sound/Interactive_" .. info.word .. "/" .. info.bpm .. "_pronunciation.wav")
+--           audio.play(sound)
+--           self.letter_stagger = 1
+--         elseif self.end_phrase == 5 then
+--           local sound = audio.loadSound("Sound/Interactive_" .. info.word .. "/" .. info.bpm .. "_success_word.wav")
+--           audio.play(sound)
+--           for i = 1, string.len(info.word) do
+--             self.button_backings[i].squish_scale = 1.02
+--             self.button_backings[i].squish_tilt = 8
+--             self.button_backings[i].squish_period = 545
+--             self.button_letters[i].squish_scale = 1.02
+--             self.button_letters[i].squish_tilt = 8
+--             self.button_letters[i].squish_period = 545
+--             if self.button_backings[i].frame == 1 then
+--               self.button_backings[i]:setFrame(2)
+--             else
+--               self.button_backings[i]:setFrame(1)
+--             end
+--           end
+--         elseif self.end_phrase == 6 then
+--           local sound = audio.loadSound("Sound/Interactive_" .. info.word .. "/" .. info.bpm .. "_success_praise.wav")
+--           audio.play(sound)
+
+--           for i = 1, string.len(info.word) do
+--             self.button_backings[i]:setFrame(1)
+--             self.button_backings[i].squish_scale = 1
+--             self.button_backings[i].squish_tilt = 0
+--             self.button_backings[i].squish_period = 545
+--             self.button_letters[i].squish_scale = 1
+--             self.button_letters[i].squish_tilt = 0
+--             self.button_letters[i].squish_period = 545
+--           end
+--         elseif self.end_phrase == 8 then
+--           -- this is a reset that removes everything
+--           print("Trying to cancel this damned function")
+--           print(interactive_ui_timer)
+--           timer.cancel(interactive_ui_timer)
+--           print(interactive_ui_timer)
+--           timer.cancel(self.sketch_sprite_timer)
+--           audio.stop()
+--           sketch_sprites:immediatelyRemoveAll()
+--           for i = 1, string.len(info.word) do
+--             self.buttons[i]:removeEventListener("tap", self.buttons[i].event)
+--             display.remove(self.buttons[i])
+--           end
+--           self.buttons = {}
+--           -- mode = "pre_outro"
+--           self.chapter:gotoScene(self.next_scene, nil)
+--         end
+
+--         self.end_phrase = self.end_phrase + 1
+--       end
+--     end
+
+--     self.interactive_rounds = self.interactive_rounds + 1
+--   end
+-- end
 
 -- asset_start_x = 0
 -- asset_start_y = 0
