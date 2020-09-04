@@ -39,6 +39,13 @@ local chapter_1_scene_4_file = system.pathForFile("Scenes/chapter_1_scene_4.json
 local chapter_1_scene_5_file = system.pathForFile("Scenes/chapter_1_scene_5.json", system.ResourceDirectory)
 local chapter_1_scene_6_file = system.pathForFile("Scenes/chapter_1_scene_6.json", system.ResourceDirectory)
 
+local chapter_1_beast_apple_file = system.pathForFile("Scenes/chapter_1_beast_apple.json", system.ResourceDirectory)
+local chapter_1_beast_banana_file = system.pathForFile("Scenes/chapter_1_beast_banana.json", system.ResourceDirectory)
+local chapter_1_beast_lime_file = system.pathForFile("Scenes/chapter_1_beast_lime.json", system.ResourceDirectory)
+local chapter_1_beast_orange_file = system.pathForFile("Scenes/chapter_1_beast_orange.json", system.ResourceDirectory)
+local chapter_1_beast_pear_file = system.pathForFile("Scenes/chapter_1_beast_pear.json", system.ResourceDirectory)
+local chapter_1_beast_plum_file = system.pathForFile("Scenes/chapter_1_beast_plum.json", system.ResourceDirectory)
+
 function scene:loadInfo(scene_file)
   local file = io.open(scene_file, "r")
   local script_assets = {}
@@ -266,7 +273,7 @@ function scene:setupSceneStructure()
     random_letters=false,
     bpm=110,
     mpb=545.4545454545,
-    intro_letter_beats = {4, 6, 8, 10},
+    intro_letter_beats = {8, 10, 12, 14},
     outro_letter_beats = {4, 6, 8, 10},
     outro_sound_beats = {12, 14, 16, 18},
     outro_word_beat = 20,
@@ -290,47 +297,139 @@ function scene:setupSceneStructure()
     random_letters=false,
     bpm=110,
     mpb=545.4545454545,
-    intro_letter_beats = {4, 6, 8},
+    intro_letter_beats = {12, 14, 16},
     outro_letter_beats = {4, 6, 8},
     outro_sound_beats = {12, 14, 16},
-    outro_word_beat = 20,
+    outro_word_beat = 18,
     time_sig=4,
     -- here it might be fun to use a stage spotlight
   }
   flow["Chapter_1_Interactive_Cow"] = {
     name="Chapter_1_Interactive_Cow",
-    next=nil,
+    next="Chapter_1_Scene_5",
     type="interactive_spelling",
     word="Cow",
     random_order=false,
     random_letters=false,
     bpm=110,
     mpb=545.4545454545,
-    intro_letter_beats = {4, 6, 8},
+    intro_letter_beats = {8, 10, 12},
     outro_letter_beats = {4, 6, 8},
     outro_sound_beats = {12, 14, 16},
-    outro_word_beat = 20,
+    outro_word_beat = 18,
     time_sig=4,
     -- here it might be fun to use a stage spotlight
   }
-
-
   flow["Chapter_1_Scene_5"] = {
     name="Chapter_1_Scene_5",
-    next="Chapter_1_Interactive_Cow",
+    next="Chapter_1_Interactive_Coin",
     type="scripted",
     script_file="Chapter_1_Scene_5.json",
     script=nil,
     duration=0,
   }
+  flow["Chapter_1_Interactive_Coin"] = {
+    name="Chapter_1_Interactive_Coin",
+    next="Chapter_1_Scene_6",
+    type="interactive_spelling",
+    word="Coin",
+    random_order=false,
+    random_letters=false,
+    bpm=110,
+    mpb=545.4545454545,
+    intro_letter_beats = {12, 14, 16, 18},
+    outro_letter_beats = {4, 6, 8, 10},
+    outro_sound_beats = {12, 14, 16, 18},
+    outro_word_beat = 20,
+    time_sig=4,
+    -- here it might be fun to use a stage spotlight
+  }
   flow["Chapter_1_Scene_6"] = {
     name="Chapter_1_Scene_6",
-    next="Chapter_1_Interactive_Cow",
+    next=nil,
     type="scripted",
     script_file="Chapter_1_Scene_6.json",
     script=nil,
     duration=0,
   }
+
+
+  flow["Chapter_1_Beast_Apple"] = {
+    name="Chapter_1_Beast_Apple",
+    next="Chapter_1_Interactive_Apple",
+    type="scripted",
+    -- script_file="Chapter_1_Beast_Apple.json",
+    script=nil,
+    duration=0,
+  }
+  flow["Chapter_1_Interactive_Apple"] = {
+    name="Chapter_1_Interactive_Apple",
+    next=nil,
+    type="interactive_spelling",
+    word="Apple",
+    random_order=false,
+    random_letters=false,
+    bpm=110,
+    mpb=545.4545454545,
+    intro_letter_beats = {12, 13, 14, 15, 16},
+    outro_letter_beats = {4, 6, 8, 10, 12},
+    outro_sound_beats = {14, 16, 18, 20, 22},
+    outro_word_beat = 24,
+    time_sig=4,
+    -- here it might be fun to use a stage spotlight
+  }
+  flow["Chapter_1_Beast_Banana"] = {
+    name="Chapter_1_Beast_Banana",
+    next=nil,
+    type="scripted",
+    -- script_file="Chapter_1_Beast_Apple.json",
+    script=nil,
+    duration=0,
+  }
+  flow["Chapter_1_Beast_Lime"] = {
+    name="Chapter_1_Beast_Lime",
+    next=nil,
+    type="scripted",
+    -- script_file="Chapter_1_Beast_Apple.json",
+    script=nil,
+    duration=0,
+  }
+  flow["Chapter_1_Beast_Orange"] = {
+    name="Chapter_1_Beast_Orange",
+    next=nil,
+    type="scripted",
+    -- script_file="Chapter_1_Beast_Apple.json",
+    script=nil,
+    duration=0,
+  }
+  flow["Chapter_1_Beast_Pear"] = {
+    name="Chapter_1_Beast_Pear",
+    next=nil,
+    type="scripted",
+    -- script_file="Chapter_1_Beast_Apple.json",
+    script=nil,
+    duration=0,
+  }
+  flow["Chapter_1_Beast_Plum"] = {
+    name="Chapter_1_Beast_Plum",
+    next=nil,
+    type="scripted",
+    -- script_file="Chapter_1_Beast_Apple.json",
+    script=nil,
+    duration=0,
+  }
+
+  fruits = {
+    "Chapter_1_Beast_Apple",
+    "Chapter_1_Beast_Banana",
+    "Chapter_1_Beast_Lime",
+    "Chapter_1_Beast_Orange",
+    "Chapter_1_Beast_Pear",
+    "Chapter_1_Beast_Plum",
+  }
+
+  flow.Chapter_1_Scene_6.next = math.random(6)
+
 
 
   flow.Chapter_1_Scene_1.script = self:loadInfo(chapter_1_scene_1_file)
@@ -340,6 +439,15 @@ function scene:setupSceneStructure()
   flow.Chapter_1_Scene_5.script = self:loadInfo(chapter_1_scene_5_file)
   flow.Chapter_1_Scene_6.script = self:loadInfo(chapter_1_scene_6_file)
 
+  flow.Chapter_1_Beast_Apple.script = self:loadInfo(chapter_1_beast_apple_file)
+  flow.Chapter_1_Beast_Banana.script = self:loadInfo(chapter_1_beast_banana_file)
+  flow.Chapter_1_Beast_Orange.script = self:loadInfo(chapter_1_beast_orange_file)
+  flow.Chapter_1_Beast_Lime.script = self:loadInfo(chapter_1_beast_lime_file)
+  flow.Chapter_1_Beast_Pear.script = self:loadInfo(chapter_1_beast_pear_file)
+  flow.Chapter_1_Beast_Plum.script = self:loadInfo(chapter_1_beast_plum_file)
+
+  self.first_scene = "Chapter_1_Scene_6"
+
 end
 
 function scene:startGame()
@@ -348,8 +456,7 @@ function scene:startGame()
 
   composer.setVariable("sprite", sprite)
 
-  -- self:gotoScene("Chapter_1_Scene_1", {effect = "fade", time = 500})
-  self:gotoScene("Chapter_1_Interactive_Dad", {effect = "fade", time = 500})
+  self:gotoScene(self.first_scene, {effect = "fade", time = 500})
 end
 
 function scene:gotoScene(new_scene_name, fade_options)

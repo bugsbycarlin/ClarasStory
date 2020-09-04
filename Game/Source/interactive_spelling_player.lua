@@ -90,6 +90,7 @@ function scene:startScene()
   mode = "intro"
 
   local info = self.info
+  local word = self.info.word
 
   self.current_letter_number = 1
 
@@ -111,6 +112,8 @@ function scene:startScene()
     mode = "interactive"
     self.interactive_measures = 1
     self.interactive_beats = 1
+
+    self:setWordColor(self.current_letter_number)
   end})
 
   local picture = info.word
@@ -226,6 +229,8 @@ function scene:startScene()
               mode = "pre_outro"
               self.spelling_object.state = "sketching"
             end
+
+            self:setWordColor(self.current_letter_number)
           end
         end
       end
@@ -265,32 +270,8 @@ function scene:beatActions()
   local word = string.lower(self.info.word)
 
     -- on every other beat during interactives, update the color coding to fit the letter
-  if mode == "interactive" and self.interactive_beats % 2 == 0 then
-    for i = 1, string.len(word) do
-      if i ~= nil and self.button_backings ~= nil and self.button_backings[i] ~= nil and self.button_backings[i]["squish_scale"] ~= nil then
-        if i ~= self.current_letter_number then
-          self.button_backings[i]:setFrame(1)
-          self.button_backings[i].squish_scale = 1
-          self.button_backings[i].squish_tilt = 0
-          self.button_backings[i].squish_period = info.mpb
-          self.button_letters[i].squish_scale = 1
-          self.button_letters[i].squish_tilt = 0
-          self.button_letters[i].squish_period = info.mpb
-        else
-          self.button_backings[i].squish_scale = 1.02
-          self.button_backings[i].squish_tilt = 8
-          self.button_backings[i].squish_period = info.mpb
-          self.button_letters[i].squish_scale = 1.02
-          self.button_letters[i].squish_tilt = 8
-          self.button_letters[i].squish_period = info.mpb
-          if self.button_backings[i].frame == 1 then
-            self.button_backings[i]:setFrame(2)
-          else
-            self.button_backings[i]:setFrame(1)
-          end
-        end
-      end
-    end
+  if mode == "interactive" then
+    self:setWordColor(self.current_letter_number)
   end
 
   -- on interactives, on the 3rd out of every 8 beats, tell the player to press a button.
@@ -325,80 +306,84 @@ function scene:measureActions()
     -- load up some letter timing for show
     for letter_num = 1, string.len(info.word) do
       timer.performWithDelay(info.outro_letter_beats[letter_num] * info.mpb, function()
-        for i = 1, string.len(info.word) do
-          if i ~= letter_num then
-            self.button_backings[i]:setFrame(1)
-            self.button_backings[i].squish_scale = 1
-            self.button_backings[i].squish_tilt = 0
-            self.button_backings[i].squish_period = info.mpb
-            self.button_letters[i].squish_scale = 1
-            self.button_letters[i].squish_tilt = 0
-            self.button_letters[i].squish_period = info.mpb
-          else
-            self.button_backings[i].squish_scale = 1.02
-            self.button_backings[i].squish_tilt = 8
-            self.button_backings[i].squish_period = info.mpb
-            self.button_letters[i].squish_scale = 1.02
-            self.button_letters[i].squish_tilt = 8
-            self.button_letters[i].squish_period = info.mpb
-            if self.button_backings[i].frame == 1 then
-              self.button_backings[i]:setFrame(2)
-            else
-              self.button_backings[i]:setFrame(1)
-            end
-          end
-        end
+        -- for i = 1, string.len(info.word) do
+        --   if i ~= letter_num then
+        --     self.button_backings[i]:setFrame(1)
+        --     self.button_backings[i].squish_scale = 1
+        --     self.button_backings[i].squish_tilt = 0
+        --     self.button_backings[i].squish_period = info.mpb
+        --     self.button_letters[i].squish_scale = 1
+        --     self.button_letters[i].squish_tilt = 0
+        --     self.button_letters[i].squish_period = info.mpb
+        --   else
+        --     self.button_backings[i].squish_scale = 1.02
+        --     self.button_backings[i].squish_tilt = 8
+        --     self.button_backings[i].squish_period = info.mpb
+        --     self.button_letters[i].squish_scale = 1.02
+        --     self.button_letters[i].squish_tilt = 8
+        --     self.button_letters[i].squish_period = info.mpb
+        --     if self.button_backings[i].frame == 1 then
+        --       self.button_backings[i]:setFrame(2)
+        --     else
+        --       self.button_backings[i]:setFrame(1)
+        --     end
+        --   end
+        -- end
+        self:setWordColor(letter_num)
       end)
     end
     for letter_num = 1, string.len(info.word) do
       timer.performWithDelay(info.outro_sound_beats[letter_num] * info.mpb, function()
-        for i = 1, string.len(info.word) do
-          if i ~= letter_num then
-            self.button_backings[i]:setFrame(1)
-            self.button_backings[i].squish_scale = 1
-            self.button_backings[i].squish_tilt = 0
-            self.button_backings[i].squish_period = info.mpb
-            self.button_letters[i].squish_scale = 1
-            self.button_letters[i].squish_tilt = 0
-            self.button_letters[i].squish_period = info.mpb
-          else
-            self.button_backings[i].squish_scale = 1.02
-            self.button_backings[i].squish_tilt = 8
-            self.button_backings[i].squish_period = info.mpb
-            self.button_letters[i].squish_scale = 1.02
-            self.button_letters[i].squish_tilt = 8
-            self.button_letters[i].squish_period = info.mpb
-            if self.button_backings[i].frame == 1 then
-              self.button_backings[i]:setFrame(2)
-            else
-              self.button_backings[i]:setFrame(1)
-            end
-          end
-        end
+        -- for i = 1, string.len(info.word) do
+        --   if i ~= letter_num then
+        --     self.button_backings[i]:setFrame(1)
+        --     self.button_backings[i].squish_scale = 1
+        --     self.button_backings[i].squish_tilt = 0
+        --     self.button_backings[i].squish_period = info.mpb
+        --     self.button_letters[i].squish_scale = 1
+        --     self.button_letters[i].squish_tilt = 0
+        --     self.button_letters[i].squish_period = info.mpb
+        --   else
+        --     self.button_backings[i].squish_scale = 1.02
+        --     self.button_backings[i].squish_tilt = 8
+        --     self.button_backings[i].squish_period = info.mpb
+        --     self.button_letters[i].squish_scale = 1.02
+        --     self.button_letters[i].squish_tilt = 8
+        --     self.button_letters[i].squish_period = info.mpb
+        --     if self.button_backings[i].frame == 1 then
+        --       self.button_backings[i]:setFrame(2)
+        --     else
+        --       self.button_backings[i]:setFrame(1)
+        --     end
+        --   end
+        -- end
+        self:setWordColor(letter_num)
       end)
     end
     timer.performWithDelay(info.outro_word_beat * info.mpb, function()
-      for i = 1, string.len(info.word) do
-        self.button_backings[i].squish_scale = 1.02
-        self.button_backings[i].squish_tilt = 8
-        self.button_backings[i].squish_period = info.mpb
-        self.button_letters[i].squish_scale = 1.02
-        self.button_letters[i].squish_tilt = 8
-        self.button_letters[i].squish_period = info.mpb
-        self.button_backings[i]:setFrame(2)
-      end
+      -- for i = 1, string.len(info.word) do
+      --   self.button_backings[i].squish_scale = 1.02
+      --   self.button_backings[i].squish_tilt = 8
+      --   self.button_backings[i].squish_period = info.mpb
+      --   self.button_letters[i].squish_scale = 1.02
+      --   self.button_letters[i].squish_tilt = 8
+      --   self.button_letters[i].squish_period = info.mpb
+      --   self.button_backings[i]:setFrame(2)
+      -- end
+      self:setWordColor("all")
     end)
     timer.performWithDelay((info.outro_word_beat + 1) * info.mpb, function()
-      for i = 1, string.len(info.word) do
-        self.button_backings[i]:setFrame(1)
-        self.button_backings[i].squish_scale = 1
-        self.button_backings[i].squish_tilt = 0
-        self.button_backings[i].squish_period = info.mpb
-        self.button_letters[i].squish_scale = 1
-        self.button_letters[i].squish_tilt = 0
-        self.button_letters[i].squish_period = info.mpb
-        self.button_backings[i]:setFrame(1)
-      end
+      -- for i = 1, string.len(info.word) do
+      --   self.button_backings[i]:setFrame(1)
+      --   self.button_backings[i].squish_scale = 1
+      --   self.button_backings[i].squish_tilt = 0
+      --   self.button_backings[i].squish_period = info.mpb
+      --   self.button_letters[i].squish_scale = 1
+      --   self.button_letters[i].squish_tilt = 0
+      --   self.button_letters[i].squish_period = info.mpb
+      --   self.button_backings[i]:setFrame(1)
+      -- end
+      self:setWordColor("none")
     end)
   end
 
@@ -414,6 +399,41 @@ function scene:measureActions()
     end
     self.buttons = {}
     self.chapter:gotoScene(self.next_scene, nil)
+  end
+end
+
+function scene:setWordColor(compare_value)
+  local info = self.info
+  local word = info.word
+  for i = 1, string.len(word) do
+    if i ~= nil and self.button_backings ~= nil and self.button_backings[i] ~= nil and self.button_backings[i]["squish_scale"] ~= nil then
+      if compare_value == "none" or (compare_value ~= "all" and i ~= compare_value) then
+        self.button_backings[i]:setFrame(1)
+        self.button_backings[i].squish_scale = 1
+        self.button_backings[i].squish_tilt = 0
+        self.button_backings[i].squish_period = info.mpb
+        self.button_letters[i].squish_scale = 1
+        self.button_letters[i].squish_tilt = 0
+        self.button_letters[i].squish_period = info.mpb
+      else
+        self.button_backings[i].squish_scale = 1.02
+        self.button_backings[i].squish_tilt = 8
+        self.button_backings[i].squish_period = info.mpb
+        self.button_letters[i].squish_scale = 1.02
+        self.button_letters[i].squish_tilt = 8
+        self.button_letters[i].squish_period = info.mpb
+        if self.button_backings[i].frame == 1 then
+          self.button_backings[i]:setFrame(2)
+        else
+          self.button_backings[i]:setFrame(1)
+        end
+        if compare_value == "all" then
+          self.button_backings[i]:setFrame(2)
+        elseif compare_value == "none" then
+          self.button_backings[i]:setFrame(1)
+        end
+      end
+    end
   end
 end
 
