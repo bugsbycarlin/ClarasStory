@@ -408,6 +408,15 @@ picture_info["Plum"] = {
   outline_frame = 6,
 }
 
+picture_info["Spotlight"] = {
+  file_name = "Spotlight.png",
+  row_length = 1,
+  sprite_size = 1024,
+  sprite_height = 768,
+  sprite_count = 1,
+  outline_frame = 1,
+}
+
 picture_info["Farm"] = {
   file_name = "Farm_Sketch.png",
   row_length = 4,

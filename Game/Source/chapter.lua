@@ -30,6 +30,8 @@ local loading_text = nil
 
 local flow = nil
 
+local memory_estimate = 0
+
 -- local scripts = {}
 
 local current_scene = nil
@@ -162,6 +164,7 @@ function scene:setupLoading()
 end
 
 function scene:partialLoad()
+  -- print(system.getInfo(“textureMemoryUsed”))
   picture_name = self.partialLoadObjects[self.partialLoadNumber]
   if string.len(picture_name) >= 1 then
     file_name = picture_info[picture_name]["file_name"]
@@ -169,6 +172,10 @@ function scene:partialLoad()
     sprite[picture_name] = graphics.newImageSheet("Art/" .. file_name, sheet)
   end
   print("Loaded " .. picture_name)
+  local side = picture_info[picture_name].sprite_size * picture_info[picture_name].row_length
+  memory_estimate = memory_estimate + (side * side * 4)
+  print("Memory estimate " .. side * side * 4)
+  -- print("Ending texture memory " .. system.getInfo(“textureMemoryUsed”))
 
   self.partialLoadNumber = self.partialLoadNumber + 1
   if self.partialLoadNumber <= #self.partialLoadObjects then
@@ -179,6 +186,7 @@ function scene:partialLoad()
     Runtime:removeEventListener("enterFrame", updateLoadDisplay)
     local load_time_total = system.getTimer() - load_start_time
     print("Load time was " .. load_time_total)
+    print("Estimated texture memory is " .. tostring(memory_estimate))
     self:startGame()
   end
 end
@@ -208,6 +216,7 @@ function scene:setupSceneStructure()
     outro_sound_beats = {12, 14, 16, 18},
     outro_word_beat = 20,
     time_sig=4,
+    script=nil,
   }
   flow["Chapter_1_Interactive_Bird"] = {
     name="Chapter_1_Interactive_Bird",
@@ -223,6 +232,7 @@ function scene:setupSceneStructure()
     outro_sound_beats = {12, 14, 16, 18},
     outro_word_beat = 20,
     time_sig=4,
+    script=nil,
   }
   flow["Chapter_1_Scene_2"] = {
     name="Chapter_1_Scene_2",
@@ -292,6 +302,7 @@ function scene:setupSceneStructure()
     outro_sound_beats = {12, 14, 16, 18},
     outro_word_beat = 20,
     time_sig=4,
+    script=nil,
     -- here it might be fun to use a stage spotlight
   }
   flow["Chapter_1_Scene_4"] = {
@@ -316,6 +327,7 @@ function scene:setupSceneStructure()
     outro_sound_beats = {12, 14, 16},
     outro_word_beat = 18,
     time_sig=4,
+    script=nil,
     -- here it might be fun to use a stage spotlight
   }
   flow["Chapter_1_Interactive_Cow"] = {
@@ -332,6 +344,7 @@ function scene:setupSceneStructure()
     outro_sound_beats = {12, 14, 16},
     outro_word_beat = 18,
     time_sig=4,
+    script=nil,
     -- here it might be fun to use a stage spotlight
   }
   flow["Chapter_1_Scene_5"] = {
@@ -356,6 +369,7 @@ function scene:setupSceneStructure()
     outro_sound_beats = {12, 14, 16, 18},
     outro_word_beat = 20,
     time_sig=4,
+    script=nil,
     -- here it might be fun to use a stage spotlight
   }
   flow["Chapter_1_Scene_6"] = {
@@ -507,6 +521,13 @@ function scene:setupSceneStructure()
     time_sig=4,
     script=self:loadSceneScript("chapter_1_fruit_interactive"),
   }
+  flow["Chapter_1_Scene_7"] = {
+    name="Chapter_1_Scene_7",
+    next=nil,
+    type="scripted",
+    script=self:loadSceneScript("chapter_1_scene_7"),
+    duration=0,
+  }
 
   -- make a random chain of fruits for the fruit beast before moving to Scene 7
   fruits = {
@@ -529,17 +550,10 @@ function scene:setupSceneStructure()
   flow["Chapter_1_Interactive_" .. fruits[3]].next = "Chapter_1_Scene_7"
 
 
-  flow["Chapter_1_Scene_7"] = {
-    name="Chapter_1_Scene_7",
-    next=nil,
-    type="scripted",
-    script_file="Chapter_1_Scene_7.json",
-    script=self:loadSceneScript("chapter_1_scene_7"),
-    duration=0,
-  }
 
 
-  self.first_scene = "Chapter_1_Interactive_Mom"
+
+  self.first_scene = "Chapter_1_Scene_1"
 
 end
 
@@ -558,14 +572,14 @@ function scene:gotoScene(new_scene_name, fade_options)
   if new_scene_name ~= "end" and flow[new_scene_name] ~= nil then
     print("New scene: " .. new_scene_name)
     new_scene = flow[new_scene_name]
+    composer.setVariable("settings", new_scene)
+    if new_scene.script ~= nil then
+      composer.setVariable("script_assets", new_scene.script)
+    else
+      composer.setVariable("script_assets", "")
+    end
     if new_scene.next ~= nil then
       composer.setVariable("next_scene", new_scene.next)
-      composer.setVariable("settings", new_scene)
-      if new_scene.script ~= nil then
-        composer.setVariable("script_assets", new_scene.script)
-      else
-        composer.setVariable("script_assets", "")
-      end
     else
       composer.setVariable("next_scene", "end")
     end

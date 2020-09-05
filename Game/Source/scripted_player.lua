@@ -10,9 +10,7 @@ local scene = composer.newScene()
 
 local sprite = {}
 
-local script_assets = {}
-
-local current_time = 0
+-- local current_time = 0
 local start_performance_time = 0
 local stored_performance_time = 0
 local total_performance_time = 0
@@ -25,18 +23,24 @@ local selected_element_id = nil
 
 local mode = nil
 
-function updateTime()
-  current_time = system.getTimer()
+function scene:updateTime()
+  self.current_time = system.getTimer()
 
   if mode == "performing" then
-    total_performance_time = stored_performance_time + (current_time - start_performance_time)
+    total_performance_time = stored_performance_time + (self.current_time - start_performance_time)
   end
 end
 
 function scene:nextScene()
   timer.cancel(self.sketch_sprite_timer)
+  if update_timer ~= nil then
+    timer.cancel(update_timer)
+  end
   if self.info["cleanup"] == nil or self.info["cleanup"] ~= false then
     self.sketch_sprites:immediatelyRemoveAll()
+    self.sketch_sprites.picture_info = nil
+    self.sketch_sprites.sprite_info = nil
+    self.sketch_sprites.top_group = nil
   end
   mode = nil
   self.chapter:gotoScene(self.next_scene, nil)
@@ -44,11 +48,13 @@ function scene:nextScene()
 end
 
 function scene:perform(asset)
+  print("Considering " .. asset.name)
   if asset.type == "sound" then
     asset.performance = audio.loadStream("Sound/" .. sound_info[asset.name].file_name)
     -- should only do if this is the main audio file
     audio.play(asset.performance, {loops = 0, onComplete=function() self:nextScene() end})
   elseif asset.type == "picture" then
+    print("Performing " .. asset.name)
     local picture = asset.name
 
     asset.performance = display.newSprite(self.performanceAssetGroup[asset.depth + 5], sprite[picture], {frames=picture_info[picture].frames})
@@ -57,6 +63,8 @@ function scene:perform(asset)
     asset.performance.y = asset.y
     asset.performance.fixed_y = asset.y
     asset.performance.fixed_x = asset.x
+    asset.performance.x_vel = 0
+    asset.performance.y_vel = 0
     asset.performance.info = picture_info[picture]
     if asset.sketch == true then
       asset.performance.sketch = true
@@ -87,10 +95,11 @@ function scene:perform(asset)
 end
 
 function scene:clearPerformance()
+  self.sketch_sprites:immediatelyRemoveAll()
   self.sketch_sprites.sprite_list = {}
 
-  for i = 1, #script_assets do
-    asset = script_assets[i]
+  for i = 1, #self.script_assets do
+    asset = self.script_assets[i]
     asset.performance = nil
   end
 
@@ -104,13 +113,12 @@ end
 
 function scene:updatePerformance()
   local last_update_time = total_performance_time
-  updateTime()
+  self:updateTime()
 
   if mode == "performing" then
-    for i = 1, #script_assets do
-      asset = script_assets[i]
+    for i = 1, #self.script_assets do
+      asset = self.script_assets[i]
       if asset.performance == nil and last_update_time <= asset.start_time and total_performance_time >= asset.start_time then
-        print("Performing " .. asset.id)
         self:perform(asset)
       end
     end
@@ -155,9 +163,13 @@ function scene:show(event)
     end
 
     self.sketch_sprites = composer.getVariable("sketch_sprites")
+    sprite = composer.getVariable("sprite")
 
     display.setDefault("background", 1, 1, 1)
 
+    self.sketch_sprites.picture_info = picture_info
+    self.sketch_sprites.sprite_info = sprite
+    self.sketch_sprites.top_group = self.performanceAssetGroup[9]
     self.sketch_sprite_timer = timer.performWithDelay(35, function() 
       self.sketch_sprites:update(mode, total_performance_time)
     end, 0)
@@ -170,7 +182,7 @@ function scene:show(event)
     -- Runtime:addEventListener("touch", function(event) self:handleMouse(event) end)
 
     sprite = composer.getVariable("sprite")
-    script_assets = composer.getVariable("script_assets")
+    self.script_assets = composer.getVariable("script_assets")
 
     scene:startPerformance()
   end
@@ -179,7 +191,7 @@ end
 function scene:startPerformance()
   mode = "performing"
 
-  current_time = system.getTimer()
+  self.current_time = system.getTimer()
   start_performance_time = 0
   stored_performance_time = 0
   total_performance_time = 0
@@ -187,7 +199,7 @@ function scene:startPerformance()
   self:clearPerformance()
 
   start_performance_time = system.getTimer()
-  current_time = system.getTimer()
+  self.current_time = system.getTimer()
 
   self:updatePerformance()
 

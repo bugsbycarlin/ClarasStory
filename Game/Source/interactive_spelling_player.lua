@@ -11,7 +11,6 @@ local scene = composer.newScene()
 local sprite = {}
 
 local script_asset_count = 0
-local script_assets = {}
 
 local mode = nil
 
@@ -75,10 +74,11 @@ function scene:perform(asset)
 end
 
 function scene:clearPerformance()
+  self.sketch_sprites:immediatelyRemoveAll()
   self.sketch_sprites.sprite_list = {}
 
-  for i = 1, #script_assets do
-    asset = script_assets[i]
+  for i = 1, #self.script_assets do
+    asset = self.script_assets[i]
     asset.performance = nil
   end
 
@@ -95,8 +95,8 @@ function scene:updatePerformance()
   updateTime()
 
 
-  for i = 1, #script_assets do
-    asset = script_assets[i]
+  for i = 1, #self.script_assets do
+    asset = self.script_assets[i]
     if asset.performance == nil and last_update_time <= asset.start_time and total_performance_time >= asset.start_time then
       self:perform(asset)
     end
@@ -181,8 +181,8 @@ function scene:show(event)
     self.info = composer.getVariable("settings")
     self.chapter = composer.getVariable("chapter")
     self.next_scene = composer.getVariable("next_scene")
-    script_assets = composer.getVariable("script_assets")
-    print(script_assets)
+    self.script_assets = composer.getVariable("script_assets")
+    print(self.script_assets)
 
     print("Making scene for " .. self.info.word)
 
@@ -193,6 +193,9 @@ function scene:show(event)
 
     self:startScene()
 
+    self.sketch_sprites.picture_info = picture_info
+    self.sketch_sprites.sprite_info = sprite
+    self.sketch_sprites.top_group = self.performanceAssetGroup[9]
     self.sketch_sprite_timer = timer.performWithDelay(35, function() 
       self.sketch_sprites:update(mode, total_performance_time)
     end, 0)
@@ -207,6 +210,10 @@ function scene:startScene()
 
   local info = self.info
   local word = self.info.word
+
+  self.sketch_sprites.picture_info = picture_info
+  self.sketch_sprites.sprite_info = sprite
+  self.sketch_sprites.top_group = self.performanceAssetGroup[9]
 
   self.current_letter_number = 1
 
@@ -223,7 +230,7 @@ function scene:startScene()
     self:beatTimerCheck()
   end, 0)
 
-  if script_assets ~= nil and script_assets ~= "" then
+  if self.script_assets ~= nil and self.script_assets ~= "" then
     current_time = system.getTimer()
     start_performance_time = 0
     stored_performance_time = 0
@@ -545,6 +552,9 @@ function scene:measureActions()
     mode = "finished"
     -- timer.cancel(interactive_ui_timer)
     timer.cancel(self.sketch_sprite_timer)
+    if update_timer ~= nil then
+      timer.cancel(update_timer)
+    end
     audio.stop()
     self.sketch_sprites:immediatelyRemoveAll()
     for i = 1, string.len(info.word) do

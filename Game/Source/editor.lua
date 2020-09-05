@@ -38,7 +38,7 @@ local load_start_time = 0
 
 local selected_element_id = nil
 
-local save_file = system.pathForFile("Scenes/chapter_1_scene_6.json", system.ResourceDirectory)
+local save_file = system.pathForFile("Scenes/chapter_1_scene_7.json", system.ResourceDirectory)
 print(save_file)
 
 function scene:saveInfo(event)
@@ -378,7 +378,12 @@ function scene:perform(asset)
     else
       asset.performance.sketch = false
       asset.performance:setFrame(picture_info[picture]["sprite_count"])
-      asset.performance.state = "static"
+      if asset.performance.info["animation_end"] ~= nil then
+        asset.performance.state = "animating"
+        asset.performance.animation_count = 0
+      else
+        asset.performance.state = "static"
+      end
     end
     asset.performance.start_time = system.getTimer()
     asset.performance.x_scale = asset.x_scale
@@ -387,6 +392,10 @@ function scene:perform(asset)
     asset.performance.yScale = asset.performance.y_scale
     asset.performance.disappear_time = asset.disappear_time
     asset.performance.disappear_method = asset.disappear_method
+    if asset.disappear_method == "gravity" then
+      asset.performance.x_vel = 0
+      asset.performance.y_vel = 0
+    end
     asset.performance.squish_scale = asset.squish_scale
     asset.performance.squish_tilt = asset.squish_tilt
     asset.performance.squish_period = asset.squish_period
@@ -511,7 +520,10 @@ function scene:show(event)
 
     updateLoadDisplay()
 
-    sketch_sprites_timer = timer.performWithDelay(35, function() 
+    sketch_sprites.picture_info = picture_info
+    sketch_sprites.sprite_info = sprite
+    sketch_sprites.top_group = self.performanceAssetGroup[9]
+    sketch_sprites_timer = timer.performWithDelay(35, function()
       sketch_sprites:update(mode, total_performance_time)
     end, 0)
 
