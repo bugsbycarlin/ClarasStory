@@ -150,7 +150,7 @@ function scene:setupLoading()
 
   function updateLoadDisplay()
     local percent = math.floor((self.partialLoadNumber / #self.partialLoadObjects) * 100)
-    loading_text.text = "Loading " .. percent .. "%"
+    loading_text.text = "Spelling " .. percent .. "%"
   end
 
   timer.performWithDelay(40, function() 

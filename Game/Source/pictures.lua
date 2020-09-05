@@ -3,160 +3,160 @@ local picture_info = {}
 
 -- letters
 picture_info["A"] = {
-  file_name = "Letter_A_Sketch.png",
-  row_length = 5,
+  file_name = "A.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 15,
+  sprite_count = 1,
 }
 picture_info["B"] = {
-  file_name = "Letter_B_Sketch.png",
-  row_length = 5,
+  file_name = "B.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 17,
+  sprite_count = 1,
 }
 picture_info["C"] = {
-  file_name = "Letter_C_Sketch.png",
-  row_length = 5,
+  file_name = "C.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 11,
+  sprite_count = 1,
 }
 picture_info["D"] = {
-  file_name = "Letter_D_Sketch.png",
-  row_length = 5,
+  file_name = "D.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 10,
+  sprite_count = 1,
 }
 picture_info["E"] = {
-  file_name = "Letter_E_Sketch.png",
-  row_length = 5,
+  file_name = "E.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 21,
+  sprite_count = 1,
 }
 picture_info["F"] = {
-  file_name = "Letter_F_Sketch.png",
-  row_length = 5,
+  file_name = "F.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 15,
+  sprite_count = 1,
 }
 picture_info["G"] = {
-  file_name = "Letter_G_Sketch.png",
-  row_length = 5,
+  file_name = "G.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 13,
+  sprite_count = 1,
 }
 picture_info["H"] = {
-  file_name = "Letter_H_Sketch.png",
-  row_length = 5,
+  file_name = "H.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 13,
+  sprite_count = 1,
 }
 picture_info["I"] = {
-  file_name = "Letter_I_Sketch.png",
-  row_length = 5,
+  file_name = "I.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 12,
+  sprite_count = 1,
 }
 picture_info["J"] = {
-  file_name = "Letter_J_Sketch.png",
-  row_length = 5,
+  file_name = "J.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 10,
+  sprite_count = 1,
 }
 picture_info["K"] = {
-  file_name = "Letter_K_Sketch.png",
-  row_length = 5,
+  file_name = "K.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 15,
+  sprite_count = 1,
 }
 picture_info["L"] = {
-  file_name = "Letter_L_Sketch.png",
-  row_length = 5,
+  file_name = "L.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 14,
+  sprite_count = 1,
 }
 picture_info["M"] = {
-  file_name = "Letter_M_Sketch.png",
-  row_length = 5,
+  file_name = "M.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 11,
+  sprite_count = 1,
 }
 picture_info["N"] = {
-  file_name = "Letter_N_Sketch.png",
-  row_length = 5,
+  file_name = "N.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 8,
+  sprite_count = 1,
 }
 picture_info["O"] = {
-  file_name = "Letter_O_Sketch.png",
-  row_length = 5,
+  file_name = "O.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count =8,
+  sprite_count = 1,
 }
 picture_info["P"] = {
-  file_name = "Letter_P_Sketch.png",
-  row_length = 5,
+  file_name = "P.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 8,
+  sprite_count = 1,
 }
 picture_info["Q"] = {
-  file_name = "Letter_Q_Sketch.png",
-  row_length = 5,
+  file_name = "Q.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 18,
+  sprite_count = 1,
 }
 picture_info["R"] = {
-  file_name = "Letter_R_Sketch.png",
-  row_length = 5,
+  file_name = "R.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 22,
+  sprite_count = 1,
 }
 picture_info["S"] = {
-  file_name = "Letter_S_Sketch.png",
-  row_length = 5,
+  file_name = "S.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 13,
+  sprite_count = 1,
 }
 picture_info["T"] = {
-  file_name = "Letter_T_Sketch.png",
-  row_length = 5,
+  file_name = "T.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 12,
+  sprite_count = 1,
 }
 picture_info["U"] = {
-  file_name = "Letter_U_Sketch.png",
-  row_length = 5,
+  file_name = "U.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 13,
+  sprite_count = 1,
 }
 picture_info["V"] = {
-  file_name = "Letter_V_Sketch.png",
-  row_length = 5,
+  file_name = "V.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 7,
+  sprite_count = 1,
 }
 picture_info["W"] = {
-  file_name = "Letter_W_Sketch.png",
-  row_length = 5,
+  file_name = "W.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 13,
+  sprite_count = 1,
 }
 picture_info["X"] = {
-  file_name = "Letter_X_Sketch.png",
-  row_length = 5,
+  file_name = "X.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 8,
+  sprite_count = 1,
 }
 picture_info["Y"] = {
-  file_name = "Letter_Y_Sketch.png",
-  row_length = 5,
+  file_name = "Y.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 20,
+  sprite_count = 1,
 }
 picture_info["Z"] = {
-  file_name = "Letter_Z_Sketch.png",
-  row_length = 5,
+  file_name = "Z.png",
+  row_length = 1,
   sprite_size = 200,
-  sprite_count = 11,
+  sprite_count = 1,
 }
 
 
@@ -180,11 +180,11 @@ picture_info["Apple"] = {
 }
 
 picture_info["Earth"] = {
-  file_name = "Earth_Sketch.png",
-  row_length = 10,
+  file_name = "Earth_Single.png",
+  row_length = 1,
   sprite_size = 400,
-  sprite_count = 58,
-  outline_frame = 14,
+  sprite_count = 1,
+  outline_frame = 1,
 }
 
 picture_info["Sun"] = {
@@ -285,9 +285,9 @@ picture_info["Seagull"] = {
 
 picture_info["Beach"] = {
   file_name = "Beach_Sketch.png",
-  row_length = 5,
+  row_length = 1,
   sprite_size = 400,
-  sprite_count = 10,
+  sprite_count = 1,
   outline_frame = 1,
 }
 
@@ -418,27 +418,27 @@ picture_info["Spotlight"] = {
 }
 
 picture_info["Farm"] = {
-  file_name = "Farm_Sketch.png",
-  row_length = 4,
+  file_name = "Farm_Single.png",
+  row_length = 1,
   sprite_size = 1024,
   sprite_height = 768,
-  sprite_count = 16,
-  outline_frame = 9,
+  sprite_count = 1,
+  outline_frame = 1,
 }
 
 picture_info["River"] = {
-  file_name = "River_Sketch.png",
-  row_length = 4,
+  file_name = "River_Single.png",
+  row_length = 1,
   sprite_size = 1024,
   sprite_height = 768,
-  sprite_count = 13,
-  outline_frame = 6,
+  sprite_count = 1,
+  outline_frame = 1,
 }
 
 picture_info["Fruit_Beast"] = {
   file_name = "Fruit_Beast_Sketch.png",
-  row_length = 9,
-  sprite_size = 400,
+  row_length = 6,
+  sprite_size = 320,
   sprite_count = 16,
   outline_frame = 8,
   animation_start = 17,
