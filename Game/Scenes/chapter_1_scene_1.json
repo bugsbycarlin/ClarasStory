@@ -2,7 +2,7 @@
   {
     "type": "sound",
     "id": "Chapter_1_Scene_1_1",
-    "sketch": true,
+    "intro": "sketch"
     "y": 384,
     "x": 512,
     "name": "Chapter_1_Scene_1",
@@ -17,7 +17,7 @@
     "x": 512,
     "squish_period": 545,
     "id": "Earth_2",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_x": 512,
     "fixed_y": 384,
     "y": 384,
@@ -38,7 +38,7 @@
     "id": "Tower_5",
     "fixed_y": 509.25,
     "x_scale": 1,
-    "sketch": true,
+    "intro": "sketch"
     "disappear_time": 13075,
     "y_scale": 1,
     "name": "Tower",
@@ -55,7 +55,7 @@
     "fixed_x": 740.75,
     "squish_period": 545,
     "id": "Girl_6",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_y": 556.5,
     "x": 740.75,
     "disappear_time": 25630,
@@ -74,7 +74,7 @@
     "fixed_x": 611,
     "squish_period": 1718,
     "id": "Red_Star_7",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_y": 408,
     "x": 611,
     "y": 408,
@@ -93,7 +93,7 @@
     "fixed_x": 542,
     "squish_period": 1718,
     "id": "Orange_Star_8",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_y": 351.75,
     "x": 542,
     "y": 351.75,
@@ -112,7 +112,7 @@
     "fixed_x": 475.25,
     "squish_period": 1718,
     "id": "Green_Star_9",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_y": 282,
     "x": 475.25,
     "y": 282,
@@ -131,7 +131,7 @@
     "fixed_x": 413,
     "squish_period": 1718,
     "id": "Yellow_Star_10",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_y": 191.25,
     "x": 413,
     "disappear_time": 17420,
@@ -157,7 +157,7 @@
       "squish_period": 545,
       "id": "Girl_11",
       "fixed_y": 510.75,
-      "sketch": true,
+      "intro": "sketch"
       "disappear_time": 8300,
       "state": "static",
       "y_scale": 1,
@@ -362,7 +362,7 @@
     "y_scale": 1,
     "squish_period": 545,
     "id": "Girl_11",
-    "sketch": true,
+    "intro": "sketch"
     "x_scale": 1,
     "fixed_y": 510.75,
     "disappear_time": 8300,
@@ -381,7 +381,7 @@
     "x_scale": 1,
     "squish_period": 545,
     "id": "Sweater_12",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_y": 400.5,
     "y_scale": 1,
     "y": 400.5,
@@ -400,7 +400,7 @@
     "x_scale": 1,
     "squish_period": 545,
     "id": "Bird_13",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_y": 148.5,
     "y_scale": 1,
     "y": 148.5,
@@ -419,7 +419,7 @@
     "fixed_x": 535.25,
     "squish_period": 1718,
     "id": "B_14",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_y": 107.25,
     "x": 535.25,
     "disappear_time": 24540,
@@ -438,7 +438,7 @@
     "fixed_x": 651.5,
     "squish_period": 1718,
     "id": "S_15",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_y": 276.75,
     "x": 651.5,
     "disappear_time": 25360,
@@ -457,7 +457,7 @@
     "fixed_x": 594.5,
     "squish_period": 1718,
     "id": "I_16",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_y": 111.75,
     "x": 594.5,
     "disappear_time": 24540,
@@ -476,7 +476,7 @@
     "fixed_x": 703.25,
     "squish_period": 1718,
     "id": "W_17",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_y": 279,
     "x": 703.25,
     "disappear_time": 25360,
@@ -495,7 +495,7 @@
     "fixed_x": 657.5,
     "squish_period": 1718,
     "id": "R_18",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_y": 114,
     "x": 657.5,
     "disappear_time": 24540,
@@ -514,7 +514,7 @@
     "fixed_x": 761.75,
     "squish_period": 1718,
     "id": "E_19",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_y": 276.75,
     "x": 761.75,
     "disappear_time": 25360,
@@ -533,7 +533,7 @@
     "fixed_x": 707.75,
     "squish_period": 1718,
     "id": "D_20",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_y": 105.75,
     "x": 707.75,
     "disappear_time": 24540,
@@ -552,7 +552,7 @@
     "fixed_x": 805.25,
     "squish_period": 1718,
     "id": "A_21",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_y": 276,
     "x": 805.25,
     "disappear_time": 25360,
@@ -571,7 +571,7 @@
     "fixed_x": 854,
     "squish_period": 1718,
     "id": "T_22",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_y": 278.25,
     "x": 854,
     "disappear_time": 25360,
@@ -590,7 +590,7 @@
     "fixed_x": 896,
     "squish_period": 1718,
     "id": "E_23",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_y": 274.5,
     "x": 896,
     "disappear_time": 25360,
@@ -609,7 +609,7 @@
     "fixed_x": 941,
     "squish_period": 1718,
     "id": "R_24",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_y": 276.75,
     "x": 941,
     "disappear_time": 25360,
@@ -628,7 +628,7 @@
     "x": 953,
     "squish_period": 545,
     "id": "Sun_24",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_x": 953,
     "fixed_y": 39,
     "disappear_time": 25630,
@@ -649,7 +649,7 @@
     "id": "Little_Boat_25",
     "fixed_y": 477,
     "fixed_x": 428,
-    "sketch": true,
+    "intro": "sketch"
     "y": 477,
     "x": 428,
     "name": "Little_Boat",
@@ -668,7 +668,7 @@
     "id": "Little_Wave_26",
     "fixed_y": 512.25,
     "x_scale": -0.7,
-    "sketch": true,
+    "intro": "sketch"
     "y": 512.25,
     "x": 408.5,
     "name": "Little_Wave",
@@ -685,7 +685,7 @@
     "x": 512,
     "squish_period": 1718,
     "id": "Blue_Sky_27",
-    "sketch": true,
+    "intro": "sketch"
     "fixed_x": 512,
     "fixed_y": 384,
     "disappear_time": 25630,
@@ -706,7 +706,7 @@
     "id": "Beach_28",
     "fixed_y": 549,
     "fixed_x": 442.25,
-    "sketch": true,
+    "intro": "sketch"
     "y": 549,
     "x": 442.25,
     "name": "Beach",
@@ -725,7 +725,7 @@
     "id": "Seagull_28",
     "fixed_y": 63.75,
     "x_scale": 0.3,
-    "sketch": true,
+    "intro": "sketch"
     "y": 63.75,
     "x": 142.25,
     "name": "Seagull",
@@ -744,7 +744,7 @@
     "id": "Seagull_29",
     "fixed_y": 105,
     "x_scale": 0.2,
-    "sketch": true,
+    "intro": "sketch"
     "y": 105,
     "x": 74.75,
     "name": "Seagull",

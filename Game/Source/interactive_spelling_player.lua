@@ -45,12 +45,24 @@ function scene:perform(asset)
     asset.performance.fixed_y = asset.y
     asset.performance.fixed_x = asset.x
     asset.performance.info = picture_info[picture]
-    if asset.sketch == true then
-      asset.performance.sketch = true
-      asset.performance:setFrame(0)
+    asset.performance.intro = asset.intro
+    if asset.intro == "sketch" then
+      asset.performance:setFrame(1)
       asset.performance.state = "sketching"
+    elseif asset.intro == "fade_in" then
+      asset.performance:setFrame(1)
+      asset.performance.state = "fade_in"
+      asset.performance.alpha = 0.01
+    elseif asset.intro == "rise" then
+      asset.performance:setFrame(1)
+      asset.performance.state = "rise"
+      local height = asset.performance.info.sprite_size
+      if asset.performance.info["sprite_height"] ~= nil then
+        height = asset.performance.info["sprite_height"]
+      end
+      asset.performance.y = asset.y + height
+      asset.performance.fixed_y = asset.performance.y
     else
-      asset.performance.sketch = false
       asset.performance:setFrame(picture_info[picture]["sprite_count"])
       if asset.performance.info["animation_end"] ~= nil then
         asset.performance.state = "animating"
@@ -122,7 +134,7 @@ function scene:poopStars(center_x, center_y, num_stars)
     star_sprite.fixed_y = star_sprite.y
     star_sprite.fixed_x = star_sprite.x
     star_sprite.info = picture_info[picture]
-    star_sprite.sketch = false
+    star_sprite.intro = "static"
     star_sprite:setFrame(picture_info[picture]["sprite_count"])
     star_sprite.state = "disappearing_gravity"
     star_sprite.start_time = system.getTimer()
@@ -275,7 +287,7 @@ function scene:startScene()
   self.spelling_object.fixed_y = self.spelling_object.y
   self.spelling_object.fixed_x = self.spelling_object.x
   self.spelling_object.info = picture_info[picture]
-  self.spelling_object.sketch = true
+  self.spelling_object.intro = "sketch"
   self.spelling_object:setFrame(0)
   self.spelling_object.state = "outline_sketching"
   self.spelling_object.start_time = system.getTimer()
@@ -313,7 +325,7 @@ function scene:startScene()
       button_backing.fixed_y = button_backing.y
       button_backing.fixed_x = button_backing.x
       button_backing.info = picture_info["Letter_Box"]
-      button_backing.sketch = false
+      button_backing.intro = "static"
       button_backing:setFrame(1)
       button_backing.state = "static"
       button_backing.start_time = system.getTimer()
@@ -335,7 +347,7 @@ function scene:startScene()
       button_letter.fixed_y = button_letter.y
       button_letter.fixed_x = button_letter.x
       button_letter.info = picture_info[picture]
-      button_letter.sketch = false
+      button_letter.intro = "static"
       button_letter:setFrame(picture_info[picture]["sprite_count"])
       button_letter.state = "static"
       button_letter.start_time = system.getTimer()

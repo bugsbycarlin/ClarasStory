@@ -261,11 +261,12 @@ picture_info["Girl_Shadow"] = {
 }
 
 picture_info["Black_and_White_Town"] = {
-  file_name = "Black_and_White_Town_Sketch.png",
-  row_length = 5,
+  file_name = "Black_and_White_Town.png",
+  row_length = 1,
   sprite_size = 400,
-  sprite_count = 24,
-  outline_frame = 3,
+  sprite_height = 256,
+  sprite_count = 1,
+  outline_frame = 1,
 }
 
 picture_info["Seaside_Road"] = {

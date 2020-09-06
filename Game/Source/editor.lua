@@ -38,7 +38,7 @@ local load_start_time = 0
 
 local selected_element_id = nil
 
-local save_file = system.pathForFile("Scenes/chapter_1_scene_7.json", system.ResourceDirectory)
+local save_file = system.pathForFile("Scenes/chapter_1_scene_5.json", system.ResourceDirectory)
 print(save_file)
 
 function scene:saveInfo(event)
@@ -74,9 +74,9 @@ function scene:loadInfo()
 
   -- supplement assets which might be missing later properties
   for key, asset in pairs(script_assets) do
-    if asset["sketch"] == nil then
-      asset.sketch = true
-    end
+    -- if asset["sketch"] == nil then
+    --   asset.sketch = true
+    -- end
 
 
     if asset["depth"] == nil then
@@ -165,7 +165,7 @@ function scene:updateAssetDisplayList(script_asset_start, script_asset_end)
           "y",
           "x scale",
           "y scale",
-          "Sketch",
+          "Intro",
           "Disappear Time",
           "Disappear Method",
           "Squish Scale",
@@ -248,13 +248,9 @@ function scene:updateAssetDisplayList(script_asset_start, script_asset_end)
         edit_fields[6]:addEventListener("userInput", function(event)
           if event.phase == "editing" then
             asset = getSelectedAsset()
-            if event.text == "true" then
-              asset.sketch = true
-            else
-              asset.sketch = false
-            end
+            asset.intro = event.text
             if asset.performance ~= nil then
-              asset.performance.sketch = asset.sketch
+              asset.performance.intro = asset.intro
             end
           end
         end)
@@ -338,7 +334,7 @@ function scene:updateAssetDisplayList(script_asset_start, script_asset_end)
       edit_fields[3].text = asset.y
       edit_fields[4].text = asset.x_scale
       edit_fields[5].text = asset.y_scale
-      edit_fields[6].text = tostring(asset.sketch)
+      edit_fields[6].text = asset.intro
       edit_fields[7].text = asset.disappear_time
       edit_fields[8].text = asset.disappear_method
       edit_fields[9].text = asset.squish_scale
@@ -371,12 +367,25 @@ function scene:perform(asset)
     asset.performance.fixed_y = asset.y
     asset.performance.fixed_x = asset.x
     asset.performance.info = picture_info[picture]
-    if asset.sketch == true then
-      asset.performance.sketch = true
-      asset.performance:setFrame(0)
+    asset.performance.intro = asset.intro
+    if asset.intro == "sketch" then
+      asset.performance:setFrame(1)
       asset.performance.state = "sketching"
+    elseif asset.intro == "fade_in" then
+      print("fading this one in")
+      asset.performance:setFrame(1)
+      asset.performance.state = "fade_in"
+      asset.performance.alpha = 0.01
+    elseif asset.intro == "rise" then
+      asset.performance:setFrame(1)
+      asset.performance.state = "rise"
+      local height = asset.performance.info.sprite_size
+      if asset.performance.info["sprite_height"] ~= nil then
+        height = asset.performance.info["sprite_height"]
+      end
+      asset.performance.y = asset.y + height
+      asset.performance.fixed_y = asset.performance.y
     else
-      asset.performance.sketch = false
       asset.performance:setFrame(picture_info[picture]["sprite_count"])
       if asset.performance.info["animation_end"] ~= nil then
         asset.performance.state = "animating"
@@ -424,7 +433,6 @@ function scene:updatePerformance()
   updateTime()
   local objects_in_performance = 0
   for i = 1, 9 do
-    print(i)
     objects_in_performance = objects_in_performance + self.performanceAssetGroup[i].numChildren
   end 
   basic_info_text.text = "Time: " .. math.floor(total_performance_time) / 1000.0 .. ", Objects: " .. objects_in_performance
@@ -660,7 +668,7 @@ function scene:updatePictureAssetMenu(start_number, end_number)
               y=display.contentCenterY,
               x_scale=1,
               y_scale=1,
-              sketch=true,
+              intro="sketch",
               disappear_time=-1,
               disappear_method="",
               squish_scale=1,

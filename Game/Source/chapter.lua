@@ -553,7 +553,7 @@ function scene:setupSceneStructure()
 
 
 
-  self.first_scene = "Chapter_1_Scene_1"
+  self.first_scene = "Chapter_1_Scene_3"
 
 end
 

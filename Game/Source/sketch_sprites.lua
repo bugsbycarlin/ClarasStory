@@ -95,14 +95,42 @@ function sketch_sprites:create()
           sprite:setFrame(sprite.frame + 1)
         else
           if sprite.info["animation_end"] ~= nil then
-            print("setting " .. sprite.info.file_name .. " to animation")
-            --sprite_count = info["animation_end"]
             sprite.state = "animating"
             sprite.animation_count = 0
           else
-            print("setting " .. sprite.info.file_name .. " to static")
             sprite.state = "static"
           end
+        end
+      end
+
+      if sprite.state == "fade_in" then
+        if sprite.alpha < 1.0 then
+          sprite.alpha = sprite.alpha + 0.16
+          if sprite.alpha >= 1.0 then
+            sprite.alpha = 1.0
+            if sprite.info["animation_end"] ~= nil then
+              sprite.state = "animating"
+              sprite.animation_count = 0
+            else
+              sprite.state = "static"
+            end
+          end
+        end
+      end
+
+      if sprite.state == "rise" then
+        local height = sprite.info.sprite_size
+        if sprite.info["sprite_height"] ~= nil then
+          height = sprite.info["sprite_height"]
+        end
+        current_y = sprite.fixed_y
+        animation.to(sprite, {fixed_y=current_y - height, y=current_y - height}, {time=sprite.squish_period, easing=easing.inOutQuad})
+
+        if sprite.info["animation_end"] ~= nil then
+          sprite.state = "animating"
+          sprite.animation_count = 0
+        else
+          sprite.state = "static"
         end
       end
 
@@ -261,7 +289,7 @@ function sketch_sprites:create()
     fruit_sprite.fixed_y = fruit_sprite.y
     fruit_sprite.fixed_x = fruit_sprite.x
     fruit_sprite.info = self.picture_info[picture]
-    fruit_sprite.sketch = false
+    fruit_sprite.intro = "static"
     fruit_sprite:setFrame(self.picture_info[picture]["sprite_count"])
     fruit_sprite.state = "disappearing_gravity"
     fruit_sprite.start_time = system.getTimer()

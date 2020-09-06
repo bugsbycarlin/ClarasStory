@@ -66,12 +66,24 @@ function scene:perform(asset)
     asset.performance.x_vel = 0
     asset.performance.y_vel = 0
     asset.performance.info = picture_info[picture]
-    if asset.sketch == true then
-      asset.performance.sketch = true
-      asset.performance:setFrame(0)
+    asset.performance.intro = asset.intro
+    if asset.intro == "sketch" then
+      asset.performance:setFrame(1)
       asset.performance.state = "sketching"
+    elseif asset.intro == "fade_in" then
+      asset.performance:setFrame(1)
+      asset.performance.state = "fade_in"
+      asset.performance.alpha = 0.01
+    elseif asset.intro == "rise" then
+      asset.performance:setFrame(1)
+      asset.performance.state = "rise"
+      local height = asset.performance.info.sprite_size
+      if asset.performance.info["sprite_height"] ~= nil then
+        height = asset.performance.info["sprite_height"]
+      end
+      asset.performance.y = asset.y + height
+      asset.performance.fixed_y = asset.performance.y
     else
-      asset.performance.sketch = false
       asset.performance:setFrame(picture_info[picture]["sprite_count"])
       if asset.performance.info["animation_end"] ~= nil then
         asset.performance.state = "animating"
