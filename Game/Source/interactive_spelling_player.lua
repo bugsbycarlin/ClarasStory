@@ -415,8 +415,6 @@ function scene:startScene()
   end
 end
 
-
-
 function scene:beatTimerCheck()
   current_time = system.getTimer()
   if current_time - self.start_performance_time > (self.info.mpb * self.info.time_sig) * self.measures then
@@ -479,83 +477,18 @@ function scene:measureActions()
     -- load up some letter timing for show
     for letter_num = 1, string.len(info.word) do
       timer.performWithDelay(info.outro_letter_beats[letter_num] * info.mpb, function()
-        -- for i = 1, string.len(info.word) do
-        --   if i ~= letter_num then
-        --     self.button_backings[i]:setFrame(1)
-        --     self.button_backings[i].squish_scale = 1
-        --     self.button_backings[i].squish_tilt = 0
-        --     self.button_backings[i].squish_period = info.mpb
-        --     self.button_letters[i].squish_scale = 1
-        --     self.button_letters[i].squish_tilt = 0
-        --     self.button_letters[i].squish_period = info.mpb
-        --   else
-        --     self.button_backings[i].squish_scale = 1.02
-        --     self.button_backings[i].squish_tilt = 8
-        --     self.button_backings[i].squish_period = info.mpb
-        --     self.button_letters[i].squish_scale = 1.02
-        --     self.button_letters[i].squish_tilt = 8
-        --     self.button_letters[i].squish_period = info.mpb
-        --     if self.button_backings[i].frame == 1 then
-        --       self.button_backings[i]:setFrame(2)
-        --     else
-        --       self.button_backings[i]:setFrame(1)
-        --     end
-        --   end
-        -- end
         self:setWordColor(letter_num)
       end)
     end
     for letter_num = 1, string.len(info.word) do
       timer.performWithDelay(info.outro_sound_beats[letter_num] * info.mpb, function()
-        -- for i = 1, string.len(info.word) do
-        --   if i ~= letter_num then
-        --     self.button_backings[i]:setFrame(1)
-        --     self.button_backings[i].squish_scale = 1
-        --     self.button_backings[i].squish_tilt = 0
-        --     self.button_backings[i].squish_period = info.mpb
-        --     self.button_letters[i].squish_scale = 1
-        --     self.button_letters[i].squish_tilt = 0
-        --     self.button_letters[i].squish_period = info.mpb
-        --   else
-        --     self.button_backings[i].squish_scale = 1.02
-        --     self.button_backings[i].squish_tilt = 8
-        --     self.button_backings[i].squish_period = info.mpb
-        --     self.button_letters[i].squish_scale = 1.02
-        --     self.button_letters[i].squish_tilt = 8
-        --     self.button_letters[i].squish_period = info.mpb
-        --     if self.button_backings[i].frame == 1 then
-        --       self.button_backings[i]:setFrame(2)
-        --     else
-        --       self.button_backings[i]:setFrame(1)
-        --     end
-        --   end
-        -- end
         self:setWordColor(letter_num)
       end)
     end
     timer.performWithDelay(info.outro_word_beat * info.mpb, function()
-      -- for i = 1, string.len(info.word) do
-      --   self.button_backings[i].squish_scale = 1.02
-      --   self.button_backings[i].squish_tilt = 8
-      --   self.button_backings[i].squish_period = info.mpb
-      --   self.button_letters[i].squish_scale = 1.02
-      --   self.button_letters[i].squish_tilt = 8
-      --   self.button_letters[i].squish_period = info.mpb
-      --   self.button_backings[i]:setFrame(2)
-      -- end
       self:setWordColor("all")
     end)
     timer.performWithDelay((info.outro_word_beat + 1) * info.mpb, function()
-      -- for i = 1, string.len(info.word) do
-      --   self.button_backings[i]:setFrame(1)
-      --   self.button_backings[i].squish_scale = 1
-      --   self.button_backings[i].squish_tilt = 0
-      --   self.button_backings[i].squish_period = info.mpb
-      --   self.button_letters[i].squish_scale = 1
-      --   self.button_letters[i].squish_tilt = 0
-      --   self.button_letters[i].squish_period = info.mpb
-      --   self.button_backings[i]:setFrame(1)
-      -- end
       self:setWordColor("none")
     end)
   end

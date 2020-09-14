@@ -3,31 +3,31 @@ local sound_info = {}
 
 -- scenes
 sound_info["Chapter_1_Scene_1"] = {
-  file_name = "Chapter_1_Scene_1.mp3",
+  file_name = "Chapter_1_Scene_1_Tight.wav",
 }
 
 sound_info["Chapter_1_Scene_2"] = {
-  file_name = "Chapter_1_Scene_2.mp3",
+  file_name = "Chapter_1_Scene_2_Tight.wav",
 }
 
 sound_info["Chapter_1_Scene_3"] = {
-  file_name = "Chapter_1_Scene_3.mp3",
+  file_name = "Chapter_1_Scene_3_Tight.wav",
 }
 
 sound_info["Chapter_1_Scene_4"] = {
-  file_name = "Chapter_1_Scene_4.mp3",
+  file_name = "Chapter_1_Scene_4_Tight.wav",
 }
 
 sound_info["Chapter_1_Scene_5"] = {
-  file_name = "Chapter_1_Scene_5.mp3",
+  file_name = "Chapter_1_Scene_5_Tight.wav",
 }
 
 sound_info["Chapter_1_Scene_6"] = {
-  file_name = "Chapter_1_Scene_6.mp3",
+  file_name = "Chapter_1_Scene_6_Tight.wav",
 }
 
 sound_info["Chapter_1_Scene_7"] = {
-  file_name = "Chapter_1_Scene_7.mp3",
+  file_name = "Chapter_1_Scene_7_Tight.wav",
 }
 
 sound_info["Chapter_1_Interactive_Loop"] = {

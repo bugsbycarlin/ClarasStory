@@ -55,15 +55,17 @@ function scene:loadSceneScript(scene_name)
   local scene_file = system.pathForFile("Scenes/" .. scene_name .. ".json", system.ResourceDirectory)
   local file = io.open(scene_file, "r")
   local script_assets = {}
- 
+  print(scene_name)
+  print(scene_file)
   if file then
-      local contents = file:read("*a")
-      io.close(file)
-      script_assets = json.decode(contents)
-      script_asset_count = 0
-      for k,v in pairs(script_assets) do
-        script_asset_count = script_asset_count + 1
-      end
+    print(file)
+    local contents = file:read("*a")
+    io.close(file)
+    script_assets = json.decode(contents)
+    script_asset_count = 0
+    for k,v in pairs(script_assets) do
+      script_asset_count = script_asset_count + 1
+    end
   end
 
   if script_assets == nil or #script_assets == 0 then
@@ -379,7 +381,7 @@ function scene:setupSceneStructure()
     script_file="Chapter_1_Scene_6.json",
     script=self:loadSceneScript("chapter_1_scene_6"),
     duration=0,
-    -- cleanup=false,
+    cleanup=false,
   }
 
 
@@ -388,6 +390,7 @@ function scene:setupSceneStructure()
     next="Chapter_1_Interactive_Apple",
     type="scripted",
     script=self:loadSceneScript("chapter_1_beast_apple"),
+    cleanup=false,
     duration=0,
   }
   flow["Chapter_1_Interactive_Apple"] = {
@@ -404,12 +407,14 @@ function scene:setupSceneStructure()
     outro_sound_beats = {16, 18, 20, 22, 24},
     outro_word_beat = 26,
     time_sig=4,
-    script=self:loadSceneScript("chapter_1_fruit_interactive"),
+    cleanup=false,
+    -- script=self:loadSceneScript("chapter_1_fruit_interactive"),
   }
   flow["Chapter_1_Beast_Banana"] = {
     name="Chapter_1_Beast_Banana",
     next="Chapter_1_Interactive_Banana",
     type="scripted",
+    cleanup=false,
     script=self:loadSceneScript("chapter_1_beast_banana"),
     duration=0,
   }
@@ -427,12 +432,14 @@ function scene:setupSceneStructure()
     outro_sound_beats = {16, 18, 20, 22, 24, 26},
     outro_word_beat = 28,
     time_sig=4,
-    script=self:loadSceneScript("chapter_1_fruit_interactive"),
+    cleanup=false,
+    -- script=self:loadSceneScript("chapter_1_fruit_interactive"),
   }
   flow["Chapter_1_Beast_Lime"] = {
     name="Chapter_1_Beast_Lime",
     next="Chapter_1_Interactive_Lime",
     type="scripted",
+    cleanup=false,
     script=self:loadSceneScript("chapter_1_beast_lime"),
     duration=0,
   }
@@ -450,13 +457,15 @@ function scene:setupSceneStructure()
     outro_sound_beats = {12, 14, 16, 18},
     outro_word_beat = 20,
     time_sig=4,
-    script=self:loadSceneScript("chapter_1_fruit_interactive"),
+    cleanup=false,
+    -- script=self:loadSceneScript("chapter_1_fruit_interactive"),
   }
   flow["Chapter_1_Beast_Orange"] = {
     name="Chapter_1_Beast_Orange",
     next="Chapter_1_Interactive_Orange",
     type="scripted",
     script=self:loadSceneScript("chapter_1_beast_orange"),
+    cleanup=false,
     duration=0,
   }
   flow["Chapter_1_Interactive_Orange"] = {
@@ -473,12 +482,14 @@ function scene:setupSceneStructure()
     outro_sound_beats = {20, 22, 24, 26, 28, 30},
     outro_word_beat = 34,
     time_sig=4,
-    script=self:loadSceneScript("chapter_1_fruit_interactive"),
+    cleanup=false,
+    -- script=self:loadSceneScript("chapter_1_fruit_interactive"),
   }
   flow["Chapter_1_Beast_Pear"] = {
     name="Chapter_1_Beast_Pear",
     next="Chapter_1_Interactive_Pear",
     type="scripted",
+    cleanup="false",
     script=self:loadSceneScript("chapter_1_beast_pear"),
     duration=0,
   }
@@ -496,12 +507,14 @@ function scene:setupSceneStructure()
     outro_sound_beats = {12, 14, 16, 18},
     outro_word_beat = 20,
     time_sig=4,
-    script=self:loadSceneScript("chapter_1_fruit_interactive"),
+    cleanup=false,
+    -- script=self:loadSceneScript("chapter_1_fruit_interactive"),
   }
   flow["Chapter_1_Beast_Plum"] = {
     name="Chapter_1_Beast_Plum",
     next="Chapter_1_Interactive_Plum",
     type="scripted",
+    cleanup=false,
     script=self:loadSceneScript("chapter_1_beast_plum"),
     duration=0,
   }
@@ -519,7 +532,8 @@ function scene:setupSceneStructure()
     outro_sound_beats = {12, 14, 16, 18},
     outro_word_beat = 20,
     time_sig=4,
-    script=self:loadSceneScript("chapter_1_fruit_interactive"),
+    cleanup=false,
+    -- script=self:loadSceneScript("chapter_1_fruit_interactive"),
   }
   flow["Chapter_1_Scene_7"] = {
     name="Chapter_1_Scene_7",
@@ -548,12 +562,9 @@ function scene:setupSceneStructure()
   flow["Chapter_1_Interactive_" .. fruits[1]].next = "Chapter_1_Beast_" .. fruits[2]
   flow["Chapter_1_Interactive_" .. fruits[2]].next = "Chapter_1_Beast_" .. fruits[3]
   flow["Chapter_1_Interactive_" .. fruits[3]].next = "Chapter_1_Scene_7"
+  flow["Chapter_1_Interactive_" .. fruits[3]].cleanup = true
 
-
-
-
-
-  self.first_scene = "Chapter_1_Scene_3"
+  self.first_scene = "Chapter_1_Scene_6"
 
 end
 
@@ -584,13 +595,38 @@ function scene:gotoScene(new_scene_name, fade_options)
       composer.setVariable("next_scene", "end")
     end
     print("COMPOSER has set next as " .. tostring(composer.getVariable("next_scene")))
-    if new_scene.type == "interactive_spelling" then
-      composer.gotoScene("Source.interactive_spelling_player", fade_options)
-    elseif new_scene.type == "scripted" then
-      composer.gotoScene("Source.scripted_player", fade_options)
-    end
+    composer.gotoScene("Source.scripted_player", fade_options)
   else
     composer.gotoScene("Source.temporary_end", fade_options)
+  end
+end
+
+function scene:setNextScene(new_scene_name)
+  if new_scene_name ~= "end" and flow[new_scene_name] ~= nil then
+    print("New scene: " .. new_scene_name)
+    new_scene = flow[new_scene_name]
+    composer.setVariable("settings", new_scene)
+    if new_scene.script ~= nil then
+      composer.setVariable("script_assets", new_scene.script)
+    else
+      composer.setVariable("script_assets", "")
+    end
+    if new_scene.next ~= nil then
+      composer.setVariable("next_scene", new_scene.next)
+    else
+      composer.setVariable("next_scene", "end")
+    end
+    -- print("COMPOSER has set next as " .. tostring(composer.getVariable("next_scene")))
+    -- if new_scene.type == "interactive_spelling" then
+    --   composer.gotoScene("Source.interactive_spelling_player", fade_options)
+    -- elseif new_scene.type == "scripted" then
+    --   composer.gotoScene("Source.scripted_player", fade_options)
+    -- end
+    -- scene = composer.getSceneName("current")
+    -- scene:reset()
+
+  else
+    composer.gotoScene("Source.temporary_end")
   end
 end
 
