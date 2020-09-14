@@ -7,156 +7,182 @@ picture_info["A"] = {
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["B"] = {
   file_name = "B.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["C"] = {
   file_name = "C.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["D"] = {
   file_name = "D.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["E"] = {
   file_name = "E.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["F"] = {
   file_name = "F.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["G"] = {
   file_name = "G.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["H"] = {
   file_name = "H.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["I"] = {
   file_name = "I.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["J"] = {
   file_name = "J.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["K"] = {
   file_name = "K.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["L"] = {
   file_name = "L.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["M"] = {
   file_name = "M.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["N"] = {
   file_name = "N.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["O"] = {
   file_name = "O.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["P"] = {
   file_name = "P.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["Q"] = {
   file_name = "Q.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["R"] = {
   file_name = "R.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["S"] = {
   file_name = "S.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["T"] = {
   file_name = "T.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["U"] = {
   file_name = "U.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["V"] = {
   file_name = "V.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["W"] = {
   file_name = "W.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["X"] = {
   file_name = "X.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["Y"] = {
   file_name = "Y.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 picture_info["Z"] = {
   file_name = "Z.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
+  always_load = true,
 }
 
 
@@ -166,6 +192,65 @@ picture_info["Letter_Box"] = {
   row_length = 2,
   sprite_size = 200,
   sprite_count = 2,
+  always_load = true,
+}
+
+-- Stars
+
+picture_info["Green_Star"] = {
+  file_name = "Green_Star_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 15,
+  always_load = true,
+}
+
+picture_info["Yellow_Star"] = {
+  file_name = "Yellow_Star_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 15,
+  always_load = true,
+}
+
+picture_info["Blue_Star"] = {
+  file_name = "Blue_Star_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 15,
+  always_load = true,
+}
+
+picture_info["Red_Star"] = {
+  file_name = "Red_Star_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 15,
+  always_load = true,
+}
+
+picture_info["Orange_Star"] = {
+  file_name = "Orange_Star_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 15,
+  always_load = true,
+}
+
+picture_info["Purple_Star"] = {
+  file_name = "Purple_Star_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 15,
+  always_load = true,
+}
+
+picture_info["Pink_Star"] = {
+  file_name = "Pink_Star_Sketch.png",
+  row_length = 5,
+  sprite_size = 200,
+  sprite_count = 15,
+  always_load = true,
 }
 
 
@@ -551,54 +636,63 @@ picture_info["Girl"] = {
   outline_frame = 10,
 }
 
-picture_info["Green_Star"] = {
-  file_name = "Green_Star_Sketch.png",
-  row_length = 5,
-  sprite_size = 200,
-  sprite_count = 15,
+picture_info["Car_Red"] = {
+  file_name = "Car_Red.png",
+  row_length = 1,
+  sprite_size = 512,
+  sprite_count = 1,
 }
 
-picture_info["Yellow_Star"] = {
-  file_name = "Yellow_Star_Sketch.png",
-  row_length = 5,
-  sprite_size = 200,
-  sprite_count = 15,
+picture_info["Car_Green"] = {
+  file_name = "Car_Green.png",
+  row_length = 1,
+  sprite_size = 512,
+  sprite_count = 1,
 }
 
-picture_info["Blue_Star"] = {
-  file_name = "Blue_Star_Sketch.png",
-  row_length = 5,
-  sprite_size = 200,
-  sprite_count = 15,
+picture_info["Car_Blue"] = {
+  file_name = "Car_Blue.png",
+  row_length = 1,
+  sprite_size = 512,
+  sprite_count = 1,
 }
 
-picture_info["Red_Star"] = {
-  file_name = "Red_Star_Sketch.png",
-  row_length = 5,
-  sprite_size = 200,
-  sprite_count = 15,
+picture_info["Car_Pink"] = {
+  file_name = "Car_Pink.png",
+  row_length = 1,
+  sprite_size = 512,
+  sprite_count = 1,
 }
 
-picture_info["Orange_Star"] = {
-  file_name = "Orange_Star_Sketch.png",
-  row_length = 5,
-  sprite_size = 200,
-  sprite_count = 15,
+picture_info["Car_Purple"] = {
+  file_name = "Car_Purple.png",
+  row_length = 1,
+  sprite_size = 512,
+  sprite_count = 1,
 }
 
-picture_info["Purple_Star"] = {
-  file_name = "Purple_Star_Sketch.png",
-  row_length = 5,
-  sprite_size = 200,
-  sprite_count = 15,
+picture_info["Car_Yellow"] = {
+  file_name = "Car_Yellow.png",
+  row_length = 1,
+  sprite_size = 512,
+  sprite_count = 1,
 }
 
-picture_info["Pink_Star"] = {
-  file_name = "Pink_Star_Sketch.png",
-  row_length = 5,
-  sprite_size = 200,
-  sprite_count = 15,
+picture_info["Car_Orange"] = {
+  file_name = "Car_Orange.png",
+  row_length = 1,
+  sprite_size = 512,
+  sprite_count = 1,
 }
+
+picture_info["Car_Gray"] = {
+  file_name = "Car_Gray.png",
+  row_length = 1,
+  sprite_size = 512,
+  sprite_count = 1,
+}
+
+
 
 for picture, info in pairs(picture_info) do
   local file_name = info["file_name"]

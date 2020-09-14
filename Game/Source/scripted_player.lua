@@ -3,6 +3,8 @@ local composer = require("composer")
 local json = require("json")
 local lfs = require("lfs")
 
+local animation = require("plugin.animation")
+
 local picture_info = require("Source.pictures")
 local sound_info = require("Source.sounds")
 
@@ -97,6 +99,10 @@ function scene:nextScene()
   timer.cancel(self.sketch_sprite_timer)
   if self.update_timer ~= nil then
     timer.cancel(self.update_timer)
+  end
+
+  if self.special_timer ~= nil then
+    timer.cancel(self.special_timer)
   end
 
   print("I am deciding whether to clean up.")
@@ -209,6 +215,33 @@ function scene:startScripted()
   self.update_timer = timer.performWithDelay(35, function() 
     self:updatePerformance()
   end, 0)
+
+  -- Special functions
+  if self.scene_name == "Chapter_2_Scene_1" then
+    self.chapter_2_scoot_counter = 0
+    scoot = function()
+      self.chapter_2_scoot_counter = self.chapter_2_scoot_counter + 1
+      if self.chapter_2_scoot_counter % 4 == 1 then
+        self.performanceAssetGroup[7].x = self.performanceAssetGroup[7].x - 1024
+        self.performanceAssetGroup[8].x = self.performanceAssetGroup[8].x + 1024
+      end
+      print("Right scoot")
+      current_x = self.performanceAssetGroup[7].x
+      animation.to(self.performanceAssetGroup[7], {x=current_x + 256}, {time=750 / 4 * 0.7, easing=easing.outExp})
+
+      -- scoot left
+      timer.performWithDelay(750 * 3 / 4, function()
+        print("Left scoot")
+        current_x = self.performanceAssetGroup[8].x
+        animation.to(self.performanceAssetGroup[8], {x=current_x - 256}, {time=750 / 4 * 0.7, easing=easing.outExp})
+      end, 1)
+    end
+
+    scoot()
+    self.special_timer = timer.performWithDelay(1500, function()
+      scoot()
+    end, 0)
+  end
 end
 
 function scene:updatePerformance()
@@ -218,10 +251,10 @@ function scene:updatePerformance()
   -- if self.mode == "performing" then
     for i = 1, #self.script_assets do
       asset = self.script_assets[i]
-      print(asset)
-      print(asset.performance)
-      print(asset.start_time)
-      print(self.total_performance_time)
+      -- print(asset)
+      -- print(asset.performance)
+      -- print(asset.start_time)
+      -- print(self.total_performance_time)
       if asset.performance == nil and last_update_time <= asset.start_time and self.total_performance_time >= asset.start_time then
         self:perform(asset)
       end
@@ -239,6 +272,8 @@ function scene:initialize()
   self.sketch_sprite_timer = timer.performWithDelay(35, function() 
     self.sketch_sprites:update(self.mode, self.total_performance_time)
   end, 0)
+
+  self.scene_name = composer.getVariable("scene_name")
 
   self.info = composer.getVariable("settings")
   self.chapter = composer.getVariable("chapter")
