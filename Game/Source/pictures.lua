@@ -637,58 +637,74 @@ picture_info["Girl"] = {
 }
 
 picture_info["Car_Red"] = {
-  file_name = "Car_Red.png",
+  file_name = "Car_Red_Small.png",
   row_length = 1,
-  sprite_size = 512,
+  sprite_size = 256,
   sprite_count = 1,
 }
 
 picture_info["Car_Green"] = {
-  file_name = "Car_Green.png",
+  file_name = "Car_Green_Small.png",
   row_length = 1,
-  sprite_size = 512,
+  sprite_size = 256,
   sprite_count = 1,
 }
 
 picture_info["Car_Blue"] = {
-  file_name = "Car_Blue.png",
+  file_name = "Car_Blue_Small.png",
   row_length = 1,
-  sprite_size = 512,
+  sprite_size = 256,
   sprite_count = 1,
 }
 
 picture_info["Car_Pink"] = {
-  file_name = "Car_Pink.png",
+  file_name = "Car_Pink_Small.png",
   row_length = 1,
-  sprite_size = 512,
+  sprite_size = 256,
   sprite_count = 1,
 }
 
 picture_info["Car_Purple"] = {
-  file_name = "Car_Purple.png",
+  file_name = "Car_Purple_Small.png",
   row_length = 1,
-  sprite_size = 512,
+  sprite_size = 256,
   sprite_count = 1,
 }
 
 picture_info["Car_Yellow"] = {
-  file_name = "Car_Yellow.png",
+  file_name = "Car_Yellow_Small.png",
   row_length = 1,
-  sprite_size = 512,
+  sprite_size = 256,
   sprite_count = 1,
 }
 
 picture_info["Car_Orange"] = {
-  file_name = "Car_Orange.png",
+  file_name = "Car_Orange_Small.png",
   row_length = 1,
-  sprite_size = 512,
+  sprite_size = 256,
   sprite_count = 1,
 }
 
 picture_info["Car_Gray"] = {
-  file_name = "Car_Gray.png",
+  file_name = "Car_Gray_Small.png",
   row_length = 1,
-  sprite_size = 512,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["City_Block"] = {
+  file_name = "City_Block.png",
+  row_length = 1,
+  sprite_size = 1024,
+  sprite_height = 768,
+  sprite_count = 1,
+}
+
+picture_info["Palm"] = {
+  file_name = "Palm.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_height = 512,
   sprite_count = 1,
 }
 
