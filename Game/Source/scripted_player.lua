@@ -218,22 +218,24 @@ function scene:startScripted()
 
   -- Special functions
   if self.scene_name == "Chapter_2_Scene_1" then
+    local back_row = 6
+    local front_row = 7
     self.chapter_2_scoot_counter = 0
     scoot = function()
       self.chapter_2_scoot_counter = self.chapter_2_scoot_counter + 1
       if self.chapter_2_scoot_counter % 4 == 1 then
-        self.performanceAssetGroup[7].x = self.performanceAssetGroup[7].x - 1024
-        self.performanceAssetGroup[8].x = self.performanceAssetGroup[8].x + 1024
+        self.performanceAssetGroup[back_row].x = self.performanceAssetGroup[back_row].x - 1024
+        self.performanceAssetGroup[front_row].x = self.performanceAssetGroup[front_row].x + 1024
       end
       print("Right scoot")
-      current_x = self.performanceAssetGroup[7].x
-      animation.to(self.performanceAssetGroup[7], {x=current_x + 256}, {time=750 / 4 * 0.7, easing=easing.outExp})
+      current_x = self.performanceAssetGroup[back_row].x
+      animation.to(self.performanceAssetGroup[back_row], {x=current_x + 256}, {time=750 / 4 * 0.7, easing=easing.outExp})
 
       -- scoot left
       timer.performWithDelay(750 * 3 / 4, function()
         print("Left scoot")
-        current_x = self.performanceAssetGroup[8].x
-        animation.to(self.performanceAssetGroup[8], {x=current_x - 256}, {time=750 / 4 * 0.7, easing=easing.outExp})
+        current_x = self.performanceAssetGroup[front_row].x
+        animation.to(self.performanceAssetGroup[front_row], {x=current_x - 256}, {time=750 / 4 * 0.7, easing=easing.outExp})
       end, 1)
     end
 
