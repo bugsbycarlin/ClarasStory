@@ -1,2490 +1,411 @@
 [
   {
     "squish_scale": 1,
-    "performance": {
-      "squish_scale": 1,
-      "squish_start": 250234,
-      "x_scale": 5.5,
-      "squish_period": 1718,
-      "id": "Blue_Sky_1",
-      "fixed_y": 384,
-      "intro": "static",
-      "disappear_time": 9810,
-      "state": "disappearing_pop",
-      "y_scale": 4,
-      "info": {
-        "row_length": 1,
-        "sheet": {
-          "sheetContentWidth": 200,
-          "sheetContentHeight": 200,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 200,
-              "width": 200
-            }
-          ]
-        },
-        "outline_frame": 1,
-        "sprite_count": 1,
-        "sprite_size": 200,
-        "frames": [
-          1
-        ],
-        "file_name": "Blue_Sky_Sketch.png"
-      },
-      "disappear_method": "pop",
-      "start_time": 250233.965,
-      "fixed_x": 512,
-      "squish_tilt": 0
-    },
-    "disappear_time": 9810,
+    "intro": "static",
     "type": "picture",
-    "x_scale": 5.5,
+    "disappear_time": 9810,
     "squish_period": 1718,
     "id": "Blue_Sky_1",
-    "intro": "static",
-    "start_time": 0,
-    "x": 512,
-    "y": 384,
-    "y_scale": 4,
-    "name": "Blue_Sky",
     "fixed_y": 384,
-    "disappear_method": "pop",
-    "depth": -3,
     "fixed_x": 512,
+    "depth": -3,
+    "y": 384,
+    "x": 512,
+    "name": "Blue_Sky",
+    "y_scale": 4,
+    "disappear_method": "pop",
+    "start_time": 0,
+    "x_scale": 5.5,
     "squish_tilt": 0
   },
   {
     "squish_scale": 1,
-    "performance": {
-      "squish_scale": 1,
-      "squish_start": 250234.127,
-      "x_scale": 3,
-      "squish_period": 1718,
-      "id": "Beach_2",
-      "fixed_y": 507.75,
-      "intro": "sketch",
-      "disappear_time": 11990,
-      "state": "disappearing_pop",
-      "y_scale": 1.3,
-      "info": {
-        "row_length": 5,
-        "sheet": {
-          "sheetContentWidth": 2000,
-          "sheetContentHeight": 800,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            }
-          ]
-        },
-        "outline_frame": 1,
-        "sprite_count": 10,
-        "sprite_size": 400,
-        "frames": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10
-        ],
-        "file_name": "Beach_Sketch.png"
-      },
-      "disappear_method": "rewind",
-      "start_time": 250234.096,
-      "fixed_x": 528.5,
-      "squish_tilt": 0
-    },
-    "disappear_time": 11990,
+    "intro": "sketch",
     "type": "picture",
-    "x_scale": 3,
+    "disappear_time": 11990,
     "squish_period": 1718,
     "id": "Beach_2",
-    "intro": "sketch",
-    "start_time": 33,
-    "x": 528.5,
-    "y": 507.75,
-    "y_scale": 1.3,
-    "name": "Beach",
     "fixed_y": 507.75,
-    "disappear_method": "rewind",
-    "depth": -2,
     "fixed_x": 528.5,
+    "depth": -2,
+    "y": 507.75,
+    "x": 528.5,
+    "name": "Beach",
+    "y_scale": 1.3,
+    "disappear_method": "rewind",
+    "start_time": 33,
+    "x_scale": 3,
     "squish_tilt": 0
   },
   {
     "squish_scale": 1,
-    "performance": {
-      "squish_scale": 1,
-      "intro": "static",
-      "squish_start": 250266.755,
-      "x_scale": 9,
-      "squish_period": 1718,
-      "id": "Brown_Square_6",
-      "fixed_y": 92.25,
-      "disappear_time": 9810,
-      "state": "disappearing_expand",
-      "y_scale": 1.5,
-      "info": {
-        "row_length": 1,
-        "sheet": {
-          "sheetContentWidth": 128,
-          "sheetContentHeight": 128,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 128,
-              "width": 128
-            }
-          ]
-        },
-        "sprite_count": 1,
-        "sprite_size": 128,
-        "frames": [
-          1
-        ],
-        "file_name": "Brown_Square.png"
-      },
-      "disappear_method": "expand",
-      "start_time": 250266.721,
-      "fixed_x": 499.25,
-      "squish_tilt": 0
-    },
-    "disappear_time": 9810,
+    "intro": "static",
     "type": "picture",
-    "x_scale": 9,
+    "disappear_time": 9810,
     "squish_period": 1718,
     "id": "Brown_Square_6",
-    "intro": "static",
-    "start_time": 66,
-    "x": 499.25,
-    "y": 92.25,
-    "y_scale": 1.5,
-    "name": "Brown_Square",
     "fixed_y": 92.25,
-    "disappear_method": "expand",
-    "depth": 1,
     "fixed_x": 499.25,
+    "depth": 1,
+    "y": 92.25,
+    "x": 499.25,
+    "name": "Brown_Square",
+    "y_scale": 1.5,
+    "disappear_method": "expand",
+    "start_time": 66,
+    "x_scale": 9,
     "squish_tilt": 0
   },
   {
     "squish_scale": 1,
-    "performance": {
-      "squish_scale": 1,
-      "intro": "static",
-      "squish_start": 250299.188,
-      "x_scale": 9,
-      "squish_period": 1718,
-      "id": "Brown_Square_7",
-      "fixed_y": 685.5,
-      "disappear_time": 9810,
-      "state": "disappearing_expand",
-      "y_scale": 1.5,
-      "info": {
-        "row_length": 1,
-        "sheet": {
-          "sheetContentWidth": 128,
-          "sheetContentHeight": 128,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 128,
-              "width": 128
-            }
-          ]
-        },
-        "sprite_count": 1,
-        "sprite_size": 128,
-        "frames": [
-          1
-        ],
-        "file_name": "Brown_Square.png"
-      },
-      "disappear_method": "expand",
-      "start_time": 250299.167,
-      "fixed_x": 511.25,
-      "squish_tilt": 0
-    },
-    "disappear_time": 9810,
+    "intro": "static",
     "type": "picture",
-    "x_scale": 9,
+    "disappear_time": 9810,
     "squish_period": 1718,
     "id": "Brown_Square_7",
-    "intro": "static",
-    "start_time": 99,
-    "x": 511.25,
-    "y": 685.5,
-    "y_scale": 1.5,
-    "name": "Brown_Square",
     "fixed_y": 685.5,
-    "disappear_method": "expand",
-    "depth": 1,
     "fixed_x": 511.25,
+    "depth": 1,
+    "y": 685.5,
+    "x": 511.25,
+    "name": "Brown_Square",
+    "y_scale": 1.5,
+    "disappear_method": "expand",
+    "start_time": 99,
+    "x_scale": 9,
     "squish_tilt": 0
   },
   {
     "squish_scale": 1,
-    "performance": {
-      "squish_scale": 1,
-      "intro": "static",
-      "squish_start": 250333.494,
-      "x_scale": 0.8,
-      "squish_period": 1718,
-      "id": "Brown_Square_8",
-      "fixed_y": 378.75,
-      "disappear_time": 9810,
-      "state": "disappearing_leap_left",
-      "y_scale": 4,
-      "info": {
-        "row_length": 1,
-        "sheet": {
-          "sheetContentWidth": 128,
-          "sheetContentHeight": 128,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 128,
-              "width": 128
-            }
-          ]
-        },
-        "sprite_count": 1,
-        "sprite_size": 128,
-        "frames": [
-          1
-        ],
-        "file_name": "Brown_Square.png"
-      },
-      "disappear_method": "leap_left",
-      "start_time": 250333.453,
-      "fixed_x": 340.25,
-      "squish_tilt": 0
-    },
-    "disappear_time": 9810,
+    "intro": "static",
     "type": "picture",
-    "x_scale": 0.8,
+    "disappear_time": 9810,
     "squish_period": 1718,
     "id": "Brown_Square_8",
-    "intro": "static",
-    "start_time": 132,
-    "x": 340.25,
-    "y": 378.75,
-    "y_scale": 4,
-    "name": "Brown_Square",
     "fixed_y": 378.75,
-    "disappear_method": "leap_left",
-    "depth": 1,
     "fixed_x": 340.25,
+    "depth": 1,
+    "y": 378.75,
+    "x": 340.25,
+    "name": "Brown_Square",
+    "y_scale": 4,
+    "disappear_method": "leap_left",
+    "start_time": 132,
+    "x_scale": 0.8,
     "squish_tilt": 0
   },
   {
     "squish_scale": 1,
-    "performance": {
-      "squish_scale": 1,
-      "intro": "static",
-      "squish_start": 250399.304,
-      "x_scale": 0.8,
-      "squish_period": 1718,
-      "id": "Brown_Square_9",
-      "fixed_y": 391.5,
-      "disappear_time": 9810,
-      "state": "disappearing_leap_right",
-      "y_scale": 4,
-      "info": {
-        "row_length": 1,
-        "sheet": {
-          "sheetContentWidth": 128,
-          "sheetContentHeight": 128,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 128,
-              "width": 128
-            }
-          ]
-        },
-        "sprite_count": 1,
-        "sprite_size": 128,
-        "frames": [
-          1
-        ],
-        "file_name": "Brown_Square.png"
-      },
-      "disappear_method": "leap_right",
-      "start_time": 250399.269,
-      "fixed_x": 667.25,
-      "squish_tilt": 0
-    },
-    "disappear_time": 9810,
+    "intro": "static",
     "type": "picture",
-    "x_scale": 0.8,
+    "disappear_time": 9810,
     "squish_period": 1718,
     "id": "Brown_Square_9",
-    "intro": "static",
-    "start_time": 165,
-    "x": 667.25,
-    "y": 391.5,
-    "y_scale": 4,
-    "name": "Brown_Square",
     "fixed_y": 391.5,
-    "disappear_method": "leap_right",
-    "depth": 1,
     "fixed_x": 667.25,
+    "depth": 1,
+    "y": 391.5,
+    "x": 667.25,
+    "name": "Brown_Square",
+    "y_scale": 4,
+    "disappear_method": "leap_right",
+    "start_time": 165,
+    "x_scale": 0.8,
     "squish_tilt": 0
   },
   {
     "squish_scale": 1,
-    "performance": {
-      "squish_scale": 1,
-      "intro": "static",
-      "squish_start": 250399.398,
-      "x_scale": 0.8,
-      "squish_period": 1718,
-      "id": "Brown_Square_10",
-      "fixed_y": 366,
-      "disappear_time": 9810,
-      "state": "disappearing_leap_left",
-      "y_scale": 4,
-      "info": {
-        "row_length": 1,
-        "sheet": {
-          "sheetContentWidth": 128,
-          "sheetContentHeight": 128,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 128,
-              "width": 128
-            }
-          ]
-        },
-        "sprite_count": 1,
-        "sprite_size": 128,
-        "frames": [
-          1
-        ],
-        "file_name": "Brown_Square.png"
-      },
-      "disappear_method": "leap_left",
-      "start_time": 250399.369,
-      "fixed_x": 11.75,
-      "squish_tilt": 0
-    },
-    "disappear_time": 9810,
+    "intro": "static",
     "type": "picture",
-    "x_scale": 0.8,
+    "disappear_time": 9810,
     "squish_period": 1718,
     "id": "Brown_Square_10",
-    "intro": "static",
-    "start_time": 198,
-    "x": 11.75,
-    "y": 366,
-    "y_scale": 4,
-    "name": "Brown_Square",
     "fixed_y": 366,
-    "disappear_method": "leap_left",
-    "depth": 1,
     "fixed_x": 11.75,
+    "depth": 1,
+    "y": 366,
+    "x": 11.75,
+    "name": "Brown_Square",
+    "y_scale": 4,
+    "disappear_method": "leap_left",
+    "start_time": 198,
+    "x_scale": 0.8,
     "squish_tilt": 0
   },
   {
     "squish_scale": 1,
-    "performance": {
-      "squish_scale": 1,
-      "intro": "static",
-      "squish_start": 250432.245,
-      "x_scale": 0.8,
-      "squish_period": 1718,
-      "id": "Brown_Square_11",
-      "fixed_y": 380.25,
-      "disappear_time": 9810,
-      "state": "disappearing_leap_right",
-      "y_scale": 4,
-      "info": {
-        "row_length": 1,
-        "sheet": {
-          "sheetContentWidth": 128,
-          "sheetContentHeight": 128,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 128,
-              "width": 128
-            }
-          ]
-        },
-        "sprite_count": 1,
-        "sprite_size": 128,
-        "frames": [
-          1
-        ],
-        "file_name": "Brown_Square.png"
-      },
-      "disappear_method": "leap_right",
-      "start_time": 250432.21,
-      "fixed_x": 1001.75,
-      "squish_tilt": 0
-    },
-    "disappear_time": 9810,
+    "intro": "static",
     "type": "picture",
-    "x_scale": 0.8,
+    "disappear_time": 9810,
     "squish_period": 1718,
     "id": "Brown_Square_11",
-    "intro": "static",
-    "start_time": 231,
-    "x": 1001.75,
-    "y": 380.25,
-    "y_scale": 4,
-    "name": "Brown_Square",
     "fixed_y": 380.25,
-    "disappear_method": "leap_right",
-    "depth": 1,
     "fixed_x": 1001.75,
+    "depth": 1,
+    "y": 380.25,
+    "x": 1001.75,
+    "name": "Brown_Square",
+    "y_scale": 4,
+    "disappear_method": "leap_right",
+    "start_time": 231,
+    "x_scale": 0.8,
     "squish_tilt": 0
   },
   {
     "squish_scale": 1,
-    "performance": {
-      "squish_scale": 1,
-      "squish_start": 250498.112,
-      "x_scale": 0.9,
-      "squish_period": 1718,
-      "id": "Window_12",
-      "fixed_y": 377.25,
-      "intro": "sketch",
-      "disappear_time": 9810,
-      "state": "disappearing_pop",
-      "y_scale": 1,
-      "info": {
-        "sheet": {
-          "sheetContentWidth": 2000,
-          "sheetContentHeight": 1800,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 400,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 800,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1200,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1600,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 600,
-              "x": 0,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 600,
-              "x": 400,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 600,
-              "x": 800,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 600,
-              "x": 1200,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 600,
-              "x": 1600,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 0,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 400,
-              "height": 600,
-              "width": 400
-            }
-          ]
-        },
-        "row_length": 5,
-        "sprite_height": 600,
-        "outline_frame": 12,
-        "sprite_count": 12,
-        "sprite_size": 400,
-        "frames": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ],
-        "file_name": "Window_Sketch.png"
-      },
-      "disappear_method": "rewind",
-      "start_time": 250498.088,
-      "fixed_x": 170,
-      "squish_tilt": 0
-    },
-    "disappear_time": 9810,
+    "intro": "sketch",
     "type": "picture",
-    "x_scale": 0.9,
+    "disappear_time": 9810,
     "squish_period": 1718,
     "id": "Window_12",
-    "intro": "sketch",
-    "start_time": 272,
-    "x": 170,
-    "y": 377.25,
-    "y_scale": 1,
-    "name": "Window",
     "fixed_y": 377.25,
-    "disappear_method": "rewind",
-    "depth": 2,
     "fixed_x": 170,
+    "depth": 2,
+    "y": 377.25,
+    "x": 170,
+    "name": "Window",
+    "y_scale": 1,
+    "disappear_method": "rewind",
+    "start_time": 272,
+    "x_scale": 0.9,
     "squish_tilt": 0
   },
   {
     "squish_scale": 1,
-    "performance": {
-      "squish_scale": 1,
-      "squish_start": 250498.201,
-      "x_scale": 0.9,
-      "squish_period": 1718,
-      "id": "Window_13",
-      "fixed_y": 377.25,
-      "intro": "sketch",
-      "disappear_time": 9810,
-      "state": "disappearing_pop",
-      "y_scale": 1,
-      "info": {
-        "sheet": {
-          "sheetContentWidth": 2000,
-          "sheetContentHeight": 1800,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 400,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 800,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1200,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1600,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 600,
-              "x": 0,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 600,
-              "x": 400,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 600,
-              "x": 800,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 600,
-              "x": 1200,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 600,
-              "x": 1600,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 0,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 400,
-              "height": 600,
-              "width": 400
-            }
-          ]
-        },
-        "row_length": 5,
-        "sprite_height": 600,
-        "outline_frame": 12,
-        "sprite_count": 12,
-        "sprite_size": 400,
-        "frames": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ],
-        "file_name": "Window_Sketch.png"
-      },
-      "disappear_method": "rewind",
-      "start_time": 250498.181,
-      "fixed_x": 500.75,
-      "squish_tilt": 0
-    },
-    "disappear_time": 9810,
+    "intro": "sketch",
     "type": "picture",
-    "x_scale": 0.9,
+    "disappear_time": 9810,
     "squish_period": 1718,
     "id": "Window_13",
-    "intro": "sketch",
-    "start_time": 272,
-    "x": 500.75,
-    "y": 377.25,
-    "y_scale": 1,
-    "name": "Window",
     "fixed_y": 377.25,
-    "disappear_method": "rewind",
-    "depth": 2,
     "fixed_x": 500.75,
+    "depth": 2,
+    "y": 377.25,
+    "x": 500.75,
+    "name": "Window",
+    "y_scale": 1,
+    "disappear_method": "rewind",
+    "start_time": 272,
+    "x_scale": 0.9,
     "squish_tilt": 0
   },
   {
     "squish_scale": 1,
-    "performance": {
-      "squish_scale": 1,
-      "squish_start": 250498.273,
-      "x_scale": 0.9,
-      "squish_period": 1718,
-      "id": "Window_14",
-      "fixed_y": 375.75,
-      "intro": "sketch",
-      "disappear_time": 9810,
-      "state": "disappearing_pop",
-      "y_scale": 1,
-      "info": {
-        "sheet": {
-          "sheetContentWidth": 2000,
-          "sheetContentHeight": 1800,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 400,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 800,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1200,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1600,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 600,
-              "x": 0,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 600,
-              "x": 400,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 600,
-              "x": 800,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 600,
-              "x": 1200,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 600,
-              "x": 1600,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 0,
-              "height": 600,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 400,
-              "height": 600,
-              "width": 400
-            }
-          ]
-        },
-        "row_length": 5,
-        "sprite_height": 600,
-        "outline_frame": 12,
-        "sprite_count": 12,
-        "sprite_size": 400,
-        "frames": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ],
-        "file_name": "Window_Sketch.png"
-      },
-      "disappear_method": "rewind",
-      "start_time": 250498.254,
-      "fixed_x": 827.75,
-      "squish_tilt": 0
-    },
-    "disappear_time": 9810,
+    "intro": "sketch",
     "type": "picture",
-    "x_scale": 0.9,
+    "disappear_time": 9810,
     "squish_period": 1718,
     "id": "Window_14",
-    "intro": "sketch",
-    "start_time": 272,
-    "x": 827.75,
-    "y": 375.75,
-    "y_scale": 1,
-    "name": "Window",
     "fixed_y": 375.75,
-    "disappear_method": "rewind",
-    "depth": 2,
     "fixed_x": 827.75,
+    "depth": 2,
+    "y": 375.75,
+    "x": 827.75,
+    "name": "Window",
+    "y_scale": 1,
+    "disappear_method": "rewind",
+    "start_time": 272,
+    "x_scale": 0.9,
     "squish_tilt": 0
   },
   {
     "squish_scale": 1,
-    "performance": {
-      "squish_scale": 1,
-      "squish_start": 250498.346,
-      "x_scale": 1,
-      "squish_period": 1718,
-      "id": "Couch_13",
-      "fixed_y": 597,
-      "intro": "sketch",
-      "disappear_time": 11990,
-      "state": "disappearing_pop",
-      "y_scale": 1,
-      "info": {
-        "row_length": 1,
-        "sheet": {
-          "sheetContentWidth": 800,
-          "sheetContentHeight": 800,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 800,
-              "width": 800
-            }
-          ]
-        },
-        "sprite_count": 1,
-        "sprite_size": 800,
-        "frames": [
-          1
-        ],
-        "file_name": "Couch.png"
-      },
-      "disappear_method": "pop",
-      "start_time": 250498.326,
-      "fixed_x": 343.25,
-      "squish_tilt": 0
-    },
-    "disappear_time": 11990,
+    "intro": "sketch",
     "type": "picture",
-    "x_scale": 1,
+    "disappear_time": 11990,
     "squish_period": 1718,
     "id": "Couch_13",
-    "intro": "sketch",
-    "start_time": 272,
-    "x": 343.25,
-    "y": 597,
-    "y_scale": 1,
-    "name": "Couch",
     "fixed_y": 597,
-    "disappear_method": "pop",
-    "depth": -1,
     "fixed_x": 343.25,
+    "depth": -1,
+    "y": 597,
+    "x": 343.25,
+    "name": "Couch",
+    "y_scale": 1,
+    "disappear_method": "pop",
+    "start_time": 272,
+    "x_scale": 1,
     "squish_tilt": 0
   },
   {
     "squish_scale": 1.02,
-    "performance": {
-      "squish_scale": 1.02,
-      "intro": "sketch",
-      "squish_start": 252378.328,
-      "x_scale": -1,
-      "squish_period": 545,
-      "id": "Girl_13",
-      "fixed_y": 561,
-      "disappear_time": 11990,
-      "state": "disappearing_leap_right",
-      "y_scale": 1,
-      "info": {
-        "row_length": 5,
-        "sheet": {
-          "sheetContentWidth": 2000,
-          "sheetContentHeight": 2000,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            }
-          ]
-        },
-        "outline_frame": 10,
-        "sprite_count": 25,
-        "sprite_size": 400,
-        "frames": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23,
-          24,
-          25
-        ],
-        "file_name": "Girl_Sketch.png"
-      },
-      "disappear_method": "leap_right",
-      "start_time": 252378.293,
-      "fixed_x": 752.75,
-      "squish_tilt": 8
-    },
-    "disappear_time": 11990,
+    "intro": "sketch",
     "type": "picture",
-    "fixed_x": 752.75,
+    "disappear_time": 11990,
     "squish_period": 545,
     "id": "Girl_13",
     "fixed_y": 561,
-    "depth": 0,
-    "y_scale": 1,
-    "y": 561,
-    "x": 752.75,
-    "name": "Girl",
-    "intro": "sketch",
-    "disappear_method": "leap_right",
-    "start_time": 2180,
     "x_scale": -1,
+    "start_time": 2180,
+    "y": 561,
+    "y_scale": 1,
+    "name": "Girl",
+    "x": 752.75,
+    "disappear_method": "leap_right",
+    "depth": 0,
+    "fixed_x": 752.75,
     "squish_tilt": 8
   },
   {
     "squish_scale": 1,
-    "performance": {
-      "squish_scale": 1,
-      "squish_start": 250234.244,
-      "_class": {
-        "removeEventListener": "<type 'function' is not supported by JSON.>",
-        "addEventListener": "<type 'function' is not supported by JSON.>",
-        "__index": "<reference cycle>"
-      },
-      "x_scale": 10,
-      "squish_period": 1718,
-      "id": "White_Square_14",
-      "fixed_y": 679.5,
-      "intro": "sketch",
-      "disappear_time": -1,
-      "state": "static",
-      "y_scale": 2,
-      "info": {
-        "row_length": 1,
-        "sheet": {
-          "sheetContentWidth": 128,
-          "sheetContentHeight": 128,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 128,
-              "width": 128
-            }
-          ]
-        },
-        "sprite_count": 1,
-        "sprite_size": 128,
-        "frames": [
-          1
-        ],
-        "file_name": "White_Square.png"
-      },
-      "_proxy": "<type 'userdata' is not supported by JSON.>",
-      "disappear_method": "",
-      "start_time": 250234.215,
-      "fixed_x": 492.5,
-      "squish_tilt": 0
-    },
-    "disappear_time": -1,
+    "intro": "sketch",
     "type": "picture",
-    "x_scale": 10,
+    "disappear_time": -1,
     "squish_period": 1718,
     "id": "White_Square_14",
-    "intro": "sketch",
-    "start_time": 0,
-    "x": 492.5,
-    "y": 679.5,
-    "y_scale": 2,
-    "name": "White_Square",
     "fixed_y": 679.5,
-    "disappear_method": "",
-    "depth": -2,
     "fixed_x": 492.5,
+    "depth": -2,
+    "y": 679.5,
+    "x": 492.5,
+    "name": "White_Square",
+    "y_scale": 2,
+    "disappear_method": "",
+    "start_time": 0,
+    "x_scale": 10,
     "squish_tilt": 0
   },
   {
     "type": "sound",
     "id": "Chapter_1_Scene_2_15",
-    "intro": "sketch",
     "y": 384,
     "x": 512,
     "name": "Chapter_1_Scene_2",
-    "performance": "<type 'userdata' is not supported by JSON.>",
     "start_time": 0,
-    "depth": 0
+    "depth": 0,
+    "intro": "sketch"
   },
   {
     "squish_scale": 1.02,
-    "performance": {
-      "squish_scale": 1.02,
-      "intro": "sketch",
-      "squish_start": 263301.246,
-      "x_scale": 1,
-      "squish_period": 545,
-      "id": "Girl_18",
-      "fixed_y": 441.75,
-      "disappear_time": 18530,
-      "state": "disappearing_leap_left",
-      "y_scale": 1,
-      "info": {
-        "row_length": 5,
-        "sheet": {
-          "sheetContentWidth": 2000,
-          "sheetContentHeight": 2000,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            }
-          ]
-        },
-        "outline_frame": 10,
-        "sprite_count": 25,
-        "sprite_size": 400,
-        "frames": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23,
-          24,
-          25
-        ],
-        "file_name": "Girl_Sketch.png"
-      },
-      "disappear_method": "leap_left",
-      "start_time": 263301.211,
-      "fixed_x": 280.25,
-      "squish_tilt": 8
-    },
-    "y": 441.75,
+    "intro": "sketch",
     "type": "picture",
-    "fixed_x": 280.25,
+    "y": 441.75,
     "squish_period": 545,
     "id": "Girl_18",
     "fixed_y": 441.75,
-    "depth": 0,
-    "x": 280.25,
-    "disappear_time": 18530,
-    "y_scale": 1,
-    "name": "Girl",
-    "intro": "sketch",
-    "disappear_method": "leap_left",
-    "start_time": 13080,
     "x_scale": 1,
+    "start_time": 13080,
+    "disappear_time": 18530,
+    "x": 280.25,
+    "name": "Girl",
+    "y_scale": 1,
+    "disappear_method": "leap_left",
+    "depth": 0,
+    "fixed_x": 280.25,
     "squish_tilt": 8
   },
   {
     "squish_scale": 1.01,
-    "performance": {
-      "squish_scale": 1.01,
-      "squish_start": 255118.368,
-      "x_scale": 1,
-      "squish_period": 545,
-      "id": "Mom_21",
-      "fixed_y": 534.75,
-      "intro": "sketch",
-      "disappear_time": 11990,
-      "state": "disappearing_pop",
-      "y_scale": 1,
-      "info": {
-        "row_length": 5,
-        "sheet": {
-          "sheetContentWidth": 2000,
-          "sheetContentHeight": 2000,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            }
-          ]
-        },
-        "outline_frame": 12,
-        "sprite_count": 25,
-        "sprite_size": 400,
-        "frames": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23,
-          24,
-          25
-        ],
-        "file_name": "Mom_Sketch.png"
-      },
-      "disappear_method": "rewind",
-      "start_time": 255118.334,
-      "fixed_x": 310.25,
-      "squish_tilt": 0
-    },
-    "disappear_time": 11990,
+    "intro": "sketch",
     "type": "picture",
-    "fixed_x": 310.25,
+    "disappear_time": 11990,
     "squish_period": 545,
     "id": "Mom_21",
     "fixed_y": 534.75,
-    "depth": 0,
-    "y_scale": 1,
-    "y": 534.75,
-    "x": 310.25,
-    "name": "Mom",
-    "intro": "sketch",
-    "disappear_method": "rewind",
-    "start_time": 4905,
     "x_scale": 1,
+    "start_time": 4905,
+    "y": 534.75,
+    "y_scale": 1,
+    "name": "Mom",
+    "x": 310.25,
+    "disappear_method": "rewind",
+    "depth": 0,
+    "fixed_x": 310.25,
     "squish_tilt": 0
   },
   {
     "squish_scale": 1.01,
-    "performance": {
-      "squish_scale": 1.01,
-      "squish_start": 255678.053,
-      "x_scale": 1,
-      "squish_period": 273,
-      "id": "Dad_21",
-      "fixed_y": 536.25,
-      "intro": "sketch",
-      "disappear_time": 11990,
-      "state": "disappearing_pop",
-      "y_scale": 1,
-      "info": {
-        "row_length": 5,
-        "sheet": {
-          "sheetContentWidth": 2000,
-          "sheetContentHeight": 2000,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            }
-          ]
-        },
-        "outline_frame": 12,
-        "sprite_count": 25,
-        "sprite_size": 400,
-        "frames": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23,
-          24,
-          25
-        ],
-        "file_name": "Dad_Sketch.png"
-      },
-      "disappear_method": "rewind",
-      "start_time": 255678.029,
-      "fixed_x": 518,
-      "squish_tilt": 0
-    },
-    "disappear_time": 11990,
+    "intro": "sketch",
     "type": "picture",
-    "fixed_x": 518,
+    "disappear_time": 11990,
     "squish_period": 273,
     "id": "Dad_21",
     "fixed_y": 536.25,
-    "depth": 0,
-    "y_scale": 1,
-    "y": 536.25,
-    "x": 518,
-    "name": "Dad",
-    "intro": "sketch",
-    "disappear_method": "rewind",
-    "start_time": 5454,
     "x_scale": 1,
+    "start_time": 5454,
+    "y": 536.25,
+    "y_scale": 1,
+    "name": "Dad",
+    "x": 518,
+    "disappear_method": "rewind",
+    "depth": 0,
+    "fixed_x": 518,
     "squish_tilt": 0
   },
   {
     "squish_scale": 1,
-    "performance": {
-      "squish_scale": 1,
-      "squish_start": 263301.367,
-      "x_scale": 1,
-      "squish_period": 1718,
-      "id": "Home_21",
-      "fixed_y": 357,
-      "intro": "sketch",
-      "disappear_time": 15260,
-      "state": "disappearing_pop",
-      "y_scale": 1,
-      "info": {
-        "row_length": 5,
-        "sheet": {
-          "sheetContentWidth": 2000,
-          "sheetContentHeight": 2000,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            }
-          ]
-        },
-        "outline_frame": 12,
-        "sprite_count": 25,
-        "sprite_size": 400,
-        "frames": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23,
-          24,
-          25
-        ],
-        "file_name": "Home_Sketch.png"
-      },
-      "disappear_method": "rewind",
-      "start_time": 263301.337,
-      "fixed_x": 691.25,
-      "squish_tilt": 0
-    },
-    "disappear_time": 15260,
+    "intro": "sketch",
     "type": "picture",
-    "fixed_x": 691.25,
+    "disappear_time": 15260,
     "squish_period": 1718,
     "id": "Home_21",
     "fixed_y": 357,
-    "depth": 0,
-    "y_scale": 1,
-    "y": 357,
-    "x": 691.25,
-    "name": "Home",
-    "intro": "sketch",
-    "disappear_method": "rewind",
-    "start_time": 13080,
     "x_scale": 1,
+    "start_time": 13080,
+    "y": 357,
+    "y_scale": 1,
+    "name": "Home",
+    "x": 691.25,
+    "disappear_method": "rewind",
+    "depth": 0,
+    "fixed_x": 691.25,
     "squish_tilt": 0
   },
   {
     "squish_scale": 1,
-    "performance": {
-      "squish_scale": 1,
-      "squish_start": 263301.479,
-      "x_scale": 1,
-      "squish_period": 1718,
-      "id": "Hill_22",
-      "fixed_y": 369,
-      "intro": "sketch",
-      "disappear_time": 15260,
-      "state": "disappearing_pop",
-      "y_scale": 1,
-      "info": {
-        "row_length": 1,
-        "sheet": {
-          "sheetContentWidth": 1024,
-          "sheetContentHeight": 1024,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 1024,
-              "width": 1024
-            }
-          ]
-        },
-        "sprite_count": 1,
-        "sprite_size": 1024,
-        "frames": [
-          1
-        ],
-        "file_name": "Hill.png"
-      },
-      "disappear_method": "pop",
-      "start_time": 263301.45,
-      "fixed_x": 513.5,
-      "squish_tilt": 0
-    },
-    "disappear_time": 15260,
+    "intro": "sketch",
     "type": "picture",
-    "fixed_x": 513.5,
+    "disappear_time": 15260,
     "squish_period": 1718,
     "id": "Hill_22",
     "fixed_y": 369,
-    "depth": -1,
-    "y_scale": 1,
-    "y": 369,
-    "x": 513.5,
-    "name": "Hill",
-    "intro": "sketch",
-    "disappear_method": "pop",
-    "start_time": 13080,
     "x_scale": 1,
+    "start_time": 13080,
+    "y": 369,
+    "y_scale": 1,
+    "name": "Hill",
+    "x": 513.5,
+    "disappear_method": "pop",
+    "depth": -1,
+    "fixed_x": 513.5,
     "squish_tilt": 0
   },
   {
     "squish_scale": 1,
-    "performance": {
-      "squish_scale": 1,
-      "squish_start": 263301.587,
-      "x_scale": 1,
-      "squish_period": 1718,
-      "id": "Mountain_23",
-      "fixed_y": 366,
-      "intro": "sketch",
-      "disappear_time": 15260,
-      "state": "disappearing_pop",
-      "y_scale": 1,
-      "info": {
-        "row_length": 1,
-        "sheet": {
-          "sheetContentWidth": 1024,
-          "sheetContentHeight": 1024,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 1024,
-              "width": 1024
-            }
-          ]
-        },
-        "sprite_count": 1,
-        "sprite_size": 1024,
-        "frames": [
-          1
-        ],
-        "file_name": "Mountain.png"
-      },
-      "disappear_method": "pop",
-      "start_time": 263301.559,
-      "fixed_x": 515,
-      "squish_tilt": 0
-    },
-    "disappear_time": 15260,
+    "intro": "sketch",
     "type": "picture",
-    "fixed_x": 515,
+    "disappear_time": 15260,
     "squish_period": 1718,
     "id": "Mountain_23",
     "fixed_y": 366,
-    "depth": -2,
-    "y_scale": 1,
-    "y": 366,
-    "x": 515,
-    "name": "Mountain",
-    "intro": "sketch",
-    "disappear_method": "pop",
-    "start_time": 13080,
     "x_scale": 1,
+    "start_time": 13080,
+    "y": 366,
+    "y_scale": 1,
+    "name": "Mountain",
+    "x": 515,
+    "disappear_method": "pop",
+    "depth": -2,
+    "fixed_x": 515,
     "squish_tilt": 0
   },
   {
     "squish_scale": 1.02,
-    "performance": {
-      "squish_scale": 1.02,
-      "squish_start": 267691.11,
-      "x_scale": 1,
-      "squish_period": 545,
-      "id": "Phone_23",
-      "fixed_y": 327,
-      "intro": "sketch",
-      "disappear_time": 18530,
-      "state": "disappearing_pop",
-      "y_scale": 1,
-      "info": {
-        "row_length": 5,
-        "sheet": {
-          "sheetContentWidth": 2000,
-          "sheetContentHeight": 2000,
-          "frames": [
-            {
-              "y": 0,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 0,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 400,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 800,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 800,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 1200,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1200,
-              "x": 1600,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 0,
-              "height": 400,
-              "width": 400
-            },
-            {
-              "y": 1600,
-              "x": 400,
-              "height": 400,
-              "width": 400
-            }
-          ]
-        },
-        "outline_frame": 6,
-        "sprite_count": 22,
-        "sprite_size": 400,
-        "frames": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22
-        ],
-        "file_name": "Phone_Sketch.png"
-      },
-      "disappear_method": "rewind",
-      "start_time": 267691.07,
-      "fixed_x": 390.5,
-      "squish_tilt": 8
-    },
-    "disappear_time": 18530,
+    "intro": "sketch",
     "type": "picture",
-    "fixed_x": 390.5,
+    "disappear_time": 18530,
     "squish_period": 545,
     "id": "Phone_23",
     "fixed_y": 327,
-    "depth": 0,
-    "y_scale": 1,
-    "y": 327,
-    "x": 390.5,
-    "name": "Phone",
-    "intro": "sketch",
-    "disappear_method": "rewind",
-    "start_time": 17440,
     "x_scale": 1,
+    "start_time": 17440,
+    "y": 327,
+    "y_scale": 1,
+    "name": "Phone",
+    "x": 390.5,
+    "disappear_method": "rewind",
+    "depth": 0,
+    "fixed_x": 390.5,
     "squish_tilt": 8
   }
 ]

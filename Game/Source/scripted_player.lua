@@ -13,6 +13,16 @@ local scene = composer.newScene()
 local small_word_gap = 180
 local large_word_gap = 160
 
+local printMemUsage = function()  
+  local memUsed = (collectgarbage("count"))
+  local texUsed = system.getInfo( "textureMemoryUsed" ) / 1048576 -- Reported in Bytes
+ 
+  print("\n---------MEMORY USAGE INFORMATION---------")
+  print("System Memory: ", string.format("%.00f", memUsed), "KB")
+  print("Texture Memory:", string.format("%.03f", texUsed), "MB")
+  print("------------------------------------------\n")
+end
+
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
@@ -40,6 +50,10 @@ function scene:show(event)
     end
 
     display.setDefault("background", 1, 1, 1)
+
+    self.memory_log_timer = timer.performWithDelay(3000, function() 
+      printMemUsage()
+    end, 0)
 
     self:initialize()
     if self.scene_type == "scripted" then
@@ -105,8 +119,6 @@ function scene:nextScene()
     timer.cancel(self.special_timer)
   end
 
-  print("I am deciding whether to clean up.")
-  print(self.info["cleanup"])
   if self.info["cleanup"] == nil or self.info["cleanup"] ~= false then
     print("I have decided to clean up")
     self:clearPerformance()
@@ -115,8 +127,10 @@ function scene:nextScene()
     self.sketch_sprites.top_group = nil
   end
 
+  print(self.next_scene)
   self.chapter:setNextScene(self.next_scene, nil)
   self:initialize()
+  print("finished initializing")
   if self.scene_type == "scripted" then
     self:startScripted()
   elseif self.scene_type == "interactive_spelling" then

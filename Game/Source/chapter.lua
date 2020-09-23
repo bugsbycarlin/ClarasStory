@@ -106,7 +106,7 @@ function scene:show(event)
 
     composer.setVariable("chapter", self)
 
-    self.chapter = 2
+    self.chapter = 1
 
     self.flow = {}
 
@@ -244,7 +244,7 @@ function scene:chapter_2_Structure()
 end
 
 function scene:chapter_1_Structure()
-  self.first_scene = "Chapter_1_Scene_6"
+  self.first_scene = "Chapter_1_Scene_1"
 
   self.flow = {}
   self.flow["Chapter_1_Scene_1"] = {
@@ -291,7 +291,6 @@ function scene:chapter_1_Structure()
     name="Chapter_1_Scene_2",
     next="Chapter_1_Interactive_Mom",
     type="scripted",
-    script_file="Chapter_1_Scene_2.json",
     script=self:loadSceneScript("chapter_1_scene_2"),
     duration=0,
   }
@@ -324,7 +323,7 @@ function scene:chapter_1_Structure()
     bpm=110,
     mpb=545.4545454545,
     object_x = display.contentCenterX + 90,
-    object_y = display.contentCenterY - 100,
+    object_y = display.contentCenterY - 80,
     intro_letter_beats = {8, 10, 12},
     outro_letter_beats = {4, 6, 8},
     outro_sound_beats = {12, 14, 16},
@@ -701,8 +700,8 @@ function scene:destroy(event)
   local sceneGroup = self.view
   -- Code here runs prior to the removal of scene's view
   -- Runtime:removeEventListener("key")
-  Runtime:removeEventListener("touch")
-  mui.destroy()
+  Runtime:removeEventListener("touch")    
+
 end
 
 

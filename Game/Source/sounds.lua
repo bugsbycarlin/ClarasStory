@@ -38,24 +38,24 @@ sound_info["Chapter_2_Scene_1"] = {
   file_name = "Chapter_2_Scene_1.mp3",
 }
 
--- sound_info["Apple_Beast_Intro"] = {
---   file_name = "Apple_Beast_Intro.wav",
--- }
--- sound_info["Banana_Beast_Intro"] = {
---   file_name = "Banana_Beast_Intro.wav",
--- }
--- sound_info["Lime_Beast_Intro"] = {
---   file_name = "Lime_Beast_Intro.wav",
--- }
--- sound_info["Orange_Beast_Intro"] = {
---   file_name = "Orange_Beast_Intro.wav",
--- }
--- sound_info["Pear_Beast_Intro"] = {
---   file_name = "Pear_Beast_Intro.wav",
--- }
--- sound_info["Plum_Beast_Intro"] = {
---   file_name = "Plum_Beast_Intro.wav",
--- }
+sound_info["Apple_Beast_Intro"] = {
+  file_name = "Apple_Beast_Intro.wav",
+}
+sound_info["Banana_Beast_Intro"] = {
+  file_name = "Banana_Beast_Intro.wav",
+}
+sound_info["Lime_Beast_Intro"] = {
+  file_name = "Lime_Beast_Intro.wav",
+}
+sound_info["Orange_Beast_Intro"] = {
+  file_name = "Orange_Beast_Intro.wav",
+}
+sound_info["Pear_Beast_Intro"] = {
+  file_name = "Pear_Beast_Intro.wav",
+}
+sound_info["Plum_Beast_Intro"] = {
+  file_name = "Plum_Beast_Intro.wav",
+}
 
 
 return sound_info

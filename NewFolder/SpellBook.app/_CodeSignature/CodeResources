@@ -116,9 +116,9 @@
 		<data>
 		3mJDTw+a5Hb/XMRk6Eo6YR+J7ns=
 		</data>
-		<key>Art/Black_and_White_Town_Sketch.png</key>
+		<key>Art/Black_and_White_Town.png</key>
 		<data>
-		bfLpOmRHrQqgPiuk8sB0dl2hD98=
+		whMfVn/QsiUGKL8JppJufLsDJFA=
 		</data>
 		<key>Art/Blue_Sky.png</key>
 		<data>
@@ -139,6 +139,42 @@
 		<key>Art/C.png</key>
 		<data>
 		xOOZCPqC3LE7sON+1HJcRDle3aM=
+		</data>
+		<key>Art/Car_Blue_Small.png</key>
+		<data>
+		dcS880SQa1OsQD+i7CdPpy1eMDU=
+		</data>
+		<key>Art/Car_Gray_Small.png</key>
+		<data>
+		Uq2tShgRyz34X3Ag5jyPu0vG274=
+		</data>
+		<key>Art/Car_Green_Small.png</key>
+		<data>
+		OFLILgw/HLmTHDOMocz3lhs5dJI=
+		</data>
+		<key>Art/Car_Orange_Small.png</key>
+		<data>
+		UO4Znu5fVHq0ICmk+7Bv1S7i4c0=
+		</data>
+		<key>Art/Car_Pink_Small.png</key>
+		<data>
+		aFw/cckW+4SILnfVZVDkz7UT97Q=
+		</data>
+		<key>Art/Car_Purple_Small.png</key>
+		<data>
+		2bWnE7tVlo6qix8mQUooVRv8Xy8=
+		</data>
+		<key>Art/Car_Red_Small.png</key>
+		<data>
+		LJ+W7+SkF22C+r7MCuAezCaQAzo=
+		</data>
+		<key>Art/Car_Yellow_Small.png</key>
+		<data>
+		iocD8yqH7MLE+47FSeI0POPyJHM=
+		</data>
+		<key>Art/City_Block.png</key>
+		<data>
+		QaqmqEORnSwG28bxHKsAYSXR5GY=
 		</data>
 		<key>Art/Coin_Sketch.png</key>
 		<data>
@@ -270,7 +306,7 @@
 		</data>
 		<key>Art/Orange_Sky.png</key>
 		<data>
-		5G6vKuMR1Q47bFtMrHnwSTO/1ek=
+		txMM1qmZwD3kfVKkx0RaeX+ZXHU=
 		</data>
 		<key>Art/Orange_Star_Sketch.png</key>
 		<data>
@@ -280,9 +316,17 @@
 		<data>
 		Txpn8/qQgxw4+OK2mlrVyug39Mg=
 		</data>
+		<key>Art/Palm.png</key>
+		<data>
+		rDSFizsvue7sIn6FOPnC+ks/uzM=
+		</data>
 		<key>Art/Pear_Sketch.png</key>
 		<data>
 		x2wETe2Bro6DZtSieDeH88jbSRY=
+		</data>
+		<key>Art/Perimeter.png</key>
+		<data>
+		ygCQJfylud/o4LCCIIOAE3TtdzU=
 		</data>
 		<key>Art/Phone_Sketch.png</key>
 		<data>
@@ -330,7 +374,7 @@
 		</data>
 		<key>Art/Seaside_Road.png</key>
 		<data>
-		iNJfFgkas58NfGC6TNBvsXSawio=
+		BD+8dpH1wtBChYb1azgvZx8S/ic=
 		</data>
 		<key>Art/Snack_Sketch.png</key>
 		<data>
@@ -426,7 +470,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		+A1FBIQilPP/RjVeu66KNrS2NAQ=
+		GcRLKgoHDh+Gwfub6Hu2iFuner0=
 		</data>
 		<key>Corona3rdPartyLicenses.txt</key>
 		<data>
@@ -506,7 +550,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		aDa4xxUfP1bOmP4BSasZnMc7v/k=
+		Zb7Rzc8u2P7OlEgy98fD6Sqq/tw=
 		</data>
 		<key>LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
@@ -536,69 +580,73 @@
 		<data>
 		n57qDP4tZfLD1rCS43W0B4LQjzE=
 		</data>
+		<key>Scenes/Chapter_2_Scene_1.json</key>
+		<data>
+		zUA335BbJMi7rg70tqbgOU6qzuI=
+		</data>
 		<key>Scenes/chapter_1_beast_apple.json</key>
 		<data>
-		iy7Rl6Tz3j1jJ0E0+m/XUgyGggc=
+		2z8YJwIjO0V4c27N1t4Ix9SS32w=
 		</data>
 		<key>Scenes/chapter_1_beast_banana.json</key>
 		<data>
-		k+z3RmpVwBDcwzHDocBMlehJK0s=
+		w2SqrUaLbrHs16Ua0liPjcsr3k8=
 		</data>
 		<key>Scenes/chapter_1_beast_lime.json</key>
 		<data>
-		VT+agyQijUKd4wNp3+8VOgSoX0A=
+		WScG3sU0dc0avLfILhB8EkHWdLU=
 		</data>
 		<key>Scenes/chapter_1_beast_orange.json</key>
 		<data>
-		nMKRuHFn4pnnEQlof2BciG0ZPlw=
+		ZG6Kfq2RGm0425a+e1aJggTYgF0=
 		</data>
 		<key>Scenes/chapter_1_beast_pear.json</key>
 		<data>
-		glpbNe44JbBMlMXFd9yfEA3LhI8=
+		W9/VBMEFHspyISljBPff+eKGKaE=
 		</data>
 		<key>Scenes/chapter_1_beast_plum.json</key>
 		<data>
-		clW1TIM/orSXlp8r5w97rqECGJ0=
+		EEKYEjtKzP3KariVO0xS+WXw7Mk=
 		</data>
 		<key>Scenes/chapter_1_dad_interactive.json</key>
 		<data>
-		mKnKJ7vkHsCB9Cmgp4TGf+D5ajk=
+		XlNr/gynS77rcPpaoMszjkRiXoc=
 		</data>
 		<key>Scenes/chapter_1_fruit_interactive.json</key>
 		<data>
-		OZy8k0RX99hqpuLW1AHm+L9zvQI=
+		Y1qBuVYOPf2lEiMikeZiBwkJ7GA=
 		</data>
 		<key>Scenes/chapter_1_mom_interactive.json</key>
 		<data>
-		Ns7OgnmnKtqtpzNQwoTlizfS9gE=
+		KQL4Ib7ZexkvhBToDpfmv2HTJtk=
 		</data>
 		<key>Scenes/chapter_1_scene_1.json</key>
 		<data>
-		Nj+uBUfKG35aCZFYm38WJi4kw28=
+		CzQWO5QHXf5MX94GvmNUv/shSQI=
 		</data>
 		<key>Scenes/chapter_1_scene_2.json</key>
 		<data>
-		A3hXkFuHLuDAX6d3W0tYMsaU/aE=
+		PhBDIcwd6TKqVa6j+rkl6RdHD2U=
 		</data>
 		<key>Scenes/chapter_1_scene_3.json</key>
 		<data>
-		b0ZS2OulfuSztOUYHh81QsN62D0=
+		zFAkSUZb18bk9SdueekIecXK6OU=
 		</data>
 		<key>Scenes/chapter_1_scene_4.json</key>
 		<data>
-		l/lETqRrHm0NgEvk6sP+ninkvkk=
+		39Sz379CL6KfQLV3P8V5g+gdpys=
 		</data>
 		<key>Scenes/chapter_1_scene_5.json</key>
 		<data>
-		FVlKwNgmx3zW8Fm4epKTV/rqUcw=
+		lHaX+b5pLmXzq1LQzyz3W5mycCg=
 		</data>
 		<key>Scenes/chapter_1_scene_6.json</key>
 		<data>
-		vU3a4WkWB3yf9a9aGpHzigYcHN4=
+		xEEsRdtzB4CUlMuXv8NbeD4APJc=
 		</data>
 		<key>Scenes/chapter_1_scene_7.json</key>
 		<data>
-		oJ5gQSgBn2Lh0+WZ6VQQomEf+WM=
+		Sgohr3qPvz7HaP7j4zeZ6oRRRj8=
 		</data>
 		<key>Scenes/empty_template.json</key>
 		<data>
@@ -756,6 +804,10 @@
 		<data>
 		5RJ0uEoW7UIFfCwhOKffxMWnKyw=
 		</data>
+		<key>Sound/Chapter_1_Scene_1_Tight.wav</key>
+		<data>
+		ftJOK6+jSZpw9eoNIARCszy/Kow=
+		</data>
 		<key>Sound/Chapter_1_Scene_1_mini_debug.mp3</key>
 		<data>
 		BQpIsRlOFkp2keDo8QfujGlg+TU=
@@ -764,25 +816,53 @@
 		<data>
 		dhDyqZKaUDpvLxdS1OFZTbhFpRU=
 		</data>
+		<key>Sound/Chapter_1_Scene_2_Tight.wav</key>
+		<data>
+		5I63D0yui4Ju4s88MA3KxygzXHM=
+		</data>
 		<key>Sound/Chapter_1_Scene_3.mp3</key>
 		<data>
 		MOhABvkuXEXHiABTz4g9FBy5Lys=
+		</data>
+		<key>Sound/Chapter_1_Scene_3_Tight.wav</key>
+		<data>
+		WlVsxuNcvXxZ7jqNo8xK7X2Fj44=
 		</data>
 		<key>Sound/Chapter_1_Scene_4.mp3</key>
 		<data>
 		0nScQUvPxRoj2X77jFXC08QvID4=
 		</data>
+		<key>Sound/Chapter_1_Scene_4_Tight.wav</key>
+		<data>
+		OwC+K8t1e9BJZwQSoupc48eu9EQ=
+		</data>
 		<key>Sound/Chapter_1_Scene_5.mp3</key>
 		<data>
 		kObZQFjdPUlDGWPy648xdyEi/hs=
+		</data>
+		<key>Sound/Chapter_1_Scene_5_Tight.wav</key>
+		<data>
+		8QLpLTxB/RuHH2zTMeHebueBvjk=
 		</data>
 		<key>Sound/Chapter_1_Scene_6.mp3</key>
 		<data>
 		D3ubX6SJ4xH4Ur8urJ6XuFD68lg=
 		</data>
+		<key>Sound/Chapter_1_Scene_6_Tight.wav</key>
+		<data>
+		rFaQo9M4FmPr6j6TRhuGwbMNbv8=
+		</data>
 		<key>Sound/Chapter_1_Scene_7.mp3</key>
 		<data>
 		G4txf1XowcksxNAvoLjWTN2lKOw=
+		</data>
+		<key>Sound/Chapter_1_Scene_7_Tight.wav</key>
+		<data>
+		leMbS879155GNtyEiQQdn1H1oLA=
+		</data>
+		<key>Sound/Chapter_2_Scene_1.mp3</key>
+		<data>
+		oyZy8W+AQxtSL1JU/s1UdtnqAhs=
 		</data>
 		<key>Sound/Chapter_Intro.wav</key>
 		<data>
@@ -1264,6 +1344,38 @@
 		<data>
 		W1qsBmUSs5H59waNzBEFmMIztFI=
 		</data>
+		<key>Sound/Sound_Tester/Apple_Beast_Intro.wav</key>
+		<data>
+		BgmyDVhJbDYr6q3rXwCi0Etjocw=
+		</data>
+		<key>Sound/Sound_Tester/Banana_Beast_Intro.wav</key>
+		<data>
+		Ab4gJrTNe/XxoKNVGrtlpMDkj5w=
+		</data>
+		<key>Sound/Sound_Tester/Chapter_1_Mini_Loop_1.wav</key>
+		<data>
+		NNZshqguudqTDa44LWdFbSL/E+U=
+		</data>
+		<key>Sound/Sound_Tester/Chapter_1_Mini_Loop_2.wav</key>
+		<data>
+		EE6yZMhgsSYFNI72cNkKoNrNfF0=
+		</data>
+		<key>Sound/Sound_Tester/Lime_Beast_Intro.wav</key>
+		<data>
+		ZvA678uyd1Nw10/pLhxrJJVv+S4=
+		</data>
+		<key>Sound/Sound_Tester/Orange_Beast_Intro.wav</key>
+		<data>
+		RsAHuckGSyYRyVnZnGd0X24h2E8=
+		</data>
+		<key>Sound/Sound_Tester/Pear_Beast_Intro.wav</key>
+		<data>
+		7iRck6JBp5tyAoR04pRItkg/Tfs=
+		</data>
+		<key>Sound/Sound_Tester/Plum_Beast_Intro.wav</key>
+		<data>
+		W1qsBmUSs5H59waNzBEFmMIztFI=
+		</data>
 		<key>Sound/Touch_Letter.wav</key>
 		<data>
 		Gd6HjD9D5dcSCfWm3w41uDuW3Lg=
@@ -1278,7 +1390,7 @@
 		</data>
 		<key>resource.corona-archive</key>
 		<data>
-		pNwHRxTx5tiTtLoMhrRX9MPKmuM=
+		0wtvIDmEQ0kSSaE6NIkNvHhpmFw=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -1591,15 +1703,15 @@
 			yj/fc8lLZEhwmyoF4rE4YQOZvLkDMqvtvtvOGg1x5/s=
 			</data>
 		</dict>
-		<key>Art/Black_and_White_Town_Sketch.png</key>
+		<key>Art/Black_and_White_Town.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			bfLpOmRHrQqgPiuk8sB0dl2hD98=
+			whMfVn/QsiUGKL8JppJufLsDJFA=
 			</data>
 			<key>hash2</key>
 			<data>
-			umdnlDhAZRfxRrdU/n1rrEjN2qBlk3a2KY0GIUE56jQ=
+			D2MVDCYg/OFpYlP9/lZYN5eji8xTwsN2SC4wyBtQXsI=
 			</data>
 		</dict>
 		<key>Art/Blue_Sky.png</key>
@@ -1655,6 +1767,105 @@
 			<key>hash2</key>
 			<data>
 			ne6vrQXqLt2BaDGk30eEPtFCWg8cxw8g/5cQu+kuqUs=
+			</data>
+		</dict>
+		<key>Art/Car_Blue_Small.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			dcS880SQa1OsQD+i7CdPpy1eMDU=
+			</data>
+			<key>hash2</key>
+			<data>
+			7lPLB82rqPg6BwndITOYkWM9EIfM9CphDAteE4LG1N0=
+			</data>
+		</dict>
+		<key>Art/Car_Gray_Small.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Uq2tShgRyz34X3Ag5jyPu0vG274=
+			</data>
+			<key>hash2</key>
+			<data>
+			YrX+q4Vm2pM947tWECjn3S1EgMHvo/h9UI6dkatQ/w8=
+			</data>
+		</dict>
+		<key>Art/Car_Green_Small.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			OFLILgw/HLmTHDOMocz3lhs5dJI=
+			</data>
+			<key>hash2</key>
+			<data>
+			QZG1bWiED4Id18mfSDOkOqvrMd084Bsjy9UK1tIE8JY=
+			</data>
+		</dict>
+		<key>Art/Car_Orange_Small.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			UO4Znu5fVHq0ICmk+7Bv1S7i4c0=
+			</data>
+			<key>hash2</key>
+			<data>
+			CZQXMge34liXsE5JuM1E2g5Jt8Mx4ZOojAtd0Xzrng8=
+			</data>
+		</dict>
+		<key>Art/Car_Pink_Small.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			aFw/cckW+4SILnfVZVDkz7UT97Q=
+			</data>
+			<key>hash2</key>
+			<data>
+			jsqOYUy9qMk723evr4pEnErCg22S9nk4ivWzp2AOXpI=
+			</data>
+		</dict>
+		<key>Art/Car_Purple_Small.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			2bWnE7tVlo6qix8mQUooVRv8Xy8=
+			</data>
+			<key>hash2</key>
+			<data>
+			SulN1IWksuuvaaisJXKEmPXBOqdP8SkM8aHIMc/JcW0=
+			</data>
+		</dict>
+		<key>Art/Car_Red_Small.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			LJ+W7+SkF22C+r7MCuAezCaQAzo=
+			</data>
+			<key>hash2</key>
+			<data>
+			DMC1oYi4edutLVJOvYU6E5yGVPhGVLUOCncYF/yaeOY=
+			</data>
+		</dict>
+		<key>Art/Car_Yellow_Small.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			iocD8yqH7MLE+47FSeI0POPyJHM=
+			</data>
+			<key>hash2</key>
+			<data>
+			c67qIh3/2JnqwuVYUFeJT2NFhlMvIsVqMjlNDSxLxOs=
+			</data>
+		</dict>
+		<key>Art/City_Block.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			QaqmqEORnSwG28bxHKsAYSXR5GY=
+			</data>
+			<key>hash2</key>
+			<data>
+			PwI9FpKt7vZQ4L/EEnK0du1OaaJLBou41mOhf5299BU=
 			</data>
 		</dict>
 		<key>Art/Coin_Sketch.png</key>
@@ -2013,11 +2224,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			5G6vKuMR1Q47bFtMrHnwSTO/1ek=
+			txMM1qmZwD3kfVKkx0RaeX+ZXHU=
 			</data>
 			<key>hash2</key>
 			<data>
-			BoEePRAI8WABj6f9kkLE015ozEc8DH83QeFnKKzf/vw=
+			5jZGx45ZPuP3p6edk9zRFu5r4Eq8bHzKykhFR2yzYLs=
 			</data>
 		</dict>
 		<key>Art/Orange_Star_Sketch.png</key>
@@ -2042,6 +2253,17 @@
 			UB0PiSJbOj0teoojJh9te88PIJ83iiIXyH/duqgzyYc=
 			</data>
 		</dict>
+		<key>Art/Palm.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rDSFizsvue7sIn6FOPnC+ks/uzM=
+			</data>
+			<key>hash2</key>
+			<data>
+			jvpRDkFkPqiQKRVyNI5EaebpYI4h5pHkoGc99KcJxJ8=
+			</data>
+		</dict>
 		<key>Art/Pear_Sketch.png</key>
 		<dict>
 			<key>hash</key>
@@ -2051,6 +2273,17 @@
 			<key>hash2</key>
 			<data>
 			4/c2asxys9miM8rYUvxBc3D1+3SOWsi7dpb6Jjdoark=
+			</data>
+		</dict>
+		<key>Art/Perimeter.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ygCQJfylud/o4LCCIIOAE3TtdzU=
+			</data>
+			<key>hash2</key>
+			<data>
+			1REL8NgbcRdcugaTu6ILfi5hi9OT+q8wi8BePgDGA+o=
 			</data>
 		</dict>
 		<key>Art/Phone_Sketch.png</key>
@@ -2178,11 +2411,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			iNJfFgkas58NfGC6TNBvsXSawio=
+			BD+8dpH1wtBChYb1azgvZx8S/ic=
 			</data>
 			<key>hash2</key>
 			<data>
-			RJ3Um9AaLILrX1hNP2IDPo7wyuPsHE6CH6DBH1SQIAg=
+			Y8n32201QoCVkADFUKYB9f088qDYUTALHfH4E+KwHEo=
 			</data>
 		</dict>
 		<key>Art/Snack_Sketch.png</key>
@@ -2442,11 +2675,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			+A1FBIQilPP/RjVeu66KNrS2NAQ=
+			GcRLKgoHDh+Gwfub6Hu2iFuner0=
 			</data>
 			<key>hash2</key>
 			<data>
-			/zWYs8G1oGV+snPXJA7/PB0hITFdAwCWerXQsAxIj9o=
+			58Ix4sc/xcg8Iv/FsKn9hwp0Pv2U2ZeXCwITY+4yO9Y=
 			</data>
 		</dict>
 		<key>Corona3rdPartyLicenses.txt</key>
@@ -2724,180 +2957,191 @@
 			7hn1A5JxujW9dwY9v2grAyIlX/tqo0B6z6owP0ivenY=
 			</data>
 		</dict>
+		<key>Scenes/Chapter_2_Scene_1.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			zUA335BbJMi7rg70tqbgOU6qzuI=
+			</data>
+			<key>hash2</key>
+			<data>
+			6CYHlddh0m5QH49HtI1YvKi6sAdm2XOK+G1rMegvm/I=
+			</data>
+		</dict>
 		<key>Scenes/chapter_1_beast_apple.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			iy7Rl6Tz3j1jJ0E0+m/XUgyGggc=
+			2z8YJwIjO0V4c27N1t4Ix9SS32w=
 			</data>
 			<key>hash2</key>
 			<data>
-			QNSsFH9ysSGXRmGivo7kvvIa/D4t71eCPmFGxgr76OE=
+			DdEDdtA9GZGFdPKn80FZ5P+ka24acnsN7KiYF9afU/U=
 			</data>
 		</dict>
 		<key>Scenes/chapter_1_beast_banana.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			k+z3RmpVwBDcwzHDocBMlehJK0s=
+			w2SqrUaLbrHs16Ua0liPjcsr3k8=
 			</data>
 			<key>hash2</key>
 			<data>
-			6sYfqiQ+VX6brEP9czLyTz8aRzFMFkYGB+yX4RNDZYg=
+			sgiNxnlywaPARyveQL42GVR1a8vn3xfPqiSMX5NENSQ=
 			</data>
 		</dict>
 		<key>Scenes/chapter_1_beast_lime.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			VT+agyQijUKd4wNp3+8VOgSoX0A=
+			WScG3sU0dc0avLfILhB8EkHWdLU=
 			</data>
 			<key>hash2</key>
 			<data>
-			KIWRc4GF226+bOZfEvvgSxLJv7j58jo792aOAXaSFQQ=
+			JrmY59aa/XxoexY42iXFumOy5u091WIVr/37L1IN+/U=
 			</data>
 		</dict>
 		<key>Scenes/chapter_1_beast_orange.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nMKRuHFn4pnnEQlof2BciG0ZPlw=
+			ZG6Kfq2RGm0425a+e1aJggTYgF0=
 			</data>
 			<key>hash2</key>
 			<data>
-			0JklKdThfk3S/0YWZFChTaEGpZkddmOFYTfytzEQP3w=
+			5MO9ODkwjD3+E3u8DJZajOAjIYSj8KJ2f7K2ET97Q0Y=
 			</data>
 		</dict>
 		<key>Scenes/chapter_1_beast_pear.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			glpbNe44JbBMlMXFd9yfEA3LhI8=
+			W9/VBMEFHspyISljBPff+eKGKaE=
 			</data>
 			<key>hash2</key>
 			<data>
-			d1MwYN7VLKJ2ESV7Q3EZg34z+5WLoiW2ME798jjMkpk=
+			2rM/EV81el1w/2xYKX9k71w0xRzRbqepyfhRIIsb6hA=
 			</data>
 		</dict>
 		<key>Scenes/chapter_1_beast_plum.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			clW1TIM/orSXlp8r5w97rqECGJ0=
+			EEKYEjtKzP3KariVO0xS+WXw7Mk=
 			</data>
 			<key>hash2</key>
 			<data>
-			YbBjcKOdX1SE0b/kzuSHC+2XZVykcJfMBgxOzaQ27n0=
+			9/UQ/5XFYxAV6lYfXYyghm8vala0oKCHBR2ZX7JINxw=
 			</data>
 		</dict>
 		<key>Scenes/chapter_1_dad_interactive.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			mKnKJ7vkHsCB9Cmgp4TGf+D5ajk=
+			XlNr/gynS77rcPpaoMszjkRiXoc=
 			</data>
 			<key>hash2</key>
 			<data>
-			UrnnM8XRXBEKy/u/mxLhm8aI0nB4Oigohcvyd/NyOcI=
+			USxDpOQzt2PNJ7slch0arJzk2iulnCiFhI7VHrXJ+f0=
 			</data>
 		</dict>
 		<key>Scenes/chapter_1_fruit_interactive.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OZy8k0RX99hqpuLW1AHm+L9zvQI=
+			Y1qBuVYOPf2lEiMikeZiBwkJ7GA=
 			</data>
 			<key>hash2</key>
 			<data>
-			fLQkjr4NO+cdC1QgzsglxtkEeNE4KMtPPPt+GjIx+fU=
+			flM90Axad5/agYPO5f0shtRsmjfTjQRm6pCnq1ifFuU=
 			</data>
 		</dict>
 		<key>Scenes/chapter_1_mom_interactive.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Ns7OgnmnKtqtpzNQwoTlizfS9gE=
+			KQL4Ib7ZexkvhBToDpfmv2HTJtk=
 			</data>
 			<key>hash2</key>
 			<data>
-			/6OM0SFM9Ci3sV+TkDeOQDOWFK6hRQ2TSpjBc5UmxLs=
+			9Btom+1e5KZPZoqR9hpP0iOMFGT1/QEu0bdEe7mZm6w=
 			</data>
 		</dict>
 		<key>Scenes/chapter_1_scene_1.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Nj+uBUfKG35aCZFYm38WJi4kw28=
+			CzQWO5QHXf5MX94GvmNUv/shSQI=
 			</data>
 			<key>hash2</key>
 			<data>
-			x5FyjihX9Xy0gqpdEl0TAo5diCDfon+d9/fkH8t1vro=
+			gnvb3RH1z+dDbSgOcqFpeYFTzRdpaCHM9v0yGp/Hdt4=
 			</data>
 		</dict>
 		<key>Scenes/chapter_1_scene_2.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			A3hXkFuHLuDAX6d3W0tYMsaU/aE=
+			PhBDIcwd6TKqVa6j+rkl6RdHD2U=
 			</data>
 			<key>hash2</key>
 			<data>
-			Yqb+VkoSTgCizlQrOrM4ZemYtGhMWBD/wLlWpMHlV0Q=
+			BJptqsN/lvTCNSZHz04meRk3UptnQvne/E+k7P38Ya8=
 			</data>
 		</dict>
 		<key>Scenes/chapter_1_scene_3.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			b0ZS2OulfuSztOUYHh81QsN62D0=
+			zFAkSUZb18bk9SdueekIecXK6OU=
 			</data>
 			<key>hash2</key>
 			<data>
-			8clQLHIK1hf33cIGnXyoKZ/nWfeePk1TE18oHIdHtf4=
+			x5CbJSoMYeLo3w8MN+mnR+B2Hw53ApgFlkRIpHa0pTc=
 			</data>
 		</dict>
 		<key>Scenes/chapter_1_scene_4.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			l/lETqRrHm0NgEvk6sP+ninkvkk=
+			39Sz379CL6KfQLV3P8V5g+gdpys=
 			</data>
 			<key>hash2</key>
 			<data>
-			m0A4D8WhU3w/S7Y1CK+KtMPrUdEFtfRtFFFCREH6SQs=
+			KQ5vXGRWjhOispRoDHebaWQZcQNCM2xtUEFt71WQLUo=
 			</data>
 		</dict>
 		<key>Scenes/chapter_1_scene_5.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			FVlKwNgmx3zW8Fm4epKTV/rqUcw=
+			lHaX+b5pLmXzq1LQzyz3W5mycCg=
 			</data>
 			<key>hash2</key>
 			<data>
-			kkyZBRjKs2a1MHwrAqW7oUqEd04yRvOoNpVFOgj+w8M=
+			8SnzjlxDnF3qiCZ7Fpfr5s9D3mTfWWNj2iqIdVn+H4g=
 			</data>
 		</dict>
 		<key>Scenes/chapter_1_scene_6.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			vU3a4WkWB3yf9a9aGpHzigYcHN4=
+			xEEsRdtzB4CUlMuXv8NbeD4APJc=
 			</data>
 			<key>hash2</key>
 			<data>
-			MPufRBW7HNgZi+ptsj1duMYQfiDVktwRAJvdgxbVN20=
+			yy0MUZCFoUWyVikXv9hjBIFvtEDmKBhbgXUxdPkH1hk=
 			</data>
 		</dict>
 		<key>Scenes/chapter_1_scene_7.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			oJ5gQSgBn2Lh0+WZ6VQQomEf+WM=
+			Sgohr3qPvz7HaP7j4zeZ6oRRRj8=
 			</data>
 			<key>hash2</key>
 			<data>
-			Jg0CrRobNCZDDb2g4CbQQzhlayt8HaUbahrop0fr6dE=
+			uWf38tginp94b6j6wOy+RdcK6rBL3pL8FcN5pExXX4c=
 			</data>
 		</dict>
 		<key>Scenes/empty_template.json</key>
@@ -3329,6 +3573,17 @@
 			RJGGrxnv4X15/71Or5tz6Ad10/ifw6M+0ACTgYEObDE=
 			</data>
 		</dict>
+		<key>Sound/Chapter_1_Scene_1_Tight.wav</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ftJOK6+jSZpw9eoNIARCszy/Kow=
+			</data>
+			<key>hash2</key>
+			<data>
+			ilEe6rluouuaWgw6t26KUwcgjftie5VgDM0pMOVAn0Q=
+			</data>
+		</dict>
 		<key>Sound/Chapter_1_Scene_1_mini_debug.mp3</key>
 		<dict>
 			<key>hash</key>
@@ -3351,6 +3606,17 @@
 			1y8sAlR+CZPU3sOUbQgqhtAR7wfwozpYyx+iN239kCA=
 			</data>
 		</dict>
+		<key>Sound/Chapter_1_Scene_2_Tight.wav</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			5I63D0yui4Ju4s88MA3KxygzXHM=
+			</data>
+			<key>hash2</key>
+			<data>
+			bKZ9yIt0QYpUh5+HNY+d/6DV16qScVqpgeJpBgllthk=
+			</data>
+		</dict>
 		<key>Sound/Chapter_1_Scene_3.mp3</key>
 		<dict>
 			<key>hash</key>
@@ -3360,6 +3626,17 @@
 			<key>hash2</key>
 			<data>
 			ceJZziXHgD2kY+IoZWNi2QJ+iWYexbWKHGwiD4HNVpk=
+			</data>
+		</dict>
+		<key>Sound/Chapter_1_Scene_3_Tight.wav</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			WlVsxuNcvXxZ7jqNo8xK7X2Fj44=
+			</data>
+			<key>hash2</key>
+			<data>
+			mhj7eRW1K52QqFV66tDl+Yz6ovZtDZwS1AXblBqf0ks=
 			</data>
 		</dict>
 		<key>Sound/Chapter_1_Scene_4.mp3</key>
@@ -3373,6 +3650,17 @@
 			HNwZ7NVgGkfakydne5VfQw0upR4xAZnutvEQYtmTPGU=
 			</data>
 		</dict>
+		<key>Sound/Chapter_1_Scene_4_Tight.wav</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			OwC+K8t1e9BJZwQSoupc48eu9EQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			mFC4uWhbJwG6WnIFir2W9vrUM7PqvVtvp1eaU4hYSM0=
+			</data>
+		</dict>
 		<key>Sound/Chapter_1_Scene_5.mp3</key>
 		<dict>
 			<key>hash</key>
@@ -3382,6 +3670,17 @@
 			<key>hash2</key>
 			<data>
 			rvQ4xS3q2cgipRRXsr45NarPVjtT+MhF9yK3M9dSZNE=
+			</data>
+		</dict>
+		<key>Sound/Chapter_1_Scene_5_Tight.wav</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			8QLpLTxB/RuHH2zTMeHebueBvjk=
+			</data>
+			<key>hash2</key>
+			<data>
+			L++q6uMMNZGH72eAru+b4F0sL0FCZxsoWJ5tjMpwoJU=
 			</data>
 		</dict>
 		<key>Sound/Chapter_1_Scene_6.mp3</key>
@@ -3395,6 +3694,17 @@
 			YIgVU0yt/nwGcsAhYrTfkN8Aba8Y7uyicm31jzSqhC8=
 			</data>
 		</dict>
+		<key>Sound/Chapter_1_Scene_6_Tight.wav</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rFaQo9M4FmPr6j6TRhuGwbMNbv8=
+			</data>
+			<key>hash2</key>
+			<data>
+			vWrI1HRYe/9RhyfuWRHLie7tzpnmRPBMQK1ujSoU5Ww=
+			</data>
+		</dict>
 		<key>Sound/Chapter_1_Scene_7.mp3</key>
 		<dict>
 			<key>hash</key>
@@ -3404,6 +3714,28 @@
 			<key>hash2</key>
 			<data>
 			3Toy5j+DxYhywm/4NYBMsDc3lKJnWdphF1Ooqw6Qt4E=
+			</data>
+		</dict>
+		<key>Sound/Chapter_1_Scene_7_Tight.wav</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			leMbS879155GNtyEiQQdn1H1oLA=
+			</data>
+			<key>hash2</key>
+			<data>
+			ADKoDwDlsJ64af6CmudlKsrgVONjCzuJWX/5Kyl2eT0=
+			</data>
+		</dict>
+		<key>Sound/Chapter_2_Scene_1.mp3</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			oyZy8W+AQxtSL1JU/s1UdtnqAhs=
+			</data>
+			<key>hash2</key>
+			<data>
+			h8KaI089VhelVjwi++xYlZojXZQF6I7I+wKRc4h8+II=
 			</data>
 		</dict>
 		<key>Sound/Chapter_Intro.wav</key>
@@ -4726,6 +5058,94 @@
 			7XN31WdszAtj3ioPYwTSKG2+NsC1WddEtyVtOAM6WJg=
 			</data>
 		</dict>
+		<key>Sound/Sound_Tester/Apple_Beast_Intro.wav</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			BgmyDVhJbDYr6q3rXwCi0Etjocw=
+			</data>
+			<key>hash2</key>
+			<data>
+			iqnTP6nYzjH+tmccVtI38nYgKuaIa8oZ+fJHTKXK5YM=
+			</data>
+		</dict>
+		<key>Sound/Sound_Tester/Banana_Beast_Intro.wav</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Ab4gJrTNe/XxoKNVGrtlpMDkj5w=
+			</data>
+			<key>hash2</key>
+			<data>
+			EJS4JOpMbBWhjmqVOak/dckKGhBmj2x5ftcuyY5slAE=
+			</data>
+		</dict>
+		<key>Sound/Sound_Tester/Chapter_1_Mini_Loop_1.wav</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			NNZshqguudqTDa44LWdFbSL/E+U=
+			</data>
+			<key>hash2</key>
+			<data>
+			HSF7hWRHoOJFHMylStd4x1A2LMNEfkm3tCN/bGlOdIY=
+			</data>
+		</dict>
+		<key>Sound/Sound_Tester/Chapter_1_Mini_Loop_2.wav</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			EE6yZMhgsSYFNI72cNkKoNrNfF0=
+			</data>
+			<key>hash2</key>
+			<data>
+			Zx8bNJ10UIUqY9NOfpD5L9H2msa8M3uiTE2oHh46ss0=
+			</data>
+		</dict>
+		<key>Sound/Sound_Tester/Lime_Beast_Intro.wav</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ZvA678uyd1Nw10/pLhxrJJVv+S4=
+			</data>
+			<key>hash2</key>
+			<data>
+			AWxF9lMSbBnRguLSNjjktj3uNbeLXwpZpiZ3NJxrvFk=
+			</data>
+		</dict>
+		<key>Sound/Sound_Tester/Orange_Beast_Intro.wav</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			RsAHuckGSyYRyVnZnGd0X24h2E8=
+			</data>
+			<key>hash2</key>
+			<data>
+			b1vIRPxCebIaLZ1cxyS+j2c0bkUvYdC/h9Sr3zmBNUM=
+			</data>
+		</dict>
+		<key>Sound/Sound_Tester/Pear_Beast_Intro.wav</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			7iRck6JBp5tyAoR04pRItkg/Tfs=
+			</data>
+			<key>hash2</key>
+			<data>
+			OpQt3bnXAjb43T53uBo6K7kSB3rhvE+OagC78cI5CRQ=
+			</data>
+		</dict>
+		<key>Sound/Sound_Tester/Plum_Beast_Intro.wav</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			W1qsBmUSs5H59waNzBEFmMIztFI=
+			</data>
+			<key>hash2</key>
+			<data>
+			7XN31WdszAtj3ioPYwTSKG2+NsC1WddEtyVtOAM6WJg=
+			</data>
+		</dict>
 		<key>Sound/Touch_Letter.wav</key>
 		<dict>
 			<key>hash</key>
@@ -4763,11 +5183,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			pNwHRxTx5tiTtLoMhrRX9MPKmuM=
+			0wtvIDmEQ0kSSaE6NIkNvHhpmFw=
 			</data>
 			<key>hash2</key>
 			<data>
-			hL0zmfaNZLZAD4H6J+4uJJGJekWs1O+qqrO+4E64/bo=
+			pO0xWxjQJT8tROZs5t3msMZc1GKaafBSEIHg0T/ucc8=
 			</data>
 		</dict>
 	</dict>
