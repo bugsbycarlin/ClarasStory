@@ -8,6 +8,7 @@ local picture_info = require("Source.pictures")
 local sound_info = require("Source.sounds")
 
 local sketch_sprites_class = require("Source.sketch_sprites")
+local loader = require("Source.loader")
 
 local scene = composer.newScene()
 
@@ -30,24 +31,7 @@ local loading_text = nil
 
 local memory_estimate = 0
 
--- local scripts = {}
-
 local current_scene = nil
-
--- local chapter_1_scene_1_file = system.pathForFile("Scenes/chapter_1_scene_1.json", system.ResourceDirectory)
--- local chapter_1_scene_2_file = system.pathForFile("Scenes/chapter_1_scene_2.json", system.ResourceDirectory)
--- local chapter_1_scene_3_file = system.pathForFile("Scenes/chapter_1_scene_3.json", system.ResourceDirectory)
--- local chapter_1_scene_4_file = system.pathForFile("Scenes/chapter_1_scene_4.json", system.ResourceDirectory)
--- local chapter_1_scene_5_file = system.pathForFile("Scenes/chapter_1_scene_5.json", system.ResourceDirectory)
--- local chapter_1_scene_6_file = system.pathForFile("Scenes/chapter_1_scene_6.json", system.ResourceDirectory)
--- local chapter_1_scene_7_file = system.pathForFile("Scenes/chapter_1_scene_6.json", system.ResourceDirectory)
-
--- local chapter_1_beast_apple_file = system.pathForFile("Scenes/chapter_1_beast_apple.json", system.ResourceDirectory)
--- local chapter_1_beast_banana_file = system.pathForFile("Scenes/chapter_1_beast_banana.json", system.ResourceDirectory)
--- local chapter_1_beast_lime_file = system.pathForFile("Scenes/chapter_1_beast_lime.json", system.ResourceDirectory)
--- local chapter_1_beast_orange_file = system.pathForFile("Scenes/chapter_1_beast_orange.json", system.ResourceDirectory)
--- local chapter_1_beast_pear_file = system.pathForFile("Scenes/chapter_1_beast_pear.json", system.ResourceDirectory)
--- local chapter_1_beast_plum_file = system.pathForFile("Scenes/chapter_1_beast_plum.json", system.ResourceDirectory)
 
 function scene:loadSceneScript(scene_name)
   local scene_file = system.pathForFile("Scenes/" .. scene_name .. ".json", system.ResourceDirectory)
@@ -120,13 +104,17 @@ function scene:show(event)
     self.credits_text[2] = "Programming, Story, Art, Music\nMattsby"
 
     self.sketch_sprites = sketch_sprites_class:create()
+    self.loader = loader:create()
 
     composer.setVariable("sketch_sprites", self.sketch_sprites)
 
     self:setupDisplay()
     self:setupSceneStructure()
-    self:setupLoading()
+
+    composer.setVariable("chapter_flow", self.flow)
+
     -- when loading finishes, it will call self:startGame()
+    self:setupLoading()
 
     intro_sound = audio.loadSound("Sound/Chapter_Intro.wav")
     audio.play(intro_sound)
@@ -150,77 +138,60 @@ function scene:setupDisplay()
   })
   credits_text:setTextColor(0.0, 0.0, 0.0)
 
-  loading_text = display.newText(self.sceneGroup, "Bongos", display.contentCenterX, display.contentCenterY + 250, "Fonts/MouseMemoirs.ttf", 40)
+  loading_text = display.newText(self.sceneGroup, "", display.contentCenterX, display.contentCenterY + 250, "Fonts/MouseMemoirs.ttf", 40)
   loading_text:setTextColor(0.0, 0.0, 0.0)
 end
 
 function scene:setupLoading()
 
   -- load determined/guarded by flow
-  self.loadItems = {}
-  for scene_name, scene in pairs(self.flow) do
-    if scene.word ~= nil then
-      self.loadItems[scene.word] = 1
-    end
+  -- load_items = {}
+  -- for scene_name, scene in pairs(self.flow) do
+  --   if scene.word ~= nil then
+  --     load_items[scene.word] = 1
+  --   end
 
-    if scene.script ~= nil then
-      for asset_name, asset_value in pairs(scene.script) do
-        self.loadItems[asset_value.name] = 1
-      end
+  --   if scene.script ~= nil then
+  --     for asset_name, asset_value in pairs(scene.script) do
+  --       load_items[asset_value.name] = 1
+  --     end
+  --   end
+  -- end
+
+  -- just pre-load the stuff from scene 1. other stuff will be loaded in the background as we go along.
+  load_items = {}
+  local scene = self.flow[self.first_scene]
+  if scene.word ~= nil then
+    load_items[scene.word] = 1
+  end
+
+  if scene.script ~= nil then
+    for asset_name, asset_value in pairs(scene.script) do
+      load_items[asset_value.name] = 1
     end
   end
+
   -- gotta add standard stuff like letters and stars; these are always loads
 
-
-  self.partialLoadNumber = 1
-  self.partialLoadObjects = {}
+  partialLoadObjects = {}
   for picture, info in pairs(picture_info) do
-    if self.loadItems[picture] == 1 or info.always_load == true then
-      table.insert(self.partialLoadObjects, picture)
+    if load_items[picture] == 1 or info.always_load == true then
+      table.insert(partialLoadObjects, picture)
     end
   end
 
-  function updateLoadDisplay()
-    local percent = math.floor((self.partialLoadNumber / #self.partialLoadObjects) * 100)
+  function updateLoadDisplay(percent)
     loading_text.text = "Spelling " .. percent .. "%"
   end
 
-  timer.performWithDelay(40, function() 
-    load_start_time = system.getTimer()
-    self:partialLoad() 
-  end)
-
-  Runtime:addEventListener("enterFrame", updateLoadDisplay)
-
-  updateLoadDisplay()
-end
-
-function scene:partialLoad()
-  -- print(system.getInfo(“textureMemoryUsed”))
-  picture_name = self.partialLoadObjects[self.partialLoadNumber]
-  if string.len(picture_name) >= 1 then
-    file_name = picture_info[picture_name]["file_name"]
-    sheet = picture_info[picture_name]["sheet"]
-    sprite[picture_name] = graphics.newImageSheet("Art/" .. file_name, sheet)
-  end
-  print("Loaded " .. picture_name)
-  local side = picture_info[picture_name].sprite_size * picture_info[picture_name].row_length
-  memory_estimate = memory_estimate + (side * side * 4)
-  print("Memory estimate " .. side * side * 4)
-  -- print("Ending texture memory " .. system.getInfo(“textureMemoryUsed”))
-
-  self.partialLoadNumber = self.partialLoadNumber + 1
-  if self.partialLoadNumber <= #self.partialLoadObjects then
-  -- if self.partialLoadNumber < 2 then
-    timer.performWithDelay(20, function() self:partialLoad() end)
-  else
-    loading_text.text = "Loading 100%"
-    Runtime:removeEventListener("enterFrame", updateLoadDisplay)
-    local load_time_total = system.getTimer() - load_start_time
-    print("Load time was " .. load_time_total)
-    print("Estimated texture memory is " .. tostring(memory_estimate))
-    self:startGame()
-  end
+  self.loader:backgroundLoad(
+    sprite,
+    picture_info,
+    partialLoadObjects,
+    nil,
+    0,
+    function(percent) updateLoadDisplay(percent) end,
+    function() self:startGame() end)
 end
 
 function scene:setupSceneStructure()

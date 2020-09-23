@@ -7,6 +7,7 @@ local animation = require("plugin.animation")
 
 local picture_info = require("Source.pictures")
 local sound_info = require("Source.sounds")
+local loader = require("Source.loader")
 
 local scene = composer.newScene()
 
@@ -41,6 +42,8 @@ function scene:show(event)
     -- Code here runs when the scene is still off screen (but is about to come on screen)
   elseif (phase == "did") then
     -- Code here runs when the scene is entirely on screen
+    self.loader = loader:create()
+
     self.performanceAssetGroup = display.newGroup()
     self.sceneGroup:insert(self.performanceAssetGroup)
 
@@ -61,6 +64,8 @@ function scene:show(event)
     elseif self.scene_type == "interactive_spelling" then
       self:startInteractiveSpelling()
     end
+
+    self:setupLoading()
   end
 end
 
@@ -137,7 +142,8 @@ function scene:nextScene()
     self:startInteractiveSpelling()
   end
 
-  -- composer.gotoScene("Source.interactive_spelling_player", nil)
+  -- start loading the next stuff
+  self:setupLoading()
 end
 
 function scene:perform(asset)
@@ -151,6 +157,7 @@ function scene:perform(asset)
     local picture = asset.name
 
     asset.performance = display.newSprite(self.performanceAssetGroup[asset.depth + 5], self.sprite[picture], {frames=picture_info[picture].frames})
+    asset.performance.name = asset.name
     asset.performance.id = asset.id
     asset.performance.x = asset.x
     asset.performance.y = asset.y
@@ -294,13 +301,123 @@ function scene:initialize()
   self.info = composer.getVariable("settings")
   self.chapter = composer.getVariable("chapter")
   self.next_scene = composer.getVariable("next_scene")
+  print("THE NEXT SCENE IS " .. self.next_scene)
 
   self.sprite = composer.getVariable("sprite")
   self.script_assets = composer.getVariable("script_assets")
 
+  self.chapter_flow = composer.getVariable("chapter_flow")
+
   self.scene_type = self.info["type"]
 
   -- self:clearPerformance()
+end
+
+function scene:setupLoading()
+  local items = self:computeNextLoad()
+  local load_items = items[1]
+  local unload_items = items[2]
+  print("Got " .. #load_items .. " to load for next scene.")
+  for i = 1, #load_items do
+    print("Gotta load " .. load_items[i])
+  end
+  print("Got " .. #unload_items .. " to unload for next scene.")
+  for i = 1, #unload_items do
+    print("Gotta unload " .. unload_items[i])
+  end
+  self.loader:backgroundLoad(
+    self.sprite,
+    picture_info,
+    load_items,
+    unload_items,
+    300,
+    function(percent) end,
+    function() print("Finished loading items in the background!") end)
+end
+
+function scene:computeNextLoad()
+  local background_load_items = {}
+
+  local keep_loading = (self.next_scene ~= nil)
+  local current_scene_name = self.next_scene
+  while keep_loading do
+    print("SCENE I'M LOADING IS " .. current_scene_name)
+    local load_scene = self.chapter_flow[current_scene_name]
+    if load_scene.word ~= nil then
+      print("Adding ineractive word " .. load_scene.word .. " to load items.")
+      background_load_items[load_scene.word] = 1
+    end
+
+    if load_scene.script ~= nil then
+      for asset_name, asset_value in pairs(load_scene.script) do
+        print("Adding " .. asset_value.name .. " to load items.")
+        background_load_items[asset_value.name] = 1
+      end
+    end
+
+    -- keep going until we've checked a scripted scene.
+    keep_loading = (load_scene.type ~= "scripted" and load_scene.next ~= nil)
+    current_scene_name = load_scene.next
+  end
+
+  local clean_load_items = {}
+  for picture, info in pairs(picture_info) do
+    if background_load_items[picture] == 1 and self.sprite[picture] == nil then
+      print("Adding " .. picture .. " to final load items.")
+      table.insert(clean_load_items, picture)
+    else
+      print("Did not add " .. picture .. " to final load items.")
+    end
+  end
+  background_load_items = clean_load_items
+
+  local background_unload_items = {}
+  local safe_list = {}
+  -- add everything in the performance to the safe list
+  for i = 1, 9 do
+    for j = 1, self.performanceAssetGroup[i].numChildren do
+      local asset = self.performanceAssetGroup[i][j]
+      safe_list[asset.name] = 1
+      -- print("Adding existing " .. asset.name .. " to the safe list")
+    end
+  end
+  -- add everything from the future to the safe list
+  keep_loading = (self.next_scene ~= nil)
+  current_scene_name = self.scene_name
+  while keep_loading do
+    local load_scene = self.chapter_flow[current_scene_name]
+    if load_scene.word ~= nil then
+      -- print("Adding interactive " .. load_scene.word .. " to the safe list")
+      safe_list[load_scene.word] = 1
+    end
+
+    if load_scene.script ~= nil then
+      for asset_name, asset_value in pairs(load_scene.script) do
+        -- print("Adding future " .. asset_value.name .. " to the safe list")
+        safe_list[asset_value.name] = 1
+      end
+    end
+
+    -- keep going until we've checked everything
+    keep_loading = load_scene.next ~= nil
+    current_scene_name = load_scene.next
+  end
+
+  -- now we have a safe list. unload anything in sprites that isn't on the safe_list.
+  for sprite_name, sprite_value in pairs(self.sprite) do
+    -- print("Checking " .. sprite_name .. " against the safe list");
+    if (safe_list[sprite_name] == nil and picture_info[sprite_name].always_load ~= true) then
+      background_unload_items[sprite_name] = 1
+    end
+  end
+
+  local clean_unload_items = {}
+  for sprite_name, sprite_value in pairs(background_unload_items) do
+    table.insert(clean_unload_items, sprite_name)
+  end
+  background_unload_items = clean_unload_items
+
+  return {background_load_items, background_unload_items}
 end
 
 
@@ -566,7 +683,7 @@ function scene:beatTimerCheck()
 end
 
 function scene:beatActions()
-  print("on interactive beat " .. self.interactive_beats)
+  -- print("on interactive beat " .. self.interactive_beats)
 
   local info = self.info
   local word = string.lower(self.info.word)
@@ -581,7 +698,7 @@ function scene:beatActions()
   -- land right on the measure mark.
   if self.mode == "interactive" and self.interactive_beats % 8 == 3 then
     if self.current_letter_number >= 1 and self.current_letter_number <= string.len(word) then
-      print("I should be playing this sound")
+      -- print("I should be playing this sound")
       current_letter = word:sub(self.current_letter_number, self.current_letter_number)
       randomizer = math.random(4)
       local sound = audio.loadSound("Sound/Interactive_Letters_".. info.bpm .. "/" .. current_letter .. "_" .. randomizer .. ".wav")
@@ -591,7 +708,7 @@ function scene:beatActions()
 end
 
 function scene:measureActions()
-  print("on measure")
+  -- print("on measure")
 
   local info = self.info
   local word = string.lower(self.info.word)
