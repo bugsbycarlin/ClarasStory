@@ -57,8 +57,6 @@ function scene:loadSceneScript(scene_name)
   return script_assets
 end
 
-
-
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
@@ -90,7 +88,7 @@ function scene:show(event)
 
     composer.setVariable("chapter", self)
 
-    self.chapter = 1
+    self.chapter = 2
 
     self.flow = {}
 
@@ -144,20 +142,6 @@ end
 
 function scene:setupLoading()
 
-  -- load determined/guarded by flow
-  -- load_items = {}
-  -- for scene_name, scene in pairs(self.flow) do
-  --   if scene.word ~= nil then
-  --     load_items[scene.word] = 1
-  --   end
-
-  --   if scene.script ~= nil then
-  --     for asset_name, asset_value in pairs(scene.script) do
-  --       load_items[asset_value.name] = 1
-  --     end
-  --   end
-  -- end
-
   -- just pre-load the stuff from scene 1. other stuff will be loaded in the background as we go along.
   load_items = {}
   local scene = self.flow[self.first_scene]
@@ -172,7 +156,6 @@ function scene:setupLoading()
   end
 
   -- gotta add standard stuff like letters and stars; these are always loads
-
   partialLoadObjects = {}
   for picture, info in pairs(picture_info) do
     if load_items[picture] == 1 or info.always_load == true then
@@ -429,7 +412,6 @@ function scene:chapter_1_Structure()
     outro_word_beat = 26,
     time_sig=4,
     cleanup=false,
-    -- script=self:loadSceneScript("chapter_1_fruit_interactive"),
   }
   self.flow["Chapter_1_Beast_Banana"] = {
     name="Chapter_1_Beast_Banana",
@@ -454,7 +436,6 @@ function scene:chapter_1_Structure()
     outro_word_beat = 28,
     time_sig=4,
     cleanup=false,
-    -- script=self:loadSceneScript("chapter_1_fruit_interactive"),
   }
   self.flow["Chapter_1_Beast_Lime"] = {
     name="Chapter_1_Beast_Lime",
@@ -479,7 +460,6 @@ function scene:chapter_1_Structure()
     outro_word_beat = 20,
     time_sig=4,
     cleanup=false,
-    -- script=self:loadSceneScript("chapter_1_fruit_interactive"),
   }
   self.flow["Chapter_1_Beast_Orange"] = {
     name="Chapter_1_Beast_Orange",
@@ -504,7 +484,6 @@ function scene:chapter_1_Structure()
     outro_word_beat = 34,
     time_sig=4,
     cleanup=false,
-    -- script=self:loadSceneScript("chapter_1_fruit_interactive"),
   }
   self.flow["Chapter_1_Beast_Pear"] = {
     name="Chapter_1_Beast_Pear",
@@ -529,7 +508,6 @@ function scene:chapter_1_Structure()
     outro_word_beat = 20,
     time_sig=4,
     cleanup=false,
-    -- script=self:loadSceneScript("chapter_1_fruit_interactive"),
   }
   self.flow["Chapter_1_Beast_Plum"] = {
     name="Chapter_1_Beast_Plum",
@@ -554,7 +532,6 @@ function scene:chapter_1_Structure()
     outro_word_beat = 20,
     time_sig=4,
     cleanup=false,
-    -- script=self:loadSceneScript("chapter_1_fruit_interactive"),
   }
   self.flow["Chapter_1_Scene_7"] = {
     name="Chapter_1_Scene_7",
@@ -599,55 +576,52 @@ end
 
 function scene:gotoScene(new_scene_name, fade_options)
   if new_scene_name ~= "end" and self.flow[new_scene_name] ~= nil then
-    print("New scene: " .. new_scene_name)
+    
     new_scene = self.flow[new_scene_name]
     composer.setVariable("scene_name", new_scene.name)
     composer.setVariable("settings", new_scene)
+    
     if new_scene.script ~= nil then
       composer.setVariable("script_assets", new_scene.script)
     else
       composer.setVariable("script_assets", "")
     end
+    
     if new_scene.next ~= nil then
       composer.setVariable("next_scene", new_scene.next)
     else
       composer.setVariable("next_scene", "end")
     end
-    print("COMPOSER has set next as " .. tostring(composer.getVariable("next_scene")))
+
     composer.gotoScene("Source.scripted_player", fade_options)
   else
     composer.gotoScene("Source.temporary_end", fade_options)
   end
 end
 
-function scene:setNextScene(new_scene_name)
-  if new_scene_name ~= "end" and self.flow[new_scene_name] ~= nil then
-    print("New scene: " .. new_scene_name)
-    new_scene = self.flow[new_scene_name]
-    composer.setVariable("scene_name", new_scene.name)
-    composer.setVariable("settings", new_scene)
-    if new_scene.script ~= nil then
-      composer.setVariable("script_assets", new_scene.script)
-    else
-      composer.setVariable("script_assets", "")
-    end
-    if new_scene.next ~= nil then
-      composer.setVariable("next_scene", new_scene.next)
-    else
-      composer.setVariable("next_scene", "end")
-    end
-    -- print("COMPOSER has set next as " .. tostring(composer.getVariable("next_scene")))
-    -- if new_scene.type == "interactive_spelling" then
-    --   composer.gotoScene("Source.interactive_spelling_player", fade_options)
-    -- elseif new_scene.type == "scripted" then
-    --   composer.gotoScene("Source.scripted_player", fade_options)
-    -- end
-    -- scene = composer.getSceneName("current")
-    -- scene:reset()
+-- function scene:setNextScene(new_scene_name)
+--   if new_scene_name ~= "end" and self.flow[new_scene_name] ~= nil then
+--     print("New scene: " .. new_scene_name)
+--     new_scene = self.flow[new_scene_name]
+--     composer.setVariable("scene_name", new_scene.name)
+--     composer.setVariable("settings", new_scene)
+--     if new_scene.script ~= nil then
+--       composer.setVariable("script_assets", new_scene.script)
+--     else
+--       composer.setVariable("script_assets", "")
+--     end
+--     if new_scene.next ~= nil then
+--       composer.setVariable("next_scene", new_scene.next)
+--     else
+--       composer.setVariable("next_scene", "end")
+--     end
+--   else
+--     composer.gotoScene("Source.temporary_end")
+--   end
+-- end
 
-  else
-    composer.gotoScene("Source.temporary_end")
-  end
+function scene:finish()
+  composer.gotoScene("Source.temporary_end")
 end
 
 -- hide()

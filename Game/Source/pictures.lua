@@ -273,11 +273,14 @@ picture_info["Earth"] = {
 }
 
 picture_info["Sun"] = {
-  file_name = "Sun_Sketch.png",
-  row_length = 5,
+  file_name = "Sun.png",
+  row_length = 2,
   sprite_size = 400,
-  sprite_count = 25,
-  outline_frame = 10,
+  sprite_count = 2,
+  outline_frame = 1,
+  animation_start = 1,
+  animation_end = 2,
+  animation_on = 2,
 }
 
 picture_info["Bird"] = {
@@ -297,7 +300,7 @@ picture_info["Little_Boat"] = {
 }
 
 picture_info["Little_Wave"] = {
-  file_name = "Little_Wave_Sketch.png",
+  file_name = "Little_Wave.png",
   row_length = 1,
   sprite_size = 200,
   sprite_count = 1,
@@ -370,9 +373,10 @@ picture_info["Seagull"] = {
 }
 
 picture_info["Beach"] = {
-  file_name = "Beach_Sketch.png",
+  file_name = "Beach.png",
   row_length = 1,
-  sprite_size = 400,
+  sprite_size = 1024,
+  sprite_height = 768,
   sprite_count = 1,
   outline_frame = 1,
 }

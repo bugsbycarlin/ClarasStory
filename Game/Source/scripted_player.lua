@@ -58,7 +58,8 @@ function scene:show(event)
       printMemUsage()
     end, 0)
 
-    self:initialize()
+    self:initializeFromChapter()
+    -- self:initializeScene()
     if self.scene_type == "scripted" then
       self:startScripted()
     elseif self.scene_type == "interactive_spelling" then
@@ -112,48 +113,12 @@ function scene:updateTime()
   end
 end
 
-function scene:nextScene()
-  self.mode = nil
-
-  timer.cancel(self.sketch_sprite_timer)
-  if self.update_timer ~= nil then
-    timer.cancel(self.update_timer)
-  end
-
-  if self.special_timer ~= nil then
-    timer.cancel(self.special_timer)
-  end
-
-  if self.info["cleanup"] == nil or self.info["cleanup"] ~= false then
-    print("I have decided to clean up")
-    self:clearPerformance()
-    self.sketch_sprites.picture_info = nil
-    self.sketch_sprites.sprite_info = nil
-    self.sketch_sprites.top_group = nil
-  end
-
-  print(self.next_scene)
-  self.chapter:setNextScene(self.next_scene, nil)
-  self:initialize()
-  print("finished initializing")
-  if self.scene_type == "scripted" then
-    self:startScripted()
-  elseif self.scene_type == "interactive_spelling" then
-    self:startInteractiveSpelling()
-  end
-
-  -- start loading the next stuff
-  self:setupLoading()
-end
-
 function scene:perform(asset)
-  print("Considering " .. asset.name)
   if asset.type == "sound" then
     asset.performance = audio.loadStream("Sound/" .. sound_info[asset.name].file_name)
     -- should only do if this is the main audio file
     audio.play(asset.performance, {loops = 0, onComplete=function() self:nextScene() end})
   elseif asset.type == "picture" then
-    print("Performing " .. asset.name)
     local picture = asset.name
 
     asset.performance = display.newSprite(self.performanceAssetGroup[asset.depth + 5], self.sprite[picture], {frames=picture_info[picture].frames})
@@ -223,6 +188,94 @@ function scene:clearPerformance()
   end
 end
 
+function scene:updatePerformance()
+  local last_update_time = self.total_performance_time
+  self:updateTime()
+
+  for i = 1, #self.script_assets do
+    asset = self.script_assets[i]
+    if asset.performance == nil and last_update_time <= asset.start_time and self.total_performance_time >= asset.start_time then
+      self:perform(asset)
+    end
+  end
+end
+
+function scene:nextScene()
+  self.mode = nil
+
+  timer.cancel(self.sketch_sprite_timer)
+  if self.update_timer ~= nil then
+    timer.cancel(self.update_timer)
+  end
+
+  if self.special_timer ~= nil then
+    timer.cancel(self.special_timer)
+  end
+
+  if self.info["cleanup"] == nil or self.info["cleanup"] ~= false then
+    self:clearPerformance()
+    self.sketch_sprites.picture_info = nil
+    self.sketch_sprites.sprite_info = nil
+    self.sketch_sprites.top_group = nil
+  end
+
+  if self.next_scene ~= "end" and self.chapter_flow[self.next_scene] ~= nil then
+    self:initializeScene()
+  else
+    self.chapter:finish()
+  end
+
+  if self.scene_type == "scripted" then
+    self:startScripted()
+  elseif self.scene_type == "interactive_spelling" then
+    self:startInteractiveSpelling()
+  end
+
+  -- start loading the next stuff
+  self:setupLoading()
+end
+
+function scene:initializeFromChapter()
+  self.sketch_sprites = composer.getVariable("sketch_sprites")
+  self.sprite = composer.getVariable("sprite")
+  self.scene_name = composer.getVariable("scene_name")
+  self.info = composer.getVariable("settings")
+  self.chapter = composer.getVariable("chapter")
+  self.next_scene = composer.getVariable("next_scene")
+  self.sprite = composer.getVariable("sprite")
+  self.script_assets = composer.getVariable("script_assets")
+  self.chapter_flow = composer.getVariable("chapter_flow")
+  self.scene_type = self.info["type"]
+
+  self.sketch_sprite_timer = timer.performWithDelay(35, function() 
+    self.sketch_sprites:update(self.mode, self.total_performance_time)
+  end, 0)
+end
+
+function scene:initializeScene()
+
+  print("New scene: " .. self.next_scene)
+  local new_scene = self.chapter_flow[self.next_scene]
+
+  self.scene_name = new_scene.name
+  self.info = new_scene
+  self.scene_type = self.info["type"]
+  if new_scene.script ~= nil then
+    self.script_assets = new_scene.script
+  else
+    self.script_assets = ""
+  end
+  if new_scene.next ~= nil then
+    self.next_scene = new_scene.next
+  else
+    self.next_scene = "end"
+  end
+
+  self.sketch_sprite_timer = timer.performWithDelay(35, function() 
+    self.sketch_sprites:update(self.mode, self.total_performance_time)
+  end, 0)
+end
+
 function scene:startScripted()
   self.mode = "performing"
 
@@ -248,13 +301,11 @@ function scene:startScripted()
         self.performanceAssetGroup[back_row].x = self.performanceAssetGroup[back_row].x - 1024
         self.performanceAssetGroup[front_row].x = self.performanceAssetGroup[front_row].x + 1024
       end
-      print("Right scoot")
       current_x = self.performanceAssetGroup[back_row].x
       animation.to(self.performanceAssetGroup[back_row], {x=current_x + 256}, {time=750 / 4 * 0.7, easing=easing.outExp})
 
       -- scoot left
       timer.performWithDelay(750 * 3 / 4, function()
-        print("Left scoot")
         current_x = self.performanceAssetGroup[front_row].x
         animation.to(self.performanceAssetGroup[front_row], {x=current_x - 256}, {time=750 / 4 * 0.7, easing=easing.outExp})
       end, 1)
@@ -265,52 +316,6 @@ function scene:startScripted()
       scoot()
     end, 0)
   end
-end
-
-function scene:updatePerformance()
-  local last_update_time = self.total_performance_time
-  self:updateTime()
-
-  -- if self.mode == "performing" then
-    for i = 1, #self.script_assets do
-      asset = self.script_assets[i]
-      -- print(asset)
-      -- print(asset.performance)
-      -- print(asset.start_time)
-      -- print(self.total_performance_time)
-      if asset.performance == nil and last_update_time <= asset.start_time and self.total_performance_time >= asset.start_time then
-        self:perform(asset)
-      end
-    end
-  -- end
-end
-
-function scene:initialize()
-  self.sketch_sprites = composer.getVariable("sketch_sprites")
-  self.sprite = composer.getVariable("sprite")
-
-  self.sketch_sprites.picture_info = picture_info
-  self.sketch_sprites.sprite_info = sprite
-  self.sketch_sprites.top_group = self.performanceAssetGroup[9]
-  self.sketch_sprite_timer = timer.performWithDelay(35, function() 
-    self.sketch_sprites:update(self.mode, self.total_performance_time)
-  end, 0)
-
-  self.scene_name = composer.getVariable("scene_name")
-
-  self.info = composer.getVariable("settings")
-  self.chapter = composer.getVariable("chapter")
-  self.next_scene = composer.getVariable("next_scene")
-  print("THE NEXT SCENE IS " .. self.next_scene)
-
-  self.sprite = composer.getVariable("sprite")
-  self.script_assets = composer.getVariable("script_assets")
-
-  self.chapter_flow = composer.getVariable("chapter_flow")
-
-  self.scene_type = self.info["type"]
-
-  -- self:clearPerformance()
 end
 
 function scene:setupLoading()
@@ -338,19 +343,16 @@ end
 function scene:computeNextLoad()
   local background_load_items = {}
 
-  local keep_loading = (self.next_scene ~= nil)
+  local keep_loading = (self.next_scene ~= nil and self.next_scene ~= "end")
   local current_scene_name = self.next_scene
   while keep_loading do
-    print("SCENE I'M LOADING IS " .. current_scene_name)
     local load_scene = self.chapter_flow[current_scene_name]
     if load_scene.word ~= nil then
-      print("Adding ineractive word " .. load_scene.word .. " to load items.")
       background_load_items[load_scene.word] = 1
     end
 
     if load_scene.script ~= nil then
       for asset_name, asset_value in pairs(load_scene.script) do
-        print("Adding " .. asset_value.name .. " to load items.")
         background_load_items[asset_value.name] = 1
       end
     end
@@ -363,10 +365,7 @@ function scene:computeNextLoad()
   local clean_load_items = {}
   for picture, info in pairs(picture_info) do
     if background_load_items[picture] == 1 and self.sprite[picture] == nil then
-      print("Adding " .. picture .. " to final load items.")
       table.insert(clean_load_items, picture)
-    else
-      print("Did not add " .. picture .. " to final load items.")
     end
   end
   background_load_items = clean_load_items
@@ -378,7 +377,6 @@ function scene:computeNextLoad()
     for j = 1, self.performanceAssetGroup[i].numChildren do
       local asset = self.performanceAssetGroup[i][j]
       safe_list[asset.name] = 1
-      -- print("Adding existing " .. asset.name .. " to the safe list")
     end
   end
   -- add everything from the future to the safe list
@@ -387,13 +385,11 @@ function scene:computeNextLoad()
   while keep_loading do
     local load_scene = self.chapter_flow[current_scene_name]
     if load_scene.word ~= nil then
-      -- print("Adding interactive " .. load_scene.word .. " to the safe list")
       safe_list[load_scene.word] = 1
     end
 
     if load_scene.script ~= nil then
       for asset_name, asset_value in pairs(load_scene.script) do
-        -- print("Adding future " .. asset_value.name .. " to the safe list")
         safe_list[asset_value.name] = 1
       end
     end
@@ -405,7 +401,6 @@ function scene:computeNextLoad()
 
   -- now we have a safe list. unload anything in sprites that isn't on the safe_list.
   for sprite_name, sprite_value in pairs(self.sprite) do
-    -- print("Checking " .. sprite_name .. " against the safe list");
     if (safe_list[sprite_name] == nil and picture_info[sprite_name].always_load ~= true) then
       background_unload_items[sprite_name] = 1
     end
@@ -419,7 +414,6 @@ function scene:computeNextLoad()
 
   return {background_load_items, background_unload_items}
 end
-
 
 function scene:poopStars(center_x, center_y, num_stars)
   local info = self.info
@@ -451,7 +445,6 @@ function scene:poopStars(center_x, center_y, num_stars)
     self.sketch_sprites:add(star_sprite)
   end
 end
-
 
 function scene:startInteractiveSpelling()
   self.mode = "intro"
@@ -645,7 +638,6 @@ function scene:startInteractiveSpelling()
   end
 end
 
-
 function scene:beatTimerCheck()
   self.current_time = system.getTimer()
   if self.current_time - self.start_performance_time > (self.info.mpb * self.info.time_sig) * self.measures then
@@ -698,7 +690,6 @@ function scene:beatActions()
   -- land right on the measure mark.
   if self.mode == "interactive" and self.interactive_beats % 8 == 3 then
     if self.current_letter_number >= 1 and self.current_letter_number <= string.len(word) then
-      -- print("I should be playing this sound")
       current_letter = word:sub(self.current_letter_number, self.current_letter_number)
       randomizer = math.random(4)
       local sound = audio.loadSound("Sound/Interactive_Letters_".. info.bpm .. "/" .. current_letter .. "_" .. randomizer .. ".wav")

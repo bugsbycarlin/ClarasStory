@@ -49,7 +49,6 @@ function loader:create()
       sheet = self.picture_info[picture_name]["sheet"]
       self.sprites[picture_name] = graphics.newImageSheet("Art/" .. file_name, sheet)
     end
-    print("Loaded " .. picture_name)
 
     self.partialLoadNumber = self.partialLoadNumber + 1
     if self.partialLoadNumber <= #self.partialLoadObjects then
@@ -58,7 +57,6 @@ function loader:create()
       Runtime:removeEventListener("enterFrame", self.display_callback)
       self.display_callback(100)
       local load_time_total = system.getTimer() - self.load_start_time
-      print("Load time was " .. load_time_total)
       self.finished_callback()
     end
   end
@@ -74,7 +72,6 @@ function loader:create()
 
     for i = 1, #self.unload_list do
       unload_item = self.unload_list[i]
-      print("Unloading " .. unload_item)
       if self.sprites[unload_item] ~= nil then
         self.sprites[unload_item] = nil
       end
