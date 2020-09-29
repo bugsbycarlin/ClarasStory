@@ -198,7 +198,7 @@ function scene:chapter_2_Structure()
 end
 
 function scene:chapter_1_Structure()
-  self.first_scene = "Chapter_1_Scene_1"
+  self.first_scene = "Chapter_1_Scene_5"
   -- self.first_scene = "Chapter_1_Interactive_Girl"
 
   self.flow = {}

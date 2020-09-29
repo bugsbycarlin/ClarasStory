@@ -41,7 +41,7 @@ local selected_element_id = nil
 local bpm = 110
 local mpb = 545.4545454545
 
-local save_file = system.pathForFile("Scenes/Chapter_1_Scene_7.json", system.ResourceDirectory)
+local save_file = system.pathForFile("Scenes/Chapter_1_Scene_5.json", system.ResourceDirectory)
 print(save_file)
 
 function scene:saveInfo(event)
@@ -361,6 +361,13 @@ function scene:perform(asset)
   elseif asset.type == "picture" then
     local picture = asset.name
 
+    if sprite[picture] == nil then
+      print("Attempting last minute load for " .. picture)
+      file_name = picture_info[picture]["file_name"]
+      sheet = picture_info[picture]["sheet"]
+      sprite[picture] = graphics.newImageSheet("Art/" .. file_name, sheet)
+    end
+
     -- add depth here
     print("Adding asset " .. picture .. " with depth " .. asset.depth)
     asset.performance = display.newSprite(self.performanceAssetGroup[asset.depth + 5], sprite[picture], {frames=picture_info[picture].frames})
@@ -511,28 +518,30 @@ function scene:show(event)
     basic_info_text = display.newText(self.sceneGroup, "Time:0, Objects: 0", display.contentCenterX, 30, "Fonts/MouseMemoirs.ttf", 30)
     basic_info_text:setTextColor(0.0, 0.0, 0.0)
 
-    self.partialLoadNumber = 1
-    self.partialLoadObjects = {}
-    for picture, info in pairs(picture_info) do
-      table.insert(self.partialLoadObjects, picture)
-    end
+    -- self.partialLoadNumber = 1
+    -- self.partialLoadObjects = {}
+    -- for picture, info in pairs(picture_info) do
+    --   table.insert(self.partialLoadObjects, picture)
+    -- end
 
-    loadingText = display.newText(self.sceneGroup, "Bongos", display.contentCenterX, display.contentCenterY, "Georgia-Bold", 50)
-    loadingText:setTextColor(0.0, 0.0, 0.0)
+    -- loadingText = display.newText(self.sceneGroup, "Bongos", display.contentCenterX, display.contentCenterY, "Georgia-Bold", 50)
+    -- loadingText:setTextColor(0.0, 0.0, 0.0)
 
-    function updateLoadDisplay()
-      local percent = math.floor((self.partialLoadNumber / #self.partialLoadObjects) * 100)
-      loadingText.text = "Loading " .. percent .. "%"
-    end
+    -- function updateLoadDisplay()
+    --   local percent = math.floor((self.partialLoadNumber / #self.partialLoadObjects) * 100)
+    --   loadingText.text = "Loading " .. percent .. "%"
+    -- end
 
-    timer.performWithDelay(40, function() 
-      load_start_time = system.getTimer()
-      self:partialLoad() 
-    end)
+    -- timer.performWithDelay(40, function() 
+    --   load_start_time = system.getTimer()
+    --   self:partialLoad() 
+    -- end)
 
-    Runtime:addEventListener("enterFrame", updateLoadDisplay)
+    -- Runtime:addEventListener("enterFrame", updateLoadDisplay)
 
-    updateLoadDisplay()
+    -- updateLoadDisplay()
+
+    self:startEditor()
 
     sketch_sprites.picture_info = picture_info
     sketch_sprites.sprite_info = sprite
@@ -570,7 +579,7 @@ end
 
 function scene:startEditor()
   -- remove loading text
-  loadingText:removeSelf()
+  -- loadingText:removeSelf()
 
   self:updatePictureAssetMenu(picture_asset_start, picture_asset_start + 19)
   

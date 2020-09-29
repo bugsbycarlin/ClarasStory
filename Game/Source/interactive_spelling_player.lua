@@ -99,8 +99,7 @@ function interactive_spelling_player:augment(player)
     player.spelling_object:addEventListener("tap", touch_giggle)
     player.sketch_sprites:add(player.spelling_object)
 
-
-
+    player.button_making_timers = {}
     player.button_backings = {}
     player.button_letters = {}
     player.buttons = {}
@@ -111,7 +110,7 @@ function interactive_spelling_player:augment(player)
     end
 
     for i = 1, string.len(info.word) do
-      timer.performWithDelay(info.intro_letter_beats[i] * info.mpb, function()
+      table.insert(player.button_making_timers, timer.performWithDelay(info.intro_letter_beats[i] * info.mpb, function()
 
         local picture = string.upper(info.word):sub(i,i)
 
@@ -220,7 +219,7 @@ function interactive_spelling_player:augment(player)
         button.event = button_event
 
         table.insert(player.buttons, button)
-      end, 1)
+      end, 1))
     end
   end
 
@@ -256,19 +255,29 @@ function interactive_spelling_player:augment(player)
     end
 
     if player.mode == "finished" then
-      print("Canceling the beat timer")
-      timer.cancel(player.beat_timer)
-      
-      audio.stop()
+      player:finishSpellingScene()
+    end
+  end
 
-      for i = 1, string.len(player.info.word) do
+  player.finishSpellingScene = function()
+    print("Canceling the beat timer")
+    timer.cancel(player.beat_timer)
+    
+    audio.stop()
+
+    for i = 1, #player.button_making_timers do
+      timer.cancel(player.button_making_timers[i])
+    end
+
+    for i = 1, string.len(player.info.word) do
+      if #player.buttons >= i then
         player.buttons[i]:removeEventListener("tap", player.buttons[i].event)
         display.remove(player.buttons[i])
       end
-      player.buttons = {}
-
-      player:nextScene()
     end
+    player.buttons = {}
+
+    player:nextScene()
   end
 
   player.beatActions = function()

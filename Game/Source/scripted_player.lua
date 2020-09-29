@@ -72,6 +72,24 @@ function scene:show(event)
       self:startInteractiveSpelling()
     end
 
+    self.skip_scene_button = display.newImageRect(self.sceneGroup, "Art/skip_scene.png", 40, 40)
+    self.skip_scene_button.x = display.contentWidth - 35
+    self.skip_scene_button.y = display.contentHeight - 30
+    self.skip_scene_button.alpha = 0.3
+    self.skip_scene_button.last_skip = system.getTimer() - 1
+    self.skip_scene_button:addEventListener("tap", function(event)
+      if (system.getTimer() - self.skip_scene_button.last_skip > 1) then
+        self.skip_scene_button.last_skip = system.getTimer()
+        self:skipPerformanceToTime(100000)
+        if self.scene_type == "scripted" then
+          -- this will trigger a next scene in the case of scripted scenes
+          audio.stop() 
+        elseif self.scene_type == "interactive_spelling" then
+          self:finishSpellingScene()
+        end
+      end
+    end)
+
     self:setupLoading()
   end
 end
@@ -126,6 +144,13 @@ function scene:perform(asset)
     audio.play(asset.performance, {loops = 0, onComplete=function() self:nextScene() end})
   elseif asset.type == "picture" then
     local picture = asset.name
+
+    -- last, unlikely guard against trying to use an unloaded sprite.
+    -- this will only happen if you skip scenes really quickly
+    if self.sprite[picture] == nil then
+      print("Attempting last minute load for " .. picture)
+      self.loader:loadPicture(picture)
+    end
 
     asset.performance = display.newSprite(self.performanceAssetGroup[asset.depth + 5], self.sprite[picture], {frames=self.picture_info[picture].frames})
     asset.performance.name = asset.name
@@ -206,6 +231,34 @@ function scene:updatePerformance()
   end
 end
 
+function scene:skipPerformanceToTime(time_value)
+  -- self.total_performance_time = time_value -- this won't work because of the way those update.
+
+  for i = 1, #self.script_assets do
+    asset = self.script_assets[i]
+    if asset.performance == nil and time_value >= asset.start_time and (asset.disappear_time <= 0 or time_value < asset.disappear_time) then
+      self:perform(asset)
+    end
+  end
+
+  copy_sprite_list = {}
+  for i = 1, #self.sketch_sprites.sprite_list do
+    local sprite = self.sketch_sprites.sprite_list[i]
+    print(sprite.name)
+    print(sprite.disappear_method)
+    print(sprite.disappear_time)
+    if sprite and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 and time_value > sprite.disappear_time then
+      print("killing it")
+      animation.cancel(sprite)
+      display.remove(sprite)
+    else
+      print("saving it")
+      table.insert(copy_sprite_list, sprite)
+    end
+  end
+  self.sketch_sprites.sprite_list = copy_sprite_list
+end
+
 function scene:nextScene()
   self.mode = nil
 
@@ -232,6 +285,8 @@ function scene:nextScene()
   if self.next_scene ~= "end" and self.chapter_flow[self.next_scene] ~= nil then
     self:initializeScene()
   else
+    self.scene_type = nil
+    self.script_assets = nil
     self.chapter:finish()
   end
 
@@ -286,7 +341,7 @@ function scene:initializeScene()
   end
 
   self.sketch_sprites.picture_info = self.picture_info
-  self.sketch_sprites.sprite_info = self.sprite_info
+  self.sketch_sprites.sprite = self.sprite
   self.sketch_sprites.top_group = self.performanceAssetGroup[9]
 
   self.sketch_sprite_timer = timer.performWithDelay(35, function() 

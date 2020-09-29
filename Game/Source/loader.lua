@@ -44,12 +44,7 @@ function loader:create()
   function object:partialLoad()
 
     picture_name = self.partialLoadObjects[self.partialLoadNumber]
-    print("Loading " .. picture_name)
-    if string.len(picture_name) >= 1 then
-      file_name = self.picture_info[picture_name]["file_name"]
-      sheet = self.picture_info[picture_name]["sheet"]
-      self.sprites[picture_name] = graphics.newImageSheet("Art/" .. file_name, sheet)
-    end
+    self:loadPicture(picture_name)
 
     self.partialLoadNumber = self.partialLoadNumber + 1
     if self.partialLoadNumber <= #self.partialLoadObjects then
@@ -59,6 +54,14 @@ function loader:create()
       self.display_callback(100)
       local load_time_total = system.getTimer() - self.load_start_time
       self.finished_callback()
+    end
+  end
+
+  function object:loadPicture(picture_name)
+    if picture_name ~= nil and string.len(picture_name) >= 1 then
+      file_name = self.picture_info[picture_name]["file_name"]
+      sheet = self.picture_info[picture_name]["sheet"]
+      self.sprites[picture_name] = graphics.newImageSheet("Art/" .. file_name, sheet)
     end
   end
 
