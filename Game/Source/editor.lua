@@ -38,7 +38,10 @@ local load_start_time = 0
 
 local selected_element_id = nil
 
-local save_file = system.pathForFile("Scenes/Chapter_1_Scene_1.json", system.ResourceDirectory)
+local bpm = 110
+local mpb = 545.4545454545
+
+local save_file = system.pathForFile("Scenes/Chapter_1_Scene_7.json", system.ResourceDirectory)
 print(save_file)
 
 function scene:saveInfo(event)
@@ -499,6 +502,9 @@ function scene:show(event)
 
 
     sketch_sprites = sketch_sprites_class:create()
+    sketch_sprites.sprite = sprite
+    sketch_sprites.top_group = self.performanceAssetGroup[9]
+    sketch_sprites.picture_info = picture_info
 
     display.setDefault("background", 1, 1, 1)
 
@@ -843,9 +849,115 @@ function scene:handleKeyboard(event)
       end
 
       self:updatePerformance()
+    end
+  end
+
+  if event.isShiftDown and event.keyName == "right" and event.phase == "up" then  
+    if mode == "editing" then
+      
+      stored_performance_time = stored_performance_time + 1000
+      total_performance_time = stored_performance_time
+      
+      if stored_performance_time < 0 then
+        current_time = system.getTimer()
+        start_performance_time = 0
+        stored_performance_time = 0
+        total_performance_time = 0
+        
+        self:clearPerformance()
+        audio.stop()
+      else
+        for i = 1, #script_assets do
+          asset = script_assets[i]
+          if asset.type == "picture" then
+            if asset.start_time > stored_performance_time then
+              sketch_sprites:remove(asset.id)
+              asset.performance = nil
+            end
+          elseif asset.type == "sound" then
+            print("Seeking time " .. stored_performance_time .. " in sound file " .. tostring(asset.performance))
+            audio.seek(stored_performance_time + 50, asset.performance)
+          end
+        end
+      end
+
+      self:updatePerformance()
+    end
+  end
+
+
+  if event.isAltDown and event.keyName == "left" and event.phase == "up" then  
+    if mode == "editing" then
+      print("backwards a half beat")
+
+      stored_performance_time = math.floor((stored_performance_time / (mpb/2)) + 0.5) * (mpb/2)
+      stored_performance_time = stored_performance_time - mpb/2
+      total_performance_time = stored_performance_time
+      
+      if stored_performance_time < 0 then
+        current_time = system.getTimer()
+        start_performance_time = 0
+        stored_performance_time = 0
+        total_performance_time = 0
+        
+        self:clearPerformance()
+        audio.stop()
+      else
+        for i = 1, #script_assets do
+          asset = script_assets[i]
+          if asset.type == "picture" then
+            if asset.start_time > stored_performance_time then
+              sketch_sprites:remove(asset.id)
+              asset.performance = nil
+            end
+          elseif asset.type == "sound" then
+            print("Seeking time " .. stored_performance_time .. " in sound file " .. tostring(asset.performance))
+            audio.seek(stored_performance_time + 50, asset.performance)
+          end
+        end
+      end
+
+      self:updatePerformance()
 
     end
   end
+
+  if event.isAltDown and event.keyName == "right" and event.phase == "up" then  
+    if mode == "editing" then
+      print("forwards a half beat")
+
+      stored_performance_time = math.floor((stored_performance_time / (mpb/2)) + 0.5) * (mpb/2)
+      stored_performance_time = stored_performance_time + mpb/2
+      total_performance_time = stored_performance_time
+      
+      if stored_performance_time < 0 then
+        current_time = system.getTimer()
+        start_performance_time = 0
+        stored_performance_time = 0
+        total_performance_time = 0
+        
+        self:clearPerformance()
+        audio.stop()
+      else
+        for i = 1, #script_assets do
+          asset = script_assets[i]
+          if asset.type == "picture" then
+            if asset.start_time > stored_performance_time then
+              sketch_sprites:remove(asset.id)
+              asset.performance = nil
+            end
+          elseif asset.type == "sound" then
+            print("Seeking time " .. stored_performance_time .. " in sound file " .. tostring(asset.performance))
+            audio.seek(stored_performance_time + 50, asset.performance)
+          end
+        end
+      end
+
+      self:updatePerformance()
+
+    end
+  end
+
 
 
   if event.isCtrlDown and event.keyName == "d" and event.phase == "up" then
@@ -893,6 +1005,7 @@ function scene:handleKeyboard(event)
       self:loadInfo()
     end
   end
+
 end
 
 

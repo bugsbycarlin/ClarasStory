@@ -262,14 +262,15 @@ picture_info["Apple"] = {
   sprite_size = 400,
   sprite_count = 25,
   outline_frame = 11,
+  always_load = true,
 }
 
 picture_info["Earth"] = {
-  file_name = "Earth_Single.png",
-  row_length = 1,
+  file_name = "Earth_Sketch.png",
+  row_length = 10,
   sprite_size = 400,
-  sprite_count = 1,
-  outline_frame = 1,
+  sprite_count = 58,
+  outline_frame = 14,
 }
 
 picture_info["Sun"] = {
@@ -480,6 +481,7 @@ picture_info["Orange"] = {
   sprite_size = 400,
   sprite_count = 21,
   outline_frame = 5,
+  always_load = true,
 }
 
 picture_info["Banana"] = {
@@ -488,6 +490,7 @@ picture_info["Banana"] = {
   sprite_size = 400,
   sprite_count = 20,
   outline_frame = 7,
+  always_load = true,
 }
 
 picture_info["Plum"] = {
@@ -496,6 +499,7 @@ picture_info["Plum"] = {
   sprite_size = 400,
   sprite_count = 24,
   outline_frame = 6,
+  always_load = true,
 }
 
 picture_info["Spotlight"] = {
@@ -583,6 +587,7 @@ picture_info["Pear"] = {
   sprite_size = 256,
   sprite_count = 14,
   outline_frame = 3,
+  always_load = true,
 }
 
 picture_info["Lime"] = {
@@ -591,6 +596,7 @@ picture_info["Lime"] = {
   sprite_size = 256,
   sprite_count = 15,
   outline_frame = 5,
+  always_load = true,
 }
 
 picture_info["Tent"] = {

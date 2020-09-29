@@ -198,8 +198,8 @@ function scene:chapter_2_Structure()
 end
 
 function scene:chapter_1_Structure()
-  -- self.first_scene = "Chapter_1_Scene_1"
-  self.first_scene = "Chapter_1_Interactive_Girl"
+  self.first_scene = "Chapter_1_Scene_1"
+  -- self.first_scene = "Chapter_1_Interactive_Girl"
 
   self.flow = {}
   self.flow["Chapter_1_Scene_1"] = {
@@ -219,10 +219,13 @@ function scene:chapter_1_Structure()
     random_letters=false,
     bpm=110,
     mpb=545.4545454545,
-    intro_letter_beats = {12, 13, 14, 15},
-    outro_letter_beats = {4, 6, 8, 10},
-    outro_sound_beats = {12, 14, 16, 18},
-    outro_word_beat = 20,
+    object_x = 542,
+    object_y = 375,
+    intro_letter_beats = {0, 0.5, 1, 1.5},
+    outro_sounds = {"guh", "ih", "ruh", "luh"},
+    -- outro_letter_beats = {1, 2, 3, 4},
+    -- outro_sound_beats = {5, 6, 7, 8},
+    -- outro_word_beat = 20,
     time_sig=4,
     script=nil,
   }
@@ -235,10 +238,11 @@ function scene:chapter_1_Structure()
     random_letters=false,
     bpm=110,
     mpb=545.4545454545,
-    intro_letter_beats = {12, 13, 14, 15},
-    outro_letter_beats = {4, 6, 8, 10},
-    outro_sound_beats = {12, 14, 16, 18},
-    outro_word_beat = 20,
+    intro_letter_beats = {0, 0.5, 1, 1.5},
+    outro_sounds = {"buh", "ih", "ruh", "duh"},
+    -- outro_letter_beats = {4, 6, 8, 10},
+    -- outro_sound_beats = {12, 14, 16, 18},
+    -- outro_word_beat = 20,
     time_sig=4,
     script=nil,
   }
@@ -248,6 +252,7 @@ function scene:chapter_1_Structure()
     type="scripted",
     script=self:loadSceneScript("chapter_1_scene_2"),
     duration=0,
+    cleanup=false,
   }
   self.flow["Chapter_1_Interactive_Mom"] = {
     name="Chapter_1_Interactive_Mom",
@@ -258,14 +263,16 @@ function scene:chapter_1_Structure()
     random_letters=false,
     bpm=110,
     mpb=545.4545454545,
-    object_x = display.contentCenterX - 50,
-    object_y = display.contentCenterY - 100,
-    intro_letter_beats = {8, 10, 12},
-    outro_letter_beats = {4, 6, 8},
-    outro_sound_beats = {12, 14, 16},
-    outro_word_beat = 18,
+    object_x = 299.75,
+    object_y = 533.25,
+    intro_letter_beats = {0, 0.5, 1},
+    outro_sounds = {"muh", "oah", "muh",},
+    -- outro_letter_beats = {4, 6, 8},
+    -- outro_sound_beats = {12, 14, 16},
+    -- outro_word_beat = 18,
     time_sig=4,
     script=self:loadSceneScript("chapter_1_mom_interactive"),
+    cleanup=false,
     -- here it might be fun to use a stage spotlight
   }
   self.flow["Chapter_1_Interactive_Dad"] = {
@@ -277,12 +284,13 @@ function scene:chapter_1_Structure()
     random_letters=false,
     bpm=110,
     mpb=545.4545454545,
-    object_x = display.contentCenterX + 90,
-    object_y = display.contentCenterY - 80,
-    intro_letter_beats = {8, 10, 12},
-    outro_letter_beats = {4, 6, 8},
-    outro_sound_beats = {12, 14, 16},
-    outro_word_beat = 18,
+    object_x = 473,
+    object_y = 523.5,
+    intro_letter_beats = {0, 0.5, 1},
+    outro_sounds = {"duh", "ah", "duh",},
+    -- outro_letter_beats = {4, 6, 8},
+    -- outro_sound_beats = {12, 14, 16},
+    -- outro_word_beat = 18,
     time_sig=4,
     script=self:loadSceneScript("chapter_1_dad_interactive"),
     -- here it might be fun to use a stage spotlight
@@ -304,10 +312,12 @@ function scene:chapter_1_Structure()
     random_letters=false,
     bpm=110,
     mpb=545.4545454545,
-    intro_letter_beats = {8, 10, 12, 14},
-    outro_letter_beats = {4, 6, 8, 10},
-    outro_sound_beats = {12, 14, 16, 18},
-    outro_word_beat = 20,
+    intro_letter_beats = {0, 0.5, 1, 1.5},
+    outro_sounds = {"wuh", "ahh", "nuh", "duh"},
+    -- intro_letter_beats = {8, 10, 12, 14},
+    -- outro_letter_beats = {4, 6, 8, 10},
+    -- outro_sound_beats = {12, 14, 16, 18},
+    -- outro_word_beat = 20,
     time_sig=4,
     script=nil,
     -- here it might be fun to use a stage spotlight
@@ -319,6 +329,7 @@ function scene:chapter_1_Structure()
     script_file="Chapter_1_Scene_4.json",
     script=self:loadSceneScript("chapter_1_scene_4"),
     duration=0,
+    cleanup=false,
   }
   self.flow["Chapter_1_Interactive_Pig"] = {
     name="Chapter_1_Interactive_Pig",
@@ -329,12 +340,17 @@ function scene:chapter_1_Structure()
     random_letters=false,
     bpm=110,
     mpb=545.4545454545,
-    intro_letter_beats = {12, 14, 16},
-    outro_letter_beats = {4, 6, 8},
-    outro_sound_beats = {12, 14, 16},
-    outro_word_beat = 18,
+    object_x = 398,
+    object_y = 400,
+    -- intro_letter_beats = {12, 14, 16},
+    -- outro_letter_beats = {4, 6, 8},
+    -- outro_sound_beats = {12, 14, 16},
+    -- outro_word_beat = 18,
+    intro_letter_beats = {0, 0.5, 1},
+    outro_sounds = {"puh", "ih", "guh"},
     time_sig=4,
     script=nil,
+    cleanup=false,
     -- here it might be fun to use a stage spotlight
   }
   self.flow["Chapter_1_Interactive_Cow"] = {
@@ -346,10 +362,14 @@ function scene:chapter_1_Structure()
     random_letters=false,
     bpm=110,
     mpb=545.4545454545,
-    intro_letter_beats = {8, 10, 12},
-    outro_letter_beats = {4, 6, 8},
-    outro_sound_beats = {12, 14, 16},
-    outro_word_beat = 18,
+    object_x = 686,
+    object_y = 410,
+    -- intro_letter_beats = {8, 10, 12},
+    -- outro_letter_beats = {4, 6, 8},
+    -- outro_sound_beats = {12, 14, 16},
+    -- outro_word_beat = 18,
+    intro_letter_beats = {0, 0.5, 1},
+    outro_sounds = {"cuh", "oah", "wuh"},
     time_sig=4,
     script=nil,
     -- here it might be fun to use a stage spotlight
@@ -371,10 +391,12 @@ function scene:chapter_1_Structure()
     random_letters=false,
     bpm=110,
     mpb=545.4545454545,
-    intro_letter_beats = {12, 14, 16, 18},
-    outro_letter_beats = {4, 6, 8, 10},
-    outro_sound_beats = {12, 14, 16, 18},
-    outro_word_beat = 20,
+    -- intro_letter_beats = {12, 14, 16, 18},
+    -- outro_letter_beats = {4, 6, 8, 10},
+    -- outro_sound_beats = {12, 14, 16, 18},
+    -- outro_word_beat = 20,
+    intro_letter_beats = {0, 0.5, 1, 1.5},
+    outro_sounds = {"cuh", "oh", "ih", "nuh"},
     time_sig=4,
     script=nil,
     -- here it might be fun to use a stage spotlight
@@ -407,10 +429,12 @@ function scene:chapter_1_Structure()
     random_letters=false,
     bpm=110,
     mpb=545.4545454545,
-    intro_letter_beats = {12, 13, 14, 15, 16},
-    outro_letter_beats = {4, 6, 8, 10, 12},
-    outro_sound_beats = {16, 18, 20, 22, 24},
-    outro_word_beat = 26,
+    -- intro_letter_beats = {12, 13, 14, 15, 16},
+    -- outro_letter_beats = {4, 6, 8, 10, 12},
+    -- outro_sound_beats = {16, 18, 20, 22, 24},
+    -- outro_word_beat = 26,
+    intro_letter_beats = {0, 0.5, 1, 1.5, 2},
+    outro_sounds = {"ah", "puh", "puh", "luh", "eh"},
     time_sig=4,
     cleanup=false,
   }
@@ -431,10 +455,12 @@ function scene:chapter_1_Structure()
     random_letters=false,
     bpm=110,
     mpb=545.4545454545,
-    intro_letter_beats = {12, 14, 16, 18, 20, 22},
-    outro_letter_beats = {4, 6, 8, 10, 12, 14},
-    outro_sound_beats = {16, 18, 20, 22, 24, 26},
-    outro_word_beat = 28,
+    -- intro_letter_beats = {12, 14, 16, 18, 20, 22},
+    -- outro_letter_beats = {4, 6, 8, 10, 12, 14},
+    -- outro_sound_beats = {16, 18, 20, 22, 24, 26},
+    -- outro_word_beat = 28,
+    intro_letter_beats = {0, 0.5, 1, 1.5, 2, 2.5},
+    outro_sounds = {"buh", "ah", "nuh", "ah", "nuh", "ah"},
     time_sig=4,
     cleanup=false,
   }
@@ -455,10 +481,12 @@ function scene:chapter_1_Structure()
     random_letters=false,
     bpm=110,
     mpb=545.4545454545,
-    intro_letter_beats = {12, 14, 16, 18},
-    outro_letter_beats = {4, 6, 8, 10},
-    outro_sound_beats = {12, 14, 16, 18},
-    outro_word_beat = 20,
+    -- intro_letter_beats = {12, 14, 16, 18},
+    -- outro_letter_beats = {4, 6, 8, 10},
+    -- outro_sound_beats = {12, 14, 16, 18},
+    -- outro_word_beat = 20,
+    intro_letter_beats = {0, 0.5, 1, 1.5},
+    outro_sounds = {"luh", "I", "muh", "eh"},
     time_sig=4,
     cleanup=false,
   }
@@ -479,10 +507,12 @@ function scene:chapter_1_Structure()
     random_letters=false,
     bpm=110,
     mpb=545.4545454545,
-    intro_letter_beats = {12, 14, 16, 18, 20, 22},
-    outro_letter_beats = {4, 6, 8, 10, 12, 14},
-    outro_sound_beats = {20, 22, 24, 26, 28, 30},
-    outro_word_beat = 34,
+    -- intro_letter_beats = {12, 14, 16, 18, 20, 22},
+    -- outro_letter_beats = {4, 6, 8, 10, 12, 14},
+    -- outro_sound_beats = {20, 22, 24, 26, 28, 30},
+    -- outro_word_beat = 34,
+    intro_letter_beats = {0, 0.5, 1, 1.5, 2, 2.5},
+    outro_sounds = {"oh", "ruh", "ah", "nuh", "juh", "eh"},
     time_sig=4,
     cleanup=false,
   }
@@ -490,7 +520,7 @@ function scene:chapter_1_Structure()
     name="Chapter_1_Beast_Pear",
     next="Chapter_1_Interactive_Pear",
     type="scripted",
-    cleanup="false",
+    cleanup=false,
     script=self:loadSceneScript("chapter_1_beast_pear"),
     duration=0,
   }
@@ -503,10 +533,12 @@ function scene:chapter_1_Structure()
     random_letters=false,
     bpm=110,
     mpb=545.4545454545,
-    intro_letter_beats = {12, 14, 16, 18},
-    outro_letter_beats = {4, 6, 8, 10},
-    outro_sound_beats = {12, 14, 16, 18},
-    outro_word_beat = 20,
+    -- intro_letter_beats = {12, 14, 16, 18},
+    -- outro_letter_beats = {4, 6, 8, 10},
+    -- outro_sound_beats = {12, 14, 16, 18},
+    -- outro_word_beat = 20,
+    intro_letter_beats = {0, 0.5, 1, 1.5},
+    outro_sounds = {"puh", "eh", "ah", "ruh"},
     time_sig=4,
     cleanup=false,
   }
@@ -527,10 +559,12 @@ function scene:chapter_1_Structure()
     random_letters=false,
     bpm=110,
     mpb=545.4545454545,
-    intro_letter_beats = {12, 14, 16, 18},
-    outro_letter_beats = {4, 6, 8, 10},
-    outro_sound_beats = {12, 14, 16, 18},
-    outro_word_beat = 20,
+    -- intro_letter_beats = {12, 14, 16, 18},
+    -- outro_letter_beats = {4, 6, 8, 10},
+    -- outro_sound_beats = {12, 14, 16, 18},
+    -- outro_word_beat = 20,
+    intro_letter_beats = {0, 0.5, 1, 1.5},
+    outro_sounds = {"puh", "luh", "uh", "muh"},
     time_sig=4,
     cleanup=false,
   }
@@ -562,6 +596,20 @@ function scene:chapter_1_Structure()
   self.flow["Chapter_1_Interactive_" .. fruits[2]].next = "Chapter_1_Beast_" .. fruits[3]
   self.flow["Chapter_1_Interactive_" .. fruits[3]].next = "Chapter_1_Scene_7"
   self.flow["Chapter_1_Interactive_" .. fruits[3]].cleanup = true
+
+  -- chomp_asset = {
+  --   name="Chomp",
+  --   id="Chomp_555",
+  --   type="sound",
+  --   start_time=0,
+  --   timer=nil,
+  --   performance=nil,
+  --   x=display.contentCenterX,
+  --   y=display.contentCenterY
+  -- }
+  -- table.insert(self.flow["Chapter_1_Beast_" .. fruits[2]].script, chomp_asset)
+  -- table.insert(self.flow["Chapter_1_Beast_" .. fruits[3]].script, chomp_asset)
+  -- table.insert(self.flow["Chapter_1_Scene_7"].script, chomp_asset)
 end
 
 

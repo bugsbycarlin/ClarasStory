@@ -51,6 +51,8 @@ function scene:show(event)
 
     self.picture_info = require("Source.pictures")
 
+    interactive_spelling_player:augment(self)
+
     for i = -4, 4 do
       local layer = display.newGroup()
       self.performanceAssetGroup:insert(layer)
@@ -67,7 +69,6 @@ function scene:show(event)
     if self.scene_type == "scripted" then
       self:startScripted()
     elseif self.scene_type == "interactive_spelling" then
-      interactive_spelling_player:augment(self)
       self:startInteractiveSpelling()
     end
 
@@ -220,8 +221,12 @@ function scene:nextScene()
   if self.info["cleanup"] == nil or self.info["cleanup"] ~= false then
     self:clearPerformance()
     self.sketch_sprites.picture_info = nil
-    self.sketch_sprites.sprite_info = nil
+    self.sketch_sprites.sprite = nil
     self.sketch_sprites.top_group = nil
+  end
+  if self.scene_type == "interactive_spelling" then
+    print("I AM CLEARING THE SPELLING")
+    self:clearSpellingMaterial()
   end
 
   if self.next_scene ~= "end" and self.chapter_flow[self.next_scene] ~= nil then
@@ -252,6 +257,10 @@ function scene:initializeFromChapter()
   self.chapter_flow = composer.getVariable("chapter_flow")
   self.scene_type = self.info["type"]
 
+  self.sketch_sprites.picture_info = self.picture_info
+  self.sketch_sprites.sprite = self.sprite
+  self.sketch_sprites.top_group = self.performanceAssetGroup[9]
+
   self.sketch_sprite_timer = timer.performWithDelay(35, function() 
     self.sketch_sprites:update(self.mode, self.total_performance_time)
   end, 0)
@@ -275,6 +284,10 @@ function scene:initializeScene()
   else
     self.next_scene = "end"
   end
+
+  self.sketch_sprites.picture_info = self.picture_info
+  self.sketch_sprites.sprite_info = self.sprite_info
+  self.sketch_sprites.top_group = self.performanceAssetGroup[9]
 
   self.sketch_sprite_timer = timer.performWithDelay(35, function() 
     self.sketch_sprites:update(self.mode, self.total_performance_time)

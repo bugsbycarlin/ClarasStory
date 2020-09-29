@@ -44,6 +44,7 @@ function loader:create()
   function object:partialLoad()
 
     picture_name = self.partialLoadObjects[self.partialLoadNumber]
+    print("Loading " .. picture_name)
     if string.len(picture_name) >= 1 then
       file_name = self.picture_info[picture_name]["file_name"]
       sheet = self.picture_info[picture_name]["sheet"]

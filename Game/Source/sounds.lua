@@ -57,5 +57,9 @@ sound_info["Plum_Beast_Intro"] = {
   file_name = "Plum_Beast_Intro.wav",
 }
 
+sound_info["Chomp"] = {
+  file_name = "chomp.wav",
+}
+
 
 return sound_info

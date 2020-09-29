@@ -8,14 +8,14 @@
     "id": "Couch_13",
     "intro": "sketch",
     "start_time": 0,
-    "x": 512,
-    "y": 350,
+    "x": 397.25,
+    "y": 585.75,
     "y_scale": 1,
     "name": "Couch",
-    "fixed_y": 350,
+    "fixed_y": 585.75,
     "disappear_method": "pop",
     "depth": -1,
-    "fixed_x": 512,
+    "fixed_x": 397.25,
     "squish_tilt": 0
   }, 
 ]

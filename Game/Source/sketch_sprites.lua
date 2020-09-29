@@ -275,37 +275,34 @@ function sketch_sprites:create()
   end
 
   function object:poopFruits(current_sprite, range_x, range_y, num_fruits)
-  local info = current_sprite.info
-  local fruits = {"Apple", "Banana", "Lime", "Orange", "Pear", "Plum"}
-  print(self.sprite_info)
-  for i = 1, num_fruits do
-    local picture = fruits[math.random(#fruits)]
-    print(picture)
-    print(self.sprite_info[picture])
-    local fruit_sprite = display.newSprite(self.top_group, self.sprite_info[picture], {frames=self.picture_info[picture].frames})
-    fruit_sprite.id = picture .. "_" .. 0
-    fruit_sprite.x = current_sprite.fixed_x - range_x + math.random(2 * range_x)
-    fruit_sprite.y = current_sprite.fixed_y - range_y + math.random(2 * range_y)
-    fruit_sprite.fixed_y = fruit_sprite.y
-    fruit_sprite.fixed_x = fruit_sprite.x
-    fruit_sprite.info = self.picture_info[picture]
-    fruit_sprite.intro = "static"
-    fruit_sprite:setFrame(self.picture_info[picture]["sprite_count"])
-    fruit_sprite.state = "disappearing_gravity"
-    fruit_sprite.start_time = system.getTimer()
-    fruit_sprite.x_scale = 0.25
-    fruit_sprite.y_scale = 0.25
-    fruit_sprite.xScale = fruit_sprite.x_scale
-    fruit_sprite.yScale = fruit_sprite.y_scale
-    fruit_sprite.disappear_time = -1
-    fruit_sprite.squish_scale = 1
-    fruit_sprite.squish_tilt = 0
-    fruit_sprite.squish_period = info.mpb
-    fruit_sprite.x_vel = -20 + math.random(40)
-    fruit_sprite.y_vel = -1 * (4 + math.random(6))
-    self:add(fruit_sprite)
+    local info = current_sprite.info
+    local fruits = {"Apple", "Banana", "Lime", "Orange", "Pear", "Plum"}
+    for i = 1, num_fruits do
+      local picture = fruits[math.random(#fruits)]
+      local fruit_sprite = display.newSprite(self.top_group, self.sprite[picture], {frames=self.picture_info[picture].frames})
+      fruit_sprite.id = picture .. "_" .. 0
+      fruit_sprite.x = current_sprite.fixed_x - range_x + math.random(2 * range_x)
+      fruit_sprite.y = current_sprite.fixed_y - range_y + math.random(2 * range_y)
+      fruit_sprite.fixed_y = fruit_sprite.y
+      fruit_sprite.fixed_x = fruit_sprite.x
+      fruit_sprite.info = self.picture_info[picture]
+      fruit_sprite.intro = "static"
+      fruit_sprite:setFrame(self.picture_info[picture]["sprite_count"])
+      fruit_sprite.state = "disappearing_gravity"
+      fruit_sprite.start_time = system.getTimer()
+      fruit_sprite.x_scale = 0.25
+      fruit_sprite.y_scale = 0.25
+      fruit_sprite.xScale = fruit_sprite.x_scale
+      fruit_sprite.yScale = fruit_sprite.y_scale
+      fruit_sprite.disappear_time = -1
+      fruit_sprite.squish_scale = 1
+      fruit_sprite.squish_tilt = 0
+      fruit_sprite.squish_period = info.mpb
+      fruit_sprite.x_vel = -20 + math.random(40)
+      fruit_sprite.y_vel = -1 * (4 + math.random(6))
+      self:add(fruit_sprite)
+    end
   end
-end
 
   return object
 end
