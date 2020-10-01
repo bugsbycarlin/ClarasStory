@@ -26,6 +26,8 @@ local printMemUsage = function()
   print("------------------------------------------\n")
 end
 
+local const_allow_editor = true
+
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
@@ -65,7 +67,12 @@ function scene:show(event)
     end, 0)
 
     self:initializeFromChapter()
-    -- self:initializeScene()
+
+    if const_allow_editor == true then
+      editor = require("Source.editor_2")
+      editor:augment(self)
+    end
+
     if self.scene_type == "scripted" then
       self:startScripted()
     elseif self.scene_type == "interactive_spelling" then
@@ -82,8 +89,8 @@ function scene:show(event)
         self.skip_scene_button.last_skip = system.getTimer()
         self:skipPerformanceToTime(100000)
         if self.scene_type == "scripted" then
-          -- this will trigger a next scene in the case of scripted scenes
-          audio.stop() 
+          audio.stop()
+          self:nextScene()
         elseif self.scene_type == "interactive_spelling" then
           self:finishSpellingScene()
         end
@@ -141,7 +148,11 @@ function scene:perform(asset)
   if asset.type == "sound" then
     asset.performance = audio.loadStream("Sound/" .. sound_info[asset.name].file_name)
     -- should only do if this is the main audio file
-    audio.play(asset.performance, {loops = 0, onComplete=function() self:nextScene() end})
+    audio.play(asset.performance, {loops = 0, onComplete=function(event)
+      if event.completed == true then
+        self:nextScene()
+      end
+    end})
   elseif asset.type == "picture" then
     local picture = asset.name
 
@@ -223,10 +234,20 @@ function scene:updatePerformance()
   local last_update_time = self.total_performance_time
   self:updateTime()
 
-  for i = 1, #self.script_assets do
-    asset = self.script_assets[i]
-    if asset.performance == nil and last_update_time <= asset.start_time and self.total_performance_time >= asset.start_time then
-      self:perform(asset)
+  if basic_info_text ~= nil and basic_info_text.isVisible == true then
+    local objects_in_performance = 0
+    for i = 1, 9 do
+      objects_in_performance = objects_in_performance + self.performanceAssetGroup[i].numChildren
+    end 
+    basic_info_text.text = "Time: " .. math.floor(self.total_performance_time) / 1000.0 .. ", Objects: " .. objects_in_performance
+  end
+
+  if (self.mode ~= "editing") then
+    for i = 1, #self.script_assets do
+      asset = self.script_assets[i]
+      if asset.performance == nil and last_update_time <= asset.start_time and self.total_performance_time >= asset.start_time then
+        self:perform(asset)
+      end
     end
   end
 end
@@ -310,6 +331,8 @@ function scene:initializeFromChapter()
   self.sprite = composer.getVariable("sprite")
   self.script_assets = composer.getVariable("script_assets")
   self.chapter_flow = composer.getVariable("chapter_flow")
+  self.bpm = composer.getVariable("bpm")
+  self.mpb = composer.getVariable("mpb")
   self.scene_type = self.info["type"]
 
   self.sketch_sprites.picture_info = self.picture_info

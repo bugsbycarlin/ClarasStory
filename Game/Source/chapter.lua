@@ -188,6 +188,9 @@ end
 function scene:chapter_2_Structure()
   self.first_scene = "Chapter_2_Scene_1"
 
+  composer.setVariable("mpb", 375)
+  composer.setVariable("bpm", 160)
+
   self.flow = {}
   self.flow["Chapter_2_Scene_1"] = {
     name="Chapter_2_Scene_1",
@@ -200,6 +203,9 @@ end
 function scene:chapter_1_Structure()
   self.first_scene = "Chapter_1_Scene_5"
   -- self.first_scene = "Chapter_1_Interactive_Girl"
+
+  composer.setVariable("mpb", 545.4545454545)
+  composer.setVariable("bpm", 110)
 
   self.flow = {}
   self.flow["Chapter_1_Scene_1"] = {
@@ -217,8 +223,6 @@ function scene:chapter_1_Structure()
     word="Girl",
     random_order=false,
     random_letters=false,
-    bpm=110,
-    mpb=545.4545454545,
     object_x = 542,
     object_y = 375,
     intro_letter_beats = {0, 0.5, 1, 1.5},
@@ -236,8 +240,6 @@ function scene:chapter_1_Structure()
     word="Bird",
     random_order=false,
     random_letters=false,
-    bpm=110,
-    mpb=545.4545454545,
     intro_letter_beats = {0, 0.5, 1, 1.5},
     outro_sounds = {"buh", "ih", "ruh", "duh"},
     -- outro_letter_beats = {4, 6, 8, 10},
@@ -261,8 +263,6 @@ function scene:chapter_1_Structure()
     word="Mom",
     random_order=false,
     random_letters=false,
-    bpm=110,
-    mpb=545.4545454545,
     object_x = 299.75,
     object_y = 533.25,
     intro_letter_beats = {0, 0.5, 1},
@@ -282,8 +282,6 @@ function scene:chapter_1_Structure()
     word="Dad",
     random_order=false,
     random_letters=false,
-    bpm=110,
-    mpb=545.4545454545,
     object_x = 473,
     object_y = 523.5,
     intro_letter_beats = {0, 0.5, 1},
@@ -310,8 +308,6 @@ function scene:chapter_1_Structure()
     word="Wand",
     random_order=false,
     random_letters=false,
-    bpm=110,
-    mpb=545.4545454545,
     intro_letter_beats = {0, 0.5, 1, 1.5},
     outro_sounds = {"wuh", "ahh", "nuh", "duh"},
     -- intro_letter_beats = {8, 10, 12, 14},
@@ -338,8 +334,6 @@ function scene:chapter_1_Structure()
     word="Pig",
     random_order=false,
     random_letters=false,
-    bpm=110,
-    mpb=545.4545454545,
     object_x = 398,
     object_y = 400,
     -- intro_letter_beats = {12, 14, 16},
@@ -360,8 +354,6 @@ function scene:chapter_1_Structure()
     word="Cow",
     random_order=false,
     random_letters=false,
-    bpm=110,
-    mpb=545.4545454545,
     object_x = 686,
     object_y = 410,
     -- intro_letter_beats = {8, 10, 12},
@@ -369,7 +361,7 @@ function scene:chapter_1_Structure()
     -- outro_sound_beats = {12, 14, 16},
     -- outro_word_beat = 18,
     intro_letter_beats = {0, 0.5, 1},
-    outro_sounds = {"cuh", "oah", "wuh"},
+    outro_sounds = {"kuh", "oah", "wuh"},
     time_sig=4,
     script=nil,
     -- here it might be fun to use a stage spotlight
@@ -389,14 +381,12 @@ function scene:chapter_1_Structure()
     word="Coin",
     random_order=false,
     random_letters=false,
-    bpm=110,
-    mpb=545.4545454545,
     -- intro_letter_beats = {12, 14, 16, 18},
     -- outro_letter_beats = {4, 6, 8, 10},
     -- outro_sound_beats = {12, 14, 16, 18},
     -- outro_word_beat = 20,
     intro_letter_beats = {0, 0.5, 1, 1.5},
-    outro_sounds = {"cuh", "oh", "ih", "nuh"},
+    outro_sounds = {"kuh", "oh", "ih", "nuh"},
     time_sig=4,
     script=nil,
     -- here it might be fun to use a stage spotlight
@@ -427,8 +417,6 @@ function scene:chapter_1_Structure()
     word="Apple",
     random_order=false,
     random_letters=false,
-    bpm=110,
-    mpb=545.4545454545,
     -- intro_letter_beats = {12, 13, 14, 15, 16},
     -- outro_letter_beats = {4, 6, 8, 10, 12},
     -- outro_sound_beats = {16, 18, 20, 22, 24},
@@ -453,8 +441,6 @@ function scene:chapter_1_Structure()
     word="Banana",
     random_order=false,
     random_letters=false,
-    bpm=110,
-    mpb=545.4545454545,
     -- intro_letter_beats = {12, 14, 16, 18, 20, 22},
     -- outro_letter_beats = {4, 6, 8, 10, 12, 14},
     -- outro_sound_beats = {16, 18, 20, 22, 24, 26},
@@ -479,8 +465,6 @@ function scene:chapter_1_Structure()
     word="Lime",
     random_order=false,
     random_letters=false,
-    bpm=110,
-    mpb=545.4545454545,
     -- intro_letter_beats = {12, 14, 16, 18},
     -- outro_letter_beats = {4, 6, 8, 10},
     -- outro_sound_beats = {12, 14, 16, 18},
@@ -505,8 +489,6 @@ function scene:chapter_1_Structure()
     word="Orange",
     random_order=false,
     random_letters=false,
-    bpm=110,
-    mpb=545.4545454545,
     -- intro_letter_beats = {12, 14, 16, 18, 20, 22},
     -- outro_letter_beats = {4, 6, 8, 10, 12, 14},
     -- outro_sound_beats = {20, 22, 24, 26, 28, 30},
@@ -531,8 +513,6 @@ function scene:chapter_1_Structure()
     word="Pear",
     random_order=false,
     random_letters=false,
-    bpm=110,
-    mpb=545.4545454545,
     -- intro_letter_beats = {12, 14, 16, 18},
     -- outro_letter_beats = {4, 6, 8, 10},
     -- outro_sound_beats = {12, 14, 16, 18},
@@ -557,8 +537,6 @@ function scene:chapter_1_Structure()
     word="Plum",
     random_order=false,
     random_letters=false,
-    bpm=110,
-    mpb=545.4545454545,
     -- intro_letter_beats = {12, 14, 16, 18},
     -- outro_letter_beats = {4, 6, 8, 10},
     -- outro_sound_beats = {12, 14, 16, 18},

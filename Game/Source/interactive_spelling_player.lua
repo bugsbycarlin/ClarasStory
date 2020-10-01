@@ -88,13 +88,13 @@ function interactive_spelling_player:augment(player)
     player.spelling_object.disappear_time = -1
     player.spelling_object.squish_scale = 1.02
     player.spelling_object.squish_tilt = 8
-    player.spelling_object.squish_period = info.mpb
+    player.spelling_object.squish_period = player.mpb
     touch_giggle = function(event)
       local giggle_sound = audio.loadSound("Sound/giggle.wav")
       audio.play(giggle_sound)
       local new_y = player.spelling_object.fixed_y - 40 + math.random(80)
       local new_x = player.spelling_object.fixed_x - 100 + math.random(200)
-      animation.to(player.spelling_object, {fixed_y=new_y, fixed_x=new_x}, {time=info.mpb / 2, easing=easing.outExp})
+      animation.to(player.spelling_object, {fixed_y=new_y, fixed_x=new_x}, {time=player.mpb / 2, easing=easing.outExp})
     end
     player.spelling_object:addEventListener("tap", touch_giggle)
     player.sketch_sprites:add(player.spelling_object)
@@ -110,7 +110,7 @@ function interactive_spelling_player:augment(player)
     end
 
     for i = 1, string.len(info.word) do
-      table.insert(player.button_making_timers, timer.performWithDelay(info.intro_letter_beats[i] * info.mpb, function()
+      table.insert(player.button_making_timers, timer.performWithDelay(info.intro_letter_beats[i] * player.mpb, function()
 
         local picture = string.upper(info.word):sub(i,i)
 
@@ -135,7 +135,7 @@ function interactive_spelling_player:augment(player)
         button_backing.disappear_time = -1
         button_backing.squish_scale = 1
         button_backing.squish_tilt = 0
-        button_backing.squish_period = info.mpb
+        button_backing.squish_period = player.mpb
         player.sketch_sprites:add(button_backing)
         table.insert(player.button_backings, button_backing)
 
@@ -157,7 +157,7 @@ function interactive_spelling_player:augment(player)
         button_letter.disappear_time = -1
         button_letter.squish_scale = 1
         button_letter.squish_tilt = 0
-        button_letter.squish_period = info.mpb
+        button_letter.squish_period = player.mpb
         player.sketch_sprites:add(button_letter)
         table.insert(player.button_letters, button_letter)
 
@@ -184,25 +184,25 @@ function interactive_spelling_player:augment(player)
               player.button_backings[c - 1]:setFrame(1)
               player.button_backings[c - 1].squish_scale = 1
               player.button_backings[c - 1].squish_tilt = 0
-              player.button_backings[c - 1].squish_period = info.mpb
+              player.button_backings[c - 1].squish_period = player.mpb
               player.button_letters[c - 1].squish_scale = 1
               player.button_letters[c - 1].squish_tilt = 0
-              player.button_letters[c - 1].squish_period = info.mpb
+              player.button_letters[c - 1].squish_period = player.mpb
               -- display.remove(player.button_backings[c - 1])
               -- player.button_backings[c - 1].isVisible = false
               player.button_backings[c - 1].fixed_y = 5000
               current_y = player.button_letters[c - 1].fixed_y
               current_x = player.button_letters[c - 1].fixed_x
               new_x = display.contentCenterX + (gap * 0.6) * ((c-1) - string.len(info.word)/2 - 0.5)
-              animation.to(player.button_letters[c - 1], {fixed_y=100, fixed_x=new_x}, {time=info.mpb / 2, easing=easing.outExp})
+              animation.to(player.button_letters[c - 1], {fixed_y=100, fixed_x=new_x}, {time=player.mpb / 2, easing=easing.outExp})
 
               if c <= string.len(info.word) then
                 player.button_backings[c].squish_scale = 1.02
                 player.button_backings[c].squish_tilt = 8
-                player.button_backings[c].squish_period = info.mpb
+                player.button_backings[c].squish_period = player.mpb
                 player.button_letters[c].squish_scale = 1.02
                 player.button_letters[c].squish_tilt = 8
-                player.button_letters[c].squish_period = info.mpb
+                player.button_letters[c].squish_period = player.mpb
               end
 
               if c > string.len(info.word) then
@@ -235,7 +235,7 @@ function interactive_spelling_player:augment(player)
 
   player.beatTimerCheck = function()
     player.current_time = system.getTimer()
-    if player.current_time - player.start_performance_time > (player.info.mpb * player.info.time_sig) * player.measures then
+    if player.current_time - player.start_performance_time > (player.mpb * player.info.time_sig) * player.measures then
       player:measureActions()
       -- measure action could finish the scene, so check for that before going on
       if player.mode ~= "finished" then
@@ -246,7 +246,7 @@ function interactive_spelling_player:augment(player)
       end
     end
 
-    if player.mode ~= "finished" and player.current_time - player.start_performance_time > player.info.mpb * player.beats then
+    if player.mode ~= "finished" and player.current_time - player.start_performance_time > player.mpb * player.beats then
       player:beatActions()
       player.beats = player.beats + 1
       if player.mode == "interactive" then
@@ -321,7 +321,7 @@ function interactive_spelling_player:augment(player)
 
       -- load up some letter timing for show
       for letter_num = 1, string.len(info.word) do
-        timer.performWithDelay(letter_num * info.mpb, function()
+        timer.performWithDelay(letter_num * player.mpb, function()
           player:setWordColor(letter_num)
 
           letter = string.upper(info.word):sub(letter_num,letter_num)
@@ -331,7 +331,7 @@ function interactive_spelling_player:augment(player)
         end)
       end
       for letter_num = 1, string.len(info.word) do
-        timer.performWithDelay((string.len(info.word) + letter_num + 1) * info.mpb, function()
+        timer.performWithDelay((string.len(info.word) + letter_num + 1) * player.mpb, function()
           player:setWordColor(letter_num)
 
           local sound = audio.loadSound("Sound/Letters_2/" .. info.outro_sounds[letter_num] .. ".wav", {channel = 5})
@@ -339,12 +339,12 @@ function interactive_spelling_player:augment(player)
           audio.play(sound)
         end)
       end
-      timer.performWithDelay((2 * string.len(info.word) + 3) * info.mpb, function()
+      timer.performWithDelay((2 * string.len(info.word) + 3) * player.mpb, function()
         local final_sound = audio.loadSound("Sound/Touch_Letter.wav")
         audio.play(final_sound)
         player:setWordColor("all")
       end)
-      timer.performWithDelay((2 * string.len(info.word) + 4) * info.mpb, function()
+      timer.performWithDelay((2 * string.len(info.word) + 4) * player.mpb, function()
         player:setWordColor("none")
         player.mode = "post_outro"
         if info.word == "Banana" or info.word == "Pear" or info.word == "Apple" or info.word == "Orange" or info.word == "Plum" or info.word == "Lime" then
@@ -352,7 +352,7 @@ function interactive_spelling_player:augment(player)
           audio.play(chomp_sound)
         end
       end)
-      -- timer.performWithDelay((2 * string.len(info.word) + 5) * info.mpb, function()
+      -- timer.performWithDelay((2 * string.len(info.word) + 5) * player.mpb, function()
         
       -- end)
     end
@@ -387,20 +387,20 @@ function interactive_spelling_player:augment(player)
           player.button_backings[i]:setFrame(1)
           player.button_backings[i].squish_scale = 1
           player.button_backings[i].squish_tilt = 0
-          player.button_backings[i].squish_period = info.mpb
+          player.button_backings[i].squish_period = player.mpb
           player.button_letters[i].squish_scale = 1
           player.button_letters[i].squish_tilt = 0
-          player.button_letters[i].squish_period = info.mpb
+          player.button_letters[i].squish_period = player.mpb
           player.button_letters[i].alpha = 1
         else
           -- print("setting this one fancy")
           -- print(i)
           player.button_backings[i].squish_scale = 1.02
           player.button_backings[i].squish_tilt = 8
-          player.button_backings[i].squish_period = info.mpb
+          player.button_backings[i].squish_period = player.mpb
           player.button_letters[i].squish_scale = 1.02
           player.button_letters[i].squish_tilt = 8
-          player.button_letters[i].squish_period = info.mpb
+          player.button_letters[i].squish_period = player.mpb
           if player.button_backings[i].frame == 1 then
             player.button_backings[i]:setFrame(2)
             player.button_letters[i].alpha = 0.5
