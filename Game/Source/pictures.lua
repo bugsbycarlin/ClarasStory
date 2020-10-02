@@ -702,6 +702,98 @@ picture_info["Car_Gray"] = {
   sprite_count = 1,
 }
 
+
+picture_info["Truck_Red"] = {
+  file_name = "Truck_Red_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Truck_Green"] = {
+  file_name = "Truck_Green_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Truck_Blue"] = {
+  file_name = "Truck_Blue_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Truck_Pink"] = {
+  file_name = "Truck_Pink_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Truck_Purple"] = {
+  file_name = "Truck_Purple_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Truck_Yellow"] = {
+  file_name = "Truck_Yellow_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Truck_Orange"] = {
+  file_name = "Truck_Orange_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Truck_Gray"] = {
+  file_name = "Truck_Gray_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Bus_Blue"] = {
+  file_name = "Bus_Blue_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Bus_Yellow"] = {
+  file_name = "Bus_Yellow_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Bus_Orange"] = {
+  file_name = "Bus_Orange_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Bus_Gray"] = {
+  file_name = "Bus_Gray_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Taxi"] = {
+  file_name = "Taxi_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
 picture_info["City_Block"] = {
   file_name = "City_Block.png",
   row_length = 1,

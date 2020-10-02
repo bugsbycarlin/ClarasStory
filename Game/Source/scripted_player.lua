@@ -411,6 +411,24 @@ function scene:startScripted()
     self.special_timer = timer.performWithDelay(1500, function()
       scoot()
     end, 0)
+
+
+    -- honks!
+    honk_images = {}
+    --22500
+    for i = 1,8 do
+      timer.performWithDelay(22500 - (375/2) + (self.mpb / 2) * i, function()
+        print("MAKING A HONK")
+        local honk_image = display.newImageRect(self.performanceAssetGroup, "Art/honk.png", 128, 128)
+        honk_image.x = 100 + 100 * i
+        honk_image.y = 192 + 50 + math.random(384 - 100)
+        table.insert(honk_images, honk_image)
+        timer.performWithDelay(self.mpb * 3 / 4, function()
+
+          display.remove(honk_images[i])
+        end, 1)
+      end, 1)
+    end
   end
 end
 

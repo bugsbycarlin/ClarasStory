@@ -88,7 +88,7 @@ function scene:show(event)
 
     composer.setVariable("chapter", self)
 
-    self.chapter = 1
+    self.chapter = 2
 
     self.flow = {}
 
