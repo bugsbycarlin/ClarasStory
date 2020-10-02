@@ -1,10 +1,10 @@
 [
   {
     "type": "sound",
-    "id": "Chapter_1_Scene_4_1",
+    "id": "chapter_1_scene_4_1",
     "y": 384,
     "x": 512,
-    "name": "Chapter_1_Scene_4",
+    "name": "chapter_1_scene_4",
     "depth": 0,
     "intro": "sketch",
     "start_time": 0

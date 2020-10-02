@@ -88,7 +88,9 @@ function scene:show(event)
 
     composer.setVariable("chapter", self)
 
-    self.chapter = 2
+    self.chapter_number = 2
+
+    composer.setVariable("chapter_number", self.chapter_number)
 
     self.flow = {}
 
@@ -114,18 +116,18 @@ function scene:show(event)
     -- when loading finishes, it will call self:startGame()
     self:setupLoading()
 
-    intro_sound = audio.loadSound("Sound/Chapter_Intro.wav")
+    intro_sound = audio.loadSound("Sound/chapter_intro.wav")
     audio.play(intro_sound)
   end
 end
 
 function scene:setupDisplay()
-  title_text = display.newText(self.sceneGroup, self.title_text[self.chapter], display.contentCenterX, display.contentCenterY - 250, "Fonts/MouseMemoirs.ttf", 80)
+  title_text = display.newText(self.sceneGroup, self.title_text[self.chapter_number], display.contentCenterX, display.contentCenterY - 250, "Fonts/MouseMemoirs.ttf", 80)
   title_text:setTextColor(0.0, 0.0, 0.0)
 
   credits_text = display.newText({
   	parent = self.sceneGroup,
-      text = self.credits_text[self.chapter],
+      text = self.credits_text[self.chapter_number],
       x = display.contentCenterX,
       y = display.contentCenterY + 40,
       width = 400,
@@ -178,47 +180,66 @@ function scene:setupLoading()
 end
 
 function scene:setupSceneStructure()
-  if self.chapter == 1 then
+  if self.chapter_number == 1 then
     scene:chapter_1_Structure()
-  elseif self.chapter == 2 then
+  elseif self.chapter_number == 2 then
     scene:chapter_2_Structure()
   end
 end
 
 function scene:chapter_2_Structure()
-  self.first_scene = "Chapter_2_Scene_1"
+  self.first_scene = "chapter_2_scene_1"
 
   composer.setVariable("mpb", 375)
   composer.setVariable("bpm", 160)
+  composer.setVariable("time_sig", 4)
 
   self.flow = {}
-  self.flow["Chapter_2_Scene_1"] = {
-    name="Chapter_2_Scene_1",
+  self.flow["chapter_2_scene_1"] = {
+    name="chapter_2_scene_1",
+    next="chapter_2_interactive_taxi",
+    type="scripted",
+    script=self:loadSceneScript("chapter_2_scene_1"),
+  }
+  self.flow["chapter_2_interactive_taxi"] = {
+    name="chapter_2_interactive_taxi",
+    next="chapter_2_scene_2",
+    type="interactive_spelling",
+    word="Taxi",
+    random_order=false,
+    random_letters=false,
+    intro_letter_beats = {0, 0.5, 1, 1.5},
+    outro_sounds = {"tuh", "ah", "ks", "ii"},
+    script=nil,
+  }
+  self.flow["chapter_2_scene_2"] = {
+    name="chapter_2_scene_2",
     next=nil,
     type="scripted",
-    script=self:loadSceneScript("Chapter_2_Scene_1"),
+    script=self:loadSceneScript("chapter_2_scene_2"),
   }
 end
 
 function scene:chapter_1_Structure()
-  self.first_scene = "Chapter_1_Scene_5"
-  -- self.first_scene = "Chapter_1_Interactive_Girl"
+  self.first_scene = "chapter_1_scene_5"
+  -- self.first_scene = "chapter_1_interactive_girl"
 
   composer.setVariable("mpb", 545.4545454545)
   composer.setVariable("bpm", 110)
+  composer.setVariable("time_sig", 4)
 
   self.flow = {}
-  self.flow["Chapter_1_Scene_1"] = {
-    name="Chapter_1_Scene_1",
-    next="Chapter_1_Interactive_Girl",
+  self.flow["chapter_1_scene_1"] = {
+    name="chapter_1_scene_1",
+    next="chapter_1_interactive_girl",
     type="scripted",
-    script_file="Chapter_1_Scene_1.json",
+    script_file="chapter_1_scene_1.json",
     script=self:loadSceneScript("chapter_1_scene_1"),
     duration=28363.636,
   }
-  self.flow["Chapter_1_Interactive_Girl"] = {
-    name="Chapter_1_Interactive_Girl",
-    next="Chapter_1_Interactive_Bird",
+  self.flow["chapter_1_interactive_girl"] = {
+    name="chapter_1_interactive_girl",
+    next="chapter_1_interactive_bird",
     type="interactive_spelling",
     word="Girl",
     random_order=false,
@@ -230,12 +251,11 @@ function scene:chapter_1_Structure()
     -- outro_letter_beats = {1, 2, 3, 4},
     -- outro_sound_beats = {5, 6, 7, 8},
     -- outro_word_beat = 20,
-    time_sig=4,
     script=nil,
   }
-  self.flow["Chapter_1_Interactive_Bird"] = {
-    name="Chapter_1_Interactive_Bird",
-    next="Chapter_1_Scene_2",
+  self.flow["chapter_1_interactive_bird"] = {
+    name="chapter_1_interactive_bird",
+    next="chapter_1_scene_2",
     type="interactive_spelling",
     word="Bird",
     random_order=false,
@@ -245,20 +265,19 @@ function scene:chapter_1_Structure()
     -- outro_letter_beats = {4, 6, 8, 10},
     -- outro_sound_beats = {12, 14, 16, 18},
     -- outro_word_beat = 20,
-    time_sig=4,
     script=nil,
   }
-  self.flow["Chapter_1_Scene_2"] = {
-    name="Chapter_1_Scene_2",
-    next="Chapter_1_Interactive_Mom",
+  self.flow["chapter_1_scene_2"] = {
+    name="chapter_1_scene_2",
+    next="chapter_1_interactive_mom",
     type="scripted",
     script=self:loadSceneScript("chapter_1_scene_2"),
     duration=0,
     cleanup=false,
   }
-  self.flow["Chapter_1_Interactive_Mom"] = {
-    name="Chapter_1_Interactive_Mom",
-    next="Chapter_1_Interactive_Dad",
+  self.flow["chapter_1_interactive_mom"] = {
+    name="chapter_1_interactive_mom",
+    next="chapter_1_interactive_dad",
     type="interactive_spelling",
     word="Mom",
     random_order=false,
@@ -270,14 +289,13 @@ function scene:chapter_1_Structure()
     -- outro_letter_beats = {4, 6, 8},
     -- outro_sound_beats = {12, 14, 16},
     -- outro_word_beat = 18,
-    time_sig=4,
     script=self:loadSceneScript("chapter_1_mom_interactive"),
     cleanup=false,
     -- here it might be fun to use a stage spotlight
   }
-  self.flow["Chapter_1_Interactive_Dad"] = {
-    name="Chapter_1_Interactive_Dad",
-    next="Chapter_1_Scene_3",
+  self.flow["chapter_1_interactive_dad"] = {
+    name="chapter_1_interactive_dad",
+    next="chapter_1_scene_3",
     type="interactive_spelling",
     word="Dad",
     random_order=false,
@@ -289,21 +307,20 @@ function scene:chapter_1_Structure()
     -- outro_letter_beats = {4, 6, 8},
     -- outro_sound_beats = {12, 14, 16},
     -- outro_word_beat = 18,
-    time_sig=4,
     script=self:loadSceneScript("chapter_1_dad_interactive"),
     -- here it might be fun to use a stage spotlight
   }
-  self.flow["Chapter_1_Scene_3"] = {
-    name="Chapter_1_Scene_3",
-    next="Chapter_1_Interactive_Wand",
+  self.flow["chapter_1_scene_3"] = {
+    name="chapter_1_scene_3",
+    next="chapter_1_interactive_wand",
     type="scripted",
-    script_file="Chapter_1_Scene_3.json",
+    script_file="chapter_1_scene_3.json",
     script=self:loadSceneScript("chapter_1_scene_3"),
     duration=0,
   }
-  self.flow["Chapter_1_Interactive_Wand"] = {
-    name="Chapter_1_Interactive_Wand",
-    next="Chapter_1_Scene_4",
+  self.flow["chapter_1_interactive_wand"] = {
+    name="chapter_1_interactive_wand",
+    next="chapter_1_scene_4",
     type="interactive_spelling",
     word="Wand",
     random_order=false,
@@ -314,22 +331,21 @@ function scene:chapter_1_Structure()
     -- outro_letter_beats = {4, 6, 8, 10},
     -- outro_sound_beats = {12, 14, 16, 18},
     -- outro_word_beat = 20,
-    time_sig=4,
     script=nil,
     -- here it might be fun to use a stage spotlight
   }
-  self.flow["Chapter_1_Scene_4"] = {
-    name="Chapter_1_Scene_4",
-    next="Chapter_1_Interactive_Pig",
+  self.flow["chapter_1_scene_4"] = {
+    name="chapter_1_scene_4",
+    next="chapter_1_interactive_pig",
     type="scripted",
-    script_file="Chapter_1_Scene_4.json",
+    script_file="chapter_1_scene_4.json",
     script=self:loadSceneScript("chapter_1_scene_4"),
     duration=0,
     cleanup=false,
   }
-  self.flow["Chapter_1_Interactive_Pig"] = {
-    name="Chapter_1_Interactive_Pig",
-    next="Chapter_1_Interactive_Cow",
+  self.flow["chapter_1_interactive_pig"] = {
+    name="chapter_1_interactive_pig",
+    next="chapter_1_interactive_cow",
     type="interactive_spelling",
     word="Pig",
     random_order=false,
@@ -342,14 +358,13 @@ function scene:chapter_1_Structure()
     -- outro_word_beat = 18,
     intro_letter_beats = {0, 0.5, 1},
     outro_sounds = {"puh", "ih", "guh"},
-    time_sig=4,
     script=nil,
     cleanup=false,
     -- here it might be fun to use a stage spotlight
   }
-  self.flow["Chapter_1_Interactive_Cow"] = {
-    name="Chapter_1_Interactive_Cow",
-    next="Chapter_1_Scene_5",
+  self.flow["chapter_1_interactive_cow"] = {
+    name="chapter_1_interactive_cow",
+    next="chapter_1_scene_5",
     type="interactive_spelling",
     word="Cow",
     random_order=false,
@@ -362,21 +377,20 @@ function scene:chapter_1_Structure()
     -- outro_word_beat = 18,
     intro_letter_beats = {0, 0.5, 1},
     outro_sounds = {"kuh", "oah", "wuh"},
-    time_sig=4,
     script=nil,
     -- here it might be fun to use a stage spotlight
   }
-  self.flow["Chapter_1_Scene_5"] = {
-    name="Chapter_1_Scene_5",
-    next="Chapter_1_Interactive_Coin",
+  self.flow["chapter_1_scene_5"] = {
+    name="chapter_1_scene_5",
+    next="chapter_1_interactive_coin",
     type="scripted",
-    script_file="Chapter_1_Scene_5.json",
+    script_file="chapter_1_scene_5.json",
     script=self:loadSceneScript("chapter_1_scene_5"),
     duration=0,
   }
-  self.flow["Chapter_1_Interactive_Coin"] = {
-    name="Chapter_1_Interactive_Coin",
-    next="Chapter_1_Scene_6",
+  self.flow["chapter_1_interactive_coin"] = {
+    name="chapter_1_interactive_coin",
+    next="chapter_1_scene_6",
     type="interactive_spelling",
     word="Coin",
     random_order=false,
@@ -387,31 +401,30 @@ function scene:chapter_1_Structure()
     -- outro_word_beat = 20,
     intro_letter_beats = {0, 0.5, 1, 1.5},
     outro_sounds = {"kuh", "oh", "ih", "nuh"},
-    time_sig=4,
     script=nil,
     -- here it might be fun to use a stage spotlight
   }
-  self.flow["Chapter_1_Scene_6"] = {
-    name="Chapter_1_Scene_6",
+  self.flow["chapter_1_scene_6"] = {
+    name="chapter_1_scene_6",
     next=nil,
     type="scripted",
-    script_file="Chapter_1_Scene_6.json",
+    script_file="chapter_1_scene_6.json",
     script=self:loadSceneScript("chapter_1_scene_6"),
     duration=0,
     cleanup=false,
   }
 
 
-  self.flow["Chapter_1_Beast_Apple"] = {
-    name="Chapter_1_Beast_Apple",
-    next="Chapter_1_Interactive_Apple",
+  self.flow["chapter_1_beast_apple"] = {
+    name="chapter_1_beast_apple",
+    next="chapter_1_interactive_apple",
     type="scripted",
     script=self:loadSceneScript("chapter_1_beast_apple"),
     cleanup=false,
     duration=0,
   }
-  self.flow["Chapter_1_Interactive_Apple"] = {
-    name="Chapter_1_Interactive_Apple",
+  self.flow["chapter_1_interactive_apple"] = {
+    name="chapter_1_interactive_apple",
     next=nil,
     type="interactive_spelling",
     word="Apple",
@@ -423,19 +436,18 @@ function scene:chapter_1_Structure()
     -- outro_word_beat = 26,
     intro_letter_beats = {0, 0.5, 1, 1.5, 2},
     outro_sounds = {"ah", "puh", "puh", "luh", "eh"},
-    time_sig=4,
     cleanup=false,
   }
-  self.flow["Chapter_1_Beast_Banana"] = {
-    name="Chapter_1_Beast_Banana",
-    next="Chapter_1_Interactive_Banana",
+  self.flow["chapter_1_beast_banana"] = {
+    name="chapter_1_beast_banana",
+    next="chapter_1_interactive_banana",
     type="scripted",
     cleanup=false,
     script=self:loadSceneScript("chapter_1_beast_banana"),
     duration=0,
   }
-  self.flow["Chapter_1_Interactive_Banana"] = {
-    name="Chapter_1_Interactive_Banana",
+  self.flow["chapter_1_interactive_banana"] = {
+    name="chapter_1_interactive_banana",
     next=nil,
     type="interactive_spelling",
     word="Banana",
@@ -447,19 +459,18 @@ function scene:chapter_1_Structure()
     -- outro_word_beat = 28,
     intro_letter_beats = {0, 0.5, 1, 1.5, 2, 2.5},
     outro_sounds = {"buh", "ah", "nuh", "ah", "nuh", "ah"},
-    time_sig=4,
     cleanup=false,
   }
-  self.flow["Chapter_1_Beast_Lime"] = {
-    name="Chapter_1_Beast_Lime",
-    next="Chapter_1_Interactive_Lime",
+  self.flow["chapter_1_beast_lime"] = {
+    name="chapter_1_beast_lime",
+    next="chapter_1_interactive_lime",
     type="scripted",
     cleanup=false,
     script=self:loadSceneScript("chapter_1_beast_lime"),
     duration=0,
   }
-  self.flow["Chapter_1_Interactive_Lime"] = {
-    name="Chapter_1_Interactive_Lime",
+  self.flow["chapter_1_interactive_lime"] = {
+    name="chapter_1_interactive_lime",
     next=nil,
     type="interactive_spelling",
     word="Lime",
@@ -471,19 +482,18 @@ function scene:chapter_1_Structure()
     -- outro_word_beat = 20,
     intro_letter_beats = {0, 0.5, 1, 1.5},
     outro_sounds = {"luh", "I", "muh", "eh"},
-    time_sig=4,
     cleanup=false,
   }
-  self.flow["Chapter_1_Beast_Orange"] = {
-    name="Chapter_1_Beast_Orange",
-    next="Chapter_1_Interactive_Orange",
+  self.flow["chapter_1_beast_orange"] = {
+    name="chapter_1_beast_orange",
+    next="chapter_1_interactive_orange",
     type="scripted",
     script=self:loadSceneScript("chapter_1_beast_orange"),
     cleanup=false,
     duration=0,
   }
-  self.flow["Chapter_1_Interactive_Orange"] = {
-    name="Chapter_1_Interactive_Orange",
+  self.flow["chapter_1_interactive_orange"] = {
+    name="chapter_1_interactive_orange",
     next=nil,
     type="interactive_spelling",
     word="Orange",
@@ -495,19 +505,18 @@ function scene:chapter_1_Structure()
     -- outro_word_beat = 34,
     intro_letter_beats = {0, 0.5, 1, 1.5, 2, 2.5},
     outro_sounds = {"oh", "ruh", "ah", "nuh", "juh", "eh"},
-    time_sig=4,
     cleanup=false,
   }
-  self.flow["Chapter_1_Beast_Pear"] = {
-    name="Chapter_1_Beast_Pear",
-    next="Chapter_1_Interactive_Pear",
+  self.flow["chapter_1_beast_pear"] = {
+    name="chapter_1_beast_pear",
+    next="chapter_1_interactive_pear",
     type="scripted",
     cleanup=false,
     script=self:loadSceneScript("chapter_1_beast_pear"),
     duration=0,
   }
-  self.flow["Chapter_1_Interactive_Pear"] = {
-    name="Chapter_1_Interactive_Pear",
+  self.flow["chapter_1_interactive_pear"] = {
+    name="chapter_1_interactive_pear",
     next=nil,
     type="interactive_spelling",
     word="Pear",
@@ -519,19 +528,18 @@ function scene:chapter_1_Structure()
     -- outro_word_beat = 20,
     intro_letter_beats = {0, 0.5, 1, 1.5},
     outro_sounds = {"puh", "eh", "ah", "ruh"},
-    time_sig=4,
     cleanup=false,
   }
-  self.flow["Chapter_1_Beast_Plum"] = {
-    name="Chapter_1_Beast_Plum",
-    next="Chapter_1_Interactive_Plum",
+  self.flow["chapter_1_beast_plum"] = {
+    name="chapter_1_beast_plum",
+    next="chapter_1_interactive_plum",
     type="scripted",
     cleanup=false,
     script=self:loadSceneScript("chapter_1_beast_plum"),
     duration=0,
   }
-  self.flow["Chapter_1_Interactive_Plum"] = {
-    name="Chapter_1_Interactive_Plum",
+  self.flow["chapter_1_interactive_plum"] = {
+    name="chapter_1_interactive_plum",
     next=nil,
     type="interactive_spelling",
     word="Plum",
@@ -543,11 +551,10 @@ function scene:chapter_1_Structure()
     -- outro_word_beat = 20,
     intro_letter_beats = {0, 0.5, 1, 1.5},
     outro_sounds = {"puh", "luh", "uh", "muh"},
-    time_sig=4,
     cleanup=false,
   }
-  self.flow["Chapter_1_Scene_7"] = {
-    name="Chapter_1_Scene_7",
+  self.flow["chapter_1_scene_7"] = {
+    name="chapter_1_scene_7",
     next=nil,
     type="scripted",
     script=self:loadSceneScript("chapter_1_scene_7"),
@@ -556,12 +563,12 @@ function scene:chapter_1_Structure()
 
   -- make a random chain of fruits for the fruit beast before moving to Scene 7
   fruits = {
-    "Apple",
-    "Banana",
-    "Lime",
-    "Orange",
-    "Pear",
-    "Plum",
+    "apple",
+    "banana",
+    "lime",
+    "orange",
+    "pear",
+    "plum",
   }
   for i = #fruits, 2, -1 do
     local j = math.random(i)
@@ -569,11 +576,11 @@ function scene:chapter_1_Structure()
   end
 
 
-  self.flow["Chapter_1_Scene_6"].next = "Chapter_1_Beast_" .. fruits[1]
-  self.flow["Chapter_1_Interactive_" .. fruits[1]].next = "Chapter_1_Beast_" .. fruits[2]
-  self.flow["Chapter_1_Interactive_" .. fruits[2]].next = "Chapter_1_Beast_" .. fruits[3]
-  self.flow["Chapter_1_Interactive_" .. fruits[3]].next = "Chapter_1_Scene_7"
-  self.flow["Chapter_1_Interactive_" .. fruits[3]].cleanup = true
+  self.flow["chapter_1_scene_6"].next = "chapter_1_beast_" .. fruits[1]
+  self.flow["chapter_1_interactive_" .. fruits[1]].next = "chapter_1_beast_" .. fruits[2]
+  self.flow["chapter_1_interactive_" .. fruits[2]].next = "chapter_1_beast_" .. fruits[3]
+  self.flow["chapter_1_interactive_" .. fruits[3]].next = "chapter_1_scene_7"
+  self.flow["chapter_1_interactive_" .. fruits[3]].cleanup = true
 
   -- chomp_asset = {
   --   name="Chomp",
@@ -585,9 +592,9 @@ function scene:chapter_1_Structure()
   --   x=display.contentCenterX,
   --   y=display.contentCenterY
   -- }
-  -- table.insert(self.flow["Chapter_1_Beast_" .. fruits[2]].script, chomp_asset)
-  -- table.insert(self.flow["Chapter_1_Beast_" .. fruits[3]].script, chomp_asset)
-  -- table.insert(self.flow["Chapter_1_Scene_7"].script, chomp_asset)
+  -- table.insert(self.flow["chapter_1_beast_" .. fruits[2]].script, chomp_asset)
+  -- table.insert(self.flow["chapter_1_beast_" .. fruits[3]].script, chomp_asset)
+  -- table.insert(self.flow["chapter_1_scene_7"].script, chomp_asset)
 end
 
 
@@ -625,27 +632,6 @@ function scene:gotoScene(new_scene_name, fade_options)
     composer.gotoScene("Source.temporary_end", fade_options)
   end
 end
-
--- function scene:setNextScene(new_scene_name)
---   if new_scene_name ~= "end" and self.flow[new_scene_name] ~= nil then
---     print("New scene: " .. new_scene_name)
---     new_scene = self.flow[new_scene_name]
---     composer.setVariable("scene_name", new_scene.name)
---     composer.setVariable("settings", new_scene)
---     if new_scene.script ~= nil then
---       composer.setVariable("script_assets", new_scene.script)
---     else
---       composer.setVariable("script_assets", "")
---     end
---     if new_scene.next ~= nil then
---       composer.setVariable("next_scene", new_scene.next)
---     else
---       composer.setVariable("next_scene", "end")
---     end
---   else
---     composer.gotoScene("Source.temporary_end")
---   end
--- end
 
 function scene:finish()
   composer.gotoScene("Source.temporary_end")

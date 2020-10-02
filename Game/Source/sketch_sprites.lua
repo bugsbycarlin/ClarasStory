@@ -91,7 +91,7 @@ function sketch_sprites:create()
       end
 
       if sprite.state == "outline_sketching" then
-        if sprite.frame < sprite.info.outline_frame then
+        if sprite.info.outline_frame ~= nil and sprite.frame < sprite.info.outline_frame then
           sprite:setFrame(sprite.frame + 1)
         else
           if sprite.info["animation_end"] ~= nil then

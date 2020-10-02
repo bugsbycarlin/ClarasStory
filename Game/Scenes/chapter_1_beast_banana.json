@@ -1,11 +1,11 @@
 [
   {
     "type": "sound",
-    "id": "Banana_Beast_Intro_1",
+    "id": "banana_beast_intro_1",
     "intro": "sketch",
     "y": 384,
     "x": 512,
-    "name": "Banana_Beast_Intro",
+    "name": "banana_beast_intro",
     "start_time": 0,
     "depth": 0
   }

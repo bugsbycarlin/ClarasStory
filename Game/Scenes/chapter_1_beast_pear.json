@@ -1,11 +1,11 @@
 [
   {
     "type": "sound",
-    "id": "Pear_Beast_Intro_1",
+    "id": "pear_beast_intro_1",
     "intro": "sketch",
     "y": 384,
     "x": 512,
-    "name": "Pear_Beast_Intro",
+    "name": "pear_beast_intro",
     "start_time": 0,
     "depth": 0
   }

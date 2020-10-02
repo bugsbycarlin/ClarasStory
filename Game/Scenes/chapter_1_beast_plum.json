@@ -1,11 +1,11 @@
 [
   {
     "type": "sound",
-    "id": "Plum_Beast_Intro_1",
+    "id": "plum_beast_intro_1",
     "intro": "sketch",
     "y": 384,
     "x": 512,
-    "name": "Plum_Beast_Intro",
+    "name": "plum_beast_intro",
     "start_time": 0,
     "depth": 0
   }

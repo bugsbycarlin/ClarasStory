@@ -267,12 +267,12 @@
   },
   {
     "type": "sound",
-    "id": "Chapter_1_Scene_2_15",
+    "id": "chapter_1_scene_2_15",
     "y": 384,
     "x": 512,
     "intro": "sketch",
     "depth": 0,
-    "name": "Chapter_1_Scene_2",
+    "name": "chapter_1_scene_2",
     "start_time": 0
   },
   {

@@ -1,0 +1,252 @@
+{"frames": [
+
+{
+	"filename": "Tower-00001.png",
+	"frame": {"x":0,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00002.png",
+	"frame": {"x":720,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00003.png",
+	"frame": {"x":1440,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00004.png",
+	"frame": {"x":2160,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00005.png",
+	"frame": {"x":2880,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00006.png",
+	"frame": {"x":3600,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00007.png",
+	"frame": {"x":4320,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00008.png",
+	"frame": {"x":5040,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00009.png",
+	"frame": {"x":5760,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00010.png",
+	"frame": {"x":6480,"y":0,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00011.png",
+	"frame": {"x":0,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00012.png",
+	"frame": {"x":720,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00013.png",
+	"frame": {"x":1440,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00014.png",
+	"frame": {"x":2160,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00016.png",
+	"frame": {"x":2880,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00017.png",
+	"frame": {"x":3600,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00018.png",
+	"frame": {"x":4320,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00019.png",
+	"frame": {"x":5040,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00020.png",
+	"frame": {"x":5760,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00021.png",
+	"frame": {"x":6480,"y":720,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00022.png",
+	"frame": {"x":0,"y":1440,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00023.png",
+	"frame": {"x":720,"y":1440,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00024.png",
+	"frame": {"x":1440,"y":1440,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00025.png",
+	"frame": {"x":2160,"y":1440,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00026.png",
+	"frame": {"x":2880,"y":1440,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00027.png",
+	"frame": {"x":3600,"y":1440,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00041.png",
+	"frame": {"x":4320,"y":1440,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00045.png",
+	"frame": {"x":5040,"y":1440,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00046.png",
+	"frame": {"x":5760,"y":1440,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+},
+{
+	"filename": "Tower-00049.png",
+	"frame": {"x":6480,"y":1440,"w":720,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":720},
+	"sourceSize": {"w":720,"h":720}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "Tower_Sketch.png",
+	"format": "RGBA8888",
+	"size": {"w":7200,"h":7200},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:73a92d930ae102b8df007e3c833caac3:bfe7a52b3f33ceed562b2b7b8ff98e65:4e511712b4886654da00c8a6af759615$"
+}
+}

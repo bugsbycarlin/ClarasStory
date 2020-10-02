@@ -1,0 +1,140 @@
+{"frames": [
+
+{
+	"filename": "Farm0000.png",
+	"frame": {"x":0,"y":0,"w":1024,"h":768},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1024,"h":768},
+	"sourceSize": {"w":1024,"h":768}
+},
+{
+	"filename": "Farm0002.png",
+	"frame": {"x":1024,"y":0,"w":1024,"h":768},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1024,"h":768},
+	"sourceSize": {"w":1024,"h":768}
+},
+{
+	"filename": "Farm0004.png",
+	"frame": {"x":2048,"y":0,"w":1024,"h":768},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1024,"h":768},
+	"sourceSize": {"w":1024,"h":768}
+},
+{
+	"filename": "Farm0006.png",
+	"frame": {"x":3072,"y":0,"w":1024,"h":768},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1024,"h":768},
+	"sourceSize": {"w":1024,"h":768}
+},
+{
+	"filename": "Farm0008.png",
+	"frame": {"x":0,"y":768,"w":1024,"h":768},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1024,"h":768},
+	"sourceSize": {"w":1024,"h":768}
+},
+{
+	"filename": "Farm0010.png",
+	"frame": {"x":1024,"y":768,"w":1024,"h":768},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1024,"h":768},
+	"sourceSize": {"w":1024,"h":768}
+},
+{
+	"filename": "Farm0012.png",
+	"frame": {"x":2048,"y":768,"w":1024,"h":768},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1024,"h":768},
+	"sourceSize": {"w":1024,"h":768}
+},
+{
+	"filename": "Farm0014.png",
+	"frame": {"x":3072,"y":768,"w":1024,"h":768},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1024,"h":768},
+	"sourceSize": {"w":1024,"h":768}
+},
+{
+	"filename": "Farm0016.png",
+	"frame": {"x":0,"y":1536,"w":1024,"h":768},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1024,"h":768},
+	"sourceSize": {"w":1024,"h":768}
+},
+{
+	"filename": "Farm0018.png",
+	"frame": {"x":1024,"y":1536,"w":1024,"h":768},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1024,"h":768},
+	"sourceSize": {"w":1024,"h":768}
+},
+{
+	"filename": "Farm0020.png",
+	"frame": {"x":2048,"y":1536,"w":1024,"h":768},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1024,"h":768},
+	"sourceSize": {"w":1024,"h":768}
+},
+{
+	"filename": "Farm0022.png",
+	"frame": {"x":3072,"y":1536,"w":1024,"h":768},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1024,"h":768},
+	"sourceSize": {"w":1024,"h":768}
+},
+{
+	"filename": "Farm0024.png",
+	"frame": {"x":0,"y":2304,"w":1024,"h":768},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1024,"h":768},
+	"sourceSize": {"w":1024,"h":768}
+},
+{
+	"filename": "Farm0026.png",
+	"frame": {"x":1024,"y":2304,"w":1024,"h":768},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1024,"h":768},
+	"sourceSize": {"w":1024,"h":768}
+},
+{
+	"filename": "Farm0028.png",
+	"frame": {"x":2048,"y":2304,"w":1024,"h":768},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1024,"h":768},
+	"sourceSize": {"w":1024,"h":768}
+},
+{
+	"filename": "Farm0030.png",
+	"frame": {"x":3072,"y":2304,"w":1024,"h":768},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1024,"h":768},
+	"sourceSize": {"w":1024,"h":768}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "Farm_Sketch.png",
+	"format": "RGBA8888",
+	"size": {"w":4096,"h":3072},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:3648d39d62e0d9a60ea7337930cc8d90:cfe0d81f7c9216e61d07bfa05a17e378:dde1a30d43f362409a041ac1e8234e05$"
+}
+}

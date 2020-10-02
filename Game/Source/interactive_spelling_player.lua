@@ -21,7 +21,7 @@ function interactive_spelling_player:augment(player)
 
     player.current_letter_number = 1
 
-    player.music_loop = audio.loadStream("Sound/Chapter_1_Interactive_Loop.wav")
+    player.music_loop = audio.loadStream("Sound/chapter_" .. player.chapter_number .. "_interactive_loop.wav")
     audio.play(player.music_loop, {loops=-1})
 
     player.start_performance_time = system.getTimer()
@@ -46,7 +46,7 @@ function interactive_spelling_player:augment(player)
       end, 0)
     end
 
-    local sound = audio.loadSound("Sound/Chapter_1/" .. info.word .. "_Intro.wav")
+    local sound = audio.loadSound("Sound/chapter_1/" .. info.word .. "_Intro.wav")
     audio.play(sound)
     --, {onComplete = function()
     --   player.mode = "interactive"
@@ -171,7 +171,7 @@ function interactive_spelling_player:augment(player)
           if player.mode == "interactive" then
             print("Touching " .. player.current_letter_number)
             if player.current_letter_number >= 1 and player.current_letter_number <= string.len(info.word) and this_letter == player.current_letter_number then
-              local sound = audio.loadSound("Sound/Touch_Letter.wav")
+              local sound = audio.loadSound("Sound/touch_letter.wav")
               audio.play(sound)
               local sound = audio.loadSound("Sound/Letters_2/" .. picture .. ".wav")
               audio.play(sound)
@@ -235,7 +235,7 @@ function interactive_spelling_player:augment(player)
 
   player.beatTimerCheck = function()
     player.current_time = system.getTimer()
-    if player.current_time - player.start_performance_time > (player.mpb * player.info.time_sig) * player.measures then
+    if player.current_time - player.start_performance_time > (player.mpb * player.time_sig) * player.measures then
       player:measureActions()
       -- measure action could finish the scene, so check for that before going on
       if player.mode ~= "finished" then
@@ -314,7 +314,7 @@ function interactive_spelling_player:augment(player)
       player.mode = "outro"
 
       -- play the outro sound
-      -- local sound = audio.loadSound("Sound/Chapter_1/" .. info.word .. "_Outro.wav")
+      -- local sound = audio.loadSound("Sound/chapter_1/" .. info.word .. "_Outro.wav")
       -- audio.play(sound, {onComplete = function()
       --   player.mode = "post_outro"
       -- end})
@@ -340,7 +340,7 @@ function interactive_spelling_player:augment(player)
         end)
       end
       timer.performWithDelay((2 * string.len(info.word) + 3) * player.mpb, function()
-        local final_sound = audio.loadSound("Sound/Touch_Letter.wav")
+        local final_sound = audio.loadSound("Sound/touch_letter.wav")
         audio.play(final_sound)
         player:setWordColor("all")
       end)

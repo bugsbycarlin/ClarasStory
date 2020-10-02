@@ -1,11 +1,11 @@
 [
   {
     "type": "sound",
-    "id": "Lime_Beast_Intro_1",
+    "id": "lime_beast_intro_1",
     "intro": "sketch",
     "y": 384,
     "x": 512,
-    "name": "Lime_Beast_Intro",
+    "name": "lime_beast_intro",
     "start_time": 0,
     "depth": 0
   }
