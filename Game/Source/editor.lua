@@ -43,7 +43,7 @@ local selected_element_id = nil
 local bpm = 160
 local mpb = 375
 
-local save_file = system.pathForFile("Scenes/chapter_2_choose_vehicle.json", system.ResourceDirectory)
+local save_file = system.pathForFile("Scenes/chapter_2_interactive_choice_bus_color.json", system.ResourceDirectory)
 print(save_file)
 
 function scene:saveInfo(event)

@@ -838,6 +838,62 @@ picture_info["Vertical_Dash"] = {
   sprite_count = 1,
 }
 
+picture_info["Blue_Paint"] = {
+  file_name = "Blue_Paint.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Red_Paint"] = {
+  file_name = "Red_Paint.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Yellow_Paint"] = {
+  file_name = "Yellow_Paint.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Orange_Paint"] = {
+  file_name = "Orange_Paint.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Purple_Paint"] = {
+  file_name = "Purple_Paint.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Green_Paint"] = {
+  file_name = "Green_Paint.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Pink_Paint"] = {
+  file_name = "Pink_Paint.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Gray_Paint"] = {
+  file_name = "Gray_Paint.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
 
 
 for picture, info in pairs(picture_info) do

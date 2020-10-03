@@ -448,6 +448,7 @@ function scene:startScripted()
     -- honks!
     honk_images = {}
     --22500
+    -- fix this so skipping cancels it
     for i = 1,8 do
       timer.performWithDelay(22500 - (375/2) + (self.mpb / 2) * i, function()
         print("MAKING A HONK")
@@ -461,6 +462,17 @@ function scene:startScripted()
         end, 1)
       end, 1)
     end
+  end
+
+  if self.scene_name == "chapter_2_scene_2" then
+    self.special_timer = timer.performWithDelay(187, function()
+      local honk_image = display.newImageRect(self.performanceAssetGroup, "Art/honk.png", 256, 256)
+        honk_image.x = 100 + math.random(824)
+        honk_image.y = 192 + 50 + math.random(384 - 100)
+        timer.performWithDelay(self.mpb * 3 / 4, function()
+          display.remove(honk_image)
+      end, 1)
+    end, 0)
   end
 end
 

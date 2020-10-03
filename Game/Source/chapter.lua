@@ -1,5 +1,5 @@
 
-
+local animation = require("plugin.animation")
 local composer = require("composer")
 local json = require("json")
 local lfs = require("lfs")
@@ -196,7 +196,27 @@ function scene:chapter_2_Structure()
   composer.setVariable("bpm", 160)
   composer.setVariable("time_sig", 4)
 
-
+  setVehicle = function(vehicle_name)
+    asset_list = self.flow["chapter_2_scene_2"].script
+    for i = 1, #asset_list do
+      asset = asset_list[i]
+      print(asset.name)
+      if asset.id == "Car_Orange_Special" then
+        print("I found the asset")
+        asset.name = vehicle_name
+      end
+      if asset.id == "Girl_13" and string.find(vehicle_name, "Truck") then
+        asset.fixed_x = asset.fixed_x + 30
+        asset.x = asset.x + 30
+      end
+      if asset.id == "Girl_13" and string.find(vehicle_name, "Bus") then
+        asset.fixed_x = asset.fixed_x + 10
+        asset.x = asset.x + 10
+        asset.fixed_x = asset.fixed_y - 13
+        asset.x = asset.y - 13
+      end
+    end
+  end
 
   self.flow = {}
   local flow = self.flow
@@ -210,23 +230,41 @@ function scene:chapter_2_Structure()
     name="chapter_2_interactive_choice_vehicle",
     next=nil,
     type="interactive_choice",
-    intro="vehicle",
-    choiceCallback = function(player, choice_value)
-      if string.find(choice_value, "Car") then 
-        return "chapter_2_interactive_car"
-      elseif string.find(choice_value, "Truck") then
-        return "chapter_2_interactive_truck"
-      elseif string.find(choice_value, "Bus") then
-        return "chapter_2_interactive_bus"
-      elseif string.find(choice_value, "Taxi") then
-        return "chapter_2_interactive_taxi"
-      else
-        return nil
+    intro="vehicle_choice",
+    choiceCallback = function(something, choice_asset, player)
+
+      for i = 1, #player.script_assets do
+        other_asset = player.script_assets[i]
+        if other_asset.performance ~= nil and other_asset.performance.id ~= choice_asset.id then
+          print("fading the other asset")
+          animation.to(other_asset.performance, {alpha=0}, {time=player.mpb * 0.75, easing=easing.outExp})
+        end
       end
+
+      print("moving the main asset")
+      animation.to(choice_asset.performance, {fixed_x = display.contentCenterX, fixed_y = display.contentCenterY - 100}, {time=player.mpb, easing=easing.outExp})
+
+      player:poopStars(choice_asset.performance.fixed_x, choice_asset.performance.fixed_y, 3 + math.random(3))
+
+      local choice_value = choice_asset.name
+
+      if string.find(choice_value, "Car") then 
+        player.next_scene = "chapter_2_interactive_car"
+      elseif string.find(choice_value, "Truck") then
+        player.next_scene = "chapter_2_interactive_truck"
+      elseif string.find(choice_value, "Bus") then
+        player.next_scene = "chapter_2_interactive_bus"
+      elseif string.find(choice_value, "Taxi") then
+        player.next_scene = "chapter_2_interactive_taxi"
+        setVehicle("Taxi")
+      end
+
+      timer.performWithDelay(player.mpb, function() 
+        player.mode = "choice_outro"
+      end)
     end,
     script=self:loadSceneScript("chapter_2_interactive_choice_vehicle"),
   }
-
 
   self.flow["chapter_2_interactive_taxi"] = {
     name="chapter_2_interactive_taxi",
@@ -249,9 +287,10 @@ function scene:chapter_2_Structure()
       depth = 0,
     },
   }
+
   self.flow["chapter_2_interactive_bus"] = {
     name="chapter_2_interactive_bus",
-    next="chapter_2_scene_2",
+    next="chapter_2_interactive_choice_bus_color",
     type="interactive_spelling",
     word="Bus",
     random_order=false,
@@ -270,9 +309,40 @@ function scene:chapter_2_Structure()
       depth = 0,
     },
   }
+  self.flow["chapter_2_interactive_choice_bus_color"] = {
+    name="chapter_2_interactive_choice_bus_color",
+    next="chapter_2_scene_2",
+    type="interactive_choice",
+    intro="bus_color_choice",
+    choiceCallback = function(something, choice_asset, player)
+
+      color = string.gsub(choice_asset.name, "_Paint", "")
+
+      for i = 1, #player.script_assets do
+        asset = player.script_assets[i]
+        if asset.performance ~= nil and string.find(asset.name, "Paint") then
+          asset.performance.isVisible = false
+        elseif asset.performance ~= nil and string.find(asset.name, "Bus") then
+          display.remove(asset.performance)
+          asset.performance = nil
+          asset.name = "Bus_" .. color
+          asset.intro = "poof"
+          player:perform(asset)
+        end
+      end
+
+      setVehicle("Bus_" .. color)
+
+      timer.performWithDelay(player.mpb, function() 
+        player.mode = "choice_outro"
+      end)
+    end,
+    script=self:loadSceneScript("chapter_2_interactive_choice_bus_color"),
+  }
+
   self.flow["chapter_2_interactive_car"] = {
     name="chapter_2_interactive_car",
-    next="chapter_2_scene_2",
+    next="chapter_2_interactive_choice_car_color",
     type="interactive_spelling",
     word="Car",
     random_order=false,
@@ -291,9 +361,40 @@ function scene:chapter_2_Structure()
       depth = 0,
     },
   }
+  self.flow["chapter_2_interactive_choice_car_color"] = {
+    name="chapter_2_interactive_choice_car_color",
+    next="chapter_2_scene_2",
+    type="interactive_choice",
+    intro="car_color_choice",
+    choiceCallback = function(something, choice_asset, player)
+
+      color = string.gsub(choice_asset.name, "_Paint", "")
+
+      for i = 1, #player.script_assets do
+        asset = player.script_assets[i]
+        if asset.performance ~= nil and string.find(asset.name, "Paint") then
+          asset.performance.isVisible = false
+        elseif asset.performance ~= nil and string.find(asset.name, "Car") then
+          display.remove(asset.performance)
+          asset.performance = nil
+          asset.name = "Car_" .. color
+          asset.intro = "poof"
+          player:perform(asset)
+        end
+      end
+
+      setVehicle("Car_" .. color)
+
+      timer.performWithDelay(player.mpb, function() 
+        player.mode = "choice_outro"
+      end)
+    end,
+    script=self:loadSceneScript("chapter_2_interactive_choice_car_color"),
+  }
+
   self.flow["chapter_2_interactive_truck"] = {
     name="chapter_2_interactive_truck",
-    next="chapter_2_scene_2",
+    next="chapter_2_interactive_choice_truck_color",
     type="interactive_spelling",
     word="Truck",
     random_order=false,
@@ -312,6 +413,37 @@ function scene:chapter_2_Structure()
       depth = 0,
     },
   }
+  self.flow["chapter_2_interactive_choice_truck_color"] = {
+    name="chapter_2_interactive_choice_truck_color",
+    next="chapter_2_scene_2",
+    type="interactive_choice",
+    intro="truck_color_choice",
+    choiceCallback = function(something, choice_asset, player)
+
+      color = string.gsub(choice_asset.name, "_Paint", "")
+
+      for i = 1, #player.script_assets do
+        asset = player.script_assets[i]
+        if asset.performance ~= nil and string.find(asset.name, "Paint") then
+          asset.performance.isVisible = false
+        elseif asset.performance ~= nil and string.find(asset.name, "Truck") then
+          display.remove(asset.performance)
+          asset.performance = nil
+          asset.name = "Truck_" .. color
+          asset.intro = "poof"
+          player:perform(asset)
+        end
+      end
+
+      setVehicle("Truck_" .. color)
+
+      timer.performWithDelay(player.mpb, function() 
+        player.mode = "choice_outro"
+      end)
+    end,
+    script=self:loadSceneScript("chapter_2_interactive_choice_truck_color"),
+  }
+
   self.flow["chapter_2_scene_2"] = {
     name="chapter_2_scene_2",
     next=nil,

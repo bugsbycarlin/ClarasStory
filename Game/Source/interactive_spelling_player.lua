@@ -46,7 +46,7 @@ function interactive_spelling_player:augment(player)
       end, 0)
     end
 
-    local sound = audio.loadSound("Sound/chapter_1/" .. info.word .. "_Intro.wav")
+    local sound = audio.loadSound("Sound/chapter_" .. player.chapter_number .. "/" .. info.word .. "_Intro.wav")
     audio.play(sound)
     --, {onComplete = function()
     --   player.mode = "spelling_interactive"

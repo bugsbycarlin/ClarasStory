@@ -6,10 +6,33 @@ interactive_choice_player.__index = interactive_choice_player
 
 function interactive_choice_player:augment(player)
 
+
+  player.old_perform = player.perform
+  player.perform = function(self, asset)
+    player:old_perform(asset)
+    if asset.choice == true then
+      player.number_of_interactive_choices = player.number_of_interactive_choices + 1
+      local pop_sound = audio.loadSound("Sound/pop_" .. ((player.number_of_interactive_choices % 4) + 1) .. ".wav")
+      audio.play(pop_sound)
+      table.insert(player.interactive_choices, asset)
+      asset.performance:addEventListener("tap", function()
+        if player.mode == "choice_interactive" then
+          local touch_sound = audio.loadSound("Sound/touch_letter.wav")
+          audio.play(touch_sound)
+          player.interactive_choice = asset
+
+          player.info:choiceCallback(player.interactive_choice, player)
+        end
+      end)
+    end
+  end
+
   player.startInteractiveChoice = function()
     player.mode = "choice_intro"
 
     local info = player.info
+
+    player.number_of_interactive_choices = -1
 
     player.sketch_sprites.picture_info = player.picture_info
     player.sketch_sprites.sprite_info = player.sprite
@@ -34,41 +57,34 @@ function interactive_choice_player:augment(player)
       end, 0)
     end
 
-    local sound = audio.loadSound("Sound/chapter_1/" .. info.intro .. "_choice_intro.wav")
+    local sound = audio.loadSound("Sound/chapter_" .. player.chapter_number .. "/" .. info.intro .. ".wav")
     audio.play(sound)
 
     player.interactive_choices = {}
-
-    player.old_perform = player.perform
-    player.perform = function(self, asset)
-      player:old_perform(asset)
-      if asset.choice == true then
-        table.insert(player.interactive_choices, asset)
-        asset.performance:addEventListener("tap", function()
-          if player.mode == "choice_interactive" then
-            player.mode = "choice_outro"
-            local sound = audio.loadSound("Sound/touch_letter.wav")
-            audio.play(sound)
-            player.interactive_choice = asset.name
-            player:poopStars(asset.performance.fixed_x, asset.performance.fixed_y, 3 + math.random(3))
-          end
-        end)
-      end
-    end
 
     player.measure_timer = timer.performWithDelay(1, function() 
       player:measureTimer()
     end, 0)
 
-    player.mode = "choice_interactive"
-
+    last_choice_appears = 0
+    for i = 1, #player.script_assets do
+      asset = player.script_assets[i]
+      if asset.choice == true and asset.start_time > last_choice_appears then
+        last_choice_appears = asset.start_time
+      end
+    end
+    timer.performWithDelay(last_choice_appears, function()
+      player.mode = "choice_interactive"
+      print("Now it's interactive")
+    end)
   end
 
   player.measureTimer = function()
     player.current_time = system.getTimer()
     if player.current_time - player.start_performance_time > (player.mpb * player.time_sig) * player.measures then
+      print("Measure " .. player.measures)
       player.measures = player.measures + 1
-      if player.mode == "choice_outro" then
+      if player.mode == "choice_outro" and player.measures % 2 == 1 then
         player:finishChoiceScene()
       end
     end
@@ -80,7 +96,7 @@ function interactive_choice_player:augment(player)
 
     audio.stop()
 
-    player.next_scene = player.info:choiceCallback(player.interactive_choice)
+    -- player.next_scene = player.info:choiceCallback(player.interactive_choice)
 
     -- future: maybe should remove the choice object tap events
 
