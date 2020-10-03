@@ -817,6 +817,27 @@ picture_info["Perimeter"] = {
   sprite_count = 1,
 }
 
+picture_info["Cloud"] = {
+  file_name = "Cloud.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Horizontal_Dash"] = {
+  file_name = "Horizontal_Dash.png",
+  row_length = 1,
+  sprite_size = 128,
+  sprite_count = 1,
+}
+
+picture_info["Vertical_Dash"] = {
+  file_name = "Vertical_Dash.png",
+  row_length = 1,
+  sprite_size = 128,
+  sprite_count = 1,
+}
+
 
 
 for picture, info in pairs(picture_info) do

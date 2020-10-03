@@ -38,10 +38,12 @@ local load_start_time = 0
 
 local selected_element_id = nil
 
-local bpm = 110
-local mpb = 545.4545454545
+-- local bpm = 110
+-- local mpb = 545.4545454545
+local bpm = 160
+local mpb = 375
 
-local save_file = system.pathForFile("Scenes/Chapter_1_Scene_5.json", system.ResourceDirectory)
+local save_file = system.pathForFile("Scenes/chapter_2_choose_vehicle.json", system.ResourceDirectory)
 print(save_file)
 
 function scene:saveInfo(event)

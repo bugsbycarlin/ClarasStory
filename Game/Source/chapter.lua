@@ -189,18 +189,45 @@ end
 
 function scene:chapter_2_Structure()
   self.first_scene = "chapter_2_scene_1"
+  -- self.first_scene = "chapter_2_interactive_choice_vehicle"
 
-  composer.setVariable("mpb", 375)
+  local mpb = 375
+  composer.setVariable("mpb", mpb)
   composer.setVariable("bpm", 160)
   composer.setVariable("time_sig", 4)
 
+
+
   self.flow = {}
+  local flow = self.flow
   self.flow["chapter_2_scene_1"] = {
     name="chapter_2_scene_1",
-    next="chapter_2_interactive_taxi",
+    next="chapter_2_interactive_choice_vehicle",
     type="scripted",
     script=self:loadSceneScript("chapter_2_scene_1"),
   }
+  self.flow["chapter_2_interactive_choice_vehicle"] = {
+    name="chapter_2_interactive_choice_vehicle",
+    next=nil,
+    type="interactive_choice",
+    intro="vehicle",
+    choiceCallback = function(player, choice_value)
+      if string.find(choice_value, "Car") then 
+        return "chapter_2_interactive_car"
+      elseif string.find(choice_value, "Truck") then
+        return "chapter_2_interactive_truck"
+      elseif string.find(choice_value, "Bus") then
+        return "chapter_2_interactive_bus"
+      elseif string.find(choice_value, "Taxi") then
+        return "chapter_2_interactive_taxi"
+      else
+        return nil
+      end
+    end,
+    script=self:loadSceneScript("chapter_2_interactive_choice_vehicle"),
+  }
+
+
   self.flow["chapter_2_interactive_taxi"] = {
     name="chapter_2_interactive_taxi",
     next="chapter_2_scene_2",
@@ -211,6 +238,79 @@ function scene:chapter_2_Structure()
     intro_letter_beats = {0, 0.5, 1, 1.5},
     outro_sounds = {"tuh", "ah", "ks", "ii"},
     script=nil,
+    performance = {
+      squish_scale = 1.02,
+      intro = "poof",
+      y_scale = 1,
+      name = "Taxi",
+      disappear_method = "poof",
+      x_scale = 1,
+      squish_tilt = 8,
+      depth = 0,
+    },
+  }
+  self.flow["chapter_2_interactive_bus"] = {
+    name="chapter_2_interactive_bus",
+    next="chapter_2_scene_2",
+    type="interactive_spelling",
+    word="Bus",
+    random_order=false,
+    random_letters=false,
+    intro_letter_beats = {0, 0.5, 1},
+    outro_sounds = {"buh", "uh", "suh"},
+    script=nil,
+    performance = {
+      squish_scale = 1.02,
+      intro = "poof",
+      y_scale = 1,
+      name = "Bus_Gray",
+      disappear_method = "poof",
+      x_scale = 1,
+      squish_tilt = 8,
+      depth = 0,
+    },
+  }
+  self.flow["chapter_2_interactive_car"] = {
+    name="chapter_2_interactive_car",
+    next="chapter_2_scene_2",
+    type="interactive_spelling",
+    word="Car",
+    random_order=false,
+    random_letters=false,
+    intro_letter_beats = {0, 0.5, 1},
+    outro_sounds = {"kuh", "ahh", "ruh"},
+    script=nil,
+    performance = {
+      squish_scale = 1.02,
+      intro = "poof",
+      y_scale = 1,
+      name = "Car_Gray",
+      disappear_method = "poof",
+      x_scale = 1,
+      squish_tilt = 8,
+      depth = 0,
+    },
+  }
+  self.flow["chapter_2_interactive_truck"] = {
+    name="chapter_2_interactive_truck",
+    next="chapter_2_scene_2",
+    type="interactive_spelling",
+    word="Truck",
+    random_order=false,
+    random_letters=false,
+    intro_letter_beats = {0, 0.5, 1, 1.5, 2},
+    outro_sounds = {"tuh", "ruh", "ahh", "kuh", ""},
+    script=nil,
+    performance = {
+      squish_scale = 1.02,
+      intro = "poof",
+      y_scale = 1,
+      name = "Truck_Gray",
+      disappear_method = "poof",
+      x_scale = 1,
+      squish_tilt = 8,
+      depth = 0,
+    },
   }
   self.flow["chapter_2_scene_2"] = {
     name="chapter_2_scene_2",

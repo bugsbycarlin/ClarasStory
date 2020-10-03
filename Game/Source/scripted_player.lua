@@ -10,6 +10,7 @@ local sound_info = require("Source.sounds")
 local loader = require("Source.loader")
 
 local interactive_spelling_player = require("Source.interactive_spelling_player")
+local interactive_choice_player = require("Source.interactive_choice_player")
 
 local scene = composer.newScene()
 
@@ -54,6 +55,7 @@ function scene:show(event)
     self.picture_info = require("Source.pictures")
 
     interactive_spelling_player:augment(self)
+    interactive_choice_player:augment(self)
 
     for i = -4, 4 do
       local layer = display.newGroup()
@@ -77,6 +79,8 @@ function scene:show(event)
       self:startScripted()
     elseif self.scene_type == "interactive_spelling" then
       self:startInteractiveSpelling()
+    elseif scene.scene_type == "interactive_choice" then
+      self:startInteractiveChoice()
     end
 
     self.skip_scene_button = display.newImageRect(self.sceneGroup, "Art/skip_scene.png", 40, 40)
@@ -93,6 +97,8 @@ function scene:show(event)
           self:nextScene()
         elseif self.scene_type == "interactive_spelling" then
           self:finishSpellingScene()
+        elseif self.scene_type == "interactive_choice" then
+          self:finishChoiceScene()
         end
       end
     end)
@@ -139,12 +145,14 @@ scene:addEventListener("destroy", scene)
 function scene:updateTime()
   self.current_time = system.getTimer()
 
-  if self.mode == "performing" then
+  if self.mode ~= "editing" then
     self.total_performance_time = self.stored_performance_time + (self.current_time - self.start_performance_time)
   end
 end
 
 function scene:perform(asset)
+  print(self.chapter_number)
+  print("I AM PERFORMING " .. asset.name)
   if asset.type == "sound" then
     asset.performance = audio.loadStream("Sound/" .. sound_info[asset.name].file_name)
     -- should only do if this is the main audio file
@@ -174,31 +182,7 @@ function scene:perform(asset)
     asset.performance.y_vel = 0
     asset.performance.info = self.picture_info[picture]
     asset.performance.intro = asset.intro
-    if asset.intro == "sketch" then
-      asset.performance:setFrame(1)
-      asset.performance.state = "sketching"
-    elseif asset.intro == "fade_in" then
-      asset.performance:setFrame(1)
-      asset.performance.state = "fade_in"
-      asset.performance.alpha = 0.01
-    elseif asset.intro == "rise" then
-      asset.performance:setFrame(1)
-      asset.performance.state = "rise"
-      local height = asset.performance.info.sprite_size
-      if asset.performance.info["sprite_height"] ~= nil then
-        height = asset.performance.info["sprite_height"]
-      end
-      asset.performance.y = asset.y + height
-      asset.performance.fixed_y = asset.performance.y
-    else
-      asset.performance:setFrame(self.picture_info[picture]["sprite_count"])
-      if asset.performance.info["animation_end"] ~= nil then
-        asset.performance.state = "animating"
-        asset.performance.animation_count = 0
-      else
-        asset.performance.state = "static"
-      end
-    end
+    self:setInitialPerformanceState(asset.performance, asset.intro, picture)
     asset.performance.start_time = system.getTimer()
     asset.performance.x_scale = asset.x_scale
     asset.performance.y_scale = asset.y_scale
@@ -210,6 +194,40 @@ function scene:perform(asset)
     asset.performance.squish_tilt = asset.squish_tilt
     asset.performance.squish_period = asset.squish_period
     self.sketch_sprites:add(asset.performance)
+  end
+end
+
+function scene:setInitialPerformanceState(performance_object, intro, picture)
+  performance_object.intro = intro
+  if intro == "sketch" then
+    performance_object:setFrame(1)
+    performance_object.state = "sketching"
+  elseif intro == "fade_in" then
+    performance_object:setFrame(self.picture_info[picture]["sprite_count"])
+    performance_object.state = "fade_in"
+    performance_object.alpha = 0.01
+  elseif intro == "rise" then
+    performance_object:setFrame(self.picture_info[picture]["sprite_count"])
+    performance_object.state = "rise"
+    local height = performance_object.info.sprite_size
+    if performance_object.info["sprite_height"] ~= nil then
+      height = performance_object.info["sprite_height"]
+    end
+    performance_object.y = asset.y + height
+    performance_object.fixed_y = performance_object.y
+  elseif intro == "poof" then
+    performance_object:setFrame(self.picture_info[picture]["sprite_count"])
+    performance_object.state = "poof"
+    performance_object.alpha = 0.01
+    animation.to(performance_object, {alpha = 1}, {time=self.mpb * 0.5, easing=easing.outExp})
+  else
+    performance_object:setFrame(self.picture_info[picture]["sprite_count"])
+    if performance_object.info["animation_end"] ~= nil then
+      performance_object.state = "animating"
+      performance_object.animation_count = 0
+    else
+      performance_object.state = "static"
+    end
   end
 end
 
@@ -315,6 +333,8 @@ function scene:nextScene()
     self:startScripted()
   elseif self.scene_type == "interactive_spelling" then
     self:startInteractiveSpelling()
+  elseif self.scene_type == "interactive_choice" then
+    self:startInteractiveChoice()
   end
 
   -- start loading the next stuff
@@ -407,6 +427,16 @@ function scene:startScripted()
         current_x = self.performanceAssetGroup[front_row].x
         animation.to(self.performanceAssetGroup[front_row], {x=current_x - 256}, {time=750 / 4 * 0.7, easing=easing.outExp})
       end, 1)
+
+      if math.random(10) >= 6 then
+        print("honking")
+        local honk_image = display.newImageRect(self.performanceAssetGroup, "Art/honk.png", 256, 256)
+        honk_image.x = 100 + math.random(824)
+        honk_image.y = 192 + 50 + math.random(384 - 100)
+        timer.performWithDelay(self.mpb * 3 / 4, function()
+          display.remove(honk_image)
+        end, 1)
+      end
     end
 
     scoot()
@@ -421,13 +451,13 @@ function scene:startScripted()
     for i = 1,8 do
       timer.performWithDelay(22500 - (375/2) + (self.mpb / 2) * i, function()
         print("MAKING A HONK")
-        local honk_image = display.newImageRect(self.performanceAssetGroup, "Art/honk.png", 128, 128)
+        local honk_image = display.newImageRect(self.performanceAssetGroup, "Art/honk.png", 256, 256)
         honk_image.x = 100 + 100 * i
         honk_image.y = 192 + 50 + math.random(384 - 100)
         table.insert(honk_images, honk_image)
         timer.performWithDelay(self.mpb * 3 / 4, function()
 
-          display.remove(honk_images[i])
+          display.remove(honk_image)
         end, 1)
       end, 1)
     end
@@ -466,6 +496,9 @@ function scene:computeNextLoad()
     if load_scene.word ~= nil then
       background_load_items[load_scene.word] = 1
     end
+    if load_scene.performance ~= nil then
+      background_load_items[load_scene.performance.name] = 1
+    end
 
     if load_scene.script ~= nil then
       for asset_name, asset_value in pairs(load_scene.script) do
@@ -480,7 +513,7 @@ function scene:computeNextLoad()
 
   local clean_load_items = {}
   for picture, info in pairs(self.picture_info) do
-    if background_load_items[picture] == 1 and self.sprite[picture] == nil then
+    if background_load_items[picture] == 1 and self.picture_info[picture] ~= nil and self.sprite[picture] == nil then
       table.insert(clean_load_items, picture)
     end
   end
@@ -502,6 +535,10 @@ function scene:computeNextLoad()
     local load_scene = self.chapter_flow[current_scene_name]
     if load_scene.word ~= nil then
       safe_list[load_scene.word] = 1
+    end
+
+    if load_scene.performance ~= nil then
+      safe_list[load_scene.performance.name] = 1
     end
 
     if load_scene.script ~= nil then

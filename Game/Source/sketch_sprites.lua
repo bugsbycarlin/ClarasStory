@@ -79,15 +79,22 @@ function sketch_sprites:create()
           sprite:setFrame(sprite.frame + 1)
         else
           if sprite.info["animation_end"] ~= nil then
-            print("setting " .. sprite.info.file_name .. " to animation")
-            --sprite_count = info["animation_end"]
             sprite.state = "animating"
             sprite.animation_count = 0
           else
-            print("setting " .. sprite.info.file_name .. " to static")
             sprite.state = "static"
           end
         end
+      end
+
+      if sprite.state == "poof" then
+        if sprite.info["animation_end"] ~= nil then
+          sprite.state = "animating"
+          sprite.animation_count = 0
+        else
+          sprite.state = "static"
+        end
+        self:poopClouds(sprite, 10 + math.random(20))
       end
 
       if sprite.state == "outline_sketching" then
@@ -155,6 +162,13 @@ function sketch_sprites:create()
         sprite.x = sprite.fixed_x - sprite.squish_tilt * math.sin(0.5 * squish_time * 2 * math.pi / sprite.squish_period)
       end
 
+      if sprite.x_vel ~= nil and sprite.x_vel ~= 0 then
+        sprite.x = sprite.x + sprite.x_vel
+      end
+      if sprite.y_vel ~= nil and sprite.y_vel ~= 0 then
+        sprite.y = sprite.y + sprite.y_vel
+      end
+
       if sprite.state == "disappearing_gravity" then
         sprite.x = sprite.x + sprite.x_vel
         sprite.y = sprite.y + sprite.y_vel
@@ -167,9 +181,10 @@ function sketch_sprites:create()
         end
       end
 
-      if (mode == "performing") then
-        if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
-          if total_performance_time > sprite.disappear_time then
+      if (mode ~= "editing") then
+
+        if total_performance_time > sprite.disappear_time or mode == "outro" then
+          if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
             if sprite.disappear_method == "expand" then
               sprite.state = "disappearing_expand"
               current_x_scale = sprite.xScale
@@ -181,19 +196,23 @@ function sketch_sprites:create()
               end
             end
           end
-        end
 
-        if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
-          if total_performance_time > sprite.disappear_time then
+          if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
             if sprite.disappear_method == "fade" then
               sprite.state = "disappearing_fade"
               animation.to(sprite, {alpha = 0}, {time=sprite.squish_period * 0.75, easing=easing.outSine})
             end
           end
-        end
 
-        if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
-          if total_performance_time > sprite.disappear_time then
+          if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
+            if sprite.disappear_method == "poof" then
+              sprite.state = "disappearing_poof"
+              sprite.isVisible = false
+              self:poopClouds(sprite, 10 + math.random(20))
+            end
+          end
+
+          if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
             if sprite.disappear_method == "leap_left" then
               sprite.state = "disappearing_leap_left"
               local current_x = sprite.x
@@ -201,10 +220,8 @@ function sketch_sprites:create()
               animation.to(sprite, {x=current_x - sprite.info["sprite_size"], y=current_y - sprite.info["sprite_size"] / 4, alpha = 0}, {time=sprite.squish_period / 2, easing=easing.outCubic})
             end
           end
-        end
 
-        if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
-          if total_performance_time > sprite.disappear_time then
+          if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
             if sprite.disappear_method == "leap_right" then
               sprite.state = "disappearing_leap_right"
               local current_x = sprite.x
@@ -212,10 +229,8 @@ function sketch_sprites:create()
               animation.to(sprite, {x=current_x + sprite.info["sprite_size"], y=current_y - sprite.info["sprite_size"] / 4, alpha = 0}, {time=sprite.squish_period / 2, easing=easing.outCubic})
             end
           end
-        end
 
-        if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
-          if total_performance_time > sprite.disappear_time then
+          if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
             if sprite.disappear_method == "bounce_left" then
               sprite.state = "disappearing_bounce_left"
               local current_x = sprite.x
@@ -223,10 +238,8 @@ function sketch_sprites:create()
               animation.to(sprite, {x=current_x - sprite.info["sprite_size"], y=current_y - sprite.info["sprite_size"] / 4, alpha = 0}, {time=sprite.squish_period / 2, easing=easing.inOutBack})
             end
           end
-        end
 
-        if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
-          if total_performance_time > sprite.disappear_time then
+          if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
             if sprite.disappear_method == "bounce_right" then
               sprite.state = "disappearing_bounce_right"
               local current_x = sprite.x
@@ -234,35 +247,27 @@ function sketch_sprites:create()
               animation.to(sprite, {x=current_x + sprite.info["sprite_size"], y=current_y - sprite.info["sprite_size"] / 4, alpha = 0}, {time=sprite.squish_period / 2, easing=easing.inOutBack})
             end
           end
-        end
 
-        if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
-          if total_performance_time > sprite.disappear_time then
+          if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
             if sprite.disappear_method == "pop" then
               sprite.state = "disappearing_pop"
               sprite.isVisible = false
             end
           end
-        end
 
-        if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
-          if total_performance_time > sprite.disappear_time then
+          if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
             if sprite.disappear_method == "rewind" then
               sprite.state = "disappearing_rewind"
             end
           end
-        end
 
-        if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
-          if total_performance_time > sprite.disappear_time then
+          if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
             if sprite.disappear_method == "gravity" then
               sprite.state = "disappearing_gravity"
             end
           end
-        end
 
-        if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
-          if total_performance_time > sprite.disappear_time then
+          if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
             if sprite.disappear_method == "fruit" then
               self:poopFruits(sprite, 100, 150, 10 + math.random(20))
               sprite.state = "disappearing_pop"
@@ -301,6 +306,36 @@ function sketch_sprites:create()
       fruit_sprite.x_vel = -20 + math.random(40)
       fruit_sprite.y_vel = -1 * (4 + math.random(6))
       self:add(fruit_sprite)
+    end
+  end
+
+  function object:poopClouds(current_sprite, num_clouds)
+    local info = current_sprite.info
+    print("Width of this sprite is " .. current_sprite.width * current_sprite.xScale)
+    local width = current_sprite.width * current_sprite.xScale
+    local height = current_sprite.height * current_sprite.yScale
+    for i = 1, num_clouds do
+      local cloud_sprite = display.newImageRect(self.top_group, "Art/Cloud.png", 256, 256)
+      cloud_sprite.id = "Cloud_" .. math.random(5) .. 1000 + i
+      cloud_sprite.x = current_sprite.fixed_x - width / 2 + math.random(width)
+      cloud_sprite.y = current_sprite.fixed_y - height / 2 + math.random(height)
+      cloud_sprite.fixed_y = cloud_sprite.y
+      cloud_sprite.fixed_x = cloud_sprite.x
+      cloud_sprite.info = self.picture_info["Cloud"]
+      cloud_sprite.intro = "static"
+      cloud_sprite.state = "disappearing_fade"
+      cloud_sprite.start_time = system.getTimer()
+      cloud_sprite.x_scale = 0.5
+      cloud_sprite.y_scale = 0.5
+      cloud_sprite.xScale = cloud_sprite.x_scale
+      cloud_sprite.yScale = cloud_sprite.y_scale
+      cloud_sprite.disappear_time = -1
+      cloud_sprite.squish_scale = 1
+      cloud_sprite.squish_tilt = 0
+      cloud_sprite.squish_period = 0
+
+      animation.to(cloud_sprite, {x = cloud_sprite.x - 40 + math.random(80), y = cloud_sprite.y - 40 + math.random(80), alpha = 0}, {time=sprite.squish_period * 0.75, easing=easing.outExp})
+      self:add(cloud_sprite)
     end
   end
 

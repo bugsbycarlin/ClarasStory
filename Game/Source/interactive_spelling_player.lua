@@ -10,7 +10,7 @@ local large_word_gap = 160
 function interactive_spelling_player:augment(player)
 
   player.startInteractiveSpelling = function()
-    player.mode = "intro"
+    player.mode = "spelling_intro"
 
     local info = player.info
     local word = player.info.word
@@ -49,46 +49,87 @@ function interactive_spelling_player:augment(player)
     local sound = audio.loadSound("Sound/chapter_1/" .. info.word .. "_Intro.wav")
     audio.play(sound)
     --, {onComplete = function()
-    --   player.mode = "interactive"
+    --   player.mode = "spelling_interactive"
     --   player.interactive_measures = 1
     --   player.interactive_beats = 1
 
     --   player:setWordColor(player.current_letter_number)
     -- end})
-    player.mode = "interactive"
+    player.mode = "spelling_interactive"
     player.interactive_measures = 1
     player.interactive_beats = 1
 
     local picture = info.word
 
-    local spelling_object_x = display.contentCenterX
-    local spelling_object_y = display.contentCenterY - 100
-    if info["object_x"] ~= nil then
-      spelling_object_x = info["object_x"]
-    end
-    if info["object_y"] ~= nil then
-      spelling_object_y = info["object_y"]
+    if info["performance"] then
+      local perf = info["performance"]
+
+      if player.sprite[perf.name] == nil then
+        print("Attempting last minute load for " .. perf.name)
+        player.loader:loadPicture(perf.name)
+      end
+
+      local spelling_object_x = display.contentCenterX
+      local spelling_object_y = display.contentCenterY - 100
+      if perf.fixed_x ~= nil then
+        spelling_object_x = perf.fixed_x
+      end
+      if perf.fixed_y ~= nil then
+        spelling_object_y = perf.fixed_y
+      end
+      print(perf.name)
+      player.spelling_object = display.newSprite(player.performanceAssetGroup[perf.depth + 5], player.sprite[perf.name], {frames=player.picture_info[perf.name].frames})
+      player.spelling_object.name = perf.name
+      player.spelling_object.id = perf.name .. "_" .. 0
+      player.spelling_object.x = spelling_object_x
+      player.spelling_object.y = spelling_object_y
+      player.spelling_object.fixed_x = spelling_object_x
+      player.spelling_object.fixed_y = spelling_object_y
+      player.spelling_object.info = player.picture_info[perf.name]
+      player.spelling_object.intro = perf.intro
+      player:setInitialPerformanceState(player.spelling_object, perf.intro, perf.name)
+      player.spelling_object.start_time = system.getTimer()
+      player.spelling_object.x_scale = perf.x_scale
+      player.spelling_object.y_scale = perf.y_scale
+      player.spelling_object.xScale = perf.x_scale
+      player.spelling_object.yScale = perf.y_scale
+      player.spelling_object.disappear_time = -1
+      player.spelling_object.disappear_method = perf.disappear_method
+      player.spelling_object.squish_scale = perf.squish_scale
+      player.spelling_object.squish_tilt = perf.squish_tilt
+      player.spelling_object.squish_period = player.mpb
+    else
+      local spelling_object_x = display.contentCenterX
+      local spelling_object_y = display.contentCenterY - 100
+      if info["object_x"] ~= nil then
+        spelling_object_x = info["object_x"]
+      end
+      if info["object_y"] ~= nil then
+        spelling_object_y = info["object_y"]
+      end
+
+      player.spelling_object = display.newSprite(player.performanceAssetGroup, player.sprite[picture], {frames=player.picture_info[picture].frames})
+      player.spelling_object.id = picture .. "_" .. 0
+      player.spelling_object.x = spelling_object_x
+      player.spelling_object.y = spelling_object_y
+      player.spelling_object.fixed_x = spelling_object_x
+      player.spelling_object.fixed_y = spelling_object_y
+      player.spelling_object.info = player.picture_info[picture]
+      player.spelling_object.intro = "sketch"
+      player.spelling_object:setFrame(1)
+      player.spelling_object.state = "outline_sketching"
+      player.spelling_object.start_time = system.getTimer()
+      player.spelling_object.x_scale = 1
+      player.spelling_object.y_scale = 1
+      player.spelling_object.xScale = player.spelling_object.x_scale
+      player.spelling_object.yScale = player.spelling_object.y_scale
+      player.spelling_object.disappear_time = -1
+      player.spelling_object.disappear_method = ""
+      player.spelling_object.squish_scale = 1.02
+      player.spelling_object.squish_tilt = 8
+      player.spelling_object.squish_period = player.mpb
     end
 
-    player.spelling_object = display.newSprite(player.performanceAssetGroup, player.sprite[picture], {frames=player.picture_info[picture].frames})
-    player.spelling_object.id = picture .. "_" .. 0
-    player.spelling_object.x = spelling_object_x
-    player.spelling_object.y = spelling_object_y
-    player.spelling_object.fixed_y = player.spelling_object.y
-    player.spelling_object.fixed_x = player.spelling_object.x
-    player.spelling_object.info = player.picture_info[picture]
-    player.spelling_object.intro = "sketch"
-    player.spelling_object:setFrame(1)
-    player.spelling_object.state = "outline_sketching"
-    player.spelling_object.start_time = system.getTimer()
-    player.spelling_object.x_scale = 1
-    player.spelling_object.y_scale = 1
-    player.spelling_object.xScale = player.spelling_object.x_scale
-    player.spelling_object.yScale = player.spelling_object.y_scale
-    player.spelling_object.disappear_time = -1
-    player.spelling_object.squish_scale = 1.02
-    player.spelling_object.squish_tilt = 8
-    player.spelling_object.squish_period = player.mpb
     touch_giggle = function(event)
       local giggle_sound = audio.loadSound("Sound/giggle.wav")
       audio.play(giggle_sound)
@@ -168,7 +209,7 @@ function interactive_spelling_player:augment(player)
         end
 
         local button_event = function(event)
-          if player.mode == "interactive" then
+          if player.mode == "spelling_interactive" then
             print("Touching " .. player.current_letter_number)
             if player.current_letter_number >= 1 and player.current_letter_number <= string.len(info.word) and this_letter == player.current_letter_number then
               local sound = audio.loadSound("Sound/touch_letter.wav")
@@ -207,7 +248,7 @@ function interactive_spelling_player:augment(player)
 
               if c > string.len(info.word) then
                 -- we're done!
-                player.mode = "pre_outro"
+                player.mode = "spelling_pre_outro"
                 player.spelling_object.state = "sketching"
               end
 
@@ -238,23 +279,23 @@ function interactive_spelling_player:augment(player)
     if player.current_time - player.start_performance_time > (player.mpb * player.time_sig) * player.measures then
       player:measureActions()
       -- measure action could finish the scene, so check for that before going on
-      if player.mode ~= "finished" then
+      if player.mode ~= "spelling_finished" then
         player.measures = player.measures + 1
-        if player.mode == "interactive" then
+        if player.mode == "spelling_interactive" then
           player.interactive_measures = player.interactive_measures + 1
         end
       end
     end
 
-    if player.mode ~= "finished" and player.current_time - player.start_performance_time > player.mpb * player.beats then
+    if player.mode ~= "spelling_finished" and player.current_time - player.start_performance_time > player.mpb * player.beats then
       player:beatActions()
       player.beats = player.beats + 1
-      if player.mode == "interactive" then
+      if player.mode == "spelling_interactive" then
         player.interactive_beats = player.interactive_beats + 1
       end
     end
 
-    if player.mode == "finished" then
+    if player.mode == "spelling_finished" then
       player:finishSpellingScene()
     end
   end
@@ -287,14 +328,14 @@ function interactive_spelling_player:augment(player)
     local word = string.lower(player.info.word)
 
       -- on every other beat during interactives, update the color coding to fit the letter
-    if player.mode == "interactive" then
+    if player.mode == "spelling_interactive" then
       player:setWordColor(player.current_letter_number)
     end
 
     -- on interactives, on the 3rd out of every 8 beats, tell the player to press a button.
     -- the sound is delayed by one beat (to capture the pre-beat sound), so this will actually
     -- land right on the measure mark.
-    -- if player.mode == "interactive" and player.interactive_beats % 8 == 3 then
+    -- if player.mode == "spelling_interactive" and player.interactive_beats % 8 == 3 then
     --   if player.current_letter_number >= 1 and player.current_letter_number <= string.len(word) then
     --     current_letter = word:sub(player.current_letter_number, player.current_letter_number)
     --     randomizer = math.random(4)
@@ -310,13 +351,13 @@ function interactive_spelling_player:augment(player)
     local info = player.info
     local word = string.lower(player.info.word)
 
-    if player.mode == "pre_outro" then
-      player.mode = "outro"
+    if player.mode == "spelling_pre_outro" then
+      player.mode = "spelling_outro"
 
       -- play the outro sound
       -- local sound = audio.loadSound("Sound/chapter_1/" .. info.word .. "_Outro.wav")
       -- audio.play(sound, {onComplete = function()
-      --   player.mode = "post_outro"
+      --   player.mode = "spelling_post_outro"
       -- end})
 
       -- load up some letter timing for show
@@ -343,10 +384,18 @@ function interactive_spelling_player:augment(player)
         local final_sound = audio.loadSound("Sound/touch_letter.wav")
         audio.play(final_sound)
         player:setWordColor("all")
+
+
+        print("test")
+        print(player.spelling_object.disappear_method)
+        if player.spelling_object.disappear_method ~= nil and player.spelling_object.disappear_method ~= "" then
+          print("here")
+          player.spelling_object.disappear_time = 1
+        end
       end)
       timer.performWithDelay((2 * string.len(info.word) + 4) * player.mpb, function()
         player:setWordColor("none")
-        player.mode = "post_outro"
+        player.mode = "spelling_post_outro"
         if info.word == "Banana" or info.word == "Pear" or info.word == "Apple" or info.word == "Orange" or info.word == "Plum" or info.word == "Lime" then
           local chomp_sound = audio.loadSound("Sound/chomp.wav")
           audio.play(chomp_sound)
@@ -357,8 +406,8 @@ function interactive_spelling_player:augment(player)
       -- end)
     end
 
-    if player.mode == "post_outro" then
-      player.mode = "finished"
+    if player.mode == "spelling_post_outro" then
+      player.mode = "spelling_finished"
     end
   end
 
