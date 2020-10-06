@@ -894,6 +894,22 @@ picture_info["Gray_Paint"] = {
   sprite_count = 1,
 }
 
+picture_info["Treetop"] = {
+  file_name = "Treetop.png",
+  row_length = 1,
+  sprite_size = 1024,
+  sprite_height = 768,
+  sprite_count = 1,
+}
+
+picture_info["Large_Palm"] = {
+  file_name = "Large_Palm.png",
+  row_length = 1,
+  sprite_size = 425,
+  sprite_height = 768,
+  sprite_count = 1,
+}
+
 
 
 for picture, info in pairs(picture_info) do
