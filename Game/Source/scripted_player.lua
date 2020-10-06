@@ -466,13 +466,31 @@ function scene:startScripted()
 
   if self.scene_name == "chapter_2_scene_2" then
     self.special_timer = timer.performWithDelay(187, function()
-      local honk_image = display.newImageRect(self.performanceAssetGroup, "Art/honk.png", 256, 256)
-        honk_image.x = 100 + math.random(824)
-        honk_image.y = 192 + 50 + math.random(384 - 100)
-        timer.performWithDelay(self.mpb * 3 / 4, function()
-          display.remove(honk_image)
-      end, 1)
+      if self.total_performance_time > 4500 and self.total_performance_time < 6000 then
+        local honk_image = display.newImageRect(self.performanceAssetGroup, "Art/honk.png", 256, 256)
+          honk_image.x = 100 + math.random(824)
+          honk_image.y = 192 + 50 + math.random(384 - 100)
+          timer.performWithDelay(self.mpb * 3 / 4, function()
+            display.remove(honk_image)
+        end, 1)
+      end
     end, 0)
+
+    self.special_timer = timer.performWithDelay(6750, function()
+      -- move Girl_13 out and up in advance of switching scenes
+      for i = 1, #self.script_assets do
+        asset = self.script_assets[i]
+        print(asset.id)
+        if asset.id == "Girl_13" and asset.performance ~= nil then
+          print("I found Girl_13")
+
+          self.sketch_sprites:poopClouds(asset.performance, 8 + math.random(16))
+          asset.performance.fixed_x = asset.performance.fixed_x + 110
+          asset.performance.fixed_y = asset.performance.fixed_y - 58
+          -- self.sketch_sprites:poopClouds(asset.performance, 4 + math.random(8))
+        end
+      end
+    end, 1)
   end
 end
 

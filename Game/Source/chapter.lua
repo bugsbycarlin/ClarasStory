@@ -188,7 +188,7 @@ function scene:setupSceneStructure()
 end
 
 function scene:chapter_2_Structure()
-  self.first_scene = "chapter_2_scene_1"
+  self.first_scene = "chapter_2_scene_2"
   -- self.first_scene = "chapter_2_interactive_choice_vehicle"
 
   local mpb = 375
@@ -197,14 +197,18 @@ function scene:chapter_2_Structure()
   composer.setVariable("time_sig", 4)
 
   setVehicle = function(vehicle_name)
+    print("I AM IN SET VEHICLE")
     asset_list = self.flow["chapter_2_scene_2"].script
     for i = 1, #asset_list do
       asset = asset_list[i]
       print(asset.name)
-      if asset.id == "Car_Orange_Special" then
+      if asset.id == "Girl_13" then
         print("I found the asset")
         asset.name = vehicle_name
       end
+      -- if string.find(vehicle_name, "Girl") == nil and asset.fixed_x ~= nil and asset.fixed_x < 500 and asset.fixed_x > 300 then
+      --   asset.name = vehicle_name
+      -- end
       if asset.id == "Girl_13" and string.find(vehicle_name, "Truck") then
         asset.fixed_x = asset.fixed_x + 30
         asset.x = asset.x + 30

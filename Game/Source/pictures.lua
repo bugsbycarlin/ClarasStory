@@ -910,6 +910,27 @@ picture_info["Large_Palm"] = {
   sprite_count = 1,
 }
 
+picture_info["Girl_Climbing"] = {
+  file_name = "Girl_Climbing.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Girl_Treetop"] = {
+  file_name = "Girl_Treetop.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Attention"] = {
+  file_name = "Attention.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
 
 
 for picture, info in pairs(picture_info) do
