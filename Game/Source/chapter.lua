@@ -188,8 +188,8 @@ function scene:setupSceneStructure()
 end
 
 function scene:chapter_2_Structure()
-  self.first_scene = "chapter_2_scene_2"
-  -- self.first_scene = "chapter_2_interactive_choice_vehicle"
+  self.first_scene = "chapter_2_scene_3"
+  -- self.first_scene = "chapter_2_interactive_bike"
 
   local mpb = 375
   composer.setVariable("mpb", mpb)
@@ -260,7 +260,7 @@ function scene:chapter_2_Structure()
         player.next_scene = "chapter_2_interactive_bus"
       elseif string.find(choice_value, "Taxi") then
         player.next_scene = "chapter_2_interactive_taxi"
-        setVehicle("Taxi")
+        -- setVehicle("Taxi")
       end
 
       timer.performWithDelay(player.mpb, function() 
@@ -335,7 +335,7 @@ function scene:chapter_2_Structure()
         end
       end
 
-      setVehicle("Bus_" .. color)
+      -- setVehicle("Bus_" .. color)
 
       timer.performWithDelay(player.mpb, function() 
         player.mode = "choice_outro"
@@ -450,10 +450,72 @@ function scene:chapter_2_Structure()
 
   self.flow["chapter_2_scene_2"] = {
     name="chapter_2_scene_2",
-    next=nil,
+    next="chapter_2_interactive_bike",
     type="scripted",
     script=self:loadSceneScript("chapter_2_scene_2"),
   }
+
+
+  self.flow["chapter_2_interactive_bike"] = {
+    name="chapter_2_interactive_bike",
+    next="chapter_2_interactive_choice_bike_color",
+    type="interactive_spelling",
+    word="Bike",
+    random_order=false,
+    random_letters=false,
+    intro_letter_beats = {0, 0.5, 1, 1.5},
+    outro_sounds = {"buh", "I", "kuh", "eh"},
+    script=nil,
+    performance = {
+      squish_scale = 1.02,
+      intro = "poof",
+      y_scale = 1,
+      name = "Bike_Gray",
+      disappear_method = "poof",
+      x_scale = 1,
+      squish_tilt = 8,
+      depth = 0,
+    },
+  }
+  self.flow["chapter_2_interactive_choice_bike_color"] = {
+    name="chapter_2_interactive_choice_bike_color",
+    next="chapter_2_scene_3",
+    type="interactive_choice",
+    intro="bike_color_choice",
+    choiceCallback = function(something, choice_asset, player)
+
+      color = string.gsub(choice_asset.name, "_Paint", "")
+
+      for i = 1, #player.script_assets do
+        asset = player.script_assets[i]
+        if asset.performance ~= nil and string.find(asset.name, "Paint") then
+          asset.performance.isVisible = false
+        elseif asset.performance ~= nil and string.find(asset.name, "Bike") then
+          display.remove(asset.performance)
+          asset.performance = nil
+          asset.name = "Bike_" .. color
+          asset.intro = "poof"
+          player:perform(asset)
+        end
+      end
+
+      -- setVehicle("Car_" .. color)
+
+      timer.performWithDelay(player.mpb, function() 
+        player.mode = "choice_outro"
+      end)
+    end,
+    script=self:loadSceneScript("chapter_2_interactive_choice_bike_color"),
+  }
+
+
+  self.flow["chapter_2_scene_3"] = {
+    name="chapter_2_scene_3",
+    next=nil,
+    type="scripted",
+    script=self:loadSceneScript("chapter_2_scene_3"),
+  }
+
 end
 
 function scene:chapter_1_Structure()

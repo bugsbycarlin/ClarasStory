@@ -794,10 +794,74 @@ picture_info["Taxi"] = {
   sprite_count = 1,
 }
 
+picture_info["Bike_Red"] = {
+  file_name = "Bike_Red_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Bike_Green"] = {
+  file_name = "Bike_Green_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Bike_Blue"] = {
+  file_name = "Bike_Blue_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Bike_Pink"] = {
+  file_name = "Bike_Pink_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Bike_Purple"] = {
+  file_name = "Bike_Purple_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Bike_Yellow"] = {
+  file_name = "Bike_Yellow_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Bike_Orange"] = {
+  file_name = "Bike_Orange_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Bike_Gray"] = {
+  file_name = "Bike_Gray_Small.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
 picture_info["City_Block"] = {
   file_name = "City_Block.png",
   row_length = 1,
   sprite_size = 1024,
+  sprite_height = 768,
+  sprite_count = 1,
+}
+
+picture_info["City_Block_Wider"] = {
+  file_name = "City_Block_Wider.png",
+  row_length = 1,
+  sprite_size = 2048,
   sprite_height = 768,
   sprite_count = 1,
 }

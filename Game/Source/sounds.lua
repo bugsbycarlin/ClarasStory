@@ -42,6 +42,10 @@ sound_info["chapter_2_scene_2"] = {
   file_name = "chapter_2_scene_2.mp3",
 }
 
+sound_info["chapter_2_scene_3"] = {
+  file_name = "chapter_2_scene_3.mp3",
+}
+
 sound_info["chapter_2_interactive_loop"] = {
   file_name = "chapter_2_interactive_Loop.mp3",
 }

@@ -32,6 +32,8 @@ function interactive_choice_player:augment(player)
 
     local info = player.info
 
+    player.interactive_choices = {}
+
     player.number_of_interactive_choices = -1
 
     player.sketch_sprites.picture_info = player.picture_info
@@ -59,8 +61,6 @@ function interactive_choice_player:augment(player)
 
     local sound = audio.loadSound("Sound/chapter_" .. player.chapter_number .. "/" .. info.intro .. ".wav")
     audio.play(sound)
-
-    player.interactive_choices = {}
 
     player.measure_timer = timer.performWithDelay(1, function() 
       player:measureTimer()

@@ -75,6 +75,8 @@ function scene:show(event)
       editor:augment(self)
     end
 
+    self:setupLoading()
+
     if self.scene_type == "scripted" then
       self:startScripted()
     elseif self.scene_type == "interactive_spelling" then
@@ -102,8 +104,6 @@ function scene:show(event)
         end
       end
     end)
-
-    self:setupLoading()
   end
 end
 
@@ -485,13 +485,68 @@ function scene:startScripted()
           print("I found Girl_13")
 
           self.sketch_sprites:poopClouds(asset.performance, 8 + math.random(16))
-          asset.performance.fixed_x = asset.performance.fixed_x + 110
+          asset.performance.fixed_x = asset.performance.fixed_x + 2010 -- basically remove it, actually
           asset.performance.fixed_y = asset.performance.fixed_y - 58
           -- self.sketch_sprites:poopClouds(asset.performance, 4 + math.random(8))
         end
       end
     end, 1)
+
+    timer.performWithDelay(12000, function()
+      local back_row = 6
+      local front_row = 7
+      self.chapter_2_scoot_counter = 0
+      scoot = function()
+        self.chapter_2_scoot_counter = self.chapter_2_scoot_counter + 1
+        -- if self.chapter_2_scoot_counter % 4 == 1 then
+        --   self.performanceAssetGroup[back_row].x = self.performanceAssetGroup[back_row].x - 1024
+        --   self.performanceAssetGroup[front_row].x = self.performanceAssetGroup[front_row].x + 1024
+        -- end
+        local back_and_forth = 128
+        if self.chapter_2_scoot_counter % 2 == 1 then
+          back_and_forth = -1 * back_and_forth
+        end
+
+        current_x = self.performanceAssetGroup[back_row].x
+        animation.to(self.performanceAssetGroup[back_row], {x=current_x + back_and_forth}, {time=750 / 4 * 0.7, easing=easing.outExp})
+
+        -- scoot left
+        timer.performWithDelay(750 * 3 / 4, function()
+          current_x = self.performanceAssetGroup[front_row].x
+          animation.to(self.performanceAssetGroup[front_row], {x=current_x - 256}, {time=750 / 4 * 0.7, easing=easing.outExp})
+          current_x = self.performanceAssetGroup[back_row].x
+          animation.to(self.performanceAssetGroup[back_row], {x=current_x - back_and_forth}, {time=750 / 4 * 0.7, easing=easing.outExp})
+        end, 1)
+
+        print("honking")
+        local honk_image = display.newImageRect(self.performanceAssetGroup, "Art/honk.png", 256, 256)
+        honk_image.x = 100 + math.random(824)
+        honk_image.y = 192 + 50 + math.random(384 - 100)
+        timer.performWithDelay(self.mpb * 3 / 4, function()
+          display.remove(honk_image)
+        end, 1)
+      end
+
+      scoot()
+      self.special_timer = timer.performWithDelay(1500, function()
+        scoot()
+      end, 0)
+    end, 1)
   end
+
+  zoom = function()
+    if self.scene_name == "chapter_2_scene_3" and self.mode == "performing" then
+      for i = 1, 9 do
+        print("in here " .. i)
+        if i ~= 5 then
+          self.performanceAssetGroup[i].x = self.performanceAssetGroup[i].x - 7
+        end
+      end
+    end
+  end
+  self.special_timer = timer.performWithDelay(33, function()
+    zoom()
+  end, 0)
 end
 
 function scene:setupLoading()
