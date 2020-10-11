@@ -17,7 +17,7 @@ function interactive_spelling_player:augment(player)
 
     player.sketch_sprites.picture_info = player.picture_info
     player.sketch_sprites.sprite_info = player.sprite
-    player.sketch_sprites.top_group = player.performanceAssetGroup[9]
+    player.sketch_sprites.top_group = player.top_group
 
     player.current_letter_number = 1
 
@@ -78,7 +78,7 @@ function interactive_spelling_player:augment(player)
         spelling_object_y = perf.fixed_y
       end
       print(perf.name)
-      player.spelling_object = display.newSprite(player.performanceAssetGroup[perf.depth + 5], player.sprite[perf.name], {frames=player.picture_info[perf.name].frames})
+      player.spelling_object = display.newSprite(player.performanceAssetGroup[perf.depth + player.const_half_layers + 1], player.sprite[perf.name], {frames=player.picture_info[perf.name].frames})
       player.spelling_object.name = perf.name
       player.spelling_object.id = perf.name .. "_" .. 0
       player.spelling_object.x = spelling_object_x
@@ -108,7 +108,7 @@ function interactive_spelling_player:augment(player)
         spelling_object_y = info["object_y"]
       end
 
-      player.spelling_object = display.newSprite(player.performanceAssetGroup, player.sprite[picture], {frames=player.picture_info[picture].frames})
+      player.spelling_object = display.newSprite(player.top_group, player.sprite[picture], {frames=player.picture_info[picture].frames})
       player.spelling_object.id = picture .. "_" .. 0
       player.spelling_object.x = spelling_object_x
       player.spelling_object.y = spelling_object_y
@@ -156,9 +156,9 @@ function interactive_spelling_player:augment(player)
         local picture = string.upper(info.word):sub(i,i)
 
         local button = display.newGroup()
-        player.performanceAssetGroup:insert(button)
+        player.top_group:insert(button)
 
-        local button_backing = display.newSprite(player.performanceAssetGroup, player.sprite["Letter_Box"], {frames=player.picture_info["Letter_Box"].frames})
+        local button_backing = display.newSprite(player.top_group, player.sprite["Letter_Box"], {frames=player.picture_info["Letter_Box"].frames})
         button_backing.id = "button_backing_" .. i
         button_backing.x = display.contentCenterX + gap * (i - string.len(info.word)/2 - 0.5)
         button_backing.y = display.contentCenterY + 250
@@ -180,7 +180,7 @@ function interactive_spelling_player:augment(player)
         player.sketch_sprites:add(button_backing)
         table.insert(player.button_backings, button_backing)
 
-        local button_letter = display.newSprite(player.performanceAssetGroup, player.sprite[picture], {frames=player.picture_info[picture].frames})
+        local button_letter = display.newSprite(player.top_group, player.sprite[picture], {frames=player.picture_info[picture].frames})
         button_letter.id = picture .. "_" .. i
         button_letter.x = display.contentCenterX + gap * (i - string.len(info.word)/2 - 0.5)
         button_letter.y = display.contentCenterY + 250

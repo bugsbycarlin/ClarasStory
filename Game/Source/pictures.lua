@@ -796,55 +796,88 @@ picture_info["Taxi"] = {
 
 picture_info["Bike_Red"] = {
   file_name = "Bike_Red_Small.png",
-  row_length = 1,
+  row_length = 2,
   sprite_size = 256,
   sprite_count = 1,
+  animation_start = 1,
+  animation_end = 2,
+  animation_on = 2,
 }
 
 picture_info["Bike_Green"] = {
   file_name = "Bike_Green_Small.png",
-  row_length = 1,
+  row_length = 2,
   sprite_size = 256,
   sprite_count = 1,
+  animation_start = 1,
+  animation_end = 2,
+  animation_on = 2,
 }
 
 picture_info["Bike_Blue"] = {
   file_name = "Bike_Blue_Small.png",
-  row_length = 1,
+  row_length = 2,
   sprite_size = 256,
   sprite_count = 1,
+  animation_start = 1,
+  animation_end = 2,
+  animation_on = 2,
 }
 
 picture_info["Bike_Pink"] = {
   file_name = "Bike_Pink_Small.png",
-  row_length = 1,
+  row_length = 2,
   sprite_size = 256,
   sprite_count = 1,
+  animation_start = 1,
+  animation_end = 2,
+  animation_on = 2,
 }
 
 picture_info["Bike_Purple"] = {
   file_name = "Bike_Purple_Small.png",
-  row_length = 1,
+  row_length = 2,
   sprite_size = 256,
   sprite_count = 1,
+  animation_start = 1,
+  animation_end = 2,
+  animation_on = 2,
 }
 
 picture_info["Bike_Yellow"] = {
   file_name = "Bike_Yellow_Small.png",
-  row_length = 1,
+  row_length = 2,
   sprite_size = 256,
   sprite_count = 1,
+  animation_start = 1,
+  animation_end = 2,
+  animation_on = 2,
 }
 
 picture_info["Bike_Orange"] = {
   file_name = "Bike_Orange_Small.png",
-  row_length = 1,
+    row_length = 2,
   sprite_size = 256,
   sprite_count = 1,
+  animation_start = 1,
+  animation_end = 2,
+  animation_on = 2,
 }
 
 picture_info["Bike_Gray"] = {
   file_name = "Bike_Gray_Small.png",
+  row_length = 2,
+  sprite_size = 256,
+  sprite_count = 1,
+  animation_start = 1,
+  animation_end = 2,
+  animation_on = 2,
+}
+
+
+
+picture_info["Bike_Girl"] = {
+  file_name = "Bike_Girl.png",
   row_length = 1,
   sprite_size = 256,
   sprite_count = 1,
@@ -864,6 +897,33 @@ picture_info["City_Block_Wider"] = {
   sprite_size = 2048,
   sprite_height = 768,
   sprite_count = 1,
+}
+
+picture_info["City_Stack_1"] = {
+  file_name = "City_Stack_1.png",
+  row_length = 1,
+  sprite_size = 1024,
+  sprite_height = 1292,
+  sprite_count = 1,
+  -- y is 704 + height/2
+}
+
+picture_info["City_Stack_2"] = {
+  file_name = "City_Stack_2.png",
+  row_length = 1,
+  sprite_size = 1024,
+  sprite_height = 872,
+  sprite_count = 1,
+  -- y is 670 + height/2
+}
+
+picture_info["City_Stack_3"] = {
+  file_name = "City_Stack_3.png",
+  row_length = 1,
+  sprite_size = 1024,
+  sprite_height = 901,
+  sprite_count = 1,
+  -- y is 342 + height/2
 }
 
 picture_info["Palm"] = {

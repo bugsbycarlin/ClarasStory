@@ -57,10 +57,15 @@ function scene:show(event)
     interactive_spelling_player:augment(self)
     interactive_choice_player:augment(self)
 
-    for i = -4, 4 do
+    self.const_half_layers = 10
+    self.const_num_layers = 2 * self.const_half_layers + 1
+
+    for i = -1 * self.const_half_layers, self.const_half_layers do
       local layer = display.newGroup()
       self.performanceAssetGroup:insert(layer)
     end
+
+    self.top_group = self.performanceAssetGroup[self.const_num_layers]
 
     display.setDefault("background", 1, 1, 1)
 
@@ -94,6 +99,9 @@ function scene:show(event)
       if (system.getTimer() - self.skip_scene_button.last_skip > 1) then
         self.skip_scene_button.last_skip = system.getTimer()
         self:skipPerformanceToTime(100000)
+        if self.special_timer ~= nil then
+          timer.cancel("special")
+        end
         if self.scene_type == "scripted" then
           audio.stop()
           self:nextScene()
@@ -151,8 +159,8 @@ function scene:updateTime()
 end
 
 function scene:perform(asset)
-  print(self.chapter_number)
-  print("I AM PERFORMING " .. asset.name)
+  -- print(self.chapter_number)
+  -- print("I AM PERFORMING " .. asset.name)
   if asset.type == "sound" then
     asset.performance = audio.loadStream("Sound/" .. sound_info[asset.name].file_name)
     -- should only do if this is the main audio file
@@ -171,7 +179,7 @@ function scene:perform(asset)
       self.loader:loadPicture(picture)
     end
 
-    asset.performance = display.newSprite(self.performanceAssetGroup[asset.depth + 5], self.sprite[picture], {frames=self.picture_info[picture].frames})
+    asset.performance = display.newSprite(self.performanceAssetGroup[asset.depth + self.const_half_layers + 1], self.sprite[picture], {frames=self.picture_info[picture].frames})
     asset.performance.name = asset.name
     asset.performance.id = asset.id
     asset.performance.x = asset.x
@@ -240,12 +248,18 @@ function scene:clearPerformance()
     asset.performance = nil
   end
 
-  for i = 1, 9 do
+  for i = 1, self.const_num_layers do
     while self.performanceAssetGroup[i].numChildren > 0 do
       local child = self.performanceAssetGroup[i][1]
       if child then child:removeSelf() end
     end
   end
+
+  for i = 1, self.const_num_layers do
+    self.performanceAssetGroup[i].x = 0
+  end
+  self.performanceAssetGroup.x = 0
+  self.performanceAssetGroup.y = 0
 end
 
 function scene:updatePerformance()
@@ -254,7 +268,7 @@ function scene:updatePerformance()
 
   if basic_info_text ~= nil and basic_info_text.isVisible == true then
     local objects_in_performance = 0
-    for i = 1, 9 do
+    for i = 1, self.const_num_layers do
       objects_in_performance = objects_in_performance + self.performanceAssetGroup[i].numChildren
     end 
     basic_info_text.text = "Time: " .. math.floor(self.total_performance_time) / 1000.0 .. ", Objects: " .. objects_in_performance
@@ -283,15 +297,15 @@ function scene:skipPerformanceToTime(time_value)
   copy_sprite_list = {}
   for i = 1, #self.sketch_sprites.sprite_list do
     local sprite = self.sketch_sprites.sprite_list[i]
-    print(sprite.name)
-    print(sprite.disappear_method)
-    print(sprite.disappear_time)
+    -- print(sprite.name)
+    -- print(sprite.disappear_method)
+    -- print(sprite.disappear_time)
     if sprite and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 and time_value > sprite.disappear_time then
-      print("killing it")
+      -- print("killing it")
       animation.cancel(sprite)
       display.remove(sprite)
     else
-      print("saving it")
+      -- print("saving it")
       table.insert(copy_sprite_list, sprite)
     end
   end
@@ -307,7 +321,7 @@ function scene:nextScene()
   end
 
   if self.special_timer ~= nil then
-    timer.cancel(self.special_timer)
+    timer.cancel("special")
   end
 
   if self.info["cleanup"] == nil or self.info["cleanup"] ~= false then
@@ -317,7 +331,7 @@ function scene:nextScene()
     self.sketch_sprites.top_group = nil
   end
   if self.scene_type == "interactive_spelling" then
-    print("I AM CLEARING THE SPELLING")
+    -- print("I AM CLEARING THE SPELLING")
     self:clearSpellingMaterial()
   end
 
@@ -359,7 +373,7 @@ function scene:initializeFromChapter()
 
   self.sketch_sprites.picture_info = self.picture_info
   self.sketch_sprites.sprite = self.sprite
-  self.sketch_sprites.top_group = self.performanceAssetGroup[9]
+  self.sketch_sprites.top_group = self.top_group
 
   self.sketch_sprite_timer = timer.performWithDelay(35, function() 
     self.sketch_sprites:update(self.mode, self.total_performance_time)
@@ -387,7 +401,7 @@ function scene:initializeScene()
 
   self.sketch_sprites.picture_info = self.picture_info
   self.sketch_sprites.sprite = self.sprite
-  self.sketch_sprites.top_group = self.performanceAssetGroup[9]
+  self.sketch_sprites.top_group = self.top_group
 
   self.sketch_sprite_timer = timer.performWithDelay(35, function() 
     self.sketch_sprites:update(self.mode, self.total_performance_time)
@@ -410,27 +424,40 @@ function scene:startScripted()
 
   -- Special functions
   if self.scene_name == "chapter_2_scene_1" then
-    local back_row = 6
-    local front_row = 7
+    self.performanceAssetGroup.y = 1024
+    animation.to(self.performanceAssetGroup, {y = 0}, {time = 375 * 16, easing = easing.inOutQuart})
+
+    local back_row = 1 + self.const_half_layers + 1
+    local front_row = 2 + self.const_half_layers + 1
+
+    local super_back_row = -5 + self.const_half_layers + 1
+    local super_front_row = -4 + self.const_half_layers + 1
     self.chapter_2_scoot_counter = 0
     scoot = function()
+      print("SCOOT")
       self.chapter_2_scoot_counter = self.chapter_2_scoot_counter + 1
       if self.chapter_2_scoot_counter % 4 == 1 then
         self.performanceAssetGroup[back_row].x = self.performanceAssetGroup[back_row].x - 1024
         self.performanceAssetGroup[front_row].x = self.performanceAssetGroup[front_row].x + 1024
+        self.performanceAssetGroup[super_back_row].x = self.performanceAssetGroup[super_back_row].x - 1024
+        -- self.performanceAssetGroup[super_front_row].x = self.performanceAssetGroup[super_front_row].x + 1024
       end
       current_x = self.performanceAssetGroup[back_row].x
+      current_super = self.performanceAssetGroup[super_back_row].x
       animation.to(self.performanceAssetGroup[back_row], {x=current_x + 256}, {time=750 / 4 * 0.7, easing=easing.outExp})
+      animation.to(self.performanceAssetGroup[super_back_row], {x=current_super + 256}, {time=750 / 4 * 0.7, easing=easing.outExp})
 
       -- scoot left
       timer.performWithDelay(750 * 3 / 4, function()
         current_x = self.performanceAssetGroup[front_row].x
         animation.to(self.performanceAssetGroup[front_row], {x=current_x - 256}, {time=750 / 4 * 0.7, easing=easing.outExp})
+        current_super = self.performanceAssetGroup[super_front_row].x
+        -- animation.to(self.performanceAssetGroup[super_front_row], {x=current_super - 256}, {time=750 / 4 * 0.7, easing=easing.outExp})
       end, 1)
 
       if math.random(10) >= 6 then
-        print("honking")
-        local honk_image = display.newImageRect(self.performanceAssetGroup, "Art/honk.png", 256, 256)
+        -- print("honking")
+        local honk_image = display.newImageRect(self.top_group, "Art/honk.png", 256, 256)
         honk_image.x = 100 + math.random(824)
         honk_image.y = 192 + 50 + math.random(384 - 100)
         timer.performWithDelay(self.mpb * 3 / 4, function()
@@ -442,7 +469,7 @@ function scene:startScripted()
     scoot()
     self.special_timer = timer.performWithDelay(1500, function()
       scoot()
-    end, 0)
+    end, 0, "special")
 
 
     -- honks!
@@ -451,8 +478,8 @@ function scene:startScripted()
     -- fix this so skipping cancels it
     for i = 1,8 do
       timer.performWithDelay(22500 - (375/2) + (self.mpb / 2) * i, function()
-        print("MAKING A HONK")
-        local honk_image = display.newImageRect(self.performanceAssetGroup, "Art/honk.png", 256, 256)
+        -- print("MAKING A HONK")
+        local honk_image = display.newImageRect(self.top_group, "Art/honk.png", 256, 256)
         honk_image.x = 100 + 100 * i
         honk_image.y = 192 + 50 + math.random(384 - 100)
         table.insert(honk_images, honk_image)
@@ -467,22 +494,22 @@ function scene:startScripted()
   if self.scene_name == "chapter_2_scene_2" then
     self.special_timer = timer.performWithDelay(187, function()
       if self.total_performance_time > 4500 and self.total_performance_time < 6000 then
-        local honk_image = display.newImageRect(self.performanceAssetGroup, "Art/honk.png", 256, 256)
+        local honk_image = display.newImageRect(self.top_group, "Art/honk.png", 256, 256)
           honk_image.x = 100 + math.random(824)
           honk_image.y = 192 + 50 + math.random(384 - 100)
           timer.performWithDelay(self.mpb * 3 / 4, function()
             display.remove(honk_image)
         end, 1)
       end
-    end, 0)
+    end, 0, "special")
 
     self.special_timer = timer.performWithDelay(6750, function()
       -- move Girl_13 out and up in advance of switching scenes
       for i = 1, #self.script_assets do
         asset = self.script_assets[i]
-        print(asset.id)
+        -- print(asset.id)
         if asset.id == "Girl_13" and asset.performance ~= nil then
-          print("I found Girl_13")
+          -- print("I found Girl_13")
 
           self.sketch_sprites:poopClouds(asset.performance, 8 + math.random(16))
           asset.performance.fixed_x = asset.performance.fixed_x + 2010 -- basically remove it, actually
@@ -490,63 +517,88 @@ function scene:startScripted()
           -- self.sketch_sprites:poopClouds(asset.performance, 4 + math.random(8))
         end
       end
-    end, 1)
+    end, 1, "special")
 
     timer.performWithDelay(12000, function()
-      local back_row = 6
-      local front_row = 7
+      local back_row = 1 + self.const_half_layers + 1
+      local front_row = 2 + self.const_half_layers + 1
       self.chapter_2_scoot_counter = 0
-      scoot = function()
-        self.chapter_2_scoot_counter = self.chapter_2_scoot_counter + 1
-        -- if self.chapter_2_scoot_counter % 4 == 1 then
-        --   self.performanceAssetGroup[back_row].x = self.performanceAssetGroup[back_row].x - 1024
-        --   self.performanceAssetGroup[front_row].x = self.performanceAssetGroup[front_row].x + 1024
-        -- end
-        local back_and_forth = 128
-        if self.chapter_2_scoot_counter % 2 == 1 then
-          back_and_forth = -1 * back_and_forth
+      if self.scene_name == "chapter_2_scene_2" then
+        scoot = function()
+          self.chapter_2_scoot_counter = self.chapter_2_scoot_counter + 1
+          -- if self.chapter_2_scoot_counter % 4 == 1 then
+          --   self.performanceAssetGroup[back_row].x = self.performanceAssetGroup[back_row].x - 1024
+          --   self.performanceAssetGroup[front_row].x = self.performanceAssetGroup[front_row].x + 1024
+          -- end
+          local back_and_forth = 128
+          if self.chapter_2_scoot_counter % 2 == 1 then
+            back_and_forth = -1 * back_and_forth
+          end
+
+          current_x = self.performanceAssetGroup[back_row].x
+          animation.to(self.performanceAssetGroup[back_row], {x=current_x + back_and_forth}, {time=750 / 4 * 0.7, easing=easing.outExp})
+
+          -- scoot left
+          timer.performWithDelay(750 * 3 / 4, function()
+            current_x = self.performanceAssetGroup[front_row].x
+            animation.to(self.performanceAssetGroup[front_row], {x=current_x - 256}, {time=750 / 4 * 0.7, easing=easing.outExp})
+            current_x = self.performanceAssetGroup[back_row].x
+            animation.to(self.performanceAssetGroup[back_row], {x=current_x - back_and_forth}, {time=750 / 4 * 0.7, easing=easing.outExp})
+          end, 1)
+
+          -- print("honking")
+          local honk_image = display.newImageRect(self.top_group, "Art/honk.png", 256, 256)
+          honk_image.x = 100 + math.random(824)
+          honk_image.y = 192 + 50 + math.random(384 - 100)
+          timer.performWithDelay(self.mpb * 3 / 4, function()
+            display.remove(honk_image)
+          end, 1)
         end
 
-        current_x = self.performanceAssetGroup[back_row].x
-        animation.to(self.performanceAssetGroup[back_row], {x=current_x + back_and_forth}, {time=750 / 4 * 0.7, easing=easing.outExp})
-
-        -- scoot left
-        timer.performWithDelay(750 * 3 / 4, function()
-          current_x = self.performanceAssetGroup[front_row].x
-          animation.to(self.performanceAssetGroup[front_row], {x=current_x - 256}, {time=750 / 4 * 0.7, easing=easing.outExp})
-          current_x = self.performanceAssetGroup[back_row].x
-          animation.to(self.performanceAssetGroup[back_row], {x=current_x - back_and_forth}, {time=750 / 4 * 0.7, easing=easing.outExp})
-        end, 1)
-
-        print("honking")
-        local honk_image = display.newImageRect(self.performanceAssetGroup, "Art/honk.png", 256, 256)
-        honk_image.x = 100 + math.random(824)
-        honk_image.y = 192 + 50 + math.random(384 - 100)
-        timer.performWithDelay(self.mpb * 3 / 4, function()
-          display.remove(honk_image)
-        end, 1)
-      end
-
-      scoot()
-      self.special_timer = timer.performWithDelay(1500, function()
         scoot()
-      end, 0)
-    end, 1)
+        self.special_timer = timer.performWithDelay(1500, function()
+          scoot()
+        end, 0, "special")
+      end
+    end, 1, "special")
   end
 
+  local marker_1 = 2250 - 375
+  local marker_2 = 4500
+  local shop_time = 375
   zoom = function()
     if self.scene_name == "chapter_2_scene_3" and self.mode == "performing" then
-      for i = 1, 9 do
-        print("in here " .. i)
-        if i ~= 5 then
-          self.performanceAssetGroup[i].x = self.performanceAssetGroup[i].x - 7
+      -- print(self.total_performance_time)
+      local focus_layer = 0 + self.const_half_layers + 1
+      if self.total_performance_time < marker_1 
+        or (self.total_performance_time > marker_1 + shop_time and self.total_performance_time < marker_2) 
+        or self.total_performance_time > marker_2 + shop_time and self.total_performance_time < 6000 then
+
+        self.performanceAssetGroup[focus_layer].isVisible = true
+        for i = 1, self.const_num_layers do
+          -- print("in here " .. i)
+          if i ~= focus_layer then
+            self.performanceAssetGroup[i].x = self.performanceAssetGroup[i].x - 7
+            if self.performanceAssetGroup[i].x < -1024 then
+              self.performanceAssetGroup[i].x = -1024
+            end
+          end
         end
+      else
+        self.performanceAssetGroup[focus_layer].isVisible = false
+        if self.total_performance_time >= 6000 then
+          for i = 1, self.const_num_layers do
+            self.performanceAssetGroup[i].x = 0
+          end
+        end
+        self.performanceAssetGroup.x = 0
+        self.performanceAssetGroup.y = 0
       end
     end
   end
   self.special_timer = timer.performWithDelay(33, function()
     zoom()
-  end, 0)
+  end, 0, "special")
 end
 
 function scene:setupLoading()
@@ -554,13 +606,13 @@ function scene:setupLoading()
   local load_items = items[1]
   local unload_items = items[2]
   print("Got " .. #load_items .. " to load for next scene.")
-  for i = 1, #load_items do
-    print("Gotta load " .. load_items[i])
-  end
+  -- for i = 1, #load_items do
+  --   -- print("Gotta load " .. load_items[i])
+  -- end
   print("Got " .. #unload_items .. " to unload for next scene.")
-  for i = 1, #unload_items do
-    print("Gotta unload " .. unload_items[i])
-  end
+  -- for i = 1, #unload_items do
+  --   -- print("Gotta unload " .. unload_items[i])
+  -- end
   self.loader:backgroundLoad(
     self.sprite,
     self.picture_info,
@@ -607,7 +659,7 @@ function scene:computeNextLoad()
   local background_unload_items = {}
   local safe_list = {}
   -- add everything in the performance to the safe list
-  for i = 1, 9 do
+  for i = 1, self.const_num_layers do
     for j = 1, self.performanceAssetGroup[i].numChildren do
       local asset = self.performanceAssetGroup[i][j]
       safe_list[asset.name] = 1
@@ -659,7 +711,7 @@ function scene:poopStars(center_x, center_y, num_stars)
   for i = 1, num_stars do
     local star_color = colors[math.random(#colors)]
     local picture = star_color .. "_Star"
-    local star_sprite = display.newSprite(self.performanceAssetGroup, self.sprite[picture], {frames=self.picture_info[picture].frames})
+    local star_sprite = display.newSprite(self.top_group, self.sprite[picture], {frames=self.picture_info[picture].frames})
     star_sprite.id = picture .. "_" .. 0
     star_sprite.x = center_x
     star_sprite.y = center_y

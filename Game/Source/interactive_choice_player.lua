@@ -38,7 +38,7 @@ function interactive_choice_player:augment(player)
 
     player.sketch_sprites.picture_info = player.picture_info
     player.sketch_sprites.sprite_info = player.sprite
-    player.sketch_sprites.top_group = player.performanceAssetGroup[9]
+    player.sketch_sprites.top_group = player.top_group
 
     player.music_loop = audio.loadStream("Sound/chapter_" .. player.chapter_number .. "_interactive_loop.wav")
     audio.play(player.music_loop, {loops=-1})

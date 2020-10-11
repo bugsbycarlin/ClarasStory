@@ -188,7 +188,7 @@ function scene:setupSceneStructure()
 end
 
 function scene:chapter_2_Structure()
-  self.first_scene = "chapter_2_scene_3"
+  self.first_scene = "chapter_2_scene_1"
   -- self.first_scene = "chapter_2_interactive_bike"
 
   local mpb = 375
@@ -196,15 +196,15 @@ function scene:chapter_2_Structure()
   composer.setVariable("bpm", 160)
   composer.setVariable("time_sig", 4)
 
-  setVehicle = function(vehicle_name)
+  setVehicle = function(script_name, vehicle_name)
+    asset_list = self.flow[script_name].script
     print("I AM IN SET VEHICLE")
-    asset_list = self.flow["chapter_2_scene_2"].script
     for i = 1, #asset_list do
       asset = asset_list[i]
-      print(asset.name)
-      if asset.id == "Girl_13" then
+      if asset.name == "Choice_Asset" then
         print("I found the asset")
         asset.name = vehicle_name
+        asset.id = vehicle_name .. "_999"
       end
       -- if string.find(vehicle_name, "Girl") == nil and asset.fixed_x ~= nil and asset.fixed_x < 500 and asset.fixed_x > 300 then
       --   asset.name = vehicle_name
@@ -260,7 +260,7 @@ function scene:chapter_2_Structure()
         player.next_scene = "chapter_2_interactive_bus"
       elseif string.find(choice_value, "Taxi") then
         player.next_scene = "chapter_2_interactive_taxi"
-        -- setVehicle("Taxi")
+        setVehicle("chapter_2_scene_2", "Taxi")
       end
 
       timer.performWithDelay(player.mpb, function() 
@@ -335,7 +335,7 @@ function scene:chapter_2_Structure()
         end
       end
 
-      -- setVehicle("Bus_" .. color)
+      setVehicle("chapter_2_scene_2", "Bus_" .. color)
 
       timer.performWithDelay(player.mpb, function() 
         player.mode = "choice_outro"
@@ -387,7 +387,7 @@ function scene:chapter_2_Structure()
         end
       end
 
-      setVehicle("Car_" .. color)
+      setVehicle("chapter_2_scene_2", "Car_" .. color)
 
       timer.performWithDelay(player.mpb, function() 
         player.mode = "choice_outro"
@@ -439,7 +439,7 @@ function scene:chapter_2_Structure()
         end
       end
 
-      setVehicle("Truck_" .. color)
+      setVehicle("chapter_2_scene_2", "Truck_" .. color)
 
       timer.performWithDelay(player.mpb, function() 
         player.mode = "choice_outro"
@@ -499,7 +499,7 @@ function scene:chapter_2_Structure()
         end
       end
 
-      -- setVehicle("Car_" .. color)
+      setVehicle("chapter_2_scene_3", "Bike_" .. color)
 
       timer.performWithDelay(player.mpb, function() 
         player.mode = "choice_outro"

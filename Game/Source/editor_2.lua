@@ -278,14 +278,14 @@ function editor:augment(player)
             if event.phase == "editing" then
               asset = player:getSelectedAsset()
               local layer_number = tonumber(event.text)
-              if layer_number ~= nil and layer_number >= -4 and layer_number <= 4 then
+              if layer_number ~= nil and layer_number >= -1 * player.const_half_layers and layer_number <= player.const_half_layers then
                 asset.depth = layer_number
               
                 -- move it from one layer to another
                 if asset.performance ~= nil then
                   asset.performance.depth = asset.depth
                   display.remove(asset.performance)
-                  player.performanceAssetGroup[asset.depth + 5]:insert(asset.performance)
+                  player.performanceAssetGroup[asset.depth + player.const_half_layers + 1]:insert(asset.performance)
                 end
               end
             end
@@ -449,6 +449,26 @@ function editor:augment(player)
         player.stored_performance_time = player.stored_performance_time + player.mpb/2
         player:shiftEditor(0) -- does the rest of the adjustments
       end
+
+
+      if event.isAltDown == false and event.isShiftDown == false and event.keyName == "right" and event.phase == "up" then
+        player.performanceAssetGroup.x = player.performanceAssetGroup.x - 100
+      end
+
+      if event.isAltDown == false and event.isShiftDown == false and event.keyName == "left" and event.phase == "up" then
+        player.performanceAssetGroup.x = player.performanceAssetGroup.x + 100
+      end
+
+      if event.isAltDown == false and event.isShiftDown == false and event.keyName == "up" and event.phase == "up" then
+        player.performanceAssetGroup.y = player.performanceAssetGroup.y + 100
+      end
+
+      if event.isAltDown == false and event.isShiftDown == false and event.keyName == "down" and event.phase == "up" then
+        player.performanceAssetGroup.y = player.performanceAssetGroup.y - 100
+      end
+
+
+
 
       if event.isCtrlDown and event.keyName == "d" and event.phase == "up" then
         self:deleteSelectedAsset()
