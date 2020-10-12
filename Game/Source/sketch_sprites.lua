@@ -162,6 +162,19 @@ function sketch_sprites:create()
         sprite.x = sprite.fixed_x - sprite.squish_tilt * math.sin(0.5 * squish_time * 2 * math.pi / sprite.squish_period)
       end
 
+      if sprite.state == "punch" then
+        sprite.x = sprite.fixed_x - 4 + math.random(8)
+        sprite.y = sprite.fixed_y - 4 + math.random(8)
+        if current_time - sprite.start_time > 150 then
+          if sprite.info["animation_end"] ~= nil then
+            sprite.state = "animating"
+            sprite.animation_count = 0
+          else
+            sprite.state = "static"
+          end
+        end
+      end
+
       if sprite.x_vel ~= nil and sprite.x_vel ~= 0 then
         sprite.x = sprite.x + sprite.x_vel
       end

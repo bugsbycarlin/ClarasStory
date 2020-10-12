@@ -1055,6 +1055,99 @@ picture_info["Attention"] = {
   sprite_count = 1,
 }
 
+picture_info["Bakery"] = {
+  file_name = "Bakery.png",
+  row_length = 1,
+  sprite_size = 1024,
+  sprite_height = 768,
+  sprite_count = 1,
+}
+
+picture_info["Teapot"] = {
+  file_name = "Teapot.png",
+  row_length = 1,
+  sprite_size = 196,
+  sprite_height = 135,
+  sprite_count = 1,
+}
+
+picture_info["Chandelier"] = {
+  file_name = "Chandelier.png",
+  row_length = 1,
+  sprite_size = 268,
+  sprite_height = 207,
+  sprite_count = 1,
+}
+
+picture_info["Bouncy_Bread_1"] = {
+  file_name = "Bouncy_Bread_1.png",
+  row_length = 1,
+  sprite_size = 254,
+  sprite_height = 113,
+  sprite_count = 1,
+}
+
+picture_info["Bouncy_Bread_2"] = {
+  file_name = "Bouncy_Bread_2.png",
+  row_length = 1,
+  sprite_size = 294,
+  sprite_height = 76,
+  sprite_count = 1,
+}
+
+picture_info["Hi"] = {
+  file_name = "Hi.png",
+  row_length = 1,
+  sprite_size = 148,
+  sprite_height = 109,
+  sprite_count = 1,
+}
+
+
+picture_info["Mini_Brown_Rabbit"] = {
+  file_name = "Mini_Brown_Rabbit.png",
+  row_length = 1,
+  sprite_size = 128,
+  sprite_count = 1,
+}
+
+picture_info["Mini_Gray_Rabbit"] = {
+  file_name = "Mini_Gray_Rabbit.png",
+  row_length = 1,
+  sprite_size = 128,
+  sprite_count = 1,
+}
+
+picture_info["Mini_Brown_Bear"] = {
+  file_name = "Mini_Brown_Bear.png",
+  row_length = 1,
+  sprite_size = 128,
+  sprite_count = 1,
+}
+
+picture_info["Mini_Gray_Bear"] = {
+  file_name = "Mini_Gray_Bear.png",
+  row_length = 1,
+  sprite_size = 128,
+  sprite_count = 1,
+}
+
+picture_info["Mini_Pig"] = {
+  file_name = "Mini_Pig.png",
+  row_length = 1,
+  sprite_size = 128,
+  sprite_count = 1,
+}
+
+picture_info["Mini_Human"] = {
+  file_name = "Mini_Human.png",
+  row_length = 1,
+  sprite_size = 128,
+  sprite_count = 1,
+}
+
+
+
 
 
 for picture, info in pairs(picture_info) do

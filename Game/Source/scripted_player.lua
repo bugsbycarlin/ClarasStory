@@ -172,6 +172,10 @@ function scene:perform(asset)
   elseif asset.type == "picture" then
     local picture = asset.name
 
+    if picture == "Choice_Asset" then
+      return
+    end
+
     -- last, unlikely guard against trying to use an unloaded sprite.
     -- this will only happen if you skip scenes really quickly
     if self.sprite[picture] == nil then
@@ -214,6 +218,9 @@ function scene:setInitialPerformanceState(performance_object, intro, picture)
     performance_object:setFrame(self.picture_info[picture]["sprite_count"])
     performance_object.state = "fade_in"
     performance_object.alpha = 0.01
+  elseif intro == "punch" then
+    performance_object:setFrame(self.picture_info[picture]["sprite_count"])
+    performance_object.state = "punch"
   elseif intro == "rise" then
     performance_object:setFrame(self.picture_info[picture]["sprite_count"])
     performance_object.state = "rise"
