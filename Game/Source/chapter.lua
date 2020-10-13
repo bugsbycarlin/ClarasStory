@@ -188,7 +188,7 @@ function scene:setupSceneStructure()
 end
 
 function scene:chapter_2_Structure()
-  self.first_scene = "chapter_2_scene_1"
+  self.first_scene = "chapter_2_scene_4"
   -- self.first_scene = "chapter_2_interactive_bike"
 
   local mpb = 375
@@ -511,9 +511,16 @@ function scene:chapter_2_Structure()
 
   self.flow["chapter_2_scene_3"] = {
     name="chapter_2_scene_3",
-    next=nil,
+    next="chapter_2_scene_4",
     type="scripted",
     script=self:loadSceneScript("chapter_2_scene_3"),
+  }
+
+  self.flow["chapter_2_scene_4"] = {
+    name="chapter_2_scene_4",
+    next=nil,
+    type="scripted",
+    script=self:loadSceneScript("chapter_2_scene_4"),
   }
 
 end

@@ -891,6 +891,22 @@ picture_info["City_Block"] = {
   sprite_count = 1,
 }
 
+picture_info["City_Block_with_Mural"] = {
+  file_name = "City_Block_with_Mural.png",
+  row_length = 1,
+  sprite_size = 1024,
+  sprite_height = 1024,
+  sprite_count = 1,
+}
+
+picture_info["City_Block_with_Mural_zoom"] = {
+  file_name = "City_Block_with_Mural_zoom.png",
+  row_length = 1,
+  sprite_size = 1024,
+  sprite_height = 768,
+  sprite_count = 1,
+}
+
 picture_info["City_Block_Wider"] = {
   file_name = "City_Block_Wider.png",
   row_length = 1,

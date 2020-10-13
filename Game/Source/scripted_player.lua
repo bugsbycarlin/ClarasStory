@@ -606,6 +606,14 @@ function scene:startScripted()
   self.special_timer = timer.performWithDelay(33, function()
     zoom()
   end, 0, "special")
+
+  if self.scene_name == "chapter_2_scene_4" then
+    -- self.performanceAssetGroup.y = 0
+    animation.to(self.performanceAssetGroup, {y = 256}, {time = 375 * 16, easing = easing.inOutSine})
+    self.special_timer = timer.performWithDelay(9000, function()
+      -- self.performanceAssetGroup.y = 0
+    end, 1, "special")
+  end
 end
 
 function scene:setupLoading()
