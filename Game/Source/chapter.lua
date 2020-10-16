@@ -189,35 +189,20 @@ end
 
 function scene:chapter_2_Structure()
   self.first_scene = "chapter_2_scene_4"
-  -- self.first_scene = "chapter_2_interactive_bike"
+  -- self.first_scene = "chapter_2_interactive_choice_vehicle"
 
   local mpb = 375
   composer.setVariable("mpb", mpb)
   composer.setVariable("bpm", 160)
   composer.setVariable("time_sig", 4)
 
-  setVehicle = function(script_name, vehicle_name)
+  setChoiceObject = function(script_name, choice_id, choice_value)
     asset_list = self.flow[script_name].script
-    print("I AM IN SET VEHICLE")
+    print("I AM IN SET CHOICE OBJECT")
     for i = 1, #asset_list do
       asset = asset_list[i]
-      if asset.name == "Choice_Asset" then
-        print("I found the asset")
-        asset.name = vehicle_name
-        asset.id = vehicle_name .. "_999"
-      end
-      -- if string.find(vehicle_name, "Girl") == nil and asset.fixed_x ~= nil and asset.fixed_x < 500 and asset.fixed_x > 300 then
-      --   asset.name = vehicle_name
-      -- end
-      if asset.id == "Girl_13" and string.find(vehicle_name, "Truck") then
-        asset.fixed_x = asset.fixed_x + 30
-        asset.x = asset.x + 30
-      end
-      if asset.id == "Girl_13" and string.find(vehicle_name, "Bus") then
-        asset.fixed_x = asset.fixed_x + 10
-        asset.x = asset.x + 10
-        asset.fixed_x = asset.fixed_y - 13
-        asset.x = asset.y - 13
+      if asset.id == choice_id then
+        asset.choice_value = choice_value
       end
     end
   end
@@ -260,7 +245,7 @@ function scene:chapter_2_Structure()
         player.next_scene = "chapter_2_interactive_bus"
       elseif string.find(choice_value, "Taxi") then
         player.next_scene = "chapter_2_interactive_taxi"
-        setVehicle("chapter_2_scene_2", "Taxi")
+        setChoiceObject("chapter_2_scene_2", "Vehicle_Choice_1", "Taxi")
       end
 
       timer.performWithDelay(player.mpb, function() 
@@ -335,7 +320,18 @@ function scene:chapter_2_Structure()
         end
       end
 
-      setVehicle("chapter_2_scene_2", "Bus_" .. color)
+      setChoiceObject("chapter_2_scene_2", "Vehicle_Choice_1", "Bus_" .. color)
+
+      for i = 1, #self.flow["chapter_2_scene_2"].script do
+        asset = self.flow["chapter_2_scene_2"].script[i]
+
+        if asset.id == "Girl_13" then
+          asset.fixed_x = asset.fixed_x - 10
+          asset.x = asset.x - 10
+          asset.fixed_y = asset.fixed_y - 13
+          asset.y = asset.y - 13
+        end
+      end
 
       timer.performWithDelay(player.mpb, function() 
         player.mode = "choice_outro"
@@ -387,7 +383,7 @@ function scene:chapter_2_Structure()
         end
       end
 
-      setVehicle("chapter_2_scene_2", "Car_" .. color)
+      setChoiceObject("chapter_2_scene_2", "Vehicle_Choice_1", "Car_" .. color)
 
       timer.performWithDelay(player.mpb, function() 
         player.mode = "choice_outro"
@@ -439,7 +435,16 @@ function scene:chapter_2_Structure()
         end
       end
 
-      setVehicle("chapter_2_scene_2", "Truck_" .. color)
+      setChoiceObject("chapter_2_scene_2", "Vehicle_Choice_1", "Truck_" .. color)
+
+      for i = 1, #self.flow["chapter_2_scene_2"].script do
+        asset = self.flow["chapter_2_scene_2"].script[i]
+
+        if asset.id == "Girl_13" then
+          asset.fixed_x = asset.fixed_x + 30
+          asset.x = asset.x + 30
+        end
+      end
 
       timer.performWithDelay(player.mpb, function() 
         player.mode = "choice_outro"
@@ -499,7 +504,7 @@ function scene:chapter_2_Structure()
         end
       end
 
-      setVehicle("chapter_2_scene_3", "Bike_" .. color)
+      setChoiceObject("chapter_2_scene_3", "Bike_Choice_1", "Bike_" .. color)
 
       timer.performWithDelay(player.mpb, function() 
         player.mode = "choice_outro"
@@ -518,9 +523,69 @@ function scene:chapter_2_Structure()
 
   self.flow["chapter_2_scene_4"] = {
     name="chapter_2_scene_4",
-    next=nil,
+    next="chapter_2_interactive_choice_mural_color",
     type="scripted",
     script=self:loadSceneScript("chapter_2_scene_4"),
+    cleanup=false,
+  }
+
+  paint_depths = {
+    Mural_White_Paint=4,
+    Mural_Black_Paint=3,
+    Mural_Yellow_Paint=2,
+    Mural_Orange_Paint=1,
+    Mural_Purple_Paint=0,
+    Mural_Brown_Paint=-1,
+    Mural_Red_Paint=-2,
+    Mural_Blue_Paint=-3,
+    Mural_Green_Paint=-4,
+  }
+  self.flow["chapter_2_interactive_choice_mural_color"] = {
+    name="chapter_2_interactive_choice_mural_color",
+    next="chapter_2_interactive_choice_mural_color",
+    type="interactive_choice",
+    intro="mural_color_choice",
+    choiceCallback = function(something, choice_asset, player)
+
+      swatch_name = "Mural_" .. choice_asset.name
+      color_swatch = display.newImageRect(player.performanceAssetGroup[paint_depths[swatch_name] + player.const_half_layers + 1], "Art/" .. swatch_name .. ".png", 800, 400)
+      color_swatch.x = 471.5
+      color_swatch.y = 331.75
+      color_swatch.name = "blah"
+      color_swatch.id = "blah_" .. swatch_name
+      color_swatch.fixed_y = color_swatch.y
+      color_swatch.fixed_x = color_swatch.x
+
+      -- doctor the mural color script to remove the current color choice
+      new_assets = {}
+      for i = 1, #player.script_assets do
+        asset = player.script_assets[i]
+
+        -- remove all assets, because we're not doing cleanup
+        if asset.performance ~= nil then
+          display.remove(asset.performance)
+          asset.performance.isVisible = false
+          asset.performance = nil
+        end
+
+        if choice_asset.name == asset.name then
+          -- skip this one
+        else
+          table.insert(new_assets, asset)
+        end
+      end
+      self.flow["chapter_2_interactive_choice_mural_color"].script = new_assets
+
+      if #new_assets == 0 then
+        self.flow["chapter_2_interactive_choice_mural_color"].next = nil
+        player.next_scene = "end"
+        self.flow["chapter_2_interactive_choice_mural_color"].cleanup = true
+      end
+
+      player.mode = "choice_outro"
+    end,
+    script=self:loadSceneScript("chapter_2_interactive_choice_mural_color"),
+    cleanup=false,
   }
 
 end

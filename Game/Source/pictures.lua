@@ -1034,6 +1034,27 @@ picture_info["Gray_Paint"] = {
   sprite_count = 1,
 }
 
+picture_info["Brown_Paint"] = {
+  file_name = "Brown_Paint.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["Black_Paint"] = {
+  file_name = "Black_Paint.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
+picture_info["White_Paint"] = {
+  file_name = "White_Paint.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+}
+
 picture_info["Treetop"] = {
   file_name = "Treetop.png",
   row_length = 1,
@@ -1162,6 +1183,30 @@ picture_info["Mini_Human"] = {
   sprite_count = 1,
 }
 
+picture_info["Mural"] = {
+  file_name = "Mural_Sketch.png",
+  row_length = 5,
+  sprite_size = 800,
+  sprite_height = 400,
+  sprite_count = 17,
+  outline_frame = 17,
+}
+
+picture_info["Sign_Pie"] = {
+  file_name = "Sign_Pie.png",
+  row_length = 1,
+  sprite_size = 84,
+  sprite_height = 48,
+  sprite_count = 1,
+}
+
+picture_info["Sign_Peace"] = {
+  file_name = "Sign_Peace.png",
+  row_length = 1,
+  sprite_size = 185,
+  sprite_height = 48,
+  sprite_count = 1,
+}
 
 
 
