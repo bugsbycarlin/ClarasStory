@@ -1208,6 +1208,14 @@ picture_info["Sign_Peace"] = {
   sprite_count = 1,
 }
 
+picture_info["Paint_Beast"] = {
+  file_name = "Paint_Beast.png",
+  row_length = 1,
+  sprite_size = 768,
+  sprite_height = 1024,
+  sprite_count = 1,
+}
+
 
 
 
