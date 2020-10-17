@@ -249,7 +249,13 @@ function interactive_spelling_player:augment(player)
               if c > string.len(info.word) then
                 -- we're done!
                 player.mode = "spelling_pre_outro"
-                player.spelling_object.state = "sketching"
+                if player.info.spellingCallback == nil then
+                  print("I HAVE CHOSEN LE SKETCHING")
+                  player.spelling_object.state = "sketching"
+                else
+                  print("I HAVE CHOSEN LE CALLBACK")
+                  player.info:spellingCallback(player)
+                end
               end
 
               player:setWordColor(player.current_letter_number)

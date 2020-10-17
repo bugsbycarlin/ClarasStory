@@ -1298,6 +1298,42 @@ picture_info["Mural_White"] = {
   outline_frame = 1,
 }
 
+picture_info["Georges"] = {
+  file_name = "Georges.png",
+  row_length = 1,
+  sprite_size = 400,
+  sprite_height = 500,
+  sprite_count = 1,
+  outline_frame = 1,
+}
+
+picture_info["Georges_Laughing"] = {
+  file_name = "Georges_Laughing.png",
+  row_length = 1,
+  sprite_size = 400,
+  sprite_height = 500,
+  sprite_count = 1,
+  outline_frame = 1,
+}
+
+picture_info["Girl_Facing_Forward"] = {
+  file_name = "Girl_Facing_Forward.png",
+  row_length = 1,
+  sprite_size = 300,
+  sprite_height = 400,
+  sprite_count = 1,
+  outline_frame = 1,
+}
+
+picture_info["Georges_Excuse"] = {
+  file_name = "Georges_Excuse.png",
+  row_length = 1,
+  sprite_size = 400,
+  sprite_height = 400,
+  sprite_count = 1,
+  outline_frame = 1,
+}
+
 
 
 

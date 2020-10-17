@@ -188,7 +188,7 @@ function scene:setupSceneStructure()
 end
 
 function scene:chapter_2_Structure()
-  self.first_scene = "chapter_2_scene_4"
+  self.first_scene = "chapter_2_scene_1"
   -- self.first_scene = "chapter_2_interactive_choice_vehicle"
 
   local mpb = 375
@@ -542,19 +542,21 @@ function scene:chapter_2_Structure()
   }
   self.flow["chapter_2_interactive_choice_mural_color"] = {
     name="chapter_2_interactive_choice_mural_color",
-    next="chapter_2_interactive_choice_mural_color",
+    next="chapter_2_interactive_spell_color",
     type="interactive_choice",
     intro="mural_color_choice",
     choiceCallback = function(something, choice_asset, player)
 
       color = string.gsub(choice_asset.name, "_Paint", "")
+
       mural_paint_name = "Mural_" .. color
 
       mural_paint_asset = {
-        intro = "splash",
+        intro = "outline_sketching",
         type = "picture",
         id = mural_paint_name .. "_1",
         y = 331.75,
+        fixed_y = 331.75,
         x_scale = 1,
         start_time = 0,
         name = mural_paint_name,
@@ -562,13 +564,14 @@ function scene:chapter_2_Structure()
         disappear_method = "pop",
         depth = paint_depths[mural_paint_name],
         x = 471.5,
+        fixed_x = 471.5,
         squish_tilt = 0,
         squish_scale = 1,
         squish_period = 1700,
         disappear_time = -1,
       }
-      print(mural_paint_asset.type)
-      player:perform(mural_paint_asset)
+      -- print(mural_paint_asset.type)
+      -- player:perform(mural_paint_asset)
 
       -- doctor the mural color script to remove the current color choice
       new_assets = {}
@@ -590,16 +593,69 @@ function scene:chapter_2_Structure()
       end
       self.flow["chapter_2_interactive_choice_mural_color"].script = new_assets
 
+      self.flow["chapter_2_interactive_spell_color"].word = color
+      self.flow["chapter_2_interactive_spell_color"].performance = mural_paint_asset
+      if color == "Red" then
+        self.flow["chapter_2_interactive_spell_color"].intro_letter_beats = {0, 0.5, 1}
+        self.flow["chapter_2_interactive_spell_color"].outro_sounds = {"ruh", "eh", "duh"}
+      elseif color == "Blue" then
+        self.flow["chapter_2_interactive_spell_color"].intro_letter_beats = {0, 0.5, 1, 1.5}
+        self.flow["chapter_2_interactive_spell_color"].outro_sounds = {"buh", "luh", "oo", "eh"}
+      elseif color == "Green" then
+        self.flow["chapter_2_interactive_spell_color"].intro_letter_beats = {0, 0.5, 1, 1.5, 2}
+        self.flow["chapter_2_interactive_spell_color"].outro_sounds = {"guh", "ruh", "ee", "ee", "nuh"}
+      elseif color == "Yellow" then
+        self.flow["chapter_2_interactive_spell_color"].intro_letter_beats = {0, 0.5, 1, 1.5, 2, 2.5}
+        self.flow["chapter_2_interactive_spell_color"].outro_sounds = {"yuh", "eh", "luh", "luh", "oh", "wuh"}
+      elseif color == "Orange" then
+        self.flow["chapter_2_interactive_spell_color"].intro_letter_beats = {0, 0.5, 1, 1.5, 2, 2.5}
+        self.flow["chapter_2_interactive_spell_color"].outro_sounds = {"oh", "ruh", "ah", "nuh", "juh", "eh"}
+      elseif color == "Purple" then
+        self.flow["chapter_2_interactive_spell_color"].intro_letter_beats = {0, 0.5, 1, 1.5, 2, 2.5}
+        self.flow["chapter_2_interactive_spell_color"].outro_sounds = {"puh", "uh", "ruh", "puh", "luh", "eh"}
+      elseif color == "Brown" then
+        self.flow["chapter_2_interactive_spell_color"].intro_letter_beats = {0, 0.5, 1, 1.5, 2}
+        self.flow["chapter_2_interactive_spell_color"].outro_sounds = {"buh", "ruh", "oh", "wuh", "nuh"}
+      elseif color == "Black" then
+        self.flow["chapter_2_interactive_spell_color"].intro_letter_beats = {0, 0.5, 1, 1.5, 2}
+        self.flow["chapter_2_interactive_spell_color"].outro_sounds = {"buh", "luh", "ah", "kuh", "kuh"}
+      elseif color == "White" then
+        self.flow["chapter_2_interactive_spell_color"].intro_letter_beats = {0, 0.5, 1, 1.5, 2}
+        self.flow["chapter_2_interactive_spell_color"].outro_sounds = {"wuh", "huh", "I", "tuh", "eh"}
+      end
+
+
       if #new_assets == 0 then
-        self.flow["chapter_2_interactive_choice_mural_color"].next = nil
-        player.next_scene = "end"
-        self.flow["chapter_2_interactive_choice_mural_color"].cleanup = true
+        self.flow["chapter_2_interactive_spell_color"].next = "chapter_2_scene_5"
       end
 
       player.mode = "choice_outro"
     end,
     script=self:loadSceneScript("chapter_2_interactive_choice_mural_color"),
     cleanup=false,
+  }
+  self.flow["chapter_2_interactive_spell_color"] = {
+    name="chapter_2_interactive_spell_color",
+    next="chapter_2_interactive_choice_mural_color",
+    type="interactive_spelling",
+    word="Red",
+    random_order=false,
+    random_letters=false,
+    intro_letter_beats = {0, 0.5, 1, 1.5},
+    outro_sounds = {"ruh", "eh", "duh"},
+    script=nil,
+    cleanup=false,
+    spellingCallback = function(something, player)
+      self.flow["chapter_2_interactive_spell_color"].performance.intro = "splash"
+      player:perform(self.flow["chapter_2_interactive_spell_color"].performance)
+    end,
+  }
+
+  self.flow["chapter_2_scene_5"] = {
+    name="chapter_2_scene_5",
+    next=nil,
+    type="scripted",
+    script=self:loadSceneScript("chapter_2_scene_5"),
   }
 
 end

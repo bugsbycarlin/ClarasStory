@@ -668,6 +668,7 @@ end
 function scene:computeNextLoad()
   local background_load_items = {}
 
+  local cycles = 0
   local keep_loading = (self.next_scene ~= nil and self.next_scene ~= "end")
   local current_scene_name = self.next_scene
   while keep_loading do
@@ -686,7 +687,8 @@ function scene:computeNextLoad()
     end
 
     -- keep going until we've checked a scripted scene.
-    keep_loading = (load_scene.type ~= "scripted" and load_scene.next ~= nil and load_scene.next ~= current_scene_name)
+    cycles = cycles + 1
+    keep_loading = load_scene.type ~= "scripted" and load_scene.next ~= nil and load_scene.next ~= current_scene_name and cycles < 4
     current_scene_name = load_scene.next
   end
 
@@ -708,6 +710,7 @@ function scene:computeNextLoad()
     end
   end
   -- add everything from the future to the safe list
+  cycles = 0
   keep_loading = (self.next_scene ~= nil)
   current_scene_name = self.scene_name
   while keep_loading do
@@ -727,7 +730,8 @@ function scene:computeNextLoad()
     end
 
     -- keep going until we've checked everything
-    keep_loading = load_scene.next ~= nil and load_scene.next ~= current_scene_name
+    cycles = cycles + 1
+    keep_loading = load_scene.next ~= nil and load_scene.next ~= current_scene_name and cycles < 4
     current_scene_name = load_scene.next
   end
 
