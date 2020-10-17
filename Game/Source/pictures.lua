@@ -1334,6 +1334,14 @@ picture_info["Georges_Excuse"] = {
   outline_frame = 1,
 }
 
+picture_info["Clara_v2"] = {
+  file_name = "Clara_v2.png",
+  row_length = 1,
+  sprite_size = 512,
+  sprite_count = 1,
+  outline_frame = 1,
+}
+
 
 
 

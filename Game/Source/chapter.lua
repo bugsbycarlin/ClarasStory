@@ -188,7 +188,7 @@ function scene:setupSceneStructure()
 end
 
 function scene:chapter_2_Structure()
-  self.first_scene = "chapter_2_scene_1"
+  self.first_scene = "chapter_2_scene_3"
   -- self.first_scene = "chapter_2_interactive_choice_vehicle"
 
   local mpb = 375
@@ -325,7 +325,7 @@ function scene:chapter_2_Structure()
       for i = 1, #self.flow["chapter_2_scene_2"].script do
         asset = self.flow["chapter_2_scene_2"].script[i]
 
-        if asset.id == "Girl_13" then
+        if asset.id == "Clara_v2_13" then
           asset.fixed_x = asset.fixed_x - 10
           asset.x = asset.x - 10
           asset.fixed_y = asset.fixed_y - 13
@@ -505,6 +505,7 @@ function scene:chapter_2_Structure()
       end
 
       setChoiceObject("chapter_2_scene_3", "Bike_Choice_1", "Bike_" .. color)
+      setChoiceObject("chapter_2_scene_4", "Bike_Choice_1", "Bike_" .. color)
 
       timer.performWithDelay(player.mpb, function() 
         player.mode = "choice_outro"
@@ -534,11 +535,11 @@ function scene:chapter_2_Structure()
     Mural_Black=3,
     Mural_Yellow=2,
     Mural_Orange=1,
-    Mural_Purple=0,
-    Mural_Brown=-1,
-    Mural_Red=-2,
-    Mural_Blue=-3,
-    Mural_Green=-4,
+    Mural_Purple=-1,
+    Mural_Brown=-2,
+    Mural_Red=-3,
+    Mural_Blue=-4,
+    Mural_Green=-5,
   }
   self.flow["chapter_2_interactive_choice_mural_color"] = {
     name="chapter_2_interactive_choice_mural_color",
