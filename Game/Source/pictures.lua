@@ -1216,6 +1216,88 @@ picture_info["Paint_Beast"] = {
   sprite_count = 1,
 }
 
+picture_info["Mural_Red"] = {
+  file_name = "Mural_Red.png",
+  row_length = 1,
+  sprite_size = 800,
+  sprite_height = 400,
+  sprite_count = 5,
+  outline_frame = 1,
+}
+
+picture_info["Mural_Blue"] = {
+  file_name = "Mural_Blue.png",
+  row_length = 1,
+  sprite_size = 800,
+  sprite_height = 400,
+  sprite_count = 5,
+  outline_frame = 1,
+}
+
+picture_info["Mural_Purple"] = {
+  file_name = "Mural_Purple.png",
+  row_length = 1,
+  sprite_size = 800,
+  sprite_height = 400,
+  sprite_count = 5,
+  outline_frame = 1,
+}
+
+picture_info["Mural_Orange"] = {
+  file_name = "Mural_Orange.png",
+  row_length = 1,
+  sprite_size = 800,
+  sprite_height = 400,
+  sprite_count = 5,
+  outline_frame = 1,
+}
+
+picture_info["Mural_Green"] = {
+  file_name = "Mural_Green.png",
+  row_length = 1,
+  sprite_size = 800,
+  sprite_height = 400,
+  sprite_count = 5,
+  outline_frame = 1,
+}
+
+picture_info["Mural_Brown"] = {
+  file_name = "Mural_Brown.png",
+  row_length = 1,
+  sprite_size = 800,
+  sprite_height = 400,
+  sprite_count = 5,
+  outline_frame = 1,
+}
+
+
+picture_info["Mural_Yellow"] = {
+  file_name = "Mural_Yellow.png",
+  row_length = 1,
+  sprite_size = 800,
+  sprite_height = 400,
+  sprite_count = 5,
+  outline_frame = 1,
+}
+
+picture_info["Mural_Black"] = {
+  file_name = "Mural_Black.png",
+  row_length = 1,
+  sprite_size = 800,
+  sprite_height = 400,
+  sprite_count = 5,
+  outline_frame = 1,
+}
+
+picture_info["Mural_White"] = {
+  file_name = "Mural_White.png",
+  row_length = 1,
+  sprite_size = 800,
+  sprite_height = 400,
+  sprite_count = 5,
+  outline_frame = 1,
+}
+
 
 
 

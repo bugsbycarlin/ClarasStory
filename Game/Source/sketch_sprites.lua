@@ -74,6 +74,27 @@ function sketch_sprites:create()
         end
       end
 
+      if sprite.state == "splash" then
+        if sprite.frame < sprite.info.sprite_count then
+          sprite.animation_count = sprite.animation_count + 1
+          if (sprite.frame ~= 1 and sprite.animation_count % 3 == 0) or (sprite.frame == 1 and sprite.animation_count % 30 == 0) then
+            if sprite.frame == 1 then
+              local splash = audio.loadSound("Sound/splash.wav")
+              audio.play(splash)
+            end
+            sprite:setFrame(sprite.frame + 1)
+
+          end
+        else
+          if sprite.info["animation_end"] ~= nil then
+            sprite.state = "animating"
+            sprite.animation_count = 0
+          else
+            sprite.state = "static"
+          end
+        end
+      end
+
       if sprite.state == "sketching" then
         if sprite.frame < sprite.info.sprite_count then
           sprite:setFrame(sprite.frame + 1)

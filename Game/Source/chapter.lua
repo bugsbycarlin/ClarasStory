@@ -530,15 +530,15 @@ function scene:chapter_2_Structure()
   }
 
   paint_depths = {
-    Mural_White_Paint=4,
-    Mural_Black_Paint=3,
-    Mural_Yellow_Paint=2,
-    Mural_Orange_Paint=1,
-    Mural_Purple_Paint=0,
-    Mural_Brown_Paint=-1,
-    Mural_Red_Paint=-2,
-    Mural_Blue_Paint=-3,
-    Mural_Green_Paint=-4,
+    Mural_White=4,
+    Mural_Black=3,
+    Mural_Yellow=2,
+    Mural_Orange=1,
+    Mural_Purple=0,
+    Mural_Brown=-1,
+    Mural_Red=-2,
+    Mural_Blue=-3,
+    Mural_Green=-4,
   }
   self.flow["chapter_2_interactive_choice_mural_color"] = {
     name="chapter_2_interactive_choice_mural_color",
@@ -547,14 +547,28 @@ function scene:chapter_2_Structure()
     intro="mural_color_choice",
     choiceCallback = function(something, choice_asset, player)
 
-      swatch_name = "Mural_" .. choice_asset.name
-      color_swatch = display.newImageRect(player.performanceAssetGroup[paint_depths[swatch_name] + player.const_half_layers + 1], "Art/" .. swatch_name .. ".png", 800, 400)
-      color_swatch.x = 471.5
-      color_swatch.y = 331.75
-      color_swatch.name = "blah"
-      color_swatch.id = "blah_" .. swatch_name
-      color_swatch.fixed_y = color_swatch.y
-      color_swatch.fixed_x = color_swatch.x
+      color = string.gsub(choice_asset.name, "_Paint", "")
+      mural_paint_name = "Mural_" .. color
+
+      mural_paint_asset = {
+        intro = "splash",
+        type = "picture",
+        id = mural_paint_name .. "_1",
+        y = 331.75,
+        x_scale = 1,
+        start_time = 0,
+        name = mural_paint_name,
+        y_scale = 1,
+        disappear_method = "pop",
+        depth = paint_depths[mural_paint_name],
+        x = 471.5,
+        squish_tilt = 0,
+        squish_scale = 1,
+        squish_period = 1700,
+        disappear_time = -1,
+      }
+      print(mural_paint_asset.type)
+      player:perform(mural_paint_asset)
 
       -- doctor the mural color script to remove the current color choice
       new_assets = {}

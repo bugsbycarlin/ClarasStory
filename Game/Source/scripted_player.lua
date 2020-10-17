@@ -165,7 +165,10 @@ end
 
 function scene:perform(asset)
   -- print(self.chapter_number)
-  -- print("I AM PERFORMING " .. asset.name)
+  print(self)
+  print(asset)
+  print("I AM PERFORMING " .. asset.name)
+  print("Asset has type " .. asset.type)
   if asset.type == "sound" then
     asset.performance = audio.loadStream("Sound/" .. sound_info[asset.name].file_name)
     -- should only do if this is the main audio file
@@ -185,8 +188,8 @@ function scene:perform(asset)
       print("I am setting this picture using choice value instead")
     end
 
-    -- last, unlikely guard against trying to use an unloaded sprite.
-    -- this will only happen if you skip scenes really quickly
+    -- guard against trying to use an unloaded sprite.
+    -- sometimes this is triggered intentionally rather than loading some oddball thing.
     if self.sprite[picture] == nil then
       print("Attempting last minute load for " .. picture)
       self.loader:loadPicture(picture)
@@ -223,6 +226,13 @@ function scene:setInitialPerformanceState(performance_object, intro, picture)
   if intro == "sketch" then
     performance_object:setFrame(1)
     performance_object.state = "sketching"
+  elseif intro == "splash" then
+    performance_object.animation_count = 0
+    performance_object:setFrame(1)
+    performance_object.state = "splash"
+  elseif intro == "outline_sketching" then
+    performance_object:setFrame(1)
+    performance_object.state = "outline_sketching"
   elseif intro == "fade_in" then
     performance_object:setFrame(self.picture_info[picture]["sprite_count"])
     performance_object.state = "fade_in"

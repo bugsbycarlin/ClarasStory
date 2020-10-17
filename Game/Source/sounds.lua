@@ -43,11 +43,11 @@ sound_info["chapter_2_scene_2"] = {
 }
 
 sound_info["chapter_2_scene_3"] = {
-  file_name = "chapter_2_scene_3_alt.wav",
+  file_name = "chapter_2_scene_3.wav",
 }
 
 sound_info["chapter_2_scene_4"] = {
-  file_name = "chapter_2_scene_4_alt.wav",
+  file_name = "chapter_2_scene_4.wav",
 }
 
 sound_info["chapter_2_interactive_loop"] = {
