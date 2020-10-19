@@ -188,7 +188,7 @@ function scene:setupSceneStructure()
 end
 
 function scene:chapter_2_Structure()
-  self.first_scene = "chapter_2_scene_2"
+  self.first_scene = "chapter_2_scene_4"
   -- self.first_scene = "chapter_2_interactive_choice_vehicle"
 
   local mpb = 375
