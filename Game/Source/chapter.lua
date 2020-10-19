@@ -188,7 +188,7 @@ function scene:setupSceneStructure()
 end
 
 function scene:chapter_2_Structure()
-  self.first_scene = "chapter_2_scene_4"
+  self.first_scene = "chapter_2_scene_2"
   -- self.first_scene = "chapter_2_interactive_choice_vehicle"
 
   local mpb = 375
@@ -440,7 +440,7 @@ function scene:chapter_2_Structure()
       for i = 1, #self.flow["chapter_2_scene_2"].script do
         asset = self.flow["chapter_2_scene_2"].script[i]
 
-        if asset.id == "Girl_13" then
+        if asset.id == "Clara_v2_13" then
           asset.fixed_x = asset.fixed_x + 30
           asset.x = asset.x + 30
         end

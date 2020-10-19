@@ -1364,6 +1364,20 @@ picture_info["Paint_Beast_Dance"] = {
   },
 }
 
+picture_info["Clara_Dance"] = {
+  file_name = "Clara_Dance.png",
+  row_length = 8,
+  sprite_size = 405,
+  sprite_height = 531,
+  sprite_count = 1,
+  outline_frame = 1,
+  animation_on = 1,
+  animation_end = 23,
+  animation_frames = {
+    11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+  },
+}
+
 
 
 
