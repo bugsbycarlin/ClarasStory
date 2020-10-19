@@ -399,7 +399,7 @@ function scene:perform(asset)
       asset.performance.fixed_y = asset.performance.y
     else
       asset.performance:setFrame(picture_info[picture]["sprite_count"])
-      if asset.performance.info["animation_end"] ~= nil then
+      if asset.performance.info["animation_end"] ~= nil or asset.performance.info["animation_frames"] ~= nil then
         asset.performance.state = "animating"
         asset.performance.animation_count = 0
       else

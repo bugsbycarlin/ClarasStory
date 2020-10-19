@@ -1208,14 +1208,6 @@ picture_info["Sign_Peace"] = {
   sprite_count = 1,
 }
 
-picture_info["Paint_Beast"] = {
-  file_name = "Paint_Beast.png",
-  row_length = 1,
-  sprite_size = 768,
-  sprite_height = 1024,
-  sprite_count = 1,
-}
-
 picture_info["Mural_Red"] = {
   file_name = "Mural_Red.png",
   row_length = 1,
@@ -1340,6 +1332,36 @@ picture_info["Clara_v2"] = {
   sprite_size = 512,
   sprite_count = 1,
   outline_frame = 1,
+}
+
+picture_info["Paint_Beast"] = {
+  file_name = "Paint_Beast.png",
+  row_length = 1,
+  sprite_size = 768,
+  sprite_height = 1024,
+  sprite_count = 1,
+}
+
+picture_info["Paint_Beast_Dance"] = {
+  file_name = "Paint_Beast_Dance.png",
+  row_length = 10,
+  sprite_size = 409,
+  sprite_height = 866,
+  sprite_count = 1,
+  outline_frame = 1,
+  animation_on = 1,
+  animation_end = 19,
+  animation_frames = {
+    1, 2, 3, 4, 5, 6, 6, 6, 6, 6,
+    6, 6, 6, 6, 6, 6, 6, 7, 8, 9,
+    10, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 11, 12, 13, 14, 15,
+    15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
+    15, 15, 16, 17, 18, 19, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+  },
 }
 
 

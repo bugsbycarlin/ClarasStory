@@ -40,6 +40,16 @@ function sketch_sprites:create()
     end
   end
 
+  function object:setStaticOrAnimating(sprite)
+    if sprite.info.animation_end ~= nil or sprite.info.animation_frames ~= nil then
+      sprite.state = "animating"
+      sprite.animation_count = 0
+      sprite.frame_count = 1
+    else
+      sprite.state = "static"
+    end
+  end
+
   function object:update(mode, total_performance_time)
     -- print("Updating; time " .. system.getTimer())
     copy_sprite_list = {}
@@ -62,10 +72,16 @@ function sketch_sprites:create()
       if sprite.state == "animating" then
         sprite.animation_count = sprite.animation_count + 1
         if sprite.animation_count % sprite.info.animation_on == 0 then
-          if sprite.frame < sprite.info.animation_start or sprite.frame > sprite.info.animation_end then
-            sprite:setFrame(sprite.info.animation_start)
-          else
-            if sprite.frame >= sprite.info.animation_end then
+          if sprite.info.animation_frames ~= nil then
+            if sprite.frame_count >= #sprite.info.animation_frames then
+              sprite:setFrame(sprite.info.animation_frames[1])
+              sprite.frame_count = 1
+            else
+              sprite.frame_count = sprite.frame_count + 1
+              sprite:setFrame(sprite.info.animation_frames[sprite.frame_count])
+            end
+          elseif sprite.info.animation_end ~= nil then
+            if sprite.frame < sprite.info.animation_start or sprite.frame >= sprite.info.animation_end then
               sprite:setFrame(sprite.info.animation_start)
             else
               sprite:setFrame(sprite.frame + 1)
@@ -86,12 +102,7 @@ function sketch_sprites:create()
 
           end
         else
-          if sprite.info["animation_end"] ~= nil then
-            sprite.state = "animating"
-            sprite.animation_count = 0
-          else
-            sprite.state = "static"
-          end
+          self:setStaticOrAnimating(sprite)
         end
       end
 
@@ -99,22 +110,12 @@ function sketch_sprites:create()
         if sprite.frame < sprite.info.sprite_count then
           sprite:setFrame(sprite.frame + 1)
         else
-          if sprite.info["animation_end"] ~= nil then
-            sprite.state = "animating"
-            sprite.animation_count = 0
-          else
-            sprite.state = "static"
-          end
+          self:setStaticOrAnimating(sprite)
         end
       end
 
       if sprite.state == "poof" then
-        if sprite.info["animation_end"] ~= nil then
-          sprite.state = "animating"
-          sprite.animation_count = 0
-        else
-          sprite.state = "static"
-        end
+        self:setStaticOrAnimating(sprite)
         self:poopClouds(sprite, 10 + math.random(20))
       end
 
@@ -122,12 +123,7 @@ function sketch_sprites:create()
         if sprite.info.outline_frame ~= nil and sprite.frame < sprite.info.outline_frame then
           sprite:setFrame(sprite.frame + 1)
         else
-          if sprite.info["animation_end"] ~= nil then
-            sprite.state = "animating"
-            sprite.animation_count = 0
-          else
-            sprite.state = "static"
-          end
+          self:setStaticOrAnimating(sprite)
         end
       end
 
@@ -136,12 +132,7 @@ function sketch_sprites:create()
           sprite.alpha = sprite.alpha + 0.16
           if sprite.alpha >= 1.0 then
             sprite.alpha = 1.0
-            if sprite.info["animation_end"] ~= nil then
-              sprite.state = "animating"
-              sprite.animation_count = 0
-            else
-              sprite.state = "static"
-            end
+            self:setStaticOrAnimating(sprite)
           end
         end
       end
@@ -154,12 +145,7 @@ function sketch_sprites:create()
         current_y = sprite.fixed_y
         animation.to(sprite, {fixed_y=current_y - height, y=current_y - height}, {time=sprite.squish_period, easing=easing.inOutQuad})
 
-        if sprite.info["animation_end"] ~= nil then
-          sprite.state = "animating"
-          sprite.animation_count = 0
-        else
-          sprite.state = "static"
-        end
+        self:setStaticOrAnimating(sprite)
       end
 
       sprite = self.sprite_list[i]
@@ -187,12 +173,7 @@ function sketch_sprites:create()
         sprite.x = sprite.fixed_x - 4 + math.random(8)
         sprite.y = sprite.fixed_y - 4 + math.random(8)
         if current_time - sprite.start_time > 150 then
-          if sprite.info["animation_end"] ~= nil then
-            sprite.state = "animating"
-            sprite.animation_count = 0
-          else
-            sprite.state = "static"
-          end
+          self:setStaticOrAnimating(sprite)
         end
       end
 

@@ -256,7 +256,7 @@ function scene:setInitialPerformanceState(performance_object, intro, picture)
     animation.to(performance_object, {alpha = 1}, {time=self.mpb * 0.5, easing=easing.outExp})
   else
     performance_object:setFrame(self.picture_info[picture]["sprite_count"])
-    if performance_object.info["animation_end"] ~= nil then
+    if performance_object.info["animation_end"] ~= nil or performance_object.info["animation_frames"] ~= nil then
       performance_object.state = "animating"
       performance_object.animation_count = 0
     else
@@ -401,7 +401,7 @@ function scene:initializeFromChapter()
   self.sketch_sprites.sprite = self.sprite
   self.sketch_sprites.top_group = self.top_group
 
-  self.sketch_sprite_timer = timer.performWithDelay(35, function() 
+  self.sketch_sprite_timer = timer.performWithDelay(33, function() 
     self.sketch_sprites:update(self.mode, self.total_performance_time)
   end, 0)
 end
