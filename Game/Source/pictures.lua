@@ -1409,7 +1409,29 @@ picture_info["Food_Beast_Dance"] = {
   },
 }
 
+picture_info["Agreement_1"] = {
+  file_name = "Agreement_1.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+  outline_frame = 1,
+}
 
+picture_info["Agreement_2"] = {
+  file_name = "Agreement_2.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+  outline_frame = 1,
+}
+
+picture_info["Agreement_3"] = {
+  file_name = "Agreement_3.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+  outline_frame = 1,
+}
 
 
 for picture, info in pairs(picture_info) do
