@@ -188,7 +188,7 @@ function scene:setupSceneStructure()
 end
 
 function scene:chapter_2_Structure()
-  self.first_scene = "chapter_2_scene_4"
+  self.first_scene = "chapter_2_scene_1"
   -- self.first_scene = "chapter_2_interactive_choice_vehicle"
 
   local mpb = 375
@@ -628,6 +628,9 @@ function scene:chapter_2_Structure()
 
       if #new_assets == 0 then
         self.flow["chapter_2_interactive_spell_color"].next = "chapter_2_scene_5"
+        self.flow["chapter_2_interactive_spell_color"].cleanup = true
+        -- maybe remove and re-add the paint beast here so he's in sync with the food beast.
+        -- clara too.
       end
 
       player.mode = "choice_outro"

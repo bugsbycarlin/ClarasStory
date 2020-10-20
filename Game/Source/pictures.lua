@@ -1378,6 +1378,37 @@ picture_info["Clara_Dance"] = {
   },
 }
 
+picture_info["Small_Mural"] = {
+  file_name = "Small_Mural.png",
+  row_length = 1,
+  sprite_size = 200,
+  sprite_height = 100,
+  sprite_count = 1,
+  outline_frame = 1,
+}
+
+picture_info["Food_Beast_Dance"] = {
+  file_name = "Food_Beast_Dance.png",
+  row_length = 4,
+  sprite_size = 425,
+  sprite_height = 729,
+  sprite_count = 1,
+  outline_frame = 1,
+  animation_on = 1,
+  animation_end = 19,
+  animation_frames = {
+    1, 2, 3, 4, 5, 6, 6, 6, 6, 6,
+    6, 6, 6, 6, 6, 6, 6, 7, 8, 9,
+    10, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 11, 12, 13, 14, 15,
+    15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
+    15, 15, 16, 17, 18, 19, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+  },
+}
+
 
 
 
