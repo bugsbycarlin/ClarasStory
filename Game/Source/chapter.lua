@@ -188,8 +188,9 @@ function scene:setupSceneStructure()
 end
 
 function scene:chapter_2_Structure()
-  self.first_scene = "chapter_2_scene_4"
+  self.first_scene = "chapter_2_scene_5"
   -- self.first_scene = "chapter_2_interactive_choice_vehicle"
+  -- self.first_scene = "chapter_2_interactive_bike"
 
   local mpb = 375
   composer.setVariable("mpb", mpb)
@@ -260,14 +261,10 @@ function scene:chapter_2_Structure()
     next="chapter_2_scene_2",
     type="interactive_spelling",
     word="Taxi",
-    random_order=false,
-    random_letters=false,
-    intro_letter_beats = {0, 0.5, 1, 1.5},
-    outro_sounds = {"tuh", "ah", "ks", "ii"},
     script=nil,
     performance = {
       squish_scale = 1.02,
-      intro = "poof",
+      intro = "static",
       y_scale = 1,
       name = "Taxi",
       disappear_method = "poof",
@@ -282,16 +279,12 @@ function scene:chapter_2_Structure()
     next="chapter_2_interactive_choice_bus_color",
     type="interactive_spelling",
     word="Bus",
-    random_order=false,
-    random_letters=false,
-    intro_letter_beats = {0, 0.5, 1},
-    outro_sounds = {"buh", "uh", "suh"},
     script=nil,
     performance = {
       squish_scale = 1.02,
-      intro = "poof",
+      intro = "static",
       y_scale = 1,
-      name = "Bus_Gray",
+      name = "Bus_Blue",
       disappear_method = "poof",
       x_scale = 1,
       squish_tilt = 8,
@@ -345,16 +338,12 @@ function scene:chapter_2_Structure()
     next="chapter_2_interactive_choice_car_color",
     type="interactive_spelling",
     word="Car",
-    random_order=false,
-    random_letters=false,
-    intro_letter_beats = {0, 0.5, 1},
-    outro_sounds = {"kuh", "ahh", "ruh"},
     script=nil,
     performance = {
       squish_scale = 1.02,
-      intro = "poof",
+      intro = "static",
       y_scale = 1,
-      name = "Car_Gray",
+      name = "Car_Green",
       disappear_method = "poof",
       x_scale = 1,
       squish_tilt = 8,
@@ -397,16 +386,13 @@ function scene:chapter_2_Structure()
     next="chapter_2_interactive_choice_truck_color",
     type="interactive_spelling",
     word="Truck",
-    random_order=false,
-    random_letters=false,
-    intro_letter_beats = {0, 0.5, 1, 1.5, 2},
-    outro_sounds = {"tuh", "ruh", "ahh", "kuh", ""},
+    outro_highlights = {"t----", "-r---", "--u--", "---ck"},
     script=nil,
     performance = {
       squish_scale = 1.02,
-      intro = "poof",
+      intro = "static",
       y_scale = 1,
-      name = "Truck_Gray",
+      name = "Truck_Red",
       disappear_method = "poof",
       x_scale = 1,
       squish_tilt = 8,
@@ -466,16 +452,13 @@ function scene:chapter_2_Structure()
     next="chapter_2_interactive_choice_bike_color",
     type="interactive_spelling",
     word="Bike",
-    random_order=false,
-    random_letters=false,
-    intro_letter_beats = {0, 0.5, 1, 1.5},
-    outro_sounds = {"buh", "I", "kuh", "eh"},
+    outro_highlights = {"b---", "-i--", "--ke"},
     script=nil,
     performance = {
       squish_scale = 1.02,
       intro = "poof",
       y_scale = 1,
-      name = "Bike_Gray",
+      name = "Bike_Purple",
       disappear_method = "poof",
       x_scale = 1,
       squish_tilt = 8,
@@ -597,32 +580,23 @@ function scene:chapter_2_Structure()
       self.flow["chapter_2_interactive_spell_color"].word = color
       self.flow["chapter_2_interactive_spell_color"].performance = mural_paint_asset
       if color == "Red" then
-        self.flow["chapter_2_interactive_spell_color"].intro_letter_beats = {0, 0.5, 1}
-        self.flow["chapter_2_interactive_spell_color"].outro_sounds = {"ruh", "eh", "duh"}
+        self.flow["chapter_2_interactive_spell_color"].outro_highlights = nil
       elseif color == "Blue" then
-        self.flow["chapter_2_interactive_spell_color"].intro_letter_beats = {0, 0.5, 1, 1.5}
-        self.flow["chapter_2_interactive_spell_color"].outro_sounds = {"buh", "luh", "oo", "eh"}
+        self.flow["chapter_2_interactive_spell_color"].outro_highlights = {"b---", "-l--", "--ue"}
       elseif color == "Green" then
-        self.flow["chapter_2_interactive_spell_color"].intro_letter_beats = {0, 0.5, 1, 1.5, 2}
-        self.flow["chapter_2_interactive_spell_color"].outro_sounds = {"guh", "ruh", "ee", "ee", "nuh"}
+        self.flow["chapter_2_interactive_spell_color"].outro_highlights = {"g----", "-r---", "--ee-", "----n"}
       elseif color == "Yellow" then
-        self.flow["chapter_2_interactive_spell_color"].intro_letter_beats = {0, 0.5, 1, 1.5, 2, 2.5}
-        self.flow["chapter_2_interactive_spell_color"].outro_sounds = {"yuh", "eh", "luh", "luh", "oh", "wuh"}
+        self.flow["chapter_2_interactive_spell_color"].outro_highlights = {"y-----", "-e----", "--ll--", "----ow"}
       elseif color == "Orange" then
-        self.flow["chapter_2_interactive_spell_color"].intro_letter_beats = {0, 0.5, 1, 1.5, 2, 2.5}
-        self.flow["chapter_2_interactive_spell_color"].outro_sounds = {"oh", "ruh", "ah", "nuh", "juh", "eh"}
+        self.flow["chapter_2_interactive_spell_color"].outro_highlights = {"o-----", "-r----", "--a---", "---n--", "----ge"}
       elseif color == "Purple" then
-        self.flow["chapter_2_interactive_spell_color"].intro_letter_beats = {0, 0.5, 1, 1.5, 2, 2.5}
-        self.flow["chapter_2_interactive_spell_color"].outro_sounds = {"puh", "uh", "ruh", "puh", "luh", "eh"}
+        self.flow["chapter_2_interactive_spell_color"].outro_highlights = {"p-----", "-u----", "--r---", "---p--", "----le"}
       elseif color == "Brown" then
-        self.flow["chapter_2_interactive_spell_color"].intro_letter_beats = {0, 0.5, 1, 1.5, 2}
-        self.flow["chapter_2_interactive_spell_color"].outro_sounds = {"buh", "ruh", "oh", "wuh", "nuh"}
+        self.flow["chapter_2_interactive_spell_color"].outro_highlights = {"b----", "-r---", "--ow-", "----n"}
       elseif color == "Black" then
-        self.flow["chapter_2_interactive_spell_color"].intro_letter_beats = {0, 0.5, 1, 1.5, 2}
-        self.flow["chapter_2_interactive_spell_color"].outro_sounds = {"buh", "luh", "ah", "kuh", "kuh"}
+        self.flow["chapter_2_interactive_spell_color"].outro_highlights = {"b----", "-l---", "--a--", "---ck"}
       elseif color == "White" then
-        self.flow["chapter_2_interactive_spell_color"].intro_letter_beats = {0, 0.5, 1, 1.5, 2}
-        self.flow["chapter_2_interactive_spell_color"].outro_sounds = {"wuh", "huh", "I", "tuh", "eh"}
+        self.flow["chapter_2_interactive_spell_color"].outro_highlights = {"wh---", "--i--", "---te"}
       end
 
 

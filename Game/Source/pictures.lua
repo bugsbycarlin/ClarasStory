@@ -907,6 +907,22 @@ picture_info["City_Block_with_Mural_zoom"] = {
   sprite_count = 1,
 }
 
+picture_info["Brick_Lines_Overlay"] = {
+  file_name = "Brick_Lines_Overlay.png",
+  row_length = 1,
+  sprite_size = 1024,
+  sprite_height = 768,
+  sprite_count = 1,
+}
+
+picture_info["Restaurant_Tables"] = {
+  file_name = "Restaurant_Tables.png",
+  row_length = 1,
+  sprite_size = 1024,
+  sprite_height = 173,
+  sprite_count = 1,
+}
+
 picture_info["City_Block_Wider"] = {
   file_name = "City_Block_Wider.png",
   row_length = 1,
@@ -1432,6 +1448,31 @@ picture_info["Agreement_3"] = {
   sprite_count = 1,
   outline_frame = 1,
 }
+
+picture_info["Restaurant_View"] = {
+  file_name = "Restaurant_View.png",
+  row_length = 1,
+  sprite_size = 1024,
+  sprite_height = 768,
+  sprite_count = 1,
+}
+
+picture_info["Little_White_Boat_Shadow"] = {
+  file_name = "Little_White_Boat_Shadow.png",
+  row_length = 1,
+  sprite_size = 48,
+  sprite_count = 1,
+  outline_frame = 1,
+}
+
+picture_info["Little_Black_Boat_Shadow"] = {
+  file_name = "Little_Black_Boat_Shadow.png",
+  row_length = 1,
+  sprite_size = 48,
+  sprite_count = 1,
+  outline_frame = 1,
+}
+
 
 
 for picture, info in pairs(picture_info) do
