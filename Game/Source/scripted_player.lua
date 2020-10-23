@@ -229,7 +229,10 @@ end
 
 function scene:setInitialPerformanceState(performance_object, intro, picture)
   performance_object.intro = intro
-  if intro == "sketch" then
+  if intro == "static" then
+    performance_object:setFrame(1)
+    performance_object.state = "static"
+  elseif intro == "sketch" then
     performance_object:setFrame(1)
     performance_object.state = "sketching"
   elseif intro == "splash" then
@@ -452,7 +455,7 @@ function scene:startScripted()
 
   self:updatePerformance()
 
-  self.update_timer = timer.performWithDelay(35, function() 
+  self.update_timer = timer.performWithDelay(5, function() 
     self:updatePerformance()
   end, 0)
 

@@ -11,6 +11,11 @@ function editor:augment(player)
     player.last_mode = player.mode
     player.mode = "editing"
 
+    if player.first_edit == false then
+      Runtime:addEventListener("touch", function(event) player:handleMouse(event) end)
+      player.first_edit = true
+    end
+
     player.editingGroup.isVisible = true
     for i = 1,player.pictureEditingGroup.numChildren do
       player.pictureEditingGroup[i].isVisible = true
@@ -384,8 +389,8 @@ function editor:augment(player)
   player.edit_mode_asset_start_x = 0
   player.edit_mode_asset_start_y = 0
   player.handleMouse = function(self, event)
-    print("In mouse, mode " .. player.mode)
-    print(event.x .. "," .. event.y .. "," .. event.xStart .. "," .. event.yStart)
+    -- print("In mouse, mode " .. player.mode)
+    -- print(event.x .. "," .. event.y .. "," .. event.xStart .. "," .. event.yStart)
 
     if player.mode == "editing" then
       local asset = player:getSelectedAsset()
@@ -621,9 +626,8 @@ function editor:augment(player)
     end)
   end
 
+  player.first_edit = false
 
-
-  Runtime:addEventListener("touch", function(event) player:handleMouse(event) end)
   Runtime:addEventListener("key", function(event) player:handleKeyboard(event) end)
 
   player.editingGroup = display.newGroup()

@@ -51,7 +51,7 @@ function sketch_sprites:create()
   end
 
   function object:setStaticOrAnimating(sprite)
-    if sprite.info.animation_end ~= nil or sprite.info.animation_frames ~= nil then
+    if sprite.state ~= "static" and (sprite.info.animation_end ~= nil or sprite.info.animation_frames ~= nil) then
       sprite.state = "animating"
       sprite.animation_count = 0
       sprite.frame_count = 1
@@ -231,9 +231,11 @@ function sketch_sprites:create()
 
           if not string.find(sprite.state, "disappearing") and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 then
             if sprite.disappear_method == "poof" then
+              print("Here")
+              print(sprite)
+              self:poopClouds(sprite, 10 + math.random(20))
               sprite.state = "disappearing_poof"
               sprite.isVisible = false
-              self:poopClouds(sprite, 10 + math.random(20))
             end
           end
 
@@ -337,8 +339,8 @@ function sketch_sprites:create()
   function object:poopClouds(current_sprite, num_clouds)
     local info = current_sprite.info
     print("Width of this sprite is " .. current_sprite.width * current_sprite.xScale)
-    local width = current_sprite.width * current_sprite.xScale
-    local height = current_sprite.height * current_sprite.yScale
+    local width = math.abs(current_sprite.width * current_sprite.xScale)
+    local height = math.abs(current_sprite.height * current_sprite.yScale)
     for i = 1, num_clouds do
       local cloud_sprite = display.newImageRect(self.top_group, "Art/Cloud.png", 256, 256)
       cloud_sprite.id = "Cloud_" .. math.random(5) .. 1000 + i

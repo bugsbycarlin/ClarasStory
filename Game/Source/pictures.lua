@@ -195,6 +195,13 @@ picture_info["Letter_Box"] = {
   always_load = true,
 }
 
+picture_info["Letter_Box_Small"] = {
+  file_name = "Letter_Box_Small.png",
+  row_length = 1,
+  sprite_size = 100,
+  sprite_count = 1,
+}
+
 -- Stars
 
 picture_info["Green_Star"] = {
@@ -997,77 +1004,77 @@ picture_info["Vertical_Dash"] = {
 picture_info["Blue_Paint"] = {
   file_name = "Blue_Paint.png",
   row_length = 1,
-  sprite_size = 256,
+  sprite_size = 128,
   sprite_count = 1,
 }
 
 picture_info["Red_Paint"] = {
   file_name = "Red_Paint.png",
   row_length = 1,
-  sprite_size = 256,
+  sprite_size = 128,
   sprite_count = 1,
 }
 
 picture_info["Yellow_Paint"] = {
   file_name = "Yellow_Paint.png",
   row_length = 1,
-  sprite_size = 256,
+  sprite_size = 128,
   sprite_count = 1,
 }
 
 picture_info["Orange_Paint"] = {
   file_name = "Orange_Paint.png",
   row_length = 1,
-  sprite_size = 256,
+  sprite_size = 128,
   sprite_count = 1,
 }
 
 picture_info["Purple_Paint"] = {
   file_name = "Purple_Paint.png",
   row_length = 1,
-  sprite_size = 256,
+  sprite_size = 128,
   sprite_count = 1,
 }
 
 picture_info["Green_Paint"] = {
   file_name = "Green_Paint.png",
   row_length = 1,
-  sprite_size = 256,
+  sprite_size = 128,
   sprite_count = 1,
 }
 
 picture_info["Pink_Paint"] = {
   file_name = "Pink_Paint.png",
   row_length = 1,
-  sprite_size = 256,
+  sprite_size = 128,
   sprite_count = 1,
 }
 
 picture_info["Gray_Paint"] = {
   file_name = "Gray_Paint.png",
   row_length = 1,
-  sprite_size = 256,
+  sprite_size = 128,
   sprite_count = 1,
 }
 
 picture_info["Brown_Paint"] = {
   file_name = "Brown_Paint.png",
   row_length = 1,
-  sprite_size = 256,
+  sprite_size = 128,
   sprite_count = 1,
 }
 
 picture_info["Black_Paint"] = {
   file_name = "Black_Paint.png",
   row_length = 1,
-  sprite_size = 256,
+  sprite_size = 128,
   sprite_count = 1,
 }
 
 picture_info["White_Paint"] = {
   file_name = "White_Paint.png",
   row_length = 1,
-  sprite_size = 256,
+  sprite_size = 128,
   sprite_count = 1,
 }
 
@@ -1485,6 +1492,38 @@ picture_info["Thumb_2"] = {
   file_name = "Thumb_2.png",
   row_length = 1,
   sprite_size = 128,
+  sprite_count = 1,
+  outline_frame = 1,
+}
+
+picture_info["Donut"] = {
+  file_name = "Donut.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+  outline_frame = 1,
+}
+
+picture_info["Kebab"] = {
+  file_name = "Kebab.png",
+  row_length = 1,
+  sprite_size = 256,
+  sprite_count = 1,
+  outline_frame = 1,
+}
+
+picture_info["Mixer"] = {
+  file_name = "Mixer.png",
+  row_length = 1,
+  sprite_size = 400,
+  sprite_count = 1,
+  outline_frame = 1,
+}
+
+picture_info["Mandala_Background"] = {
+  file_name = "Mandala_Background.png",
+  row_length = 1,
+  sprite_size = 650,
   sprite_count = 1,
   outline_frame = 1,
 }
