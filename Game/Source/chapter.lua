@@ -188,9 +188,8 @@ function scene:setupSceneStructure()
 end
 
 function scene:chapter_2_Structure()
-  self.first_scene = "chapter_2_scene_5"
-  -- self.first_scene = "chapter_2_interactive_choice_vehicle"
-  -- self.first_scene = "chapter_2_interactive_bike"
+  -- self.first_scene = "chapter_2_scene_4"
+  self.first_scene = "chapter_2_interactive_mandala"
 
   local mpb = 375
   composer.setVariable("mpb", mpb)
@@ -634,6 +633,13 @@ function scene:chapter_2_Structure()
     next=nil,
     type="scripted",
     script=self:loadSceneScript("chapter_2_scene_5"),
+  }
+
+  self.flow["chapter_2_interactive_mandala"] = {
+    name="chapter_2_interactive_mandala",
+    next=nil,
+    type="interactive_mandala",
+    script=self:loadSceneScript("chapter_2_interactive_mandala"),
   }
 
 end

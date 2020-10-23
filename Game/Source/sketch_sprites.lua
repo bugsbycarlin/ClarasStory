@@ -40,6 +40,16 @@ function sketch_sprites:create()
     end
   end
 
+  function object:get(id)
+    for i = 1, #self.sprite_list do
+      sprite = self.sprite_list[i]
+      if sprite.id == id then
+        return sprite
+      end
+    end
+    return nil
+  end
+
   function object:setStaticOrAnimating(sprite)
     if sprite.info.animation_end ~= nil or sprite.info.animation_frames ~= nil then
       sprite.state = "animating"

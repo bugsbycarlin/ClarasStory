@@ -11,6 +11,7 @@ local loader = require("Source.loader")
 
 local interactive_spelling_player = require("Source.interactive_spelling_player")
 local interactive_choice_player = require("Source.interactive_choice_player")
+local interactive_mandala_player = require("Source.interactive_mandala_player")
 
 local scene = composer.newScene()
 
@@ -56,6 +57,7 @@ function scene:show(event)
 
     interactive_spelling_player:augment(self)
     interactive_choice_player:augment(self)
+    interactive_mandala_player:augment(self)
 
     self.const_half_layers = 10
     self.const_num_layers = 2 * self.const_half_layers + 1
@@ -93,6 +95,8 @@ function scene:show(event)
       self:startInteractiveSpelling()
     elseif scene.scene_type == "interactive_choice" then
       self:startInteractiveChoice()
+    elseif scene.scene_type == "interactive_mandala" then
+      self:startInteractiveMandala()
     end
 
     self.skip_scene_button = display.newImageRect(self.sceneGroup, "Art/skip_scene.png", 40, 40)
@@ -114,6 +118,8 @@ function scene:show(event)
           self:finishSpellingScene()
         elseif self.scene_type == "interactive_choice" then
           self:finishChoiceScene()
+        elseif self.scene_type == "interactive_mandala" then
+          self:finishMandalaScene()
         end
       end
     end)
@@ -375,6 +381,8 @@ function scene:nextScene()
     self:startInteractiveSpelling()
   elseif self.scene_type == "interactive_choice" then
     self:startInteractiveChoice()
+  elseif self.scene_type == "interactive_mandala" then
+    self:startInteractiveMandala()
   end
 
   -- start loading the next stuff

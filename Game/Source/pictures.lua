@@ -1473,6 +1473,22 @@ picture_info["Little_Black_Boat_Shadow"] = {
   outline_frame = 1,
 }
 
+picture_info["Thumb_1"] = {
+  file_name = "Thumb_1.png",
+  row_length = 1,
+  sprite_size = 128,
+  sprite_count = 1,
+  outline_frame = 1,
+}
+
+picture_info["Thumb_2"] = {
+  file_name = "Thumb_2.png",
+  row_length = 1,
+  sprite_size = 128,
+  sprite_count = 1,
+  outline_frame = 1,
+}
+
 
 
 for picture, info in pairs(picture_info) do

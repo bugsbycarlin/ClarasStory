@@ -196,6 +196,28 @@ function scene_actions_chapter_2:augment(player)
     end, 1, "special")
   end
 
+  player.sceneActions["chapter_2_scene_5"] = function()
+    player.special_timer = timer.performWithDelay(6900, function()
+      local boat
+
+      boat = player.sketch_sprites:get("Little_White_Boat_Shadow_1")
+      x = boat.fixed_x
+      animation.to(boat, {fixed_x = x + 40}, {time = 30000})
+
+      boat = player.sketch_sprites:get("Little_White_Boat_Shadow_2")
+      x = boat.fixed_x
+      animation.to(boat, {fixed_x = x + 50}, {time = 30000})
+
+      boat = player.sketch_sprites:get("Little_White_Boat_Shadow_3")
+      x = boat.fixed_x
+      animation.to(boat, {fixed_x = x - 40}, {time = 30000})
+
+      boat = player.sketch_sprites:get("Little_White_Boat_Shadow_4")
+      x = boat.fixed_x
+      animation.to(boat, {fixed_x = x + 60}, {time = 30000})
+    end, 1, "special")
+  end
+
 end
 
 return scene_actions_chapter_2

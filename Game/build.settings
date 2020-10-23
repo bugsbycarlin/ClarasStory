@@ -46,6 +46,10 @@ settings =
 	      {
 	          publisherId = "com.coronalabs"
 	      },
+	  ["plugin.memoryBitmap"] =
+        {
+            publisherId = "com.coronalabs"
+        },
 	},
 
 	--
