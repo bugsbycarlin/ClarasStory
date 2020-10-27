@@ -55,6 +55,7 @@ function scene:show(event)
 
     self.picture_info = require("Source.pictures")
 
+    print("AUGMENTING")
     interactive_spelling_player:augment(self)
     interactive_choice_player:augment(self)
     interactive_mandala_player:augment(self)
@@ -74,6 +75,8 @@ function scene:show(event)
     self.memory_log_timer = timer.performWithDelay(3000, function() 
       printMemUsage()
     end, 0)
+
+    self.sceneActions = {}
 
     self:initializeFromChapter()
 
@@ -108,9 +111,7 @@ function scene:show(event)
       if (system.getTimer() - self.skip_scene_button.last_skip > 1) then
         self.skip_scene_button.last_skip = system.getTimer()
         self:skipPerformanceToTime(100000)
-        if self.special_timer ~= nil then
-          timer.cancel("special")
-        end
+        self:cancelTimers()
         if self.scene_type == "scripted" then
           audio.stop()
           self:nextScene()
@@ -133,6 +134,7 @@ function scene:hide(event)
   if (phase == "will") then
     -- Code here runs when the scene is on screen (but is about to go off screen)
   elseif (phase == "did") then
+    print("HIDING SCRIPTED PLAYER")
     -- Code here runs immediately after the scene goes entirely off screen
   end
 end
@@ -140,6 +142,7 @@ end
 -- destroy()
 function scene:destroy(event)
   local sceneGroup = self.view
+  print("DESTROYING SCRIPTED PLAYER")
   -- Code here runs prior to the removal of scene's view
   -- Runtime:removeEventListener("touch")
 end
@@ -170,11 +173,6 @@ function scene:updateTime()
 end
 
 function scene:perform(asset)
-  -- print(self.chapter_number)
-  print(self)
-  print(asset)
-  print("I AM PERFORMING " .. asset.name)
-  print("Asset has type " .. asset.type)
   if asset.type == "sound" then
     asset.performance = audio.loadStream("Sound/" .. sound_info[asset.name].file_name)
     -- should only do if this is the main audio file
@@ -186,18 +184,13 @@ function scene:perform(asset)
   elseif asset.type == "picture" then
     local picture = asset.name
 
-    print(asset.id)
-    print(asset.choice_value)
-    print(picture)
     if asset.choice_value ~= nil and asset.choice_value ~= "" then
       picture = asset.choice_value
-      print("I am setting this picture using choice value instead")
     end
 
     -- guard against trying to use an unloaded sprite.
     -- sometimes this is triggered intentionally rather than loading some oddball thing.
     if self.sprite[picture] == nil then
-      print("Attempting last minute load for " .. picture)
       self.loader:loadPicture(picture)
     end
 
@@ -225,12 +218,28 @@ function scene:perform(asset)
     asset.performance.squish_period = asset.squish_period
     self.sketch_sprites:add(asset.performance)
   end
+
+  if asset.choice == true then
+    self.number_of_interactive_choices = self.number_of_interactive_choices + 1
+    local pop_sound = audio.loadSound("Sound/pop_" .. ((self.number_of_interactive_choices % 4) + 1) .. ".wav")
+    audio.play(pop_sound)
+    table.insert(self.interactive_choices, asset)
+    asset.performance:addEventListener("tap", function()
+      if self.mode == "choice_interactive" then
+        local touch_sound = audio.loadSound("Sound/touch_letter.wav")
+        audio.play(touch_sound)
+        self.interactive_choice = asset
+
+        self.info:choiceCallback(self.interactive_choice, self)
+      end
+    end)
+  end
 end
 
 function scene:setInitialPerformanceState(performance_object, intro, picture)
   performance_object.intro = intro
   if intro == "static" then
-    performance_object:setFrame(1)
+    performance_object:setFrame(self.picture_info[picture]["sprite_count"])
     performance_object.state = "static"
   elseif intro == "sketch" then
     performance_object:setFrame(1)
@@ -309,7 +318,7 @@ function scene:updatePerformance()
     basic_info_text.text = "Time: " .. math.floor(self.total_performance_time) / 1000.0 .. ", Objects: " .. objects_in_performance
   end
 
-  if (self.mode ~= "editing") then
+  if (self.mode ~= "editing") and self.script_assets ~= nil then
     for i = 1, #self.script_assets do
       asset = self.script_assets[i]
       if asset.performance == nil and last_update_time <= asset.start_time and self.total_performance_time >= asset.start_time then
@@ -322,25 +331,22 @@ end
 function scene:skipPerformanceToTime(time_value)
   -- self.total_performance_time = time_value -- this won't work because of the way those update.
 
-  for i = 1, #self.script_assets do
-    asset = self.script_assets[i]
-    if asset.performance == nil and time_value >= asset.start_time and (asset.disappear_time <= 0 or time_value < asset.disappear_time) then
-      self:perform(asset)
+  if self.script_assets ~= nil then
+    for i = 1, #self.script_assets do
+      asset = self.script_assets[i]
+      if asset.performance == nil and time_value >= asset.start_time and (asset.disappear_time <= 0 or time_value < asset.disappear_time) then
+        self:perform(asset)
+      end
     end
   end
 
   copy_sprite_list = {}
   for i = 1, #self.sketch_sprites.sprite_list do
     local sprite = self.sketch_sprites.sprite_list[i]
-    -- print(sprite.name)
-    -- print(sprite.disappear_method)
-    -- print(sprite.disappear_time)
     if sprite and sprite.disappear_method ~= nil and sprite.disappear_method ~= "" and sprite.disappear_time > 0 and time_value > sprite.disappear_time then
-      -- print("killing it")
       animation.cancel(sprite)
       display.remove(sprite)
     else
-      -- print("saving it")
       table.insert(copy_sprite_list, sprite)
     end
   end
@@ -350,14 +356,7 @@ end
 function scene:nextScene()
   self.mode = nil
 
-  timer.cancel(self.sketch_sprite_timer)
-  if self.update_timer ~= nil then
-    timer.cancel(self.update_timer)
-  end
-
-  if self.special_timer ~= nil then
-    timer.cancel("special")
-  end
+  self:cancelTimers()
 
   if self.info["cleanup"] == nil or self.info["cleanup"] ~= false then
     self:clearPerformance()
@@ -366,7 +365,6 @@ function scene:nextScene()
     self.sketch_sprites.top_group = nil
   end
   if self.scene_type == "interactive_spelling" then
-    -- print("I AM CLEARING THE SPELLING")
     self:clearSpellingMaterial()
   end
 
@@ -375,7 +373,7 @@ function scene:nextScene()
   else
     self.scene_type = nil
     self.script_assets = nil
-    self.chapter:finish()
+    self:finish()
   end
 
   if self.scene_type == "scripted" then
@@ -392,6 +390,31 @@ function scene:nextScene()
   self:setupLoading()
 end
 
+function scene:cancelTimers()
+  if self.memory_log_timer ~= nil then
+    timer.cancel(self.memory_log_timer)
+  end
+  if self.sketch_sprite_timer ~= nil then
+    timer.cancel(self.sketch_sprite_timer)
+  end
+  if self.update_timer ~= nil then
+    timer.cancel(self.update_timer)
+  end
+  if self.special_timer ~= nil then
+    timer.cancel("special")
+  end
+end
+
+function scene:finish()
+  -- unload many things!
+  self:cancelTimers()
+
+  self.loader:unloadAll()
+
+  -- self.chapter:displayTableOfContents()
+  composer.gotoScene("Source.chapter")
+end
+
 function scene:initializeFromChapter()
   self.chapter = composer.getVariable("chapter")
   self.sketch_sprites = composer.getVariable("sketch_sprites")
@@ -405,6 +428,7 @@ function scene:initializeFromChapter()
   self.chapter_flow = composer.getVariable("chapter_flow")
   self.bpm = composer.getVariable("bpm")
   self.mpb = composer.getVariable("mpb")
+  self.spelling_outro_mpb = composer.getVariable("spelling_outro_mpb")
   self.time_sig = composer.getVariable("time_sig")
   self.scene_type = self.info["type"]
 
@@ -419,7 +443,6 @@ end
 
 function scene:initializeScene()
 
-  print("New scene: " .. self.next_scene)
   local new_scene = self.chapter_flow[self.next_scene]
 
   self.scene_name = new_scene.name
@@ -440,7 +463,7 @@ function scene:initializeScene()
   self.sketch_sprites.sprite = self.sprite
   self.sketch_sprites.top_group = self.top_group
 
-  self.sketch_sprite_timer = timer.performWithDelay(35, function() 
+  self.sketch_sprite_timer = timer.performWithDelay(33, function() 
     self.sketch_sprites:update(self.mode, self.total_performance_time)
   end, 0)
 end
@@ -460,11 +483,7 @@ function scene:startScripted()
   end, 0)
 
   -- Special functions
-  print(self.sceneActions)
-  print(self.scene_name)
-  print(self.sceneActions[self.scene_name])
   if self.sceneActions ~= nil and self.sceneActions[self.scene_name] ~= nil then
-    print("I found my scene actions")
     self.sceneActions[self.scene_name]()
   end
 end
@@ -486,7 +505,7 @@ function scene:setupLoading()
     self.picture_info,
     load_items,
     unload_items,
-    300,
+    500,
     function(percent) end,
     function() print("Finished loading items in the background!") end)
 end

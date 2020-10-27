@@ -82,6 +82,12 @@ function loader:create()
     end
   end
 
+  function object:unloadAll()
+    for sprite_name, sprite_value in pairs(self.sprites) do
+      self.sprites[sprite_name] = nil
+    end
+  end
+
   return object
 end
 

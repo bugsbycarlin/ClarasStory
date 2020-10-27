@@ -45,20 +45,22 @@ function interactive_mandala_player:augment(player)
 
     if player.script_assets ~= nil and player.script_assets ~= "" then
 
-      print("DOING THIS")
       player:updatePerformance()
 
       player.update_timer = timer.performWithDelay(5, function() 
         player:updatePerformance()
-        print(player.mandala_pixels_painted .. " out of " .. player.mandala_target_pixels_painted)
+        -- print(player.mandala_pixels_painted .. " out of " .. player.mandala_target_pixels_painted)
       end, 0)
     end
 
     player:createMandala()
 
-    player.music_loop = audio.loadStream("Sound/chapter_" .. player.chapter_number .. "_interactive_loop.wav")
+    --player.music_loop = audio.loadStream("Sound/chapter_" .. player.chapter_number .. "_interactive_loop.wav")
+    -- always use the chapter 2 music for the mandala
+    player.music_loop = audio.loadStream("Sound/chapter_2_interactive_loop.wav")
     audio.play(player.music_loop, {loops=-1})
 
+    -- change this based on chapter
     local sound = audio.loadSound("Sound/chapter_" .. player.chapter_number .. "/mandala_intro.mp3")
     audio.play(sound)
 
@@ -67,56 +69,56 @@ function interactive_mandala_player:augment(player)
     timer.performWithDelay(250, function()
       player.mandala_selection = player.sketch_sprites:get("Letter_Box_1")    
 
-      for i = 1, #player.script_assets do
-        asset = player.script_assets[i]
-        if string.find(asset.id, "Paint") and string.find(asset.id, "Beast") == nil then
-          local id = asset.id
-          asset.performance:addEventListener("tap", function(event) 
-            print(id)
+      if player.script_assets ~= nil then
+        for i = 1, #player.script_assets do
+          asset = player.script_assets[i]
+          if string.find(asset.id, "Paint") and string.find(asset.id, "Beast") == nil then
+            local id = asset.id
+            asset.performance:addEventListener("tap", function(event) 
+              new_paint = player.sketch_sprites:get(id)
+              animation.to(player.mandala_selection, {fixed_x = new_paint.fixed_x, fixed_y = new_paint.fixed_y}, {time=250, easing=easing.inOutExpo})    
+            
+              if id == "Blue_Paint_2" then
+                player.mandala_r = 32/255
+                player.mandala_g = 105/255
+                player.mandala_b = 243/255
+              elseif id == "Black_Paint_3" then
+                player.mandala_r = 0/255
+                player.mandala_g = 0/255
+                player.mandala_b = 0/255
+              elseif id == "Green_Paint_4" then
+                player.mandala_r = 43/255
+                player.mandala_g = 183/255
+                player.mandala_b = 25/255
+              elseif id == "Orange_Paint_5" then
+                player.mandala_r = 255/255
+                player.mandala_g = 165/255
+                player.mandala_b = 33/255
+              elseif id == "Pink_Paint_6" then
+                player.mandala_r = 255/255
+                player.mandala_g = 133/255
+                player.mandala_b = 185/255
+              elseif id == "Purple_Paint_7" then
+                player.mandala_r = 143/255
+                player.mandala_g = 36/255
+                player.mandala_b = 215/255
+              elseif id == "Red_Paint_8" then
+                player.mandala_r = 215/255
+                player.mandala_g = 36/255
+                player.mandala_b = 36/255
+              elseif id == "Yellow_Paint_9" then
+                player.mandala_r = 255/255
+                player.mandala_g = 227/255
+                player.mandala_b = 33/255
+              elseif id == "Brown_Paint_8" then
+                player.mandala_r = 128/255
+                player.mandala_g = 83/255
+                player.mandala_b = 17/255
+              end
 
-            new_paint = player.sketch_sprites:get(id)
-            animation.to(player.mandala_selection, {fixed_x = new_paint.fixed_x, fixed_y = new_paint.fixed_y}, {time=250, easing=easing.inOutExpo})    
-          
-            if id == "Blue_Paint_2" then
-              player.mandala_r = 32/255
-              player.mandala_g = 105/255
-              player.mandala_b = 243/255
-            elseif id == "Black_Paint_3" then
-              player.mandala_r = 0/255
-              player.mandala_g = 0/255
-              player.mandala_b = 0/255
-            elseif id == "Green_Paint_4" then
-              player.mandala_r = 43/255
-              player.mandala_g = 183/255
-              player.mandala_b = 25/255
-            elseif id == "Orange_Paint_5" then
-              player.mandala_r = 255/255
-              player.mandala_g = 165/255
-              player.mandala_b = 33/255
-            elseif id == "Pink_Paint_6" then
-              player.mandala_r = 255/255
-              player.mandala_g = 133/255
-              player.mandala_b = 185/255
-            elseif id == "Purple_Paint_7" then
-              player.mandala_r = 143/255
-              player.mandala_g = 36/255
-              player.mandala_b = 215/255
-            elseif id == "Red_Paint_8" then
-              player.mandala_r = 215/255
-              player.mandala_g = 36/255
-              player.mandala_b = 36/255
-            elseif id == "Yellow_Paint_9" then
-              player.mandala_r = 255/255
-              player.mandala_g = 227/255
-              player.mandala_b = 33/255
-            elseif id == "Brown_Paint_8" then
-              player.mandala_r = 128/255
-              player.mandala_g = 83/255
-              player.mandala_b = 17/255
-            end
 
-
-          end)
+            end)
+          end
         end
       end
     end, 1)
@@ -128,12 +130,13 @@ function interactive_mandala_player:augment(player)
     player.mandala_x = 512
     player.mandala_y = 340
     player.mandala_radius = 8
+    player.mandala_degree = 3
 
     player.mandala_r = 0
     player.mandala_g = 0
     player.mandala_b = 0
 
-    player.mandala_target_pixels_painted = (player.mandala_size / 2) * (player.mandala_size / 2) * 5
+    player.mandala_target_pixels_painted = (player.mandala_size / 2) * (player.mandala_size / 2) * 1.5
 
     player.mandala_texture = memoryBitmap.newTexture(
     {
@@ -142,9 +145,9 @@ function interactive_mandala_player:augment(player)
     })
     mandala = player.mandala_texture
  
-    local bitmap = display.newImageRect(player.sceneGroup, mandala.filename, mandala.baseDir, player.mandala_size, player.mandala_size )
-    bitmap.x = player.mandala_x
-    bitmap.y = player.mandala_y
+    player.mandala_performance = display.newImageRect(player.sceneGroup, mandala.filename, mandala.baseDir, player.mandala_size, player.mandala_size )
+    player.mandala_performance.x = player.mandala_x
+    player.mandala_performance.y = player.mandala_y
 
     for y = 1,mandala.height do
         for x = 1,mandala.width do
@@ -178,12 +181,16 @@ function interactive_mandala_player:augment(player)
     local start_distance = math.sqrt(x_start*x_start + y_start*y_start)
     local end_angle = math.atan2(y_end, x_end)
     local end_distance = math.sqrt(x_end*x_end + y_end*y_end)
+    local block_size = 2
 
-    for i = 0, 4 do
-      local r_start_angle = (start_angle + i * (2 * math.pi / 5) + 4 * math.pi) % (2 * math.pi)
+    -- vals = {}
+    -- local dupcount = 0
+
+    for i = 0, player.mandala_degree - 1 do
+      local r_start_angle = (start_angle + i * (2 * math.pi / player.mandala_degree) + 4 * math.pi) % (2 * math.pi)
       local x0 = start_distance * math.cos(r_start_angle)
       local y0 = start_distance * math.sin(r_start_angle)
-      local r_end_angle = (end_angle + i * (2 * math.pi / 5) + 4 * math.pi) % (2 * math.pi)
+      local r_end_angle = (end_angle + i * (2 * math.pi / player.mandala_degree) + 4 * math.pi) % (2 * math.pi)
       local x1 = end_distance * math.cos(r_end_angle)
       local y1 = end_distance * math.sin(r_end_angle)
 
@@ -192,10 +199,28 @@ function interactive_mandala_player:augment(player)
       for j = 0, distance do
         x_j = j/distance * x1 + (distance - j)/distance * x0
         y_j = j/distance * y1 + (distance - j)/distance * y0
-        for n = -3, 3 do
-          for m = -3, 3 do
+        for n = -block_size, block_size do
+          for m = -block_size, block_size do
             if math.sqrt((x_j + n)*(x_j + n) + (y_j + m)*(y_j + m)) <= origin then
-              if math.abs(m) == math.abs(n) and math.abs(n) == 3 then
+              -- if vals[x_j + n] == nil then
+              --   vals[x_j + n] = {}
+              -- end
+              -- if vals[x_j + n][y_j + m] == nil then
+              --   vals[x_j + n][y_j + m] = 0
+              -- end
+              -- if vals[x_j + n][y_j + m] ~= 0 then
+              --   dupcount = dupcount + 1
+              -- end
+              -- if math.abs(m) == math.abs(n) and math.abs(n) == block_size then
+              --   -- plot(x_j + n, y_j + m, 0.2)
+              --   if vals[x_j + n][y_j + m] == 0 then
+              --     vals[x_j + n][y_j + m] = 1
+              --   end
+              -- else
+              --   -- plot(x_j + n, y_j + m, 1)
+              --   vals[x_j + n][y_j + m] = 2
+              -- end
+              if math.abs(m) == math.abs(n) and math.abs(n) == block_size then
                 plot(x_j + n, y_j + m, 0.2)
               else
                 plot(x_j + n, y_j + m, 1)
@@ -205,6 +230,16 @@ function interactive_mandala_player:augment(player)
         end
       end
     end
+
+    -- for k1,v1 in pairs(vals) do
+    --   for k2,v2 in pairs(v1) do
+    --     if v2 == 1 then
+    --       plot(k1, k2, 0.2)
+    --     elseif v2 == 2 then
+    --       plot(k1, k2, 1)
+    --     end
+    --   end
+    -- end
 
     texture:invalidate()
 
@@ -235,10 +270,13 @@ function interactive_mandala_player:augment(player)
   player.finishMandalaScene = function()
     --timer.cancel(player.measure_timer)
 
-    -- tex:releaseSelf()
-    timer.cancel(player.update_timer)
+    display.remove(player.mandala_performance)
+    display.remove(player.end_button)
 
-    print("DONE WITH MANDALA")
+    -- crashy as hell!
+    -- player.mandala_texture:releaseSelf()
+
+    timer.cancel(player.update_timer)
 
     audio.stop()
 

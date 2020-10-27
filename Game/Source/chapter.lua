@@ -37,10 +37,7 @@ function scene:loadSceneScript(scene_name)
   local scene_file = system.pathForFile("Scenes/" .. scene_name .. ".json", system.ResourceDirectory)
   local file = io.open(scene_file, "r")
   local script_assets = {}
-  print(scene_name)
-  print(scene_file)
   if file then
-    print(file)
     local contents = file:read("*a")
     io.close(file)
     script_assets = json.decode(contents)
@@ -75,70 +72,127 @@ function scene:show(event)
   self.sceneGroup = self.view
   local phase = event.phase
 
-  self.performanceAssetGroup = display.newGroup()
-  self.sceneGroup:insert(self.performanceAssetGroup)
-
   if (phase == "will") then
     -- Code here runs when the scene is still off screen (but is about to come on screen)
     
   elseif (phase == "did") then
     -- Code here runs when the scene is entirely on screen
 
-    display.setDefault("background", 1, 1, 1)
+    if self.initialized == false then
+      self.initialized = true
 
-    composer.setVariable("chapter", self)
+      self.tableOfContentsGroup = display.newGroup()
+      self.sceneGroup:insert(self.tableOfContentsGroup)
 
-    self.chapter_number = 2
+      self.performanceAssetGroup = display.newGroup()
+      self.sceneGroup:insert(self.performanceAssetGroup)
+      self.performanceAssetGroup.isVisible = false
 
-    composer.setVariable("chapter_number", self.chapter_number)
+      composer.removeHidden()
 
-    self.flow = {}
+      display.setDefault("background", 1, 1, 1)
 
-    self.title_text = {}
-    self.credits_text = {}
+      composer.setVariable("chapter", self)
 
-    self.title_text[1] = "Chapter 1 - Getting Started"
-    self.credits_text[1] = "Programming, Story, Art, Music\nMattsby"
+      -- self.title_text = {}
+      -- self.credits_text = {}
 
-    self.title_text[2] = "Chapter 2 - Town"
-    self.credits_text[2] = "Programming, Story, Art, Music\nMattsby"
+      -- self.title_text[1] = "Chapter 1 - Getting Started"
+      -- self.credits_text[1] = "Programming, Story, Art, Music\nMattsby"
 
-    self.sketch_sprites = sketch_sprites_class:create()
-    self.loader = loader:create()
+      -- self.title_text[2] = "Chapter 2 - Town"
+      -- self.credits_text[2] = "Programming, Story, Art, Music\nMattsby"
 
-    composer.setVariable("sketch_sprites", self.sketch_sprites)
+      self:setupTableOfContents()
+    end
 
-    self:setupDisplay()
-    self:setupSceneStructure()
-
-    composer.setVariable("chapter_flow", self.flow)
-
-    -- when loading finishes, it will call self:startGame()
-    self:setupLoading()
-
-    intro_sound = audio.loadSound("Sound/chapter_intro.wav")
-    audio.play(intro_sound)
+    self:displayTableOfContents()
   end
 end
 
+function scene:setupTableOfContents()
+  self.tableOfContentsBackground = display.newImageRect(self.tableOfContentsGroup, "Art/table_of_contents_background.png", 1024, 768)
+  self.tableOfContentsBackground.x = display.contentCenterX
+  self.tableOfContentsBackground.y = display.contentCenterY
+
+  chapter_values = {1, 2, "mandala"} --"free_play"
+
+  for i = 1, 3 do
+    local chapter_button = display.newImageRect(self.tableOfContentsGroup, "Art/chapter_" .. chapter_values[i] .. "_button.png", 108, 127)
+    chapter_button.x = display.contentCenterX + (i - 3) * 180
+    chapter_button.y = 222
+    chapter_button:addEventListener("tap", function(event)
+      self:gotoChapter(chapter_values[i])
+    end)
+  end
+    -- self.skip_scene_button.alpha = 0.3
+    -- self.skip_scene_button.last_skip = system.getTimer() - 1
+    -- self.skip_scene_button:addEventListener("tap", function(event)
+    --   if (system.getTimer() - self.skip_scene_button.last_skip > 1) then
+end
+
+function scene:displayTableOfContents()
+  print("SHOWING TOC")
+  self.tableOfContentsGroup.isVisible = true
+  self.performanceAssetGroup.isVisible = false
+end
+
+function scene:gotoChapter(chapter_value)
+  self.tableOfContentsGroup.isVisible = false
+  self.performanceAssetGroup.isVisible = true
+
+  self.chapter_number = chapter_value
+
+  composer.setVariable("chapter_number", self.chapter_number)
+
+  self.flow = {}
+
+  self.sketch_sprites = sketch_sprites_class:create()
+  self.loader = loader:create()
+
+  composer.setVariable("sketch_sprites", self.sketch_sprites)
+
+  self:setupDisplay()
+  self:setupSceneStructure()
+
+  composer.setVariable("chapter_flow", self.flow)
+
+  -- when loading finishes, it will call self:startChapter()
+  self:setupLoading()
+
+  intro_sound = audio.loadSound("Sound/chapter_intro.wav")
+  audio.play(intro_sound)
+end
+
 function scene:setupDisplay()
-  title_text = display.newText(self.sceneGroup, self.title_text[self.chapter_number], display.contentCenterX, display.contentCenterY - 250, "Fonts/MouseMemoirs.ttf", 80)
-  title_text:setTextColor(0.0, 0.0, 0.0)
+  while self.performanceAssetGroup.numChildren > 0 do
+    local child = self.performanceAssetGroup[1]
+    if child then child:removeSelf() end
+  end
 
-  credits_text = display.newText({
-  	parent = self.sceneGroup,
-      text = self.credits_text[self.chapter_number],
-      x = display.contentCenterX,
-      y = display.contentCenterY + 40,
-      width = 400,
-      height = 200,
-      font = "Fonts/MouseMemoirs.ttf",
-      fontSize = 40,
-      align = "center"
-  })
-  credits_text:setTextColor(0.0, 0.0, 0.0)
+  background = display.newImageRect(self.performanceAssetGroup, "Art/chapter_" .. self.chapter_number .. "_loading_background.png", 1024, 768)
+  background.x = display.contentCenterX
+  background.y = display.contentCenterY
 
-  loading_text = display.newText(self.sceneGroup, "", display.contentCenterX, display.contentCenterY + 250, "Fonts/MouseMemoirs.ttf", 40)
+  -- if self.chapter_number == 1 or self.chapter_number == 2 then
+  --   title_text = display.newText(self.performanceAssetGroup, self.title_text[self.chapter_number], display.contentCenterX, display.contentCenterY - 250, "Fonts/MouseMemoirs.ttf", 80)
+  --   title_text:setTextColor(0.0, 0.0, 0.0)
+
+  --   credits_text = display.newText({
+  --   	parent = self.performanceAssetGroup,
+  --       text = self.credits_text[self.chapter_number],
+  --       x = display.contentCenterX,
+  --       y = display.contentCenterY + 40,
+  --       width = 400,
+  --       height = 200,
+  --       font = "Fonts/MouseMemoirs.ttf",
+  --       fontSize = 40,
+  --       align = "center"
+  --   })
+  --   credits_text:setTextColor(0.0, 0.0, 0.0)
+  -- end
+
+  loading_text = display.newText(self.performanceAssetGroup, "", display.contentCenterX, display.contentCenterY + 250, "Fonts/BebasNeue.ttf", 30)
   loading_text:setTextColor(0.0, 0.0, 0.0)
 end
 
@@ -176,7 +230,7 @@ function scene:setupLoading()
     nil,
     0,
     function(percent) updateLoadDisplay(percent) end,
-    function() self:startGame() end)
+    function() self:startChapter() end)
 end
 
 function scene:setupSceneStructure()
@@ -184,7 +238,28 @@ function scene:setupSceneStructure()
     scene:chapter_1_Structure()
   elseif self.chapter_number == 2 then
     scene:chapter_2_Structure()
+  elseif self.chapter_number == "mandala" then
+    scene:chapter_mandala_Structure()
   end
+end
+
+function scene:chapter_mandala_Structure()
+  self.first_scene = "chapter_2_interactive_mandala"
+
+  local mpb = 375
+  composer.setVariable("bpm", 160)
+  composer.setVariable("mpb", mpb)
+  composer.setVariable("spelling_outro_mpb", mpb)
+  composer.setVariable("time_sig", 4)
+
+  self.flow = {}
+
+  self.flow["chapter_2_interactive_mandala"] = {
+    name="chapter_2_interactive_mandala",
+    next=nil,
+    type="interactive_mandala",
+    script=self:loadSceneScript("chapter_2_interactive_mandala"),
+  }
 end
 
 function scene:chapter_2_Structure()
@@ -192,13 +267,13 @@ function scene:chapter_2_Structure()
   -- self.first_scene = "chapter_2_interactive_mandala"
 
   local mpb = 375
-  composer.setVariable("mpb", mpb)
   composer.setVariable("bpm", 160)
+  composer.setVariable("mpb", mpb)
+  composer.setVariable("spelling_outro_mpb", mpb)
   composer.setVariable("time_sig", 4)
 
   setChoiceObject = function(script_name, choice_id, choice_value)
     asset_list = self.flow[script_name].script
-    print("I AM IN SET CHOICE OBJECT")
     for i = 1, #asset_list do
       asset = asset_list[i]
       if asset.id == choice_id then
@@ -225,12 +300,10 @@ function scene:chapter_2_Structure()
       for i = 1, #player.script_assets do
         other_asset = player.script_assets[i]
         if other_asset.performance ~= nil and other_asset.performance.id ~= choice_asset.id then
-          print("fading the other asset")
           animation.to(other_asset.performance, {alpha=0}, {time=player.mpb * 0.75, easing=easing.outExp})
         end
       end
 
-      print("moving the main asset")
       animation.to(choice_asset.performance, {fixed_x = display.contentCenterX, fixed_y = display.contentCenterY - 100}, {time=player.mpb, easing=easing.outExp})
 
       player:poopStars(choice_asset.performance.fixed_x, choice_asset.performance.fixed_y, 3 + math.random(3))
@@ -553,7 +626,6 @@ function scene:chapter_2_Structure()
         squish_period = 1700,
         disappear_time = -1,
       }
-      -- print(mural_paint_asset.type)
       -- player:perform(mural_paint_asset)
 
       -- doctor the mural color script to remove the current color choice
@@ -616,6 +688,7 @@ function scene:chapter_2_Structure()
     next="chapter_2_interactive_choice_mural_color",
     type="interactive_spelling",
     word="Red",
+    touch_giggle=false,
     random_order=false,
     random_letters=false,
     intro_letter_beats = {0, 0.5, 1, 1.5},
@@ -645,11 +718,12 @@ function scene:chapter_2_Structure()
 end
 
 function scene:chapter_1_Structure()
-  self.first_scene = "chapter_1_scene_5"
-  -- self.first_scene = "chapter_1_interactive_girl"
+  self.first_scene = "chapter_1_scene_1"
+  -- self.first_scene = "chapter_1_interactive_bird"
 
-  composer.setVariable("mpb", 545.4545454545)
   composer.setVariable("bpm", 110)
+  composer.setVariable("mpb", 545.4545454545)
+  composer.setVariable("spelling_outro_mpb", 545.4545454545 / 2)
   composer.setVariable("time_sig", 4)
 
   self.flow = {}
@@ -666,15 +740,13 @@ function scene:chapter_1_Structure()
     next="chapter_1_interactive_bird",
     type="interactive_spelling",
     word="Girl",
-    random_order=false,
-    random_letters=false,
-    object_x = 542,
-    object_y = 375,
-    intro_letter_beats = {0, 0.5, 1, 1.5},
-    outro_sounds = {"guh", "ih", "ruh", "luh"},
-    -- outro_letter_beats = {1, 2, 3, 4},
-    -- outro_sound_beats = {5, 6, 7, 8},
-    -- outro_word_beat = 20,
+    performance = {
+      name = "Girl",
+      fixed_x = 542,
+      fixed_y = 375,
+      intro = "outline_sketching",
+      depth = 0,
+    },
     script=nil,
   }
   self.flow["chapter_1_interactive_bird"] = {
@@ -682,13 +754,11 @@ function scene:chapter_1_Structure()
     next="chapter_1_scene_2",
     type="interactive_spelling",
     word="Bird",
-    random_order=false,
-    random_letters=false,
-    intro_letter_beats = {0, 0.5, 1, 1.5},
-    outro_sounds = {"buh", "ih", "ruh", "duh"},
-    -- outro_letter_beats = {4, 6, 8, 10},
-    -- outro_sound_beats = {12, 14, 16, 18},
-    -- outro_word_beat = 20,
+    performance = {
+      name = "Bird",
+      intro = "outline_sketching",
+      depth = 0,
+    },
     script=nil,
   }
   self.flow["chapter_1_scene_2"] = {
@@ -704,15 +774,13 @@ function scene:chapter_1_Structure()
     next="chapter_1_interactive_dad",
     type="interactive_spelling",
     word="Mom",
-    random_order=false,
-    random_letters=false,
-    object_x = 299.75,
-    object_y = 533.25,
-    intro_letter_beats = {0, 0.5, 1},
-    outro_sounds = {"muh", "oah", "muh",},
-    -- outro_letter_beats = {4, 6, 8},
-    -- outro_sound_beats = {12, 14, 16},
-    -- outro_word_beat = 18,
+    performance = {
+      name = "Mom",
+      fixed_x = 299.75,
+      fixed_y = 533.25,
+      intro = "outline_sketching",
+      depth = 5,
+    },
     script=self:loadSceneScript("chapter_1_mom_interactive"),
     cleanup=false,
     -- here it might be fun to use a stage spotlight
@@ -722,15 +790,13 @@ function scene:chapter_1_Structure()
     next="chapter_1_scene_3",
     type="interactive_spelling",
     word="Dad",
-    random_order=false,
-    random_letters=false,
-    object_x = 473,
-    object_y = 523.5,
-    intro_letter_beats = {0, 0.5, 1},
-    outro_sounds = {"duh", "ah", "duh",},
-    -- outro_letter_beats = {4, 6, 8},
-    -- outro_sound_beats = {12, 14, 16},
-    -- outro_word_beat = 18,
+    performance = {
+      name = "Dad",
+      fixed_x = 473,
+      fixed_y = 523.5,
+      intro = "outline_sketching",
+      depth = 5,
+    },
     script=self:loadSceneScript("chapter_1_dad_interactive"),
     -- here it might be fun to use a stage spotlight
   }
@@ -747,14 +813,11 @@ function scene:chapter_1_Structure()
     next="chapter_1_scene_4",
     type="interactive_spelling",
     word="Wand",
-    random_order=false,
-    random_letters=false,
-    intro_letter_beats = {0, 0.5, 1, 1.5},
-    outro_sounds = {"wuh", "ahh", "nuh", "duh"},
-    -- intro_letter_beats = {8, 10, 12, 14},
-    -- outro_letter_beats = {4, 6, 8, 10},
-    -- outro_sound_beats = {12, 14, 16, 18},
-    -- outro_word_beat = 20,
+    performance = {
+      name = "Wand",
+      intro = "outline_sketching",
+      depth = 5,
+    },
     script=nil,
     -- here it might be fun to use a stage spotlight
   }
@@ -772,16 +835,13 @@ function scene:chapter_1_Structure()
     next="chapter_1_interactive_cow",
     type="interactive_spelling",
     word="Pig",
-    random_order=false,
-    random_letters=false,
-    object_x = 398,
-    object_y = 400,
-    -- intro_letter_beats = {12, 14, 16},
-    -- outro_letter_beats = {4, 6, 8},
-    -- outro_sound_beats = {12, 14, 16},
-    -- outro_word_beat = 18,
-    intro_letter_beats = {0, 0.5, 1},
-    outro_sounds = {"puh", "ih", "guh"},
+    performance = {
+      name = "Pig",
+      fixed_x = 398,
+      fixed_y = 400,
+      intro = "outline_sketching",
+      depth = 8,
+    },
     script=nil,
     cleanup=false,
     -- here it might be fun to use a stage spotlight
@@ -791,18 +851,14 @@ function scene:chapter_1_Structure()
     next="chapter_1_scene_5",
     type="interactive_spelling",
     word="Cow",
-    random_order=false,
-    random_letters=false,
-    object_x = 686,
-    object_y = 410,
-    -- intro_letter_beats = {8, 10, 12},
-    -- outro_letter_beats = {4, 6, 8},
-    -- outro_sound_beats = {12, 14, 16},
-    -- outro_word_beat = 18,
-    intro_letter_beats = {0, 0.5, 1},
-    outro_sounds = {"kuh", "oah", "wuh"},
+    performance = {
+      name = "Cow",
+      fixed_x = 686,
+      fixed_y = 410,
+      intro = "outline_sketching",
+      depth = 8,
+    },
     script=nil,
-    -- here it might be fun to use a stage spotlight
   }
   self.flow["chapter_1_scene_5"] = {
     name="chapter_1_scene_5",
@@ -817,16 +873,8 @@ function scene:chapter_1_Structure()
     next="chapter_1_scene_6",
     type="interactive_spelling",
     word="Coin",
-    random_order=false,
-    random_letters=false,
-    -- intro_letter_beats = {12, 14, 16, 18},
-    -- outro_letter_beats = {4, 6, 8, 10},
-    -- outro_sound_beats = {12, 14, 16, 18},
-    -- outro_word_beat = 20,
-    intro_letter_beats = {0, 0.5, 1, 1.5},
-    outro_sounds = {"kuh", "oh", "ih", "nuh"},
+    outro_highlights = {"c---", "-oi-", "---n"},
     script=nil,
-    -- here it might be fun to use a stage spotlight
   }
   self.flow["chapter_1_scene_6"] = {
     name="chapter_1_scene_6",
@@ -852,14 +900,7 @@ function scene:chapter_1_Structure()
     next=nil,
     type="interactive_spelling",
     word="Apple",
-    random_order=false,
-    random_letters=false,
-    -- intro_letter_beats = {12, 13, 14, 15, 16},
-    -- outro_letter_beats = {4, 6, 8, 10, 12},
-    -- outro_sound_beats = {16, 18, 20, 22, 24},
-    -- outro_word_beat = 26,
-    intro_letter_beats = {0, 0.5, 1, 1.5, 2},
-    outro_sounds = {"ah", "puh", "puh", "luh", "eh"},
+    outro_highlights = {"a----", "-pp--", "---le"},
     cleanup=false,
   }
   self.flow["chapter_1_beast_banana"] = {
@@ -875,14 +916,6 @@ function scene:chapter_1_Structure()
     next=nil,
     type="interactive_spelling",
     word="Banana",
-    random_order=false,
-    random_letters=false,
-    -- intro_letter_beats = {12, 14, 16, 18, 20, 22},
-    -- outro_letter_beats = {4, 6, 8, 10, 12, 14},
-    -- outro_sound_beats = {16, 18, 20, 22, 24, 26},
-    -- outro_word_beat = 28,
-    intro_letter_beats = {0, 0.5, 1, 1.5, 2, 2.5},
-    outro_sounds = {"buh", "ah", "nuh", "ah", "nuh", "ah"},
     cleanup=false,
   }
   self.flow["chapter_1_beast_lime"] = {
@@ -898,14 +931,7 @@ function scene:chapter_1_Structure()
     next=nil,
     type="interactive_spelling",
     word="Lime",
-    random_order=false,
-    random_letters=false,
-    -- intro_letter_beats = {12, 14, 16, 18},
-    -- outro_letter_beats = {4, 6, 8, 10},
-    -- outro_sound_beats = {12, 14, 16, 18},
-    -- outro_word_beat = 20,
-    intro_letter_beats = {0, 0.5, 1, 1.5},
-    outro_sounds = {"luh", "I", "muh", "eh"},
+    outro_highlights = {"l---", "-i--", "--me"},
     cleanup=false,
   }
   self.flow["chapter_1_beast_orange"] = {
@@ -921,14 +947,7 @@ function scene:chapter_1_Structure()
     next=nil,
     type="interactive_spelling",
     word="Orange",
-    random_order=false,
-    random_letters=false,
-    -- intro_letter_beats = {12, 14, 16, 18, 20, 22},
-    -- outro_letter_beats = {4, 6, 8, 10, 12, 14},
-    -- outro_sound_beats = {20, 22, 24, 26, 28, 30},
-    -- outro_word_beat = 34,
-    intro_letter_beats = {0, 0.5, 1, 1.5, 2, 2.5},
-    outro_sounds = {"oh", "ruh", "ah", "nuh", "juh", "eh"},
+    outro_highlights = {"o-----", "-r----", "--a---", "---n--", "----ge"},
     cleanup=false,
   }
   self.flow["chapter_1_beast_pear"] = {
@@ -944,14 +963,7 @@ function scene:chapter_1_Structure()
     next=nil,
     type="interactive_spelling",
     word="Pear",
-    random_order=false,
-    random_letters=false,
-    -- intro_letter_beats = {12, 14, 16, 18},
-    -- outro_letter_beats = {4, 6, 8, 10},
-    -- outro_sound_beats = {12, 14, 16, 18},
-    -- outro_word_beat = 20,
-    intro_letter_beats = {0, 0.5, 1, 1.5},
-    outro_sounds = {"puh", "eh", "ah", "ruh"},
+    outro_highlights = {"p---", "-ea-", "--r"},
     cleanup=false,
   }
   self.flow["chapter_1_beast_plum"] = {
@@ -967,14 +979,6 @@ function scene:chapter_1_Structure()
     next=nil,
     type="interactive_spelling",
     word="Plum",
-    random_order=false,
-    random_letters=false,
-    -- intro_letter_beats = {12, 14, 16, 18},
-    -- outro_letter_beats = {4, 6, 8, 10},
-    -- outro_sound_beats = {12, 14, 16, 18},
-    -- outro_word_beat = 20,
-    intro_letter_beats = {0, 0.5, 1, 1.5},
-    outro_sounds = {"puh", "luh", "uh", "muh"},
     cleanup=false,
   }
   self.flow["chapter_1_scene_7"] = {
@@ -1023,11 +1027,13 @@ end
 
 
 
-function scene:startGame()
+function scene:startChapter()
   -- remove loading text
   loading_text:removeSelf()
 
   composer.setVariable("sprite", sprite)
+
+  -- self:displayTableOfContents()
 
   self:gotoScene(self.first_scene, {effect = "fade", time = 500})
 end
@@ -1057,9 +1063,12 @@ function scene:gotoScene(new_scene_name, fade_options)
   end
 end
 
-function scene:finish()
-  composer.gotoScene("Source.temporary_end")
-end
+-- function scene:finish()
+--   -- unload many things!
+--   self:displayTableOfContents()
+--   composer.gotoScene("Source.chapter")
+--   --composer.gotoScene("Source.temporary_end")
+-- end
 
 -- hide()
 function scene:hide(event)
@@ -1095,5 +1104,7 @@ scene:addEventListener("show", scene)
 scene:addEventListener("hide", scene)
 scene:addEventListener("destroy", scene)
 -- -----------------------------------------------------------------------------------
+
+scene.initialized = false
 
 return scene

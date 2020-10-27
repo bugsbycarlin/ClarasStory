@@ -164,7 +164,7 @@ function scene_actions_chapter_2:augment(player)
           for i = 1, player.const_num_layers do
             -- print("in here " .. i)
             if i ~= focus_layer then
-              player.performanceAssetGroup[i].x = player.performanceAssetGroup[i].x - 7
+              player.performanceAssetGroup[i].x = player.performanceAssetGroup[i].x - 7.5
               if player.performanceAssetGroup[i].x < -1024 then
                 player.performanceAssetGroup[i].x = -1024
               end
@@ -197,6 +197,11 @@ function scene_actions_chapter_2:augment(player)
   end
 
   player.sceneActions["chapter_2_scene_5"] = function()
+    for i = 1, player.const_num_layers do
+      player.performanceAssetGroup[i].x = 0
+      player.performanceAssetGroup[i].y = 0
+    end
+
     player.special_timer = timer.performWithDelay(6900, function()
       local boat
 
