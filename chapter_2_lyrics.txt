@@ -1,0 +1,77 @@
+In the morning she went in to the town
+Everybody used a car to get around
+
+And the street was full of wheels on the ground
+Everybody made an irritating honking sound
+
+Clara said to herself I won't get very far
+Unless I take a bus a taxi or a car
+
+Even if it means I’m sitting in the traffic
+So I’ll make myself a ride with just a little magic
+
+(Choreography notes: 
+    there should be 8 staccato “honk” onomatopoeia on ir-i-ta-tin hon-king sou-nd)
+    on “Clara said to herself”, we should cut away to clara imaginging herself
+    bus, taxi, or a car should put clara’s imagined self into these vehicles one by one, each replacing the last, center screen
+    add cars all through “even if it means i’m sitting in the traffic”
+    subtract them through the next line, and finish by adding the four vehicle options in a square
+)
+
+(Interactive: choose a vehicle for Clara. Car, Truck, Bus, or Taxi)
+(Interactive: make the vehicle)
+(Interactive: choose a color!)
+
+So she got into the <car|bus|taxi|truck> and set off   (behind the wheel)
+But the traffic quickly came to a stop
+
+Clara got out and she climbed to a treetop
+And from up there she could see there was an awful gridlock
+
+Several cars ahead were driving on the wrong side
+Clara said I think I’ll have to ditch my new ride
+
+Back to walking on the sidewalk but I’d like
+to go faster so I think I’ll make myself a new bike
+
+(Interactive: make a bike)
+(Interactive: choose a color!)
+
+Clara rode her bike around the city blocks
+Ventured in and out of different kinds of shops
+
+And she asked all of the people she was meeting
+If they’d trade her for a spacious house with central heating
+
+Everybody only laughed at the question
+Til she happened on a mural painting session
+
+When the painter of the mural heard her speak
+He said maybe I can help you find the thing that you seek
+
+Do you see my dapper style? I am the paint beast.
+I believe you’ve met my brother and his fruit feast.
+
+We don’t have a house to give you for your troubles
+But I’ve got a boat I’ll give it to you on the double
+
+I need help to paint this mural for my young niece
+For her restaurant (we’re calling it The Pie Peace)
+
+And my niece could use your help to make her food
+So if you help us then surely we will also help you
+
+(Interactive: color paints to finish the mural)
+(Pink, Blue, Red, Green, and maybe Black, Grey, Orange, Purple)
+
+Clara used her magic wand to help the paint beast
+And the mural turned out well and he was most pleased
+
+So he took her in to meet his restaurant niece
+She said nice to meet you gal, I am the Food beast
+
+Are you ready to make food with your magic
+And a couple handy dandy kitchen gadgets?
+
+Then let’s go back to the kitchen to make food
+Or just take a break! Because is the end of chapter 2.

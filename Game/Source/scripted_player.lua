@@ -60,7 +60,7 @@ function scene:show(event)
     interactive_choice_player:augment(self)
     interactive_mandala_player:augment(self)
 
-    self.const_half_layers = 10
+    self.const_half_layers = 20
     self.const_num_layers = 2 * self.const_half_layers + 1
 
     for i = -1 * self.const_half_layers, self.const_half_layers do
@@ -284,6 +284,7 @@ function scene:setInitialPerformanceState(performance_object, intro, picture)
 end
 
 function scene:clearPerformance()
+  print("I am currently in Clear Performance")
   self.sketch_sprites:immediatelyRemoveAll()
   self.sketch_sprites.sprite_list = {}
 
@@ -374,6 +375,10 @@ function scene:nextScene()
     self.scene_type = nil
     self.script_assets = nil
     self:finish()
+  end
+
+  if self.scene_type == "scripted" then
+    self:removeBook()
   end
 
   if self.scene_type == "scripted" then
@@ -551,7 +556,9 @@ function scene:computeNextLoad()
   for i = 1, self.const_num_layers do
     for j = 1, self.performanceAssetGroup[i].numChildren do
       local asset = self.performanceAssetGroup[i][j]
-      safe_list[asset.name] = 1
+      if asset.name ~= nil then
+        safe_list[asset.name] = 1
+      end
     end
   end
   -- add everything from the future to the safe list
@@ -627,5 +634,66 @@ function scene:poopStars(center_x, center_y, num_stars)
   end
 end
 
+function scene:addBook()
+  if self.sketch_sprites:get("Spiral_Notebook_999") == nil then
+    sepia_filter = {
+      intro = "static",
+      depth = 15,
+      type = "picture",
+      id = "Sepia_Filter_999",
+      name = "Sepia_Filter",
+      disappear_time = -1,
+      disappear_method = "pop",
+      x = display.contentCenterX,
+      y = display.contentCenterY,
+      fixed_x = display.contentCenterX,
+      fixed_y = display.contentCenterY,
+      x_scale = 1,
+      y_scale = 1,
+      xScale = 1,
+      yScale = 1,
+      squish_scale = 1,
+      squish_tilt = 0,
+      squish_period = 1700,
+      start_time = 0,
+    }
+    self:perform(sepia_filter)
+    sepia_filter.performance.alpha = 0.01
+    animation.to(sepia_filter.performance, {alpha=1}, {time=100, easing=easing.outQuart})
+
+    notebook = {
+      intro = "static",
+      depth = 16,
+      type = "picture",
+      id = "Spiral_Notebook_999",
+      name = "Spiral_Notebook",
+      disappear_time = -1,
+      disappear_method = "pop",
+      x = 375,
+      y = 450,
+      fixed_x = 375,
+      fixed_y = 450,
+      x_scale = 1,
+      y_scale = 1,
+      xScale = 1,
+      yScale = 1,
+      squish_scale = 1,
+      squish_tilt = 0,
+      squish_period = 1700,
+      start_time = 0,
+    }
+    self:perform(notebook)
+    notebook.performance.alpha = 0.01
+    animation.to(notebook.performance, {alpha=1}, {time=100, easing=easing.outQuart})
+  else
+    p = self.sketch_sprites:get("Spiral_Notebook_999")
+    self.sketch_sprites:animateOnce(p)
+  end
+end
+
+function scene:removeBook()
+  self.sketch_sprites:remove("Spiral_Notebook_999")
+  self.sketch_sprites:remove("Sepia_Filter_999")
+end
 
 return scene

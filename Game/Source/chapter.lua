@@ -288,6 +288,7 @@ function scene:chapter_2_Structure()
     name="chapter_2_scene_1",
     next="chapter_2_interactive_choice_vehicle",
     type="scripted",
+    cleanup=false,
     script=self:loadSceneScript("chapter_2_scene_1"),
   }
   self.flow["chapter_2_interactive_choice_vehicle"] = {
@@ -295,6 +296,7 @@ function scene:chapter_2_Structure()
     next=nil,
     type="interactive_choice",
     intro="vehicle_choice",
+    cleanup=false,
     choiceCallback = function(something, choice_asset, player)
 
       for i = 1, #player.script_assets do
@@ -350,6 +352,7 @@ function scene:chapter_2_Structure()
     name="chapter_2_interactive_bus",
     next="chapter_2_interactive_choice_bus_color",
     type="interactive_spelling",
+    cleanup=false,
     word="Bus",
     script=nil,
     performance = {
@@ -718,8 +721,8 @@ function scene:chapter_2_Structure()
 end
 
 function scene:chapter_1_Structure()
-  self.first_scene = "chapter_1_scene_1"
-  -- self.first_scene = "chapter_1_interactive_bird"
+  -- self.first_scene = "chapter_1_scene_1"
+  self.first_scene = "chapter_1_interactive_bird"
 
   composer.setVariable("bpm", 110)
   composer.setVariable("mpb", 545.4545454545)
@@ -745,7 +748,7 @@ function scene:chapter_1_Structure()
       fixed_x = 542,
       fixed_y = 375,
       intro = "outline_sketching",
-      depth = 0,
+      depth = 18,
     },
     script=nil,
   }
@@ -757,7 +760,7 @@ function scene:chapter_1_Structure()
     performance = {
       name = "Bird",
       intro = "outline_sketching",
-      depth = 0,
+      depth = 18,
     },
     script=nil,
   }
@@ -779,7 +782,7 @@ function scene:chapter_1_Structure()
       fixed_x = 299.75,
       fixed_y = 533.25,
       intro = "outline_sketching",
-      depth = 5,
+      depth = 18,
     },
     script=self:loadSceneScript("chapter_1_mom_interactive"),
     cleanup=false,
@@ -795,7 +798,7 @@ function scene:chapter_1_Structure()
       fixed_x = 473,
       fixed_y = 523.5,
       intro = "outline_sketching",
-      depth = 5,
+      depth = 19,
     },
     script=self:loadSceneScript("chapter_1_dad_interactive"),
     -- here it might be fun to use a stage spotlight
@@ -816,7 +819,7 @@ function scene:chapter_1_Structure()
     performance = {
       name = "Wand",
       intro = "outline_sketching",
-      depth = 5,
+      depth = 18,
     },
     script=nil,
     -- here it might be fun to use a stage spotlight
@@ -839,8 +842,13 @@ function scene:chapter_1_Structure()
       name = "Pig",
       fixed_x = 398,
       fixed_y = 400,
+<<<<<<< HEAD
+      intro = "sketch",
+      depth = 18,
+=======
       intro = "outline_sketching",
       depth = 8,
+>>>>>>> parent of 95c7776... Test changes to spelling UI, add spiral notebook, add beginnings of chapter 3 song
     },
     script=nil,
     cleanup=false,
@@ -855,8 +863,13 @@ function scene:chapter_1_Structure()
       name = "Cow",
       fixed_x = 686,
       fixed_y = 410,
+<<<<<<< HEAD
+      intro = "sketch",
+      depth = 18,
+=======
       intro = "outline_sketching",
       depth = 8,
+>>>>>>> parent of 95c7776... Test changes to spelling UI, add spiral notebook, add beginnings of chapter 3 song
     },
     script=nil,
   }

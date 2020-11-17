@@ -4,8 +4,8 @@ local animation = require("plugin.animation")
 interactive_spelling_player = {}
 interactive_spelling_player.__index = interactive_spelling_player
 
-local small_word_gap = 180
-local large_word_gap = 160
+local small_word_gap = 150
+local large_word_gap = 130
 
 function interactive_spelling_player:augment(player)
 
@@ -57,10 +57,12 @@ function interactive_spelling_player:augment(player)
     local spelling_object_x = display.contentCenterX
     local spelling_object_y = display.contentCenterY - 100
 
+    player:addBook()
+
     if info.performance == nil then
       info. performance = {
-        intro = "outline_sketching",
-        depth = 5,
+        intro = "sketch",
+        depth = 18,
       }
     end
 
@@ -159,19 +161,20 @@ function interactive_spelling_player:augment(player)
         local button = display.newGroup()
         player.top_group:insert(button)
 
-        local button_backing = display.newSprite(player.top_group, player.sprite["Letter_Box"], {frames=player.picture_info["Letter_Box"].frames})
+        local button_backing = display.newSprite(player.top_group, player.sprite["Wooden_Block"], {frames=player.picture_info["Wooden_Block"].frames})
         button_backing.id = "button_backing_" .. i
         button_backing.x = display.contentCenterX + gap * (i - string.len(info.word)/2 - 0.5)
-        button_backing.y = display.contentCenterY + 250
+        -- button_backing.y = display.contentCenterY + 250
+        button_backing.y = display.contentHeight - 80
         button_backing.fixed_y = button_backing.y
         button_backing.fixed_x = button_backing.x
-        button_backing.info = player.picture_info["Letter_Box"]
+        button_backing.info = player.picture_info["Wooden_Block"]
         button_backing.intro = "static"
         button_backing:setFrame(1)
         button_backing.state = "static"
         button_backing.start_time = system.getTimer()
-        button_backing.x_scale = 0.75
-        button_backing.y_scale = 0.75
+        button_backing.x_scale = 1
+        button_backing.y_scale = 1
         button_backing.xScale = button_backing.x_scale
         button_backing.yScale = button_backing.y_scale
         button_backing.disappear_time = -1
@@ -184,7 +187,8 @@ function interactive_spelling_player:augment(player)
         local button_letter = display.newSprite(player.top_group, player.sprite[picture], {frames=player.picture_info[picture].frames})
         button_letter.id = picture .. "_" .. i
         button_letter.x = display.contentCenterX + gap * (i - string.len(info.word)/2 - 0.5)
-        button_letter.y = display.contentCenterY + 250
+        -- button_letter.y = display.contentCenterY + 250
+        button_letter.y = display.contentHeight - 80
         button_letter.fixed_y = button_letter.y
         button_letter.fixed_x = button_letter.x
         button_letter.info = player.picture_info[picture]
@@ -233,7 +237,7 @@ function interactive_spelling_player:augment(player)
               current_y = player.button_letters[c - 1].fixed_y
               current_x = player.button_letters[c - 1].fixed_x
               new_x = display.contentCenterX + (gap * 0.6) * ((c-1) - string.len(info.word)/2 - 0.5)
-              animation.to(player.button_letters[c - 1], {fixed_y=100, fixed_x=new_x}, {time=player.mpb / 2, easing=easing.outExp})
+              animation.to(player.button_letters[c - 1], {fixed_y=display.contentHeight - 200, fixed_x=new_x}, {time=player.mpb / 2, easing=easing.outExp})
 
               if c <= string.len(info.word) then
                 player.button_backings[c].squish_scale = 1.02

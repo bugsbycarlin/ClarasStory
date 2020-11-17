@@ -22,6 +22,7 @@ function sketch_sprites:create()
   end
 
   function object:immediatelyRemoveAll()
+    print("I am also immediately removing all.")
     for i = 1, #self.sprite_list do
       sprite = self.sprite_list[i]
       animation.cancel(sprite)
@@ -60,6 +61,13 @@ function sketch_sprites:create()
     end
   end
 
+  function object:animateOnce(sprite)
+    sprite.state = "animate_once"
+    sprite.animation_count = 0
+    sprite.frame_count = 1
+  end
+
+
   function object:update(mode, total_performance_time)
     -- print("Updating; time " .. system.getTimer())
     copy_sprite_list = {}
@@ -93,6 +101,28 @@ function sketch_sprites:create()
           elseif sprite.info.animation_end ~= nil then
             if sprite.frame < sprite.info.animation_start or sprite.frame >= sprite.info.animation_end then
               sprite:setFrame(sprite.info.animation_start)
+            else
+              sprite:setFrame(sprite.frame + 1)
+            end
+          end
+        end
+      end
+
+      if sprite.state == "animate_once" then
+        sprite.animation_count = sprite.animation_count + 1
+        if sprite.animation_count % sprite.info.animation_on == 0 then
+          if sprite.info.animation_frames ~= nil then
+            if sprite.frame_count >= #sprite.info.animation_frames then
+              sprite:setFrame(sprite.info.animation_frames[1])
+              sprite.state = "static"
+            else
+              sprite.frame_count = sprite.frame_count + 1
+              sprite:setFrame(sprite.info.animation_frames[sprite.frame_count])
+            end
+          elseif sprite.info.animation_end ~= nil then
+            if sprite.frame < sprite.info.animation_start or sprite.frame >= sprite.info.animation_end then
+              sprite:setFrame(sprite.info.animation_start)
+              sprite.state = "static"
             else
               sprite:setFrame(sprite.frame + 1)
             end

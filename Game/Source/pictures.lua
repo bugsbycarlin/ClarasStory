@@ -202,6 +202,57 @@ picture_info["Letter_Box_Small"] = {
   sprite_count = 1,
 }
 
+picture_info["Wooden_Block"] = {
+  file_name = "Wooden_Block.png",
+  row_length = 1,
+  sprite_size = 120,
+  sprite_count = 1,
+  always_load = true,
+}
+
+picture_info["Book_Background"] = {
+  file_name = "Book_Background.png",
+  row_length = 1,
+  sprite_size = 1024,
+  sprite_height = 768,
+  sprite_count = 1,
+  always_load = true,
+}
+
+picture_info["Book_Large"] = {
+  file_name = "Book_Large.png",
+  row_length = 1,
+  sprite_size = 2048,
+  sprite_count = 1,
+  always_load = true,
+}
+
+picture_info["Spiral_Notebook"] = {
+  file_name = "Spiral_Notebook.png",
+  row_length = 4,
+  sprite_size = 1024,
+  sprite_height = 1024,
+  sprite_count = 1,
+  outline_frame = 1,
+  animation_on = 1,
+  animation_end = 8,
+  animation_frames = {
+    2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+  },
+}
+
+picture_info["Sepia_Filter"] = {
+  file_name = "sepia_filter.png",
+  row_length = 1,
+  sprite_size = 1024,
+  sprite_height = 1024,
+  sprite_count = 1,
+}
+
+
 -- Stars
 
 picture_info["Green_Star"] = {

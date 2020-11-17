@@ -14,7 +14,7 @@
     "name": "Couch",
     "fixed_y": 585.75,
     "disappear_method": "pop",
-    "depth": -1,
+    "depth": 17,
     "fixed_x": 397.25,
     "squish_tilt": 0
   }, 
