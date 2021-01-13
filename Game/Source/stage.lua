@@ -61,6 +61,29 @@ function stage:create()
     end
   end
 
+  function object:resetStage()
+    --
+    -- This function removes all performance elements and resets the stage and layer positions
+    --
+
+    -- remove all assets
+    for i = 1, #self.sprite_list do
+      display.remove(self.sprite_list[i])
+    end
+    self.id_table = {}
+    self.sprite_list = {}
+
+    -- reset the layer positions
+    for i = 1, const_num_layers do
+      self:translateLayer(i, 0, nil, {"y", "=", 0})
+      self:translateLayer(i, 0, nil, {"x", "=", 0})
+    end
+
+    -- reset stage position
+    self:translateLayer(-1, 0, nil, {"y", "=", 0})
+    self:translateLayer(-1, 0, nil, {"x", "=", 0})
+  end
+
   function object:update()
     local current_time = self.chapter:getTime()
     for i = 1, #self.sprite_list do
@@ -72,7 +95,7 @@ function stage:create()
       if self.sprite_list[i].state ~= "inactive" and self.sprite_list[i].isVisible == true and self.sprite_list[i].alpha > 0 then
         table.insert(new_sprite_list, self.sprite_list[i])
       else
-        self.id_table[self.sprite_list[i]] = 0
+        self.id_table[self.sprite_list[i]] = nil
         display.remove(self.sprite_list[i])
       end
     end

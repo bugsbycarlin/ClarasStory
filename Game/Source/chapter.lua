@@ -67,10 +67,6 @@ function scene:initializeChapter()
   self.timers = {}
   self.events = {}
 
-  self.start_time = system.getTimer()
-  self.pause_time = 0
-  self.paused = false
-
   self.current_part_structure = self.chapter_structure.flow[self.chapter_structure.first_part]
 
   print(self.current_part_structure.name)
@@ -78,14 +74,7 @@ function scene:initializeChapter()
 
   self:createPart()
 
-  self.registerTimer(timer.performWithDelay(33, function() 
-    self:update()
-  end, 0))
-
-  self.registerTimer(timer.performWithDelay(3000, function() 
-    printDebugInformation()
-  end, 0))
-
+  self:startPart()
 end
 
 
@@ -96,7 +85,24 @@ function scene:createPart()
       self.scripted_part = require("Source.scripted_part")
     end
     self.current_part = self.scripted_part:create()
+
+    self:performBackgroundLoad()
   end
+end
+
+
+function scene:startPart()
+  self.start_time = system.getTimer()
+  self.pause_time = 0
+  self.paused = false
+
+  self:registerTimer(timer.performWithDelay(33, function() 
+    self:update()
+  end, 0))
+
+  self:registerTimer(timer.performWithDelay(3000, function() 
+    printDebugInformation()
+  end, 0))
 end
 
 
@@ -166,7 +172,7 @@ end
 -- end
 
 
-function scene:skippart()
+function scene:skipPart()
 
   print(self:getTime())
 
@@ -175,8 +181,29 @@ end
 
 
 function scene:gotoNextpart()
+  self:destroyEvents()
+  self:destroyTimers()
 
+  if self.current_part_structure.cleanup == true then
+    self.stage:resetStage()
+  end
 
+  if self.current_part_structure.next ~= nil then
+    self.current_part_structure = self.chapter_structure.flow[self.current_part_structure.next]
+
+    if self.current_part_structure == nil then
+      error("Cannot find definition for next part of chapter!")
+    end
+
+    print(self.current_part_structure.name)
+    print(self.current_part_structure.type)
+
+    self:createPart()
+
+    self:startPart()
+  else
+    self:endChapter()
+  end
 end
 
 
@@ -187,14 +214,55 @@ end
 
 
 function scene:performBackgroundLoad()
+  local items = self:computeBackgroundLoad()
+  local load_items = items[1]
+  local unload_items = items[2]
 
+  self.loader:backgroundLoad(
+    self.sprite_cache,
+    self.sprite_info,
+    load_items,
+    500,
+    function(percent) end,
+    function() print("Finished loading items in the background!") end)
 
+  self.loader:unloadItems(unload_items)
 end
 
 
 function scene:computeBackgroundLoad()
+  --
+  -- This function decides the content to send to the next backgroud load task.
+  --
 
+  -- Find the next scripted part. We will load content from this.
+  scene_to_load = self.current_part_structure.next
+  while scene_to_load ~= nil do
+    structure = self.chapter_structure.flow[scene_to_load]
+    if structure.type == "scripted" then
+      break
+    else
+      scene_to_load = structure.next
+    end
+  end
 
+  background_load_dict = {}
+  if scene_to_load ~= nil then
+    script = self.chapter_structure.flow[scene_to_load].script
+    for i = 1, #script do
+      background_load_dict[script[i].picture] = 1
+    end
+  end
+  background_load_items = {}
+  for picture, val in pairs(background_load_dict) do
+    if self.sprite_info[picture] ~= nil and self.sprite_cache[picture] == nil then
+      print("Adding " .. picture .. " to load items.")
+      table.insert(background_load_items, picture)
+    end
+  end
+
+  background_unload_items = {}
+  return {background_load_items, background_unload_items}
 end
 
 
@@ -210,15 +278,18 @@ function scene:destroyEvents()
 end
 
 
-function scene:registerTimer()
-
-
+function scene:registerTimer(new_timer)
+  print("Registering")
+  print(new_timer)
+  table.insert(self.timers, new_timer)
 end
 
 
 function scene:destroyTimers()
-
-
+  for i = 1, #self.timers do
+    timer.cancel(self.timers[i])
+  end
+  self.timers = {}
 end
 
 

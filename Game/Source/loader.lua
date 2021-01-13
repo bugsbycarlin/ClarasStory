@@ -72,6 +72,7 @@ function loader:create()
     --
     -- This function loads one sprite into memory
     --
+    print("Loading " .. sprite_name)
     if sprite_name ~= nil and string.len(sprite_name) >= 1 then
       file_name = self.sprite_info[sprite_name]["file_name"]
       sheet = self.sprite_info[sprite_name]["sheet"]

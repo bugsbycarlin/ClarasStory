@@ -11,7 +11,7 @@ setup_chapter_2.__index = setup_chapter_2
 --
 
 function setup_chapter_2:setup(chapter_structure)
-  chapter_structure.first_part = "chapter_2_part_2"
+  chapter_structure.first_part = "chapter_2_part_1"
 
   chapter_structure.bpm = 160
   chapter_structure.mpb = 375
@@ -36,7 +36,7 @@ function setup_chapter_2:setup(chapter_structure)
     -- next="chapter_2_interactive_choice_vehicle",
     next="chapter_2_part_2",
     type="scripted",
-    cleanup=false,
+    cleanup=true,
     script=loadPartScript("chapter_2_part_1"),
     music="chapter_2_scene_1",
     additional_actions = {

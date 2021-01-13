@@ -68,7 +68,7 @@ function scripted_part:create()
   end
 
   function object:nextScene()
-
+    self.chapter:gotoNextpart()
   end
 
   object:initialize()
