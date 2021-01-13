@@ -22,7 +22,6 @@ function sketch_sprites:create()
   end
 
   function object:immediatelyRemoveAll()
-    print("I am also immediately removing all.")
     for i = 1, #self.sprite_list do
       sprite = self.sprite_list[i]
       animation.cancel(sprite)
@@ -73,6 +72,7 @@ function sketch_sprites:create()
     copy_sprite_list = {}
     for i = 1, #self.sprite_list do
       sprite = self.sprite_list[i]
+      -- not sure what to do with nil performances here. problematic.
       if sprite.state ~= "remove" and sprite.isVisible == true and sprite.alpha > 0 then
         table.insert(copy_sprite_list, sprite)
       else

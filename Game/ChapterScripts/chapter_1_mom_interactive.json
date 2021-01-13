@@ -1,0 +1,21 @@
+[
+  {
+    "squish_scale": 1,
+    "disappear_time": -1,
+    "type": "picture",
+    "x_scale": 1,
+    "squish_period": 1718,
+    "id": "Couch_13",
+    "intro": "sketch",
+    "start_time": 0,
+    "x": 397.25,
+    "y": 585.75,
+    "y_scale": 1,
+    "name": "Couch",
+    "fixed_y": 585.75,
+    "disappear_method": "pop",
+    "depth": 37,
+    "fixed_x": 397.25,
+    "squish_tilt": 0
+  }, 
+]

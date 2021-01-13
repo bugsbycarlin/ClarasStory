@@ -10,7 +10,7 @@ function scene_actions_chapter_2:augment(player)
   player.sceneActions["chapter_2_scene_1"] = function()
 
     player.performanceAssetGroup.y = 1024
-    animation.to(player.performanceAssetGroup, {y = 0}, {time = 375 * 16, easing = easing.inOutQuart})
+    animation.to(player.performanceAssetGroup, {y = 0}, {time = 375 * 16, easing = easing.inOutQuart, tag="finish_if_skipped"})
 
     local back_row = 1 + player.const_half_layers + 1
     local front_row = 2 + player.const_half_layers + 1

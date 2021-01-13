@@ -53,95 +53,14 @@ function interactive_spelling_player:augment(player)
     player.interactive_measures = 1
     player.interactive_beats = 1
 
-    local picture = info.word
-    local spelling_object_x = display.contentCenterX
-    local spelling_object_y = display.contentCenterY - 100
+    
 
     player:addBook()
 
-    if info.performance == nil then
-      info. performance = {
-        intro = "sketch",
-        depth = 18,
-      }
-    end
-
-
-    local perf = info["performance"]
-
-    if player.sprite[perf.name] == nil then
-      player.loader:loadPicture(perf.name)
-    end
-
-    if perf.fixed_x ~= nil then
-      spelling_object_x = perf.fixed_x
-    end
-    if perf.fixed_y ~= nil then
-      spelling_object_y = perf.fixed_y
-    end
-
-    if perf.name == nil then
-      perf.name = picture
-    end
-
-    player.spelling_object = display.newSprite(player.performanceAssetGroup[perf.depth + player.const_half_layers + 1], player.sprite[perf.name], {frames=player.picture_info[perf.name].frames})
-    player.spelling_object.name = perf.name
-    player.spelling_object.id = perf.name .. "_" .. 0
-    player.spelling_object.info = player.picture_info[perf.name]
-    player.spelling_object.intro = perf.intro
-    player:setInitialPerformanceState(player.spelling_object, perf.intro, perf.name)
-    if perf.x_scale ~= nil then
-      player.spelling_object.x_scale = perf.x_scale
-    else
-      player.spelling_object.x_scale = 1
-    end
-    if perf.y_scale ~= nil then
-      player.spelling_object.y_scale = perf.y_scale
-    else
-      player.spelling_object.y_scale = 1
-    end
-    player.spelling_object.xScale = perf.x_scale
-    player.spelling_object.yScale = perf.y_scale
-    if perf.disappear_method ~= nil then
-      player.spelling_object.disappear_method = perf.disappear_method
-    else
-      player.spelling_object.disappear_method = ""
-    end
-    if perf.squish_scale ~= nil then
-      player.spelling_object.squish_scale = perf.squish_scale
-    else
-      player.spelling_object.squish_scale = 1.02
-    end
-    if perf.squish_tilt ~= nil then
-      player.spelling_object.squish_tilt = perf.squish_tilt
-    else
-      player.spelling_object.squish_tilt = 8
-    end
-    if perf.squish_period ~= nil then
-      player.spelling_object.squish_period = perf.squish_period
-    else
-      player.spelling_object.squish_period = player.mpb
-    end
-    
-    player.spelling_object.x = spelling_object_x
-    player.spelling_object.y = spelling_object_y
-    player.spelling_object.fixed_x = spelling_object_x
-    player.spelling_object.fixed_y = spelling_object_y
-    player.spelling_object.disappear_time = -1
-    
-    player.spelling_object.start_time = system.getTimer()
-
-    touch_giggle = function(event)
-      local giggle_sound = audio.loadSound("Sound/giggle.wav")
-      audio.play(giggle_sound)
-      local new_y = player.spelling_object.fixed_y - 40 + math.random(80)
-      local new_x = player.spelling_object.fixed_x - 100 + math.random(200)
-      animation.to(player.spelling_object, {fixed_y=new_y, fixed_x=new_x}, {time=player.mpb / 2, easing=easing.outExp})
-    end
-    if info.touch_giggle ~= false then
-      player.spelling_object:addEventListener("tap", touch_giggle)
-    end
-    player.sketch_sprites:add(player.spelling_object)
+    -- this comes after book pages have turned or book has appeared
+    timer.performWithDelay(200, function()
+      player:addSpellingPerformance()
+    end, 1)
 
     player.button_making_timers = {}
     player.button_backings = {}
@@ -236,7 +155,7 @@ function interactive_spelling_player:augment(player)
               player.button_backings[c - 1].fixed_y = 5000
               current_y = player.button_letters[c - 1].fixed_y
               current_x = player.button_letters[c - 1].fixed_x
-              new_x = display.contentCenterX + (gap * 0.6) * ((c-1) - string.len(info.word)/2 - 0.5)
+              new_x = display.contentCenterX + (gap * 0.75) * ((c-1) - string.len(info.word)/2 - 0.5)
               animation.to(player.button_letters[c - 1], {fixed_y=display.contentHeight - 200, fixed_x=new_x}, {time=player.mpb / 2, easing=easing.outExp})
 
               if c <= string.len(info.word) then
@@ -265,6 +184,97 @@ function interactive_spelling_player:augment(player)
         table.insert(player.buttons, button)
       end, 1))
     end
+  end
+
+  player.addSpellingPerformance = function()
+    local info = player.info
+    local word = player.info.word
+    local picture = info.word
+    local spelling_object_x = display.contentCenterX
+    local spelling_object_y = display.contentCenterY - 100
+
+    if info.performance == nil then
+      info.performance = {
+        intro = "sketch",
+        depth = 18,
+      }
+    end
+
+    local perf = info["performance"]
+
+    if player.sprite[perf.name] == nil then
+      player.loader:loadPicture(perf.name)
+    end
+
+    if perf.fixed_x ~= nil then
+      spelling_object_x = perf.fixed_x
+    end
+    if perf.fixed_y ~= nil then
+      spelling_object_y = perf.fixed_y
+    end
+
+    if perf.name == nil then
+      perf.name = picture
+    end
+
+    player.spelling_object = display.newSprite(player.performanceAssetGroup[perf.depth + player.const_half_layers + 1], player.sprite[perf.name], {frames=player.picture_info[perf.name].frames})
+    player.spelling_object.name = perf.name
+    player.spelling_object.id = perf.name .. "_" .. 0
+    player.spelling_object.info = player.picture_info[perf.name]
+    player.spelling_object.intro = perf.intro
+    player:setInitialPerformanceState(player.spelling_object, perf.intro, perf.name)
+    if perf.x_scale ~= nil then
+      player.spelling_object.x_scale = perf.x_scale
+    else
+      player.spelling_object.x_scale = 1
+    end
+    if perf.y_scale ~= nil then
+      player.spelling_object.y_scale = perf.y_scale
+    else
+      player.spelling_object.y_scale = 1
+    end
+    player.spelling_object.xScale = perf.x_scale
+    player.spelling_object.yScale = perf.y_scale
+    if perf.disappear_method ~= nil then
+      player.spelling_object.disappear_method = perf.disappear_method
+    else
+      player.spelling_object.disappear_method = ""
+    end
+    if perf.squish_scale ~= nil then
+      player.spelling_object.squish_scale = perf.squish_scale
+    else
+      player.spelling_object.squish_scale = 1.02
+    end
+    if perf.squish_tilt ~= nil then
+      player.spelling_object.squish_tilt = perf.squish_tilt
+    else
+      player.spelling_object.squish_tilt = 8
+    end
+    if perf.squish_period ~= nil then
+      player.spelling_object.squish_period = perf.squish_period
+    else
+      player.spelling_object.squish_period = player.mpb
+    end
+    
+    player.spelling_object.x = spelling_object_x
+    player.spelling_object.y = spelling_object_y
+    player.spelling_object.fixed_x = spelling_object_x
+    player.spelling_object.fixed_y = spelling_object_y
+    player.spelling_object.disappear_time = -1
+    
+    player.spelling_object.start_time = system.getTimer()
+
+    touch_giggle = function(event)
+      local giggle_sound = audio.loadSound("Sound/giggle.wav")
+      audio.play(giggle_sound)
+      local new_y = player.spelling_object.fixed_y - 40 + math.random(80)
+      local new_x = player.spelling_object.fixed_x - 100 + math.random(200)
+      animation.to(player.spelling_object, {fixed_y=new_y, fixed_x=new_x}, {time=player.mpb / 2, easing=easing.outExp})
+    end
+    if info.touch_giggle ~= false then
+      player.spelling_object:addEventListener("tap", touch_giggle)
+    end
+    player.sketch_sprites:add(player.spelling_object)
   end
 
   player.clearSpellingMaterial = function()

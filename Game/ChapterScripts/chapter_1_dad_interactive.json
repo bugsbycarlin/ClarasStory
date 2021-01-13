@@ -1,0 +1,21 @@
+[
+  {
+    "squish_scale": 1.01,
+    "disappear_time": -1,
+    "type": "picture",
+    "fixed_x": 299.75,
+    "squish_period": 545,
+    "id": "Mom_21",
+    "fixed_y": 533.25,
+    "depth": 37,
+    "y_scale": 1,
+    "y": 533.25,
+    "x": 299.75,
+    "name": "Mom",
+    "intro": "static",
+    "disappear_method": "rewind",
+    "start_time": 0,
+    "x_scale": 1,
+    "squish_tilt": 0
+  },
+]

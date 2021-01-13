@@ -5,7 +5,6 @@ local lfs = require("lfs")
 
 local animation = require("plugin.animation")
 
--- local picture_info = require("Source.pictures")
 local sound_info = require("Source.sounds")
 local loader = require("Source.loader")
 
@@ -14,9 +13,6 @@ local interactive_choice_player = require("Source.interactive_choice_player")
 local interactive_mandala_player = require("Source.interactive_mandala_player")
 
 local scene = composer.newScene()
-
--- local small_word_gap = 180
--- local large_word_gap = 160
 
 local printMemUsage = function()  
   local memUsed = (collectgarbage("count"))
@@ -331,6 +327,8 @@ end
 
 function scene:skipPerformanceToTime(time_value)
   -- self.total_performance_time = time_value -- this won't work because of the way those update.
+
+  animation.setPosition("finish_if_skipped", 100000)
 
   if self.script_assets ~= nil then
     for i = 1, #self.script_assets do
@@ -673,9 +671,9 @@ function scene:addBook()
       y = 450,
       fixed_x = 375,
       fixed_y = 450,
-      x_scale = 1,
+      x_scale = 1.1,
       y_scale = 1,
-      xScale = 1,
+      xScale = 1.1,
       yScale = 1,
       squish_scale = 1,
       squish_tilt = 0,
@@ -688,10 +686,37 @@ function scene:addBook()
   else
     p = self.sketch_sprites:get("Spiral_Notebook_999")
     self.sketch_sprites:animateOnce(p)
+
+    -- after a few frames of page turn, by default, remove everything from layer 17 up.
+    -- this should actually take place in part in the sprite manager, but I designed it badly.
+    -- Hi, Nick :-D
+    timer.performWithDelay(180, function()
+
+      self:removeItemsFromLayers(17, self.const_half_layers)
+    end, 1)
+
+  end
+end
+
+function scene:removeItemsFromLayers(min_depth, max_depth)
+  for i = 1, #self.script_assets do
+    asset = self.script_assets[i]
+    if asset.depth == nil or asset.depth >= min_depth and asset.depth < max_depth then
+      asset.performance = nil
+    end
+  end
+
+  for i = min_depth + self.const_half_layers + 1, max_depth + self.const_half_layers + 1 do
+    while self.performanceAssetGroup[i].numChildren > 0 do
+      local child = self.performanceAssetGroup[i][1]
+      if child then child:removeSelf() end
+    end
   end
 end
 
 function scene:removeBook()
+  -- by default, remove everything from layer 15 up.
+  self:removeItemsFromLayers(15, self.const_half_layers)
   self.sketch_sprites:remove("Spiral_Notebook_999")
   self.sketch_sprites:remove("Sepia_Filter_999")
 end

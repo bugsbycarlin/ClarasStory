@@ -59,11 +59,8 @@ function interactive_choice_player:augment(player)
       end, 0)
     end
 
-<<<<<<< HEAD
     player:addBook()
 
-=======
->>>>>>> parent of 95c7776... Test changes to spelling UI, add spiral notebook, add beginnings of chapter 3 song
     local sound = audio.loadSound("Sound/chapter_" .. player.chapter_number .. "/" .. info.intro .. ".wav")
     audio.play(sound)
 

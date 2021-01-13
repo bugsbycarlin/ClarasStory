@@ -1,13 +1,13 @@
+
 local composer = require("composer")
+local game_setup = require("Source.game_setup")
 
 display.setStatusBar(display.HiddenStatusBar)
 
 math.randomseed(os.time())
 
--- audio.setVolume(0)
--- audio.setVolume(0.4, {channel=5})
+print("pre setup")
+game_setup:setup()
+print("post setup")
 
--- composer.gotoScene("Source.editor")
-composer.gotoScene("Source.chapter")
-
--- composer.gotoScene("Source.sound_tester")
+composer.gotoScene("Source.chapter_select")
