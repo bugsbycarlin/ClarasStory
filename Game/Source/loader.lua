@@ -11,7 +11,7 @@ function loader:create()
 
   local object = {}
   setmetatable(object, loader)
-
+  object.loading = false
 
   function object:backgroundLoad(
     sprite_cache, -- object for referencing sprites stored in memory
@@ -26,24 +26,33 @@ function loader:create()
     -- and then called it again before the process was finished.
     --
 
-    self.sprite_cache = sprite_cache
-    self.sprite_info = sprite_info
+    if self.loading == false then
+      self.loading = true
 
-    self.current_load_number = 1 -- counter for which thing is loading
-    self.load_list = load_list
+      self.sprite_cache = sprite_cache
+      self.sprite_info = sprite_info
 
-    self.background_delay = background_delay
-    self.display_callback = display_callback
-    self.finished_callback = finished_callback
+      self.current_load_number = 1 -- counter for which thing is loading
+      self.load_list = load_list
 
-    if self.load_list == nil or #self.load_list == 0 then
-      return
+      self.background_delay = background_delay
+      self.display_callback = display_callback
+      self.finished_callback = finished_callback
+
+      if self.load_list == nil or #self.load_list == 0 then
+        return
+      end
+
+      -- Call the display callback every frame during loading.
+      Runtime:addEventListener("enterFrame", function() self.display_callback(self:percent()) end)
+
+      self:partialLoad()
+    else
+      print("ADDING TO LIST")
+      for i = 1, #load_list do
+        table.insert(self.load_list, load_list[i])
+      end
     end
-
-    -- Call the display callback every frame during loading.
-    Runtime:addEventListener("enterFrame", function() self.display_callback(self:percent()) end)
-
-    self:partialLoad()
   end
 
 
@@ -64,6 +73,7 @@ function loader:create()
       Runtime:removeEventListener("enterFrame", self.display_callback)
       self.display_callback(100)
       self.finished_callback()
+      self.loading = false
     end
   end
 

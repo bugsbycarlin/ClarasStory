@@ -30,16 +30,17 @@ function scene:show(event)
     if (event.phase == "did") then
       self:initializeChapter()
 
-      Runtime:addEventListener("key", function(event)
-        if event.phase == "up" then
-          print("key")
-          if self.paused == false then
-            self:pause()
-          else
-            self:resume()
-          end
-        end
-      end)
+      -- Runtime:addEventListener("key", function(event)
+      --   if event.phase == "up" then
+      --     print("key")
+      --     if self.paused == false then
+      --       self:pause()
+      --     else
+      --       self:resume()
+      --     end
+      --   end
+      -- end)
+      self:initializeNav()
     end    
 end
 
@@ -75,6 +76,55 @@ function scene:initializeChapter()
   self:createPart()
 
   self:startPart()
+end
+
+
+function scene:initializeNav()
+  self.navGroup = display.newGroup()
+  self.navGroup.alpha = 0.5
+  self.view:insert(self.navGroup)
+
+  local nav_size = 48
+
+  local home_button = display.newImageRect(self.navGroup, "Art/Nav/home_button.png", nav_size, nav_size)
+  home_button.x = 0.5*nav_size
+  home_button.y = display.contentHeight - 0.5*nav_size
+
+  local back_button = display.newImageRect(self.navGroup, "Art/Nav/double_back_button.png", nav_size, nav_size)
+  back_button.x = 1.5*nav_size
+  back_button.y = display.contentHeight - 0.5*nav_size
+
+  local pause_button = display.newImageRect(self.navGroup, "Art/Nav/pause_button.png", nav_size, nav_size)
+  pause_button.x = 2.5*nav_size
+  pause_button.y = display.contentHeight - 0.5*nav_size
+
+  local forward_button = display.newImageRect(self.navGroup, "Art/Nav/double_forward_button.png", nav_size, nav_size)
+  forward_button.x = 3.5*nav_size
+  forward_button.y = display.contentHeight - 0.5*nav_size
+
+  home_button.event = home_button:addEventListener("tap", function(event)
+    if self.paused == false then
+      self:pause()
+    end
+    self:endChapter()
+  end)
+
+  back_button.event = back_button:addEventListener("tap", function(event)
+    self:skipToPreviousPart()
+  end)
+
+  pause_button.event = pause_button:addEventListener("tap", function(event)
+    if self.paused == false then
+      self:pause()
+    else
+      self:resume()
+    end
+  end)
+
+  forward_button.event = forward_button:addEventListener("tap", function(event)
+    self:skipToNextPart()
+  end)
+
 end
 
 
@@ -172,17 +222,42 @@ end
 -- end
 
 
-function scene:skipPart()
+function scene:skipToNextPart()
 
-  print(self:getTime())
+  -- deactivate the nav for a moment and put up the spinny loading icon
+    -- deactivate here
 
-  -- animation.setPosition("finish_if_skipped", 100000)
+  animation.setPosition("game", 500000)
+  audio.stop()
+
+  self:pause()
+
+  -- make necessary new sprites and set necessary old ones to inactive
+  self.current_part:skipToEnd()
+
+  -- update the stage, forcing a recycle of the dead old sprites
+  self.stage:update()
+
+  -- take a moment to do a short load
+    -- short load here
+
+  self:resume()
+
+  -- reactive the nav
+    -- reactivate here
+
+  self:gotoNextPart()
 end
 
 
-function scene:gotoNextpart()
+function scene:gotoNextPart()
   self:destroyEvents()
   self:destroyTimers()
+
+  -- take a snapshot and save it under the heading of the next part.
+  if self.current_part_structure.next ~= nil then
+    -- snapshot here
+  end
 
   if self.current_part_structure.cleanup == true then
     self.stage:resetStage()
@@ -208,8 +283,12 @@ end
 
 
 function scene:endChapter()
-
-
+  audio.stop()
+  self:destroyEvents()
+  self:destroyTimers()
+  self.stage:resetStage()
+  self.loader:unloadAll()
+  composer.gotoScene("Source.chapter_select")
 end
 
 
@@ -297,6 +376,7 @@ function scene:destroy(event)
   --
   -- Destroy things before removing scene's view
   --
+  display.remove(self.navGroup)
 end
  
 scene:addEventListener("show", scene)

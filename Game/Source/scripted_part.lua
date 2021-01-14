@@ -27,7 +27,7 @@ function scripted_part:create()
     self.stage = composer.getVariable("stage")
     self.part_structure = self.chapter.current_part_structure
     self.script = self.part_structure.script
-    self.additional_actions = self.part_structure.additional_actions
+    self.additional_actions = self.part_structure.additional_actions ~= nil and self.part_structure.additional_actions or {}
 
     self.last_update_time = 0
 
@@ -51,8 +51,8 @@ function scripted_part:create()
     for i = 1, #self.script do
       script_element = self.script[i]
       if not self.stage:has(script_element.id) and self.last_update_time <= script_element.start_time and current_time >= script_element.start_time then
-        local x = self.stage:perform(script_element)
-        print(x.id)
+        local new_sprite = self.stage:perform(script_element)
+        print("Performing " .. new_sprite.id)
       end    
     end
 
@@ -64,11 +64,26 @@ function scripted_part:create()
     end
 
     self.last_update_time = current_time
+  end
 
+  function object:skipToEnd()
+    for i = 1, #self.script do
+      script_element = self.script[i]
+      if script_element.start_time >= self.last_update_time and script_element.end_time == -1 then
+        local new_sprite = self.stage:perform(script_element)
+        print("Performing " .. new_sprite.id)
+      elseif script_element.end_time >= 0 then
+        old_sprite = self.stage:get(script_element.id)
+        if old_sprite ~= nil then
+          old_sprite.state = "inactive"
+          old_sprite.isVisible = false
+        end
+      end
+    end
   end
 
   function object:nextScene()
-    self.chapter:gotoNextpart()
+    self.chapter:gotoNextPart()
   end
 
   object:initialize()

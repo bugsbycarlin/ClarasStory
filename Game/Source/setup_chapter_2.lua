@@ -2,6 +2,8 @@
 local composer = require("composer")
 local utilities = require("Source.utilities")
 
+local animation = require("plugin.animation")
+
 setup_chapter_2 = {}
 setup_chapter_2.__index = setup_chapter_2
 
@@ -330,22 +332,12 @@ function setup_chapter_2:setup(chapter_structure)
   chapter_structure.flow["chapter_2_part_2"] = {
     name="chapter_2_part_2",
     -- next="chapter_2_interactive_bike",
-    name="chapter_2_part_3",
+    next="chapter_2_part_3",
     type="scripted",
     cleanup=false,
     script=loadPartScript("chapter_2_part_2"),
     music="chapter_2_scene_2",
-    additional_actions = {
-      -- {
-      --   start_time= 6750,
-      --   label="move the girl before switching the scene",
-      --   action=function(part)
-      --     local sprite = part.stage:find("Clara_v2_13")
-      --     self:makeClouds(sprite, 8 + math.random(16))
-
-      --   end
-      -- },
-    }
+    additional_actions = {},
   }
 
   for i = 1, 8 do
@@ -456,27 +448,60 @@ function setup_chapter_2:setup(chapter_structure)
     next="chapter_2_part_4",
     type="scripted",
     script=loadPartScript("chapter_2_part_3"),
+    cleanup=true,
     music="chapter_2_scene_3",
     additional_actions = {
-      -- {
-      --   start_time= 0,
-      --   label="pan from city top",
-      --   action=function(part)
-      --     -- part.stage:translateLayer(-1, 0, 0, nil, 1024)
-      --     -- part.stage:translateLayer(-1, 375 * 16, easing.inOutQuart, nil, 0)
-      --     part.stage:translateLayer(-1, 0, 0, {"y", "=", 1024})
-      --     part.stage:translateLayer(-1, 375 * 16, easing.inOutQuart, {"y", "=", 0})
-      --   end
-      -- },
+      {
+        start_time= 0,
+        label="gradual stage move left to right",
+        action=function(part)
+          part.stage:translateLayer(-1, 1875, easing.linear, {"x", "-", 390})
+          part.stage:translateLayer(20, 1875, easing.linear, {"x", "+", 390})
+        end
+      },
+      {
+        start_time=2250,
+        label="gradual stage move left to right",
+        action=function(part)
+          part.stage:translateLayer(-1, 2250, easing.linear, {"x", "-", 512})
+          part.stage:translateLayer(20, 2250, easing.linear, {"x", "+", 512})
+        end
+      },
+      {
+        start_time=6000,
+        label="gradual stage move left to right",
+        action=function(part)
+          part.stage:translateLayer(-1, 0, nil, {"x", "=", 0})
+          part.stage:translateLayer(20, 0, nil, {"x", "=", 0})
+        end
+      },
     }
   }
 
   chapter_structure.flow["chapter_2_part_4"] = {
     name="chapter_2_part_4",
-    next="chapter_2_interactive_choice_mural_color",
+    -- next="chapter_2_interactive_choice_mural_color",
+    next="chapter_2_part_5",
     type="scripted",
     script=loadPartScript("chapter_2_part_4"),
-    cleanup=false,
+    music="chapter_2_scene_4",
+    cleanup=true,
+    additional_actions = {
+      {
+        start_time=0,
+        label="move the stage down",
+        action=function(part)
+          part.stage:translateLayer(-1, 375 * 16, easing.inOutSine, {"y", "=", 256})
+        end
+      },
+      {
+        start_time=9000,
+        label="move the stage back",
+        action=function(part)
+          part.stage:translateLayer(-1, 0, nil, {"y", "=", 0})
+        end
+      },
+    }
   }
 
   paint_depths = {
@@ -597,9 +622,41 @@ function setup_chapter_2:setup(chapter_structure)
 
   chapter_structure.flow["chapter_2_part_5"] = {
     name="chapter_2_part_5",
-    next="chapter_2_interactive_mandala",
+    next=nil,
     type="scripted",
     script=loadPartScript("chapter_2_part_5"),
+    music="chapter_2_scene_5",
+    additional_actions = {
+      {
+        start_time=6900,
+        label="move the little boats",
+        action=function(part)
+          boat = part.stage:get("Little_White_Boat_Shadow_1")
+          if boat ~= nil then
+            x = boat.x
+            animation.to(boat, {x = x + 40}, {time = 30000, tag="game"})
+          end
+
+          boat = part.stage:get("Little_White_Boat_Shadow_2")
+          if boat ~= nil then
+            x = boat.x
+            animation.to(boat, {x = x + 50}, {time = 30000, tag="game"})
+          end
+
+          boat = part.stage:get("Little_White_Boat_Shadow_3")
+          if boat ~= nil then
+            x = boat.x
+            animation.to(boat, {x = x - 40}, {time = 30000, tag="game"})
+          end
+
+          boat = part.stage:get("Little_White_Boat_Shadow_4")
+          if boat ~= nil then
+            x = boat.x
+            animation.to(boat, {x = x + 60}, {time = 30000, tag="game"})
+          end
+        end
+      },
+    }
   }
 
   chapter_structure.flow["chapter_2_interactive_mandala"] = {

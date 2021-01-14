@@ -41,6 +41,9 @@ function stage:create()
   end
 
   function object:perform(script_element)
+    --
+    -- Turn a script element into a sprite on the stage.
+    --
     sprite = sprite_class:create(script_element)
     self.stageGroup[script_element.depth]:insert(sprite)
 
@@ -63,7 +66,7 @@ function stage:create()
 
   function object:resetStage()
     --
-    -- This function removes all performance elements and resets the stage and layer positions
+    -- Temoves all performance elements and reset the stage and layer positions
     --
 
     -- remove all assets
@@ -85,6 +88,9 @@ function stage:create()
   end
 
   function object:update()
+    --
+    -- Update the stage, updating each sprite and removing defunct sprites
+    --
     local current_time = self.chapter:getTime()
     for i = 1, #self.sprite_list do
       self.sprite_list[i]:update(current_time)
@@ -105,12 +111,15 @@ function stage:create()
 
   function object:has(id)
     --
-    -- This function checks if the stage has an item with this id
+    -- Checks if the stage has an item with this id
     --
     return self.id_table[id] ~= nil
   end
 
-  function object:find(id)
+  function object:get(id)
+    --
+    -- Try to return a sprite matching this id
+    --
     if self:has(id) then
       return self.id_table[id]
     else
@@ -118,58 +127,55 @@ function stage:create()
     end
   end
 
-  function object:translateLayer(layer, delay, easing, value)
+  function object:translateLayer(layer, delay, easing, instruction)
     --
-    -- This function translates the entire state, or a sub layer, with optional animation
-    -- layer: -1 is the whole stage, N > 0 is layer N
+    -- Translates the entire stage, or a sub layer, with optional animation delay
+    -- layer: -1 is the whole stage, N >= 1 is layer N
     -- delay: animation delay. 0 is no animation.
     -- easing: easing function for animation
+    -- instruction: {coordinate, operand, number}, eg {"x", "+", "50"} or {"y", "=", "600"}
     --
-    local translation_target = self.stageGroup
+    
 
+    -- choose the stage as the target of translation by default,
+    -- but if a layer is specified, choose that
+    local translation_target = self.stageGroup
     if layer >= 1 and layer <= const_num_layers then
       translation_target = self.stageGroup[layer]
     end
 
-    local target_value = value[3]
-    if value[2] == "+" then
-      target_value = translation_target[value[1]] + value[3]
-    elseif value[2] == "-" then
-      target_value = translation_target[value[1]] - value[3]
+    -- compute the target value based on 
+    local target_value = instruction[3]
+    if instruction[2] == "+" then
+      target_value = translation_target[instruction[1]] + instruction[3]
+    elseif instruction[2] == "-" then
+      target_value = translation_target[instruction[1]] - instruction[3]
     end
 
+    -- if there is no delay, assign immediately
     if delay == 0 then
-      translation_target[value[1]] = target_value
-      -- if x ~= nil then
-      --   translation_target.x = x
-      -- end
-      -- if y ~= nil then
-      --   translation_target.y = y
-      -- end
+      translation_target[instruction[1]] = target_value
     else
-      -- if value[2] == "=" then
-      --   translation_target[value[1]] = value[3]
-      -- elseif value[2] == "+" then
-      --   translation_target[value[1]] = translation_target[value[1]] + value[3]
-      -- elseif value[2] == "-" then
-      --   translation_target[value[1]] = translation_target[value[1]] - value[3]
-      -- end
-
-      if value[1] == "x" then
-        animation.to(translation_target, {x = target_value}, {time = delay, easing = easing, tag="finish_if_skipped"})
-      elseif value[1] == "y" then
-        animation.to(translation_target, {y = target_value}, {time = delay, easing = easing, tag="finish_if_skipped"})
+      -- if there is a delay, set an animation. unfortunately, I don't know
+      -- how to make this a general assignment, so it has to be either x or y.
+      if instruction[1] == "x" then
+        animation.to(translation_target, {x = target_value}, {time = delay, easing = easing, tag="game"})
+      elseif instruction[1] == "y" then
+        animation.to(translation_target, {y = target_value}, {time = delay, easing = easing, tag="game"})
       end
-      -- if x ~= nil then
-      --    animation.to(translation_target, {x = x}, {time = delay, easing = easing, tag="finish_if_skipped"})
-      -- end
-      -- if y ~= nil then
-      --   animation.to(translation_target, {y = y}, {time = delay, easing = easing, tag="finish_if_skipped"})
-      -- end
     end
   end
 
+
+  --
+  --
+  -- Effects
+  --
+  --
   function object:makeHonk(x, y, duration)
+    --
+    -- Make a speech bubble that says "HONK"
+    --
     local current_time = self.chapter:getTime()
     element = {
       picture = "Honk",
@@ -186,6 +192,9 @@ function stage:create()
   end
 
   function object:makeClouds(target_sprite, num_clouds)
+    --
+    -- Make some poofs of clouds that quickly disappear
+    --
     local width = math.abs(target_sprite.width * target_sprite.xScale)
     local height = math.abs(target_sprite.height * target_sprite.yScale)
     local current_time = self.chapter:getTime()

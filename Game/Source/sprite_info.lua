@@ -556,7 +556,7 @@ sprite_info["Fruit_Beast"] = {
   },
 }
 
-sprite_info["Food_Beast_Dance"] = {
+sprite_info["Food_Beast"] = {
   file_name = "Food_Beast_Dance.png",
   row_length = 4,
   sprite_size = 425,

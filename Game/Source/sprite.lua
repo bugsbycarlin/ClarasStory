@@ -28,7 +28,8 @@ function sprite:create(element)
     self.chapter = composer.getVariable("chapter")
     self.loader = composer.getVariable("loader")
 
-      -- guard against trying to use an unloaded sprite.
+    -- guard against trying to use an unloaded sprite.
+    print(element.picture)
     if self.sprite_cache[element.picture] == nil then
       self.loader:loadSprite(element.picture)
     end
@@ -67,11 +68,33 @@ function sprite:create(element)
     self.state = "active"
   end
 
+  function object:getSnapshot()
+    --
+    -- This function returns a script element corresponding to a snapshot of this sprite,
+    -- with timing information stripped out.
+    --
+    return {
+      picture = self.picture,
+      id = self.id,
+      x = self.x,
+      y = self.y,
+      xScale = self.xScale,
+      yScale = self.yScale,
+      depth = self.depth,
+      start_time = 0,
+      end_time = -1,
+      squish_period = self.squish_period,
+      squish_tilt = self.squish_tilt,
+      squish_scale = self.squish_scale,
+      animation_queue = (","):join(self.animation_queue),
+    }
+  end
+
   function object:update(current_time)
     -- print(self.id)
     -- print("updating")
     self:animate(current_time)
-    self:squish(current_time)
+    self:squishPunch(current_time)
     self:checkEnd(current_time)
   end
 
@@ -131,12 +154,18 @@ function sprite:create(element)
     end
   end
 
-  function object:squish(current_time)
-    if self.squish_enabled then
+  function object:squishPunch(current_time)
+    if self.start_effect == "punch" and current_time - self.start_time <= 150 then
+      self.image.x = -4 + math.random(8)
+      self.image.y = -4 + math.random(8)
+    elseif self.squish_enabled then
       local squish_time = current_time - self.start_time
       self.image.yScale = (1 + (self.squish_scale - 1) * math.cos(squish_time * 2 * math.pi / self.squish_period))
       self.image.y = -1 * self.height * (self.squish_scale - 1) * math.cos(squish_time * 2 * math.pi / self.squish_period)
       self.image.x = -1 * self.squish_tilt * math.sin(0.5 * squish_time * 2 * math.pi / self.squish_period)
+    else
+      self.image.x = 0
+      self.image.y = 0
     end
   end
 
