@@ -11,7 +11,7 @@ setup_chapter_mandala.__index = setup_chapter_mandala
 --
 
 function setup_chapter_mandala:setup(chapter_structure)
-  chapter_structure.first_part = "chapter_2_interactive_mandala"
+  chapter_structure.first_part = "chapter_2_mandala"
 
   local mpb = 375
   chapter_structure.bpm = 160
@@ -20,11 +20,12 @@ function setup_chapter_mandala:setup(chapter_structure)
   chapter_structure.time_sig = 4
 
   chapter_structure.flow = {}
-  chapter_structure.flow["chapter_2_interactive_mandala"] = {
-    name="chapter_2_interactive_mandala",
+  chapter_structure.flow["chapter_2_mandala"] = {
+    name="chapter_2_mandala",
     next=nil,
-    type="interactive_mandala",
-    script=loadPartScript("chapter_2_interactive_mandala"),
+    prev=nil,
+    type="mandala",
+    script=loadPartScript("chapter_2_mandala"),
   }
 end
 

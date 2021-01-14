@@ -21,6 +21,7 @@ function stage:create()
   local object = {}
   setmetatable(object, stage)
 
+
   function object:initialize()
     self.sprite_cache = composer.getVariable("sprite_cache")
     self.sprite_info = composer.getVariable("sprite_info")
@@ -39,6 +40,7 @@ function stage:create()
     self.sprite_list = {}
     self.id_table = {}
   end
+
 
   function object:perform(script_element)
     --
@@ -64,6 +66,7 @@ function stage:create()
     end
   end
 
+
   function object:resetStage()
     --
     -- Temoves all performance elements and reset the stage and layer positions
@@ -87,6 +90,34 @@ function stage:create()
     self:translateLayer(-1, 0, nil, {"x", "=", 0})
   end
 
+
+  function object:takeSnapshot()
+    --
+    -- Take a snapshot of the stage at this moment.
+    --
+    local snapshot = {}
+    for i = 1, #self.sprite_list do
+      local sprite_snapshot = self.sprite_list[i]:getSnapshot()
+      table.insert(snapshot, sprite_snapshot)
+    end
+    return snapshot
+  end
+
+
+  function object:restoreSnapshot(snapshot)
+    --
+    -- Load everything from a snapshot onto the stage.
+    -- This should generally be preceded by a stage reset.
+    --
+    for i = 1, #snapshot do
+      script_element = snapshot[i]
+      script_element.start_time = 0
+      script_element.end_time = -1
+      self:perform(script_element)
+    end
+  end
+
+
   function object:update()
     --
     -- Update the stage, updating each sprite and removing defunct sprites
@@ -106,8 +137,8 @@ function stage:create()
       end
     end
     self.sprite_list = new_sprite_list
-
   end
+
 
   function object:has(id)
     --
@@ -115,6 +146,7 @@ function stage:create()
     --
     return self.id_table[id] ~= nil
   end
+
 
   function object:get(id)
     --
@@ -127,6 +159,7 @@ function stage:create()
     end
   end
 
+
   function object:translateLayer(layer, delay, easing, instruction)
     --
     -- Translates the entire stage, or a sub layer, with optional animation delay
@@ -136,7 +169,6 @@ function stage:create()
     -- instruction: {coordinate, operand, number}, eg {"x", "+", "50"} or {"y", "=", "600"}
     --
     
-
     -- choose the stage as the target of translation by default,
     -- but if a layer is specified, choose that
     local translation_target = self.stageGroup
@@ -191,6 +223,7 @@ function stage:create()
     local honk_sprite = self:perform(element)
   end
 
+
   function object:makeClouds(target_sprite, num_clouds)
     --
     -- Make some poofs of clouds that quickly disappear
@@ -222,6 +255,7 @@ function stage:create()
     end
     return target_sprite
   end
+
 
   object:initialize()
   return object

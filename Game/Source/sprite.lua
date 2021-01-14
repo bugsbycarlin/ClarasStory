@@ -68,6 +68,7 @@ function sprite:create(element)
     self.state = "active"
   end
 
+
   function object:getSnapshot()
     --
     -- This function returns a script element corresponding to a snapshot of this sprite,
@@ -90,6 +91,7 @@ function sprite:create(element)
     }
   end
 
+
   function object:update(current_time)
     -- print(self.id)
     -- print("updating")
@@ -97,6 +99,7 @@ function sprite:create(element)
     self:squishPunch(current_time)
     self:checkEnd(current_time)
   end
+
 
   function object:startEffect()
     if self.start_effect == "fade_in" then
@@ -113,6 +116,7 @@ function sprite:create(element)
     end
     return
   end
+
 
   function object:nextAnimation()
     if #self.animation_queue > 0 then
@@ -136,10 +140,12 @@ function sprite:create(element)
     self.image:setFrame(self.info.animations[self.animation][1])
   end
 
+
   function object:queueAnimations(animation_queue)
     self.animation_queue = animation_queue
     self:nextAnimation()
   end
+
 
   function object:animate(current_time)
     -- print(self.id)
@@ -153,6 +159,7 @@ function sprite:create(element)
       self.image:setFrame(self.info.animations[self.animation][self.frame_count])
     end
   end
+
 
   function object:squishPunch(current_time)
     if self.start_effect == "punch" and current_time - self.start_time <= 150 then
@@ -168,6 +175,7 @@ function sprite:create(element)
       self.image.y = 0
     end
   end
+
 
   function object:checkEnd(current_time)
     if self.end_time > 0 and current_time > self.end_time then
@@ -189,6 +197,7 @@ function sprite:create(element)
       self.state = "inactive"
     end
   end
+
 
   object:initialize()
   return object

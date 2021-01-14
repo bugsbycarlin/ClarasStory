@@ -45,6 +45,7 @@ function scripted_part:create()
     end
   end
 
+
   function object:update()
     current_time = self.chapter:getTime()
 
@@ -66,6 +67,7 @@ function scripted_part:create()
     self.last_update_time = current_time
   end
 
+
   function object:skipToEnd()
     for i = 1, #self.script do
       script_element = self.script[i]
@@ -82,11 +84,12 @@ function scripted_part:create()
     end
   end
 
+
   function object:nextScene()
     self.chapter:gotoNextPart()
   end
 
-  object:initialize()
+
   return object
 end
 

@@ -29,18 +29,9 @@ function scene:show(event)
  
     if (event.phase == "did") then
       self:initializeChapter()
-
-      -- Runtime:addEventListener("key", function(event)
-      --   if event.phase == "up" then
-      --     print("key")
-      --     if self.paused == false then
-      --       self:pause()
-      --     else
-      --       self:resume()
-      --     end
-      --   end
-      -- end)
       self:initializeNav()
+      self:createPart()
+      self:startPart()  
     end    
 end
 
@@ -68,39 +59,46 @@ function scene:initializeChapter()
   self.timers = {}
   self.events = {}
 
+  self.snapshots = {}
+
   self.current_part_structure = self.chapter_structure.flow[self.chapter_structure.first_part]
 
   print(self.current_part_structure.name)
   print(self.current_part_structure.type)
-
-  self:createPart()
-
-  self:startPart()
 end
 
 
 function scene:initializeNav()
-  self.navGroup = display.newGroup()
-  self.navGroup.alpha = 0.5
-  self.view:insert(self.navGroup)
+  self.nav_group = display.newGroup()
+  self.nav_group.alpha = 0.5
+  self.view:insert(self.nav_group)
 
   local nav_size = 48
 
-  local home_button = display.newImageRect(self.navGroup, "Art/Nav/home_button.png", nav_size, nav_size)
+  local home_button = display.newImageRect(self.nav_group, "Art/Nav/home_button.png", nav_size, nav_size)
   home_button.x = 0.5*nav_size
   home_button.y = display.contentHeight - 0.5*nav_size
 
-  local back_button = display.newImageRect(self.navGroup, "Art/Nav/double_back_button.png", nav_size, nav_size)
-  back_button.x = 1.5*nav_size
-  back_button.y = display.contentHeight - 0.5*nav_size
+  local skip_back_button = display.newImageRect(self.nav_group, "Art/Nav/skip_back_button.png", nav_size, nav_size)
+  skip_back_button.x = 1.5*nav_size
+  skip_back_button.y = display.contentHeight - 0.5*nav_size
 
-  local pause_button = display.newImageRect(self.navGroup, "Art/Nav/pause_button.png", nav_size, nav_size)
+  local pause_button = display.newImageRect(self.nav_group, "Art/Nav/pause_button.png", nav_size, nav_size)
   pause_button.x = 2.5*nav_size
   pause_button.y = display.contentHeight - 0.5*nav_size
 
-  local forward_button = display.newImageRect(self.navGroup, "Art/Nav/double_forward_button.png", nav_size, nav_size)
-  forward_button.x = 3.5*nav_size
-  forward_button.y = display.contentHeight - 0.5*nav_size
+  local play_button = display.newImageRect(self.nav_group, "Art/Nav/play_button.png", nav_size, nav_size)
+  play_button.x = 2.5*nav_size
+  play_button.y = display.contentHeight - 0.5*nav_size
+  play_button.isVisible = false
+
+  local skip_forward_button = display.newImageRect(self.nav_group, "Art/Nav/skip_forward_button.png", nav_size, nav_size)
+  skip_forward_button.x = 3.5*nav_size
+  skip_forward_button.y = display.contentHeight - 0.5*nav_size
+
+  local refresh_button = display.newImageRect(self.nav_group, "Art/Nav/refresh_button.png", nav_size, nav_size)
+  refresh_button.x = 4.5*nav_size
+  refresh_button.y = display.contentHeight - 0.5*nav_size
 
   home_button.event = home_button:addEventListener("tap", function(event)
     if self.paused == false then
@@ -109,34 +107,58 @@ function scene:initializeNav()
     self:endChapter()
   end)
 
-  back_button.event = back_button:addEventListener("tap", function(event)
+  skip_back_button.event = skip_back_button:addEventListener("tap", function(event)
     self:skipToPreviousPart()
   end)
 
   pause_button.event = pause_button:addEventListener("tap", function(event)
     if self.paused == false then
       self:pause()
-    else
-      self:resume()
     end
+    pause_button.isVisible = false
+    play_button.isVisible = true
   end)
 
-  forward_button.event = forward_button:addEventListener("tap", function(event)
+  play_button.event = play_button:addEventListener("tap", function(event)
+    if self.paused == true then
+      self:resume()
+    end
+    play_button.isVisible = false
+    pause_button.isVisible = true
+  end)
+
+  skip_forward_button.event = skip_forward_button:addEventListener("tap", function(event)
     self:skipToNextPart()
   end)
 
+  refresh_button.event = refresh_button:addEventListener("tap", function(event)
+    self:resetCurrentPart()
+  end)
+
+  self.pause_button = pause_button
+  self.play_button = play_button
 end
 
 
 function scene:createPart()
   -- This function makes a new part from current_part_structure
   if self.current_part_structure.type == "scripted" then
+    self:lightNav()
     if self.scripted_part == nil then
       self.scripted_part = require("Source.scripted_part")
     end
+
     self.current_part = self.scripted_part:create()
+    self.current_part:initialize()
 
     self:performBackgroundLoad()
+  elseif self.current_part_structure.type == "mandala" then
+    self:darkNav()
+    if self.mandala_part == nil then
+      self.mandala_part = require("Source.mandala_part")
+    end
+    self.current_part = self.mandala_part:create()
+    self.current_part:initialize()
   end
 end
 
@@ -144,7 +166,10 @@ end
 function scene:startPart()
   self.start_time = system.getTimer()
   self.pause_time = 0
+  self.pause_start = nil
   self.paused = false
+  self.pause_button.isVisible = true
+  self.play_button.isVisible = false
 
   self:registerTimer(timer.performWithDelay(33, function() 
     self:update()
@@ -153,6 +178,20 @@ function scene:startPart()
   self:registerTimer(timer.performWithDelay(3000, function() 
     printDebugInformation()
   end, 0))
+end
+
+
+function scene:lightNav()
+  for i = 1, self.nav_group.numChildren do
+    self.nav_group[i]:setFillColor(1,1,1)
+  end
+end
+
+
+function scene:darkNav()
+  for i = 1, self.nav_group.numChildren do
+    self.nav_group[i]:setFillColor(0,0,0)
+  end
 end
 
 
@@ -222,7 +261,40 @@ end
 -- end
 
 
+function scene:skipToPreviousPart()
+  --
+  -- Skip back to the previous part of the chapter.
+  --
+  if self.current_part_structure.prev ~= nil then
+    animation.setPosition("game", 500000)
+    audio.stop()
+
+    self:destroyEvents()
+    self:destroyTimers()
+
+    self.stage:resetStage()
+
+    if self.snapshots[self.current_part_structure.prev] ~= nil then
+      self.stage:restoreSnapshot(self.snapshots[self.current_part_structure.prev])
+    end
+
+    self.current_part_structure = self.chapter_structure.flow[self.current_part_structure.prev]
+
+    self:createPart()
+
+    self:startPart()
+  else
+    self:resetCurrentPart()
+  end
+
+end
+
+
 function scene:skipToNextPart()
+  --
+  -- Skip ahead to the next part of the chapter.
+  -- This requires some cleanup to make sure things look like they're supposed to look at the end of this part.
+  --
 
   -- deactivate the nav for a moment and put up the spinny loading icon
     -- deactivate here
@@ -250,17 +322,40 @@ function scene:skipToNextPart()
 end
 
 
-function scene:gotoNextPart()
+function scene:resetCurrentPart()
+  animation.setPosition("game", 500000)
+  audio.stop()
+
   self:destroyEvents()
   self:destroyTimers()
 
-  -- take a snapshot and save it under the heading of the next part.
-  if self.current_part_structure.next ~= nil then
-    -- snapshot here
+  self.stage:resetStage()
+
+  if self.snapshots[self.current_part_structure.name] ~= nil then
+    self.stage:restoreSnapshot(self.snapshots[self.current_part_structure.name])
   end
+
+  self:createPart()
+
+  self:startPart()
+end
+
+
+function scene:gotoNextPart()
+  --
+  -- Go to the next part of the chapter.
+  --
+  self:destroyEvents()
+  self:destroyTimers()
 
   if self.current_part_structure.cleanup == true then
     self.stage:resetStage()
+  end
+
+  -- Take a snapshot and save it under the label of the next part.
+  -- We'll use this for refreshes and backwards skips.
+  if self.current_part_structure.next ~= nil then
+    self.snapshots[self.current_part_structure.next] = self.stage:takeSnapshot()
   end
 
   if self.current_part_structure.next ~= nil then
@@ -345,15 +440,16 @@ function scene:computeBackgroundLoad()
 end
 
 
-function scene:registerEvent()
-
-
+function scene:registerEvent(new_event)
+  table.insert(self.events, new_event)
 end
 
 
 function scene:destroyEvents()
-
-
+  for i = 1, #self.events do
+    -- ???
+  end
+  self.events = {}
 end
 
 
@@ -376,7 +472,7 @@ function scene:destroy(event)
   --
   -- Destroy things before removing scene's view
   --
-  display.remove(self.navGroup)
+  display.remove(self.nav_group)
 end
  
 scene:addEventListener("show", scene)
