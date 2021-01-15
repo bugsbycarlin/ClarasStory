@@ -6,6 +6,8 @@ display.setStatusBar(display.HiddenStatusBar)
 
 math.randomseed(os.time())
 
+audio.setVolume(0)
+
 print("pre setup")
 game_setup:setup()
 print("post setup")

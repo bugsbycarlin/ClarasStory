@@ -56,8 +56,8 @@ function mandala_part:create()
 
   function object:createMandala()
     self.mandala_size = 650
-    self.mandala_x = 512
-    self.mandala_y = 340
+    self.mandala_x = 512 - 64
+    self.mandala_y = 340 + 96
     self.mandala_radius = 8
     self.mandala_degree = 3
 
@@ -90,81 +90,76 @@ function mandala_part:create()
 
 
   function object:initializeColorSelection()
-    self.mandala_selection = self.stage:get("Letter_Box_1")    
+    self.mandala_selection = self.stage:get("Letter_Box_1")
 
-    local paint = nil
+    local plus_button = display.newImageRect(self.view, "Art/Nav/plus_button.png", 48, 48)
+    plus_button.x = display.contentWidth - 240
+    plus_button.y = display.contentHeight - 25
+    plus_button:setFillColor(0.5,0.5,0.5)
 
-    paint = self.stage:get("Blue_Paint_2")
-    paint:addEventListener("tap", function(event) 
-      self.mandala_r = 32/255
-      self.mandala_g = 105/255
-      self.mandala_b = 243/255
-      animation.to(self.mandala_selection, {x = paint.x, y = paint.y}, {time=250, easing=easing.inOutExpo})
+    local light_button = display.newImageRect(self.view, "Art/Nav/light_button.png", 48, 48)
+    light_button.x = display.contentWidth - 290
+    light_button.y = display.contentHeight - 25
+    light_button:setFillColor(0,0,0)
+
+    local minus_button = display.newImageRect(self.view, "Art/Nav/minus_button.png", 48, 48)
+    minus_button.x = display.contentWidth - 340
+    minus_button.y = display.contentHeight - 25
+    minus_button:setFillColor(0.5,0.5,0.5)
+
+    local color_definitions = {
+      {"Red_Paint_8", 215, 36, 36},
+      {"Orange_Paint_5", 255, 165, 33},
+      {"Yellow_Paint_9", 255, 227, 33},
+      {"Green_Paint_4", 43, 183, 25},
+      {"Blue_Paint_2", 32, 105, 243},
+      {"Purple_Paint_7", 143, 36, 215},
+      {"Pink_Paint_6", 255, 133, 185},
+      {"Brown_Paint_8", 128, 83, 17},
+      {"Black_Paint_3", 0, 0 ,0},
+    }
+    for i = 1, #color_definitions do
+      local color = color_definitions[i]
+      local paint = self.stage:get(color[1])
+      paint:addEventListener("tap", function(event) 
+        self.mandala_r = color[2]/255
+        self.mandala_g = color[3]/255
+        self.mandala_b = color[4]/255
+        local x = paint.x
+        local y = paint.y
+        animation.to(self.mandala_selection, {x = x, y = y}, {time=250, easing=easing.inOutExpo})
+        light_button:setFillColor(self.mandala_r, self.mandala_g, self.mandala_b)
+      end)
+    end
+
+    plus_button:addEventListener("tap", function(event)
+      if self.mandala_r == 0 then
+        self.mandala_r = 0.2
+        self.mandala_g = 0.2
+        self.mandala_b = 0.2
+      else
+        self.mandala_r = self.mandala_r * 1.1
+        self.mandala_g = self.mandala_g * 1.1
+        self.mandala_b = self.mandala_b * 1.1
+      end
+      light_button:setFillColor(self.mandala_r, self.mandala_g, self.mandala_b)
     end)
 
-    paint = self.stage:get("Black_Paint_3")
-    paint:addEventListener("tap", function(event) 
-      self.mandala_r = 0
-      self.mandala_g = 0
-      self.mandala_b = 0
-      animation.to(self.mandala_selection, {x = paint.x, y = paint.y}, {time=250, easing=easing.inOutExpo})
-    end)
-
-    paint = self.stage:get("Green_Paint_4")
-    paint:addEventListener("tap", function(event) 
-      self.mandala_r = 43/255
-      self.mandala_g = 183/255
-      self.mandala_b = 25/255
-      animation.to(self.mandala_selection, {x = paint.x, y = paint.y}, {time=250, easing=easing.inOutExpo})
-    end)
-
-    paint = self.stage:get("Orange_Paint_5")
-    paint:addEventListener("tap", function(event) 
-      self.mandala_r = 255/255
-      self.mandala_g = 165/255
-      self.mandala_b = 33/255
-      animation.to(self.mandala_selection, {x = paint.x, y = paint.y}, {time=250, easing=easing.inOutExpo})
-    end)
-
-    paint = self.stage:get("Pink_Paint_6")
-    paint:addEventListener("tap", function(event) 
-      self.mandala_r = 255/255
-      self.mandala_g = 133/255
-      self.mandala_b = 185/255
-      animation.to(self.mandala_selection, {x = paint.x, y = paint.y}, {time=250, easing=easing.inOutExpo})
-    end)
-
-    paint = self.stage:get("Purple_Paint_7")
-    paint:addEventListener("tap", function(event) 
-      self.mandala_r = 143/255
-      self.mandala_g = 36/255
-      self.mandala_b = 215/255
-      animation.to(self.mandala_selection, {x = paint.x, y = paint.y}, {time=250, easing=easing.inOutExpo})
-    end)
-
-    paint = self.stage:get("Red_Paint_8")
-    paint:addEventListener("tap", function(event) 
-      self.mandala_r = 215/255
-      self.mandala_g = 36/255
-      self.mandala_b = 36/255
-      animation.to(self.mandala_selection, {x = paint.x, y = paint.y}, {time=250, easing=easing.inOutExpo})
-    end)
-
-    paint = self.stage:get("Yellow_Paint_9")
-    paint:addEventListener("tap", function(event) 
-      self.mandala_r = 255/255
-      self.mandala_g = 227/255
-      self.mandala_b = 33/255
-      animation.to(self.mandala_selection, {x = paint.x, y = paint.y}, {time=250, easing=easing.inOutExpo})
-    end)
-
-    paint = self.stage:get("Brown_Paint_8")
-    paint:addEventListener("tap", function(event) 
-      self.mandala_r = 128/255
-      self.mandala_g = 83/255
-      self.mandala_b = 17/255
-      animation.to(self.mandala_selection, {x = paint.x, y = paint.y}, {time=250, easing=easing.inOutExpo})
-    end)
+    minus_button:addEventListener("tap", function(event)
+      self.mandala_r = self.mandala_r * 0.9
+      self.mandala_g = self.mandala_g * 0.9
+      self.mandala_b = self.mandala_b * 0.9
+      if self.mandala_r < 0.1 then
+        self.mandala_r = 0
+      end
+      if self.mandala_g < 0.1 then
+        self.mandala_g = 0
+      end
+      if self.mandala_b < 0.1 then
+        self.mandala_b = 0
+      end
+      light_button:setFillColor(self.mandala_r, self.mandala_g, self.mandala_b)
+    end)   
   end
 
   object.mandala_last_x = 0
@@ -219,8 +214,8 @@ function mandala_part:create()
 
     if self.mandala_pixels_painted >= self.mandala_target_pixels_painted and self.end_button == nil then
       self.end_button = display.newImageRect(self.view, "Art/Thumb_2.png", 128, 128)
-      self.end_button.x = display.contentWidth - 100
-      self.end_button.y = 100
+      self.end_button.x = display.contentWidth - 80
+      self.end_button.y = 220
       self.end_button:addEventListener("tap", function(event)
         self:nextScene()
       end)
@@ -246,7 +241,7 @@ function mandala_part:create()
   function object:update()
     self:parentUpdate()
 
-    if self.color_selection == nil then
+    if self.mandala_selection == nil then
       self:initializeColorSelection()
     end
   end
