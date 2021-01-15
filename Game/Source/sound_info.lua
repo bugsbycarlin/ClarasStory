@@ -2,56 +2,56 @@
 local sound_info = {}
 
 -- scenes
-sound_info["chapter_1_scene_1"] = {
-  file_name = "chapter_1_scene_1_Tight.wav",
+sound_info["chapter_1_part_1"] = {
+  file_name = "chapter_1_part_1_Tight.wav",
 }
 
-sound_info["chapter_1_scene_2"] = {
-  file_name = "chapter_1_scene_2_Tight.wav",
+sound_info["chapter_1_part_2"] = {
+  file_name = "chapter_1_part_2_Tight.wav",
 }
 
-sound_info["chapter_1_scene_3"] = {
-  file_name = "chapter_1_scene_3_Tight.wav",
+sound_info["chapter_1_part_3"] = {
+  file_name = "chapter_1_part_3_Tight.wav",
 }
   
-sound_info["chapter_1_scene_4"] = {
-  file_name = "chapter_1_scene_4_Tight.wav",
+sound_info["chapter_1_part_4"] = {
+  file_name = "chapter_1_part_4_Tight.wav",
 }
 
-sound_info["chapter_1_scene_5"] = {
-  file_name = "chapter_1_scene_5_Tight.wav",
+sound_info["chapter_1_part_5"] = {
+  file_name = "chapter_1_part_5_Tight.wav",
 }
 
-sound_info["chapter_1_scene_6"] = {
-  file_name = "chapter_1_scene_6_Tight.wav",
+sound_info["chapter_1_part_6"] = {
+  file_name = "chapter_1_part_6_Tight.wav",
 }
 
-sound_info["chapter_1_scene_7"] = {
-  file_name = "chapter_1_scene_7_Tight.wav",
+sound_info["chapter_1_part_7"] = {
+  file_name = "chapter_1_part_7_Tight.wav",
 }
 
 sound_info["chapter_1_interactive_Loop"] = {
   file_name = "chapter_1_interactive_Loop.mp3",
 }
 
-sound_info["chapter_2_scene_1"] = {
-  file_name = "chapter_2_scene_1.mp3",
+sound_info["chapter_2_part_1"] = {
+  file_name = "chapter_2_part_1.mp3",
 }
 
-sound_info["chapter_2_scene_2"] = {
-  file_name = "chapter_2_scene_2.mp3",
+sound_info["chapter_2_part_2"] = {
+  file_name = "chapter_2_part_2.mp3",
 }
 
-sound_info["chapter_2_scene_3"] = {
-  file_name = "chapter_2_scene_3.wav",
+sound_info["chapter_2_part_3"] = {
+  file_name = "chapter_2_part_3.wav",
 }
 
-sound_info["chapter_2_scene_4"] = {
-  file_name = "chapter_2_scene_4.wav",
+sound_info["chapter_2_part_4"] = {
+  file_name = "chapter_2_part_4.wav",
 }
 
-sound_info["chapter_2_scene_5"] = {
-  file_name = "chapter_2_scene_5.mp3",
+sound_info["chapter_2_part_5"] = {
+  file_name = "chapter_2_part_5.mp3",
 }
 
 sound_info["chapter_2_interactive_loop"] = {

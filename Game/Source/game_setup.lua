@@ -12,18 +12,27 @@ game_setup.__index = game_setup
 
 function game_setup:setup()
 
+  -- Master volume control
+  audio.setVolume(0)
+
+  -- Allow or disallow edit mode
+  composer.setVariable("editor_mode_allowed", true)
+
+
+  -- Create the global sprite_info and sprite_cache structures
   sprite_info = require("Source.sprite_info")
   composer.setVariable("sprite_info", sprite_info)
 
   sprite_cache = {}
   composer.setVariable("sprite_cache", sprite_cache)
 
+
+  -- Construct the chapter structures for each chapter
   chapters = {"1", "2", "mandala"}
   composer.setVariable("chapters", chapters)
 
   chapter_structures = {}
   composer.setVariable("chapter_structures", chapter_structures)
-
   for i = 1, #chapters do
     chapter_structures[chapters[i]] = {}
 

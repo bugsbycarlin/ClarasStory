@@ -48,6 +48,7 @@ function scene:initializeChapter()
   self.sprite_info = composer.getVariable("sprite_info")
   self.current_chapter = composer.getVariable("current_chapter")
   self.loader = composer.getVariable("loader")
+  self.editor_mode_allowed = composer.getVariable("editor_mode_allowed")
 
   self.chapter_structure = self.chapter_structures[self.current_chapter]
 
@@ -55,6 +56,11 @@ function scene:initializeChapter()
 
   self.stage = stage_class.create()
   composer.setVariable("stage", self.stage)
+
+  if self.editor_mode_allowed then
+    editor = require("Source.editor")
+    editor:augment(self)
+  end
 
   self.timers = {}
   self.events = {}
@@ -99,6 +105,20 @@ function scene:initializeNav()
   local refresh_button = display.newImageRect(self.nav_group, "Art/Nav/refresh_button.png", nav_size, nav_size)
   refresh_button.x = 4.5*nav_size
   refresh_button.y = display.contentHeight - 0.5*nav_size
+
+  if self.editor_mode_allowed then
+    local gear_button = display.newImageRect(self.nav_group, "Art/Nav/gear_button.png", nav_size, nav_size)
+    gear_button.x = 5.5*nav_size
+    gear_button.y = display.contentHeight - 0.5*nav_size
+
+    gear_button.event = gear_button:addEventListener("tap", function(event)
+      if self.editor_mode == false then
+        self:startEditor()
+      else
+        self:stopEditor()
+      end
+    end)
+  end
 
   home_button.event = home_button:addEventListener("tap", function(event)
     if self.paused == false then

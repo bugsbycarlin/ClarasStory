@@ -202,7 +202,6 @@ sprite_info["Green_Star"] = {
   row_length = 5,
   sprite_size = 200,
   sprite_count = 15,
-  always_load = true,
   animations = {
     sketch = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15},
   },
@@ -213,7 +212,6 @@ sprite_info["Yellow_Star"] = {
   row_length = 5,
   sprite_size = 200,
   sprite_count = 15,
-  always_load = true,
   animations = {
     sketch = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15},
   },
@@ -224,7 +222,6 @@ sprite_info["Blue_Star"] = {
   row_length = 5,
   sprite_size = 200,
   sprite_count = 15,
-  always_load = true,
   animations = {
     sketch = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15},
   },
@@ -235,7 +232,6 @@ sprite_info["Red_Star"] = {
   row_length = 5,
   sprite_size = 200,
   sprite_count = 15,
-  always_load = true,
   animations = {
     sketch = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15},
   },
@@ -246,7 +242,6 @@ sprite_info["Orange_Star"] = {
   row_length = 5,
   sprite_size = 200,
   sprite_count = 15,
-  always_load = true,
   animations = {
     sketch = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15},
   },
@@ -257,7 +252,6 @@ sprite_info["Purple_Star"] = {
   row_length = 5,
   sprite_size = 200,
   sprite_count = 15,
-  always_load = true,
   animations = {
     sketch = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15},
   },
@@ -268,7 +262,6 @@ sprite_info["Pink_Star"] = {
   row_length = 5,
   sprite_size = 200,
   sprite_count = 15,
-  always_load = true,
   animations = {
     sketch = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15},
   },
@@ -283,7 +276,6 @@ sprite_info["Apple"] = {
   animations = {
     sketch = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25},
   },
-  always_load = true,
 }
 
 sprite_info["Earth"] = {
@@ -496,7 +488,6 @@ sprite_info["Orange"] = {
   row_length = 5,
   sprite_size = 400,
   sprite_count = 21,
-  always_load = true,
   animations = {
     sketch = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
   },
@@ -507,7 +498,6 @@ sprite_info["Banana"] = {
   row_length = 5,
   sprite_size = 400,
   sprite_count = 20,
-  always_load = true,
   animations = {
     sketch = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20},
   },
@@ -518,7 +508,6 @@ sprite_info["Plum"] = {
   row_length = 5,
   sprite_size = 400,
   sprite_count = 24,
-  always_load = true,
   animations = {
     sketch = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24},
   },
@@ -628,7 +617,6 @@ sprite_info["Pear"] = {
   row_length = 4,
   sprite_size = 256,
   sprite_count = 14,
-  always_load = true,
   animations = {
     sketch = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14},
   },
@@ -639,7 +627,6 @@ sprite_info["Lime"] = {
   row_length = 4,
   sprite_size = 256,
   sprite_count = 15,
-  always_load = true,
   animations = {
     sketch = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15},
   },

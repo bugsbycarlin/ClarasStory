@@ -59,9 +59,8 @@ function sprite:create(element)
     self.width = self.sprite_info[element.picture]["sprite_size"]
     self.height = self.sprite_info[element.picture]["sprite_height"]
 
-    local queue_string = element.animation_queue ~= nil and element.animation_queue or "static"
-    local starting_queue = (queue_string):split(",")
-    self:queueAnimations(starting_queue)
+    self.starting_animation_queue_string = element.animation_queue ~= nil and element.animation_queue or "static"
+    self:queueAnimations(self.starting_animation_queue_string)
 
     self:startEffect()
 
@@ -122,7 +121,8 @@ function sprite:create(element)
     if #self.animation_queue > 0 then
       local new_animation = self.animation_queue[1]
       if self.info.animations[new_animation] == nil then
-        error("Sprite " .. self.picture .. " does not have animation " .. new_animation)
+        print("Error! Sprite " .. self.picture .. " does not have animation " .. new_animation)
+        new_animation = "static"
       end
       self.animation = new_animation
     end
@@ -141,8 +141,8 @@ function sprite:create(element)
   end
 
 
-  function object:queueAnimations(animation_queue)
-    self.animation_queue = animation_queue
+  function object:queueAnimations(animation_queue_string)
+    self.animation_queue = (string.gsub(animation_queue_string, "%s+", "")):split(",")
     self:nextAnimation()
   end
 

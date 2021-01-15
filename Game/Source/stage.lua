@@ -14,7 +14,7 @@ stage.__index = stage
 -- emptied at any time.
 --
 
-const_num_layers = 50
+
 
 function stage:create()
 
@@ -29,12 +29,14 @@ function stage:create()
     self.loader = composer.getVariable("loader")
     self.view = composer.getVariable("view")
 
-    self.stageGroup = display.newGroup()
-    self.view:insert(self.stageGroup)
+    self.stage_group = display.newGroup()
+    self.view:insert(self.stage_group)
 
-    for i = 1, const_num_layers do
+    self.const_num_layers = 50
+
+    for i = 1, self.const_num_layers do
       local layer = display.newGroup()
-      self.stageGroup:insert(layer)
+      self.stage_group:insert(layer)
     end
 
     self.sprite_list = {}
@@ -47,7 +49,7 @@ function stage:create()
     -- Turn a script element into a sprite on the stage.
     --
     sprite = sprite_class:create(script_element)
-    self.stageGroup[script_element.depth]:insert(sprite)
+    self.stage_group[script_element.depth]:insert(sprite)
 
     table.insert(self.sprite_list, sprite)
     self.id_table[sprite.id] = sprite
@@ -80,7 +82,7 @@ function stage:create()
     self.sprite_list = {}
 
     -- reset the layer positions
-    for i = 1, const_num_layers do
+    for i = 1, self.const_num_layers do
       self:translateLayer(i, 0, nil, {"y", "=", 0})
       self:translateLayer(i, 0, nil, {"x", "=", 0})
     end
@@ -160,6 +162,18 @@ function stage:create()
   end
 
 
+  function object:relayer(sprite, depth)
+    --
+    -- Put this sprite at a new depth
+    --
+    if self.stage_group[depth] ~= nil then
+      display.remove(sprite)
+      sprite.depth = depth
+      self.stage_group[depth]:insert(sprite)
+    end
+  end
+
+
   function object:translateLayer(layer, delay, easing, instruction)
     --
     -- Translates the entire stage, or a sub layer, with optional animation delay
@@ -171,9 +185,9 @@ function stage:create()
     
     -- choose the stage as the target of translation by default,
     -- but if a layer is specified, choose that
-    local translation_target = self.stageGroup
-    if layer >= 1 and layer <= const_num_layers then
-      translation_target = self.stageGroup[layer]
+    local translation_target = self.stage_group
+    if layer >= 1 and layer <= self.const_num_layers then
+      translation_target = self.stage_group[layer]
     end
 
     -- compute the target value based on 
@@ -199,6 +213,33 @@ function stage:create()
   end
 
 
+
+  function object:getX(layer)
+    --
+    -- Get x value of the stage or a sub layer
+    -- layer: -1 is the stage, N >= 1 is layer N
+    --
+    local target = self.stage_group
+    if layer >= 1 and layer <= self.const_num_layers then
+      target = self.stage_group[layer]
+    end
+    return target.x
+  end
+
+
+  function object:getY(layer)
+    --
+    -- Get y value of the stage or a sub layer
+    -- layer: -1 is the stage, N >= 1 is layer N
+    --
+    local target = self.stage_group
+    if layer >= 1 and layer <= self.const_num_layers then
+      target = self.stage_group[layer]
+    end
+    return target.y
+  end
+
+
   --
   --
   -- Effects
@@ -214,7 +255,7 @@ function stage:create()
       id = "Honk_" .. math.random(50000),
       x = x,
       y = y,
-      depth = const_num_layers - 3,
+      depth = self.const_num_layers - 3,
       start_time = current_time,
       end_time = current_time + duration,
       end_effect = "pop",

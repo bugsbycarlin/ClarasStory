@@ -11,7 +11,7 @@ setup_chapter_1.__index = setup_chapter_1
 --
 
 function setup_chapter_1:setup(chapter_structure)
-  chapter_structure.first_part = "chapter_1_part_4"
+  chapter_structure.first_part = "chapter_1_part_X"
 
   chapter_structure.bpm = 110
   chapter_structure.mpb = 545.4545454545
@@ -21,14 +21,26 @@ function setup_chapter_1:setup(chapter_structure)
   chapter_structure.flow = {}
 
   local flow = chapter_structure.flow
-  chapter_structure.flow["chapter_1_part_4"] = {
-    name="chapter_1_part_4",
-    next="chapter_2_interactive_choice_vehicle",
+  chapter_structure.flow["chapter_1_part_X"] = {
+    name="chapter_1_part_X",
+    next=nil,
     type="scripted",
     cleanup=false,
-    script=loadPartScript("chapter_1_part_4"),
-    music="chapter_1_part_4",
+    script=loadPartScript("chapter_1_part_X"),
+    music="chapter_1_part_1",
   }
+
+  -- local flow = chapter_structure.flow
+  -- chapter_structure.flow["chapter_1_part_4"] = {
+  --   name="chapter_1_part_4",
+  --   next="chapter_2_interactive_choice_vehicle",
+  --   type="scripted",
+  --   cleanup=false,
+  --   script=loadPartScript("chapter_1_part_4"),
+  --   music="chapter_1_part_4",
+  -- }
+
+
 end
 
 return setup_chapter_1

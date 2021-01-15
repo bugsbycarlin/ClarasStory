@@ -38,7 +38,7 @@ function setup_chapter_2:setup(chapter_structure)
       name="chapter_2_part_" .. i,
       type="scripted",
       script=loadPartScript("chapter_2_part_" .. i),
-      music="chapter_2_scene_" .. i,
+      music="chapter_2_part_" .. i,
       additional_actions = {},
     }
   end
