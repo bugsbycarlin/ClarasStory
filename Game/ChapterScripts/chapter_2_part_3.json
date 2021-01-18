@@ -1,6 +1,6 @@
 [
   {
-    "animation_queue": "animating",
+    "animation_sequence": "animating",
     "choice_value": "Bike_Green",
     "depth": 20,
     "end_effect": "pop",

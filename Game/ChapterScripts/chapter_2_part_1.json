@@ -1,6 +1,6 @@
 [
   // {
-  //   "animation_queue": "animating,animating",
+  //   "animation_sequence": "animating,animating",
   //   "depth": 20,
   //   "end_effect": "",
   //   "end_time": -1,
@@ -17,7 +17,7 @@
   //   "yScale": 0.5
   // },
   // {
-  //   "animation_queue": "sketch,animating",
+  //   "animation_sequence": "sketch,animating",
   //   "depth": 20,
   //   "end_effect": "",
   //   "end_time": -1,
@@ -708,7 +708,7 @@
     "yScale": 1
   },
   {
-    "animation_queue": "animating",
+    "animation_sequence": "animating",
     "depth": 20,
     "end_effect": "",
     "end_time": -1,

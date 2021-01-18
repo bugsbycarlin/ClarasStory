@@ -93,6 +93,22 @@ function stage:create()
   end
 
 
+  function object:delete(id)
+    if self:get(id) ~= nil then
+      new_sprite_list = {}
+      for i = 1, #self.sprite_list do
+        if self.sprite_list[i].id ~= id then
+          table.insert(new_sprite_list, self.sprite_list[i])
+        else
+          self.id_table[self.sprite_list[i]] = nil
+          display.remove(self.sprite_list[i])
+        end
+      end
+      self.sprite_list = new_sprite_list
+    end
+  end
+
+
   function object:takeSnapshot()
     --
     -- Take a snapshot of the stage at this moment.

@@ -45,7 +45,7 @@
     "yScale": 1
   },
   {
-    "animation_queue": "animating",
+    "animation_sequence": "animating",
     "depth": 29,
     "end_effect": "pop",
     "end_time": -1,
@@ -211,7 +211,7 @@
     "yScale": 1
   },
   {
-    "animation_queue": "animating",
+    "animation_sequence": "animating",
     "depth": 29,
     "end_effect": "pop",
     "end_time": -1,
@@ -272,7 +272,7 @@
     "yScale": 1
   },
   {
-    "animation_queue": "animating",
+    "animation_sequence": "animating",
     "depth": 12,
     "end_effect": "pop",
     "end_time": -1,

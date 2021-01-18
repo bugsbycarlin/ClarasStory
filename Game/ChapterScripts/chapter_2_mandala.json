@@ -150,7 +150,7 @@
     "yScale": 0.9
   },
   {
-    "animation_queue": "animating",
+    "animation_sequence": "animating",
     "depth": 29,
     "end_effect": "pop",
     "end_time": -1,

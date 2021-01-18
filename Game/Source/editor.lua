@@ -43,21 +43,8 @@ function editor:augment(player)
   end
 
 
-  player.editorMouseEvent = function(event)
-    --
-    -- Handle editor mouse clicks
-    --
-    if player.editor_mode == true then
-      print(event.phase)
-      print(event.x)
-    end
-  end
-  Runtime:addEventListener("touch", player.editorMouseEvent)
-
-
   player.updateEditorInfoText = function()
     player.editor_info_text.text = "Time: " .. math.floor(player:getTime()) / 1000.0 .. ", Objects: " .. #player.stage.sprite_list
-
   end
 
 
@@ -86,7 +73,7 @@ function editor:augment(player)
     for i, sprite_name in ipairs(alphabetical_pairs) do
       if i >= start_number and i <= end_number then
         if string.len(sprite_name) >= 1 then
-          local sprite_text_button = display.newText(player.sprite_list_group, sprite_name, 30, 3 + 18 * (sprite_count + 2), "Fonts/MouseMemoirs.ttf", 20)
+          local sprite_text_button = display.newText(player.sprite_list_group, sprite_name, 30, 3 + 18 * (sprite_count + 2), "Fonts/Arial Black.ttf", 20)
           sprite_text_button.anchorX = 0
           sprite_text_button:setTextColor(0,0,0)
           sprite_count = sprite_count + 1
@@ -179,7 +166,7 @@ function editor:augment(player)
       print(sprite.id)
       if i >= start_number and i <= end_number then
         print("in make thingy")
-        local sprite_text_button = display.newText(player.stage_list_group, sprite.id, display.contentWidth - 30, 18 * (sprite_count + 2), "Fonts/MouseMemoirs.ttf", 20)
+        local sprite_text_button = display.newText(player.stage_list_group, sprite.id, display.contentWidth - 30, 18 * (sprite_count + 2), "Fonts/Arial Black.ttf", 20)
         sprite_text_button.anchorX = 1
         sprite_text_button:setTextColor(0, 0, 0)
         if sprite.id == player.selected_element_id then
@@ -259,11 +246,11 @@ function editor:augment(player)
           "squish_period",
           "squish_tilt",
           "squish_scale",
-          "animation_queue",
+          "animation_sequence",
         }
 
         for i = 1, #labels do
-          local label = display.newText(player.sprite_editor_group, labels[i], display.contentWidth - 135, 450 + i * 21, "Fonts/Arial Black.ttf", 12)
+          local label = display.newText(player.sprite_editor_group, labels[i], display.contentWidth - 135, 449 + i * 21, "Fonts/Arial Black.ttf", 12)
           label:setTextColor(0.0, 0.0, 0.0)
           label.anchorX = 1
 
@@ -317,7 +304,66 @@ function editor:augment(player)
             player.stage:relayer(stage_sprite, depth)
           end
           player:updateScript(stage_sprite.id, stage_sprite)
-        end)        
+        end)
+
+        player.sprite_editor_fields[7]:addEventListener("userInput", function(event)
+          local start_time = tonumber(event.text)
+          if start_time ~= nil then
+            stage_sprite.start_time = start_time
+          end
+          player:updateScript(stage_sprite.id, stage_sprite)
+        end)
+
+        player.sprite_editor_fields[8]:addEventListener("userInput", function(event)
+          local end_time = tonumber(event.text)
+          if end_time ~= nil then
+            stage_sprite.end_time = end_time
+          end
+          player:updateScript(stage_sprite.id, stage_sprite)
+        end)
+
+        player.sprite_editor_fields[9]:addEventListener("userInput", function(event)
+          stage_sprite.start_effect = event.text
+          player:updateScript(stage_sprite.id, stage_sprite)
+        end)
+
+        player.sprite_editor_fields[10]:addEventListener("userInput", function(event)
+          stage_sprite.end_effect = event.text
+          player:updateScript(stage_sprite.id, stage_sprite)
+        end)
+
+        player.sprite_editor_fields[11]:addEventListener("userInput", function(event)
+          local squish_period = tonumber(event.text)
+          if squish_period ~= nil then
+            stage_sprite.squish_period = squish_period
+          end
+          player:updateScript(stage_sprite.id, stage_sprite)
+        end)
+
+        player.sprite_editor_fields[12]:addEventListener("userInput", function(event)
+          local squish_tilt = tonumber(event.text)
+          if squish_tilt ~= nil then
+            stage_sprite.squish_tilt = squish_tilt
+          end
+          player:updateScript(stage_sprite.id, stage_sprite)
+        end)
+
+        player.sprite_editor_fields[13]:addEventListener("userInput", function(event)
+          local squish_scale = tonumber(event.text)
+          if squish_scale ~= nil then
+            stage_sprite.squish_scale = squish_scale
+          end
+          player:updateScript(stage_sprite.id, stage_sprite)
+        end)
+
+        player.sprite_editor_fields[14]:addEventListener("userInput", function(event)
+          if event.text ~= nil then
+            stage_sprite.animation_sequence = event.text
+            print("text is _" .. event.text .. "_")
+            stage_sprite:queueAnimations(stage_sprite.animation_sequence)
+            player:updateScript(stage_sprite.id, stage_sprite)
+          end
+        end)
 
         player.sprite_editor_fields[1].text = stage_sprite.id
         player.sprite_editor_fields[2].text = stage_sprite.x
@@ -332,17 +378,160 @@ function editor:augment(player)
         player.sprite_editor_fields[11].text = stage_sprite.squish_period
         player.sprite_editor_fields[12].text = stage_sprite.squish_tilt
         player.sprite_editor_fields[13].text = stage_sprite.squish_scale
-        player.sprite_editor_fields[14].text = stage_sprite.starting_animation_queue_string
+        player.sprite_editor_fields[14].text = stage_sprite.animation_sequence
       end
     end
   end
 
 
-  player.updateScript = function(self, sprite_id, updated_sprite)
+  player.updateScript = function(self, sprite_id, sprite)
     --
     -- Update the script for sprite with given id (note this may not match the new id)
     --
+    if string.len(sprite_id) > 2 then
+      for i = 1, #player.current_part_structure.script do
+        local element = player.current_part_structure.script[i]
+
+        if element.id == sprite_id then
+          -- note in the case of a new id, we matched on the old id and we're writing the new one here
+          element.id = sprite.id
+          element.x = sprite.x
+          element.y = sprite.y
+          element.xScale = sprite.xScale
+          element.yScale = sprite.yScale
+          element.depth = sprite.depth
+          element.start_time = sprite.start_time
+          element.end_time = sprite.end_time
+          element.start_effect = sprite.start_effect
+          element.end_effect = sprite.end_effect
+          element.squish_period = sprite.squish_period
+          element.squish_tilt = sprite.squish_tilt
+          element.squish_scale = sprite.squish_scale
+          element.animation_sequence = sprite.animation_sequence
+          break -- so it doesn't update two things, especially in the case of a weird id match
+        end
+      end
+    end
   end
+
+
+  player.deleteSelectedSprite = function()
+    stage_sprite = player.stage:get(player.selected_element_id)
+
+    if stage_sprite ~= nil then
+      player.stage:delete(player.selected_element_id)
+      new_script = {}
+      for i = 1, #player.current_part_structure.script do
+        element = player.current_part_structure.script[i]
+        if element.id ~= player.selected_element_id then
+          table.insert(new_script, element)
+        end
+      end
+      player.selected_element_id = nil
+      player.current_part_structure.script = new_script
+      player:recreateEditorStageList(player.editor_stage_list_start, player.editor_stage_list_start + 19)
+    end
+  end
+
+
+
+  player.saveScriptChanges = function()
+    print("hulloo")
+    print(player.current_part_structure.name)
+    local save_file = system.pathForFile("ChapterScripts/" .. player.current_part_structure.name .. ".json", system.ResourceDirectory)
+
+    local file = io.open(save_file, "w")
+ 
+    if file then
+      file:write(json.encode(player.current_part_structure.script))
+      io.close(file)
+    else
+      print("UNABLE TO OPEN SAVE FILE")
+    end
+
+    print("Saved to " .. save_file)
+  end
+
+
+  player.editor_mouse_start_x = 0
+  player.editor_mouse_start_y = 0
+  player.editorMouseEvent = function(event)
+    --
+    -- Handle editor mouse events
+    --
+    if player.editor_mode == true then
+      local stage_sprite = player.stage:get(player.selected_element_id)
+
+      if stage_sprite ~= nil then
+        if event.phase == "began" then
+          player.editor_mouse_start_x = stage_sprite.x
+          player.editor_mouse_start_y = stage_sprite.y
+        elseif event.phase == "moved" or event.phase == "ended" or event.phase == "cancelled" then
+          print("boom")
+          print(player.stage:getX(-1))
+          print(player.stage:getY(-1))
+          stage_sprite.x = player.editor_mouse_start_x + event.x - event.xStart
+          stage_sprite.y = player.editor_mouse_start_y + event.y - event.yStart
+          player.sprite_editor_fields[2].text = stage_sprite.x
+          player.sprite_editor_fields[3].text = stage_sprite.y
+          player:updateScript(stage_sprite.id, stage_sprite)
+        end
+      end
+    end
+  end
+  Runtime:addEventListener("touch", player.editorMouseEvent)
+
+
+  player.editorKeyboardEvent = function(event)
+    --
+    -- Handle editor keyboard
+    --
+    if event.keyName == "space"  and event.phase == "down" then
+      if player.editor_mode == false then
+        player:startEditor()
+      else
+        player:stopEditor()
+      end
+    end
+    if player.editor_mode == true then
+      local stage_sprite = player.stage:get(player.selected_element_id)
+
+      if event.isAltDown == false and event.isShiftDown == false and event.phase == "up" then
+        if event.keyName == "right" then 
+          player.stage:translateLayer(-1, 100, easing.inOutQuart, {"x", "+", 64})
+        elseif event.keyName == "left" then
+          player.stage:translateLayer(-1, 100, easing.inOutQuart, {"x", "-", 64})
+        elseif event.keyName == "up" then
+          player.stage:translateLayer(-1, 100, easing.inOutQuart, {"y", "+", 64})
+        elseif event.keyName == "down" then
+          player.stage:translateLayer(-1, 100, easing.inOutQuart, {"y", "-", 64})
+        end
+      end
+
+      if event.isCtrlDown and event.keyName == "d" and event.phase == "up" then
+        player:deleteSelectedSprite()
+      end
+
+      if event.isShiftDown and event.keyName == "left" and event.phase == "up" then
+        player.start_time = player.start_time + player.chapter_structure.mpb
+        if player:getTime() < 0 then
+          player.start_time = player.pause_start - player.pause_time
+        end
+        player:updateEditorInfoText()
+      end
+
+      if event.isShiftDown and event.keyName == "right" and event.phase == "up" then
+        player.start_time = player.start_time - player.chapter_structure.mpb
+        player:updateEditorInfoText()
+      end
+
+      if event.isCtrlDown and event.keyName == "s" and event.phase == "up" then
+        player:saveScriptChanges()
+      end
+
+    end
+  end
+  Runtime:addEventListener("key", player.editorKeyboardEvent)
 
 
   player.editor_group = display.newGroup()

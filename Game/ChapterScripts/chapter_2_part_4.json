@@ -30,7 +30,7 @@
     "yScale": 1
   },
   {
-    "animation_queue": "animating",
+    "animation_sequence": "animating",
     "depth": 29,
     "end_effect": "pop",
     "end_time": 9000,
@@ -62,7 +62,7 @@
     "yScale": 0.65
   },
   {
-    "animation_queue": "animating",
+    "animation_sequence": "animating",
     "depth": 29,
     "end_effect": "pop",
     "end_time": 9000,
@@ -93,7 +93,7 @@
     "yScale": 0.7
   },
   {
-    "animation_queue": "sketch,static",
+    "animation_sequence": "sketch,static",
     "depth": 26,
     "end_effect": "pop",
     "end_time": 9000,
@@ -230,7 +230,7 @@
     "yScale": 1
   },
   {
-    "animation_queue": "animating",
+    "animation_sequence": "animating",
     "depth": 29,
     "end_effect": "",
     "end_time": -1,
@@ -261,7 +261,7 @@
     "yScale": 1
   },
   {
-    "animation_queue": "animating",
+    "animation_sequence": "animating",
     "depth": 29,
     "end_effect": "",
     "end_time": -1,
@@ -292,7 +292,7 @@
     "yScale": 1
   },
   {
-    "animation_queue": "animating",
+    "animation_sequence": "animating",
     "depth": 29,
     "end_effect": "pop",
     "end_time": 12750,
@@ -323,7 +323,7 @@
     "yScale": 1
   },
   {
-    "animation_queue": "animating",
+    "animation_sequence": "animating",
     "depth": 29,
     "end_effect": "poof",
     "end_time": 15187,
@@ -384,7 +384,7 @@
     "yScale": 1
   },
   {
-    "animation_queue": "animating",
+    "animation_sequence": "animating",
     "depth": 29,
     "end_effect": "poof",
     "end_time": 24937,

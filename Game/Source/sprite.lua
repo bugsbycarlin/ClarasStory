@@ -59,8 +59,8 @@ function sprite:create(element)
     self.width = self.sprite_info[element.picture]["sprite_size"]
     self.height = self.sprite_info[element.picture]["sprite_height"]
 
-    self.starting_animation_queue_string = element.animation_queue ~= nil and element.animation_queue or "static"
-    self:queueAnimations(self.starting_animation_queue_string)
+    self.animation_sequence = element.animation_sequence ~= nil and element.animation_sequence or "static"
+    self:queueAnimations(self.animation_sequence)
 
     self:startEffect()
 
@@ -86,7 +86,7 @@ function sprite:create(element)
       squish_period = self.squish_period,
       squish_tilt = self.squish_tilt,
       squish_scale = self.squish_scale,
-      animation_queue = (","):join(self.animation_queue),
+      animation_sequence = (","):join(self.animation_queue),
     }
   end
 
@@ -141,16 +141,13 @@ function sprite:create(element)
   end
 
 
-  function object:queueAnimations(animation_queue_string)
-    self.animation_queue = (string.gsub(animation_queue_string, "%s+", "")):split(",")
+  function object:queueAnimations(animation_sequence)
+    self.animation_queue = (string.gsub(animation_sequence, "%s+", "")):split(",")
     self:nextAnimation()
   end
 
 
   function object:animate(current_time)
-    -- print(self.id)
-    -- print(self.animation_queue)
-    -- print(self.animation)
     self.frame_count = self.frame_count + 1
     -- print(self.picture .. " animation " .. self.animation .. " on frame count " .. self.frame_count)
     if self.frame_count >= #self.info.animations[self.animation] then

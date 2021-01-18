@@ -886,7 +886,7 @@
     "yScale": 1
   },
   {
-    "animation_queue": "animating",
+    "animation_sequence": "animating",
     "depth": 20,
     "end_effect": "pop",
     "end_time": -1,
